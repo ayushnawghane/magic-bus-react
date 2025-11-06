@@ -1,130 +1,217 @@
-// GetInvolved.jsx
-export default function GetInvolved() {
+import { motion, useReducedMotion } from "framer-motion";
+
+export default function GetInvolvedSection() {
+  const prefersReduced = useReducedMotion();
+
+  // If user prefers reduced motion, keep very subtle drift (or none)
+  const baseDrift = prefersReduced
+    ? { x: 0, y: 0, opacity: 0.75, rotate: 0 }
+    : undefined;
+
   return (
-    <section className="relative py-24 bg-gradient-to-b from-white to-brand-yellow/10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-gradient-to-br from-brand-black to-gray-900 py-20">
+      {/* --- Animated Blobs (Framer Motion) --- */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* Yellow blob */}
+        <motion.div
+          className="absolute -top-24 -right-24 h-[30rem] w-[30rem] rounded-full mix-blend-screen"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(255,204,4,.55), rgba(255,204,4,.35), transparent 70%)",
+            filter: "blur(48px)",
+          }}
+          initial={{ x: 0, y: 0, opacity: 0.85, rotate: 0 }}
+          animate={
+            baseDrift ?? {
+              x: [0, -30, -10, 25, 0],
+              y: [0, -25, 20, -10, 0],
+              opacity: [0.85, 0.7, 0.8, 0.75, 0.85],
+              rotate: [0, 5, -3, 4, 0],
+            }
+          }
+          transition={{ duration: 28, ease: "easeInOut", repeat: Infinity }}
+        />
+
+        {/* Red blob */}
+        <motion.div
+          className="absolute -bottom-28 -left-24 h-[28rem] w-[28rem] rounded-full mix-blend-screen"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(225,34,40,.55), rgba(225,34,40,.35), transparent 70%)",
+            filter: "blur(48px)",
+          }}
+          initial={{ x: 0, y: 0, opacity: 0.85, rotate: 0 }}
+          animate={
+            baseDrift ?? {
+              x: [0, 35, 10, -30, 0],
+              y: [0, 15, -20, 10, 0],
+              opacity: [0.8, 0.68, 0.78, 0.7, 0.8],
+              rotate: [0, -6, 4, -5, 0],
+            }
+          }
+          transition={{
+            duration: 34,
+            ease: "easeInOut",
+            repeat: Infinity,
+            delay: 0.6,
+          }}
+        />
+
+        {/* Blue blob */}
+        <motion.div
+          className="absolute top-1/3 left-1/4 h-[24rem] w-[24rem] rounded-full mix-blend-screen"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(33,189,234,.48), rgba(33,189,234,.32), transparent 70%)",
+            filter: "blur(48px)",
+          }}
+          initial={{ x: 0, y: 0, opacity: 0.82, rotate: 0 }}
+          animate={
+            baseDrift ?? {
+              x: [0, -20, 25, -15, 0],
+              y: [0, 20, -15, 10, 0],
+              opacity: [0.82, 0.7, 0.8, 0.72, 0.82],
+              rotate: [0, 4, -4, 3, 0],
+            }
+          }
+          transition={{
+            duration: 32,
+            ease: "easeInOut",
+            repeat: Infinity,
+            delay: 1.2,
+          }}
+        />
+      </div>
+
+      {/* --- Content --- */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-yellow/50 bg-brand-yellow/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ink">
-            Get Involved
+        <div className="mb-16 text-center">
+          <span className="font-dosis font-bold uppercase tracking-wider text-sm text-brand-yellow">
+            Get Involved With Us
           </span>
-
-          <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-ink">
-            Join The Movement
+          <h2 className="mt-3 font-dosis text-4xl md:text-5xl font-bold text-white">
+            Transform Lives Through Partnership
           </h2>
-
-          <p className="mt-4 text-lg md:text-xl text-ink/70 max-w-2xl mx-auto">
-            Be part of India’s largest youth transformation initiative.
+          <p className="mx-auto mt-4 max-w-2xl font-lato text-lg text-gray-300">
+            Join leading corporates and foundations in creating lasting social
+            impact through innovative CSR partnerships.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid gap-6 md:gap-8 md:grid-cols-2 xl:grid-cols-3">
-          <InvolveCard
-            gradient="from-brand-yellow via-brand-yellow to-brand-red"
-            icon={
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 21.35 10.55 20.03C5.4 15.36 2 12.28 2 8.5A5.5 5.5 0 0 1 12 6.41 5.5 5.5 0 0 1 22 8.5c0 3.78-3.4 6.86-8.55 11.53L12 21.35z" />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {/* Corporate CSR */}
+          <article className="group rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm transition-all hover:-translate-y-2 hover:bg-white/15">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-yellow shadow-xl transition-transform group-hover:scale-110">
+              <svg
+                className="h-8 w-8 text-brand-black"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
               </svg>
-            }
-            title="Donate"
-            description="Support youth transformation with your contribution. Every rupee creates lasting impact."
-            highlight="₹2,500 can support 1 adolescent to develop life skills for 6 months"
-            cta="Donate Now"
-          />
+            </div>
+            <h3 className="mb-3 font-dosis text-xl font-bold text-white">
+              Corporate CSR
+            </h3>
+            <p className="font-lato text-sm leading-relaxed text-gray-300">
+              Strategic CSR partnerships aligned with ESG goals and sustainable
+              impact.
+            </p>
+          </article>
 
-          <InvolveCard
-            gradient="from-brand-blue via-brand-blue to-brand-magenta"
-            icon={
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M16 11c1.66 0 3-1.34 3-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3Zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3Zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.93 1.97 3.45V19h6v-2.5C23 14.17 18.33 13 16 13Z" />
+          {/* Grant Funding */}
+          <article className="group rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm transition-all hover:-translate-y-2 hover:bg-white/15">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-blue shadow-xl transition-transform group-hover:scale-110">
+              <svg
+                className="h-8 w-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
-            }
-            title="Partner"
-            description="Collaborate with us to create scalable solutions for youth development and employment."
-            highlight="Join 500+ organizations creating impact together"
-            cta="Partner With Us"
-          />
+            </div>
+            <h3 className="mb-3 font-dosis text-xl font-bold text-white">
+              Grant Funding
+            </h3>
+            <p className="font-lato text-sm leading-relaxed text-gray-300">
+              Foundation partnerships supporting scalable, tech-driven youth
+              programs.
+            </p>
+          </article>
 
-          <InvolveCard
-            gradient="from-brand-green via-brand-green to-brand-blue"
-            icon={
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+          {/* Skill Partners */}
+          <article className="group rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm transition-all hover:-translate-y-2 hover:bg-white/15">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-magenta shadow-xl transition-transform group-hover:scale-110">
+              <svg
+                className="h-8 w-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
               </svg>
-            }
-            title="Volunteer"
-            description="Share your skills and time to mentor youth and drive community transformation."
-            highlight="2 hours/week can mentor 5 youth towards better futures"
-            cta="Volunteer Now"
-          />
+            </div>
+            <h3 className="mb-3 font-dosis text-xl font-bold text-white">
+              Skill Partners
+            </h3>
+            <p className="font-lato text-sm leading-relaxed text-gray-300">
+              Industry collaboration for curriculum design and placement support.
+            </p>
+          </article>
+
+          {/* Tech Partners */}
+          <article className="group rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm transition-all hover:-translate-y-2 hover:bg-white/15">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-green shadow-xl transition-transform group-hover:scale-110">
+              <svg
+                className="h-8 w-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+            <h3 className="mb-3 font-dosis text-xl font-bold text-white">
+              Tech Partners
+            </h3>
+            <p className="font-lato text-sm leading-relaxed text-gray-300">
+              Technology partnerships powering AI and digital innovation at
+              scale.
+            </p>
+          </article>
         </div>
 
-        {/* Assurances */}
-        <div className="mt-10 md:mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-ink/70">
-          <BadgeDot color="bg-brand-yellow" label="Tax-deductible donations" />
-          <BadgeDot color="bg-brand-red" label="Transparent impact reporting" />
-          <BadgeDot color="bg-brand-blue" label="PAN & 80G receipts issued" />
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <button className="rounded-full bg-brand-yellow px-10 py-4 font-work font-bold text-brand-black shadow-xl transition hover:-translate-y-0.5 hover:bg-yellow-400 hover:shadow-2xl">
+            Become a Partner
+          </button>
         </div>
       </div>
     </section>
-  );
-}
-
-/* ---------- helpers ---------- */
-
-function InvolveCard({ gradient, icon, title, description, highlight, cta }) {
-  return (
-    <div
-      className={[
-        // Card shell
-        "relative rounded-3xl border border-border bg-white",
-        "shadow-[0_10px_30px_rgba(0,0,0,0.06)]",
-        "transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]",
-        // Gradient ribbon that is PART OF the card (no gaps)
-        "before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:rounded-t-3xl",
-        `before:bg-gradient-to-r before:${gradient}`,
-      ].join(" ")}
-    >
-      <div className="p-8">
-        {/* Icon + Title row */}
-        <div className="flex items-center gap-4 mb-4">
-          <div
-            className={[
-              "shrink-0 w-12 h-12 rounded-2xl text-white grid place-items-center",
-              "bg-gradient-to-br",
-              gradient
-                .split(" ")
-                .map((g) => g.replace("from-", "from-").replace("via-", "via-").replace("to-", "to-"))
-                .join(" "),
-              "shadow-sm ring-1 ring-black/5",
-            ].join(" ")}
-          >
-            {icon}
-          </div>
-          <h3 className="text-2xl font-bold text-ink m-0">{title}</h3>
-        </div>
-
-        <p className="text-ink/70 leading-relaxed">{description}</p>
-
-        {/* Highlight panel */}
-        <div className="mt-6 rounded-xl border border-ink/10 bg-ink/5 px-4 py-3">
-          <p className="text-sm font-semibold text-ink">{highlight}</p>
-        </div>
-
-        <button className="mt-6 w-full rounded-xl bg-brand-red px-5 py-3.5 text-white font-semibold shadow-sm transition hover:bg-brand-red/90 active:scale-[0.99]">
-          {cta}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function BadgeDot({ color, label }) {
-  return (
-    <div className="flex items-center gap-2">
-      <span className={`inline-block w-2 h-2 rounded-full ${color}`} />
-      {label}
-    </div>
   );
 }

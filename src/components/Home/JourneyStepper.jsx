@@ -38,54 +38,65 @@ const steps = [
   },
 ];
 
-export default function JourneyZigzag() {
+// Small helper to stagger card fades
+const fade = (i) => ({
+  initial: { opacity: 0, y: 10 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-10% 0px -10% 0px" },
+  transition: { delay: 0.05 * i, duration: 0.45, ease: "easeOut" },
+});
+
+export default function JourneyZigzagAnimated() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-16 md:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 md:mb-12">
           <p className="uppercase tracking-[0.22em] text-xs font-bold text-gray-500 mb-3">
             Our proven model
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-ink mb-4">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-ink mb-4">
             Childhood to Livelihood Journey
           </h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            A clear, practical 5-step pathway that prepares young people for meaningful
-            careers and lifelong success.
+            A clear, practical 5-step pathway that prepares young people for
+            meaningful careers and lifelong success.
           </p>
         </div>
 
-        {/* Track */}
         <div className="relative">
-          {/* Dotted wave path (desktop) */}
+          {/* Dotted wave path – tuned to sit under 1, 4, 5 */}
           <svg
-            className="pointer-events-none absolute inset-x-0 -top-3 hidden md:block"
-            viewBox="0 0 1200 160"
+            className="pointer-events-none absolute inset-x-0 -top-6 hidden md:block"
+            viewBox="0 0 1200 180"
             fill="none"
             aria-hidden="true"
           >
-            {/* A smooth wave across five nodes; tweak stroke color as needed */}
-            <path
+            {/* main wave (starts slightly before step-1 and ends after step-5) */}
+            <motion.path
+              // anchors ~ under each icon center: 1(160), 2(380), 3(600), 4(820), 5(1040)
+              // up (60) -> down (110) -> up (60) -> down (110) -> up (60)
               d="
-                M 40 80
-                C 140 30, 220 30, 300 80
-                S 460 130, 600 80
-                S 820 30, 960 80
-                S 1080 130, 1160 80
+                M 70 90
+                C 120 40, 200 40, 260 90
+                S 440 120, 540 90
+                S 740 60, 840 120
+                S 1000 100, 1100 90
               "
               stroke="#9B87F5"
-              strokeWidth="4"
-              strokeDasharray="6 10"
+              strokeWidth="5"
               strokeLinecap="round"
-              opacity="0.65"
+              strokeDasharray="6 12"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 1.4, ease: "easeOut", delay: 0.2 }}
+              opacity="0.75"
             />
           </svg>
 
-          {/* Steps */}
+          {/* Steps grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 relative">
             {steps.map((s, i) => {
-              const isDown = i % 2 === 1; // 2nd & 4th go down
+              const isDown = i % 2 === 1; // 2 & 4 lower
               return (
                 <div
                   key={s.id}
@@ -93,22 +104,18 @@ export default function JourneyZigzag() {
                     isDown ? "mt-16" : "mt-0"
                   }`}
                 >
-                  {/* Icon bubble */}
+                  {/* Floating Icon */}
                   <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 3 + i * 0.15, repeat: Infinity, ease: "easeInOut" }}
                     whileHover={{ scale: 1.06 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`relative z-10 w-[96px] h-[96px] rounded-full grid place-items-center shadow-xl 
+                    className={`relative z-10 w-[96px] h-[96px] rounded-full grid place-items-center shadow-xl
                                 bg-gradient-to-br ${s.grad}`}
                   >
                     <span className="text-3xl drop-shadow-sm">{s.emoji}</span>
-
-                    {/* Number badge */}
-                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full 
-                                     bg-white text-ink text-xs font-bold grid place-items-center shadow">
+                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-white text-ink text-xs font-bold grid place-items-center shadow">
                       {s.id}
                     </span>
-
-                    {/* glow */}
                     <span
                       aria-hidden
                       className="absolute inset-0 rounded-full blur-2xl opacity-30 bg-white"
@@ -117,13 +124,7 @@ export default function JourneyZigzag() {
                   </motion.div>
 
                   {/* Card */}
-                  <motion.div
-                    initial={{ y: 10, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-                    transition={{ duration: 0.45, ease: "easeOut" }}
-                    className={`mt-6 w-full`}
-                  >
+                  <motion.div {...fade(i)} className="mt-6 w-full">
                     <div className="bg-white rounded-2xl shadow-[0_10px_30px_rgba(16,24,40,0.08)] p-6 text-center">
                       <h3 className="text-lg font-semibold text-ink mb-2">{s.title}</h3>
                       <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
@@ -138,7 +139,7 @@ export default function JourneyZigzag() {
           <div className="text-center mt-10">
             <a
               href="#"
-              className="inline-flex items-center justify-center rounded-full px-8 py-4 
+              className="inline-flex items-center justify-center rounded-full px-8 py-4
                          font-semibold bg-brand-red text-white shadow-lg hover:shadow-xl
                          transition hover:-translate-y-0.5 active:translate-y-0"
             >
