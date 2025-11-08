@@ -61,7 +61,7 @@ const logos = [
 
 export default function PartnersShowcase() {
   return (
-    <section className="relative py-20 bg-white">
+    <section className="relative py-20 max-w-7xl mx-auto bg-white">
       {/* soft background accents */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-brand-yellow/20 blur-3xl" />
