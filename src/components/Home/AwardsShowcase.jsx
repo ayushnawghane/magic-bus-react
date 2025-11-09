@@ -42,12 +42,10 @@ function AwardTitleFX({ text }) {
       <h3
         className="font-black tracking-tight leading-tight"
         style={{
+          fontFamily: 'Comic Sans MS, cursive',
           fontSize: "clamp(32px, 5vw, 64px)",
-          background: "linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          textShadow: "none",
-          filter: "drop-shadow(2px 2px 0px rgba(0,0,0,0.3)) drop-shadow(0px 0px 30px rgba(255,255,255,0.5))",
+          color: '#ffffff',
+          textShadow: '3px 3px 0px rgba(0,0,0,0.3), -2px -2px 0px rgba(255,200,87,0.4), 0px 0px 20px rgba(255,255,255,0.3)',
         }}
       >
         {text}
@@ -61,63 +59,164 @@ export default function AwardsShowcase() {
   const a = AWARDS[i];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-white py-20">
+      {/* Playful background elements */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[8%] top-[12%] h-20 w-20 rounded-full bg-yellow-300/20 blur-2xl"></div>
+        <div className="absolute right-[10%] top-[20%] h-24 w-24 rotate-45 bg-blue-300/20 blur-3xl"></div>
+        <div className="absolute bottom-[15%] left-[15%] h-28 w-28 rounded-full bg-pink-300/20 blur-2xl"></div>
+        <div className="absolute bottom-[25%] right-[12%] h-20 w-20 rotate-12 bg-green-300/20 blur-xl"></div>
+
+        {/* Hand-drawn stars */}
+        <svg className="absolute left-[5%] top-[8%] h-10 w-10 rotate-12 text-yellow-400/40" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        <svg className="absolute right-[6%] top-[10%] h-8 w-8 -rotate-6 text-pink-400/40" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+
+        {/* Crayon doodles */}
+        <svg className="absolute bottom-[10%] left-[3%] h-16 w-16 text-orange-400/30" viewBox="0 0 100 100">
+          <path d="M20,50 Q30,30 50,50 T80,50" stroke="currentColor" strokeWidth="4" fill="none" strokeLinecap="round"/>
+        </svg>
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
-        <div className="flex items-start md:items-center justify-between gap-6 mb-12">
+        <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <div>
-            <p className="text-sm font-semibold tracking-wider text-red-600 uppercase mb-2">
-              Recognition
-            </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Awards & Achievements
+            <div className="mb-4 inline-block">
+              <div className="relative">
+                <div className="rotate-1 rounded-2xl border-3 border-dashed border-orange-400 bg-white px-5 py-2 shadow-md">
+                  <span className="text-sm font-black uppercase tracking-wider text-orange-600" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                    🎖️ Recognition 🎖️
+                  </span>
+                </div>
+                <div className="absolute -right-1 -top-1 h-3 w-3 rotate-45 bg-yellow-400"></div>
+              </div>
+            </div>
+            <h2 
+              className="text-4xl font-black text-gray-900 md:text-5xl lg:text-6xl"
+              style={{ 
+                fontFamily: 'Comic Sans MS, cursive',
+                textShadow: '3px 3px 0px rgba(251, 191, 36, 0.2)'
+              }}
+            >
+              Awards & <span className="relative inline-block text-red-600">
+                Achievements
+                <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" preserveAspectRatio="none">
+                  <path d="M5,5 Q50,2 100,4 T195,5" stroke="#dc2626" strokeWidth="3" fill="none" strokeLinecap="round"/>
+                </svg>
+              </span>
             </h2>
           </div>
 
           <a
             href="#"
-            className="inline-flex items-center gap-2 rounded-full bg-red-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-red-700 transition-all hover:shadow-lg"
+            className="group inline-flex items-center gap-2 rounded-full border-3 border-red-600 bg-red-600 px-6 py-3 text-sm font-black text-white shadow-lg transition-all hover:scale-105 hover:border-red-700 hover:bg-red-700 hover:shadow-xl active:scale-95"
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
           >
             All Awards
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 6l6 6-6 6" />
+            <svg className="transition-transform group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
             </svg>
           </a>
         </div>
 
         {/* Main Grid */}
-        <div className="grid lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid items-stretch gap-6 lg:grid-cols-12">
           {/* Left stats card */}
           <div className="lg:col-span-4">
-            <div className="h-full min-h-[420px] rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 p-8 shadow-lg border border-orange-100 flex flex-col justify-between">
-              <div>
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6, rotate: 1 }}
+              className="flex h-full min-h-[420px] flex-col justify-between overflow-hidden rounded-3xl border-4 border-white bg-gradient-to-br from-amber-100 via-orange-50 to-yellow-100 p-8 shadow-xl"
+            >
+              {/* Paper texture */}
+              <div 
+                className="pointer-events-none absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                }}
+              ></div>
+
+              <div className="relative">
+                {/* Trophy icon decoration */}
+                <div className="absolute -right-4 -top-4 text-6xl opacity-20">🏆</div>
+                
                 <div className="inline-flex items-baseline gap-2">
-                  <span className="text-7xl font-black text-gray-900">8</span>
-                  <span className="text-3xl font-bold text-orange-500">+</span>
+                  <span 
+                    className="text-7xl font-black text-gray-900"
+                    style={{ 
+                      fontFamily: 'Comic Sans MS, cursive',
+                      textShadow: '3px 3px 0px rgba(251, 191, 36, 0.3)'
+                    }}
+                  >
+                    8
+                  </span>
+                  <span 
+                    className="text-3xl font-black text-orange-600"
+                    style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                  >
+                    +
+                  </span>
                 </div>
-                <div className="mt-4 flex items-center gap-1 text-amber-500 text-2xl">
-                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                
+                <div className="mt-4 flex items-center gap-1 text-2xl text-amber-500">
+                  {[...Array(5)].map((_, idx) => (
+                    <motion.span
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: idx * 0.1, type: "spring" }}
+                    >
+                      ⭐
+                    </motion.span>
+                  ))}
                 </div>
-                <p className="text-base mt-3 text-gray-700 font-medium">
-                  Global awards & certifications
+                
+                <p 
+                  className="mt-4 text-base font-bold leading-relaxed text-gray-700"
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                >
+                  Global awards & certifications that recognize our impact! 🌍
                 </p>
               </div>
 
-              <div className="space-y-3 mt-8">
-                <p className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Recent Honors</p>
-                <div className="flex items-center -space-x-2">
+              <div className="relative mt-8 space-y-4">
+                {/* Decorative line */}
+                <div className="flex items-center gap-2">
+                  <div className="h-1 flex-1 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400"></div>
+                  <div className="h-2 w-2 rotate-45 bg-orange-400"></div>
+                </div>
+
+                <p 
+                  className="text-xs font-black uppercase tracking-wider text-orange-700"
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                >
+                  ✨ Recent Honors ✨
+                </p>
+                
+                <div className="flex items-center -space-x-3">
                   {AWARDS.slice(0, 4).map((w, idx) => (
-                    <div
+                    <motion.div
                       key={idx}
-                      className={`w-14 h-14 rounded-full grid place-items-center text-2xl ring-4 ring-amber-50 bg-gradient-to-br ${w.accent} shadow-md hover:scale-110 transition-transform cursor-pointer`}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5 + idx * 0.1, type: "spring" }}
+                      whileHover={{ scale: 1.2, zIndex: 10 }}
+                      className={`grid h-14 w-14 cursor-pointer place-items-center rounded-full border-4 border-white bg-gradient-to-br ${w.accent} text-2xl shadow-lg transition-transform`}
                       title={w.title}
                     >
                       <span>{w.icon}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right awards carousel */}
@@ -126,11 +225,11 @@ export default function AwardsShowcase() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.95, rotate: -2 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, rotate: 2 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl"
+                  className="absolute inset-0 overflow-hidden rounded-3xl border-4 border-white shadow-2xl"
                 >
                   {/* Background image with overlay */}
                   <div className="relative h-full w-full">
@@ -139,32 +238,73 @@ export default function AwardsShowcase() {
                       alt={a.title}
                       initial={{ scale: 1.1 }}
                       animate={{ scale: 1 }}
-                      transition={{ duration: 0.5 }}
+                      transition={{ duration: 0.6 }}
                       className="absolute inset-0 h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                    
+                    {/* Paper texture overlay */}
+                    <div 
+                      className="absolute inset-0 opacity-10 mix-blend-overlay"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M0 0h20v20H0V0zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm20 0a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM10 37a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm10-17h20v20H20V20zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14z'/%3E%3C/g%3E%3C/svg%3E")`
+                      }}
+                    ></div>
                   </div>
 
                   {/* Content overlay */}
                   <div className="absolute inset-0 flex flex-col justify-between p-8">
                     {/* Top badge */}
                     <div className="flex justify-end">
-                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30">
-                        <div className={`w-8 h-8 rounded-full grid place-items-center text-lg bg-gradient-to-br ${a.accent}`}>
+                      <motion.div 
+                        initial={{ y: -20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="inline-flex items-center gap-3 rounded-2xl border-3 border-white/40 bg-white/20 px-4 py-3 backdrop-blur-md"
+                      >
+                        <div className={`grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-gradient-to-br ${a.accent} text-xl shadow-lg`}>
                           {a.icon}
                         </div>
-                        <span className="text-white font-semibold text-sm">{a.badge}</span>
-                      </div>
+                        <span 
+                          className="text-base font-black text-white"
+                          style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                        >
+                          {a.badge}
+                        </span>
+                      </motion.div>
                     </div>
 
                     {/* Bottom content */}
-                    <div>
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
                       <AwardTitleFX text={a.title} />
-                      <div className="mt-4 flex items-center gap-3">
-                        <div className="h-1 w-12 bg-gradient-to-r from-white to-white/50 rounded-full" />
-                        <span className="text-white/90 text-lg font-semibold">{a.year}</span>
+                      
+                      <div className="mt-6 flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <div className="h-1 w-12 rounded-full bg-gradient-to-r from-white to-white/50" />
+                          <div className="h-1.5 w-1.5 rotate-45 bg-white/70" />
+                        </div>
+                        <span 
+                          className="text-xl font-black text-white/90"
+                          style={{ 
+                            fontFamily: 'Comic Sans MS, cursive',
+                            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                          }}
+                        >
+                          📅 {a.year}
+                        </span>
                       </div>
-                    </div>
+
+                      {/* Decorative corner element */}
+                      <div className="absolute bottom-8 right-8 opacity-30">
+                        <svg className="h-16 w-16 text-white" viewBox="0 0 100 100">
+                          <path d="M50,10 L60,40 L90,50 L60,60 L50,90 L40,60 L10,50 L40,40 Z" fill="currentColor"/>
+                        </svg>
+                      </div>
+                    </motion.div>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -172,13 +312,15 @@ export default function AwardsShowcase() {
 
             {/* Navigation dots and arrows */}
             <div className="mt-6 flex items-center justify-between">
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 {AWARDS.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setI(idx)}
-                    className={`h-2 rounded-full transition-all ${
-                      idx === i ? "w-8 bg-red-600" : "w-2 bg-gray-300 hover:bg-gray-400"
+                    className={`rounded-full transition-all ${
+                      idx === i 
+                        ? "h-3 w-10 bg-gradient-to-r from-red-600 to-orange-500 shadow-md" 
+                        : "h-3 w-3 bg-gray-300 hover:scale-125 hover:bg-gray-400"
                     }`}
                     aria-label={`Go to award ${idx + 1}`}
                   />
@@ -189,19 +331,21 @@ export default function AwardsShowcase() {
                 <button
                   onClick={() => setI((p) => (p - 1 + AWARDS.length) % AWARDS.length)}
                   aria-label="Previous award"
-                  className="h-10 w-10 grid place-items-center rounded-full bg-white text-gray-900 ring-1 ring-gray-200 hover:ring-gray-300 hover:shadow-md active:scale-95 transition-all"
+                  className="grid h-12 w-12 place-items-center rounded-full border-3 border-gray-200 bg-white text-gray-900 shadow-md transition-all hover:scale-110 hover:border-gray-300 hover:shadow-lg active:scale-95"
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M15 18l-6-6 6-6" />
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 18l-6-6 6-6" />
                   </svg>
                 </button>
                 <button
                   onClick={() => setI((p) => (p + 1) % AWARDS.length)}
                   aria-label="Next award"
-                  className="h-10 w-10 grid place-items-center rounded-full bg-red-600 text-white hover:bg-red-700 hover:shadow-lg active:scale-95 transition-all"
+                  className="grid h-12 w-12 place-items-center rounded-full border-3 border-red-700 bg-gradient-to-br from-red-600 to-orange-500 text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl active:scale-95"
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M9 6l6 6-6 6" />
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
                   </svg>
                 </button>
               </div>
@@ -210,17 +354,24 @@ export default function AwardsShowcase() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center"
+        >
           <a
             href="#"
-            className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white px-8 py-3.5 font-semibold hover:bg-gray-800 transition-all hover:shadow-xl hover:scale-105"
+            className="group inline-flex items-center gap-3 rounded-full border-4 border-gray-900 bg-gray-900 px-10 py-4 font-black text-white shadow-xl transition-all hover:scale-105 hover:border-gray-800 hover:bg-gray-800 hover:shadow-2xl active:scale-95"
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
           >
-            View All Awards & Certifications
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7" />
+            View All Awards & Certifications 🏅
+            <svg className="transition-transform group-hover:translate-x-2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

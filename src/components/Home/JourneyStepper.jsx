@@ -133,11 +133,11 @@ export default function JourneyZigzagAnimated() {
           <motion.path
             // raised Y coordinates and extended start/end to the sides
             d="M 40 40
-              Q 160 20, 260 80
-              Q 360 140, 460 90
-              Q 560 40, 660 120
-              Q 760 200, 860 120
-              Q 920 90, 980 140"
+              Q 160 20, 240 70
+              Q 320 140, 420 90
+              Q 560 10, 660 120
+              Q 700 150, 750 120
+              Q 820 80, 900 40"
             stroke="#FF69B4"
             strokeWidth="6"
             strokeLinecap="round"

@@ -19,7 +19,7 @@ export default function ProgrammesSlider() {
         icon: "🎒",
         color: "#FFB6C1",
         image:
-          "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop",
+          "/ngo-images/2.JPG",
       },
       {
         id: "livelihood-programme",
@@ -30,7 +30,7 @@ export default function ProgrammesSlider() {
         icon: "💼",
         color: "#98D8C8",
         image:
-          "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop",
+          "/ngo-images/3.JPG",
       },
       {
         id: "employee-volunteering",
@@ -41,7 +41,7 @@ export default function ProgrammesSlider() {
         icon: "🤝",
         color: "#FFD700",
         image:
-          "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=1600&auto=format&fit=crop",
+          "/ngo-images/4.JPG",
       },
       {
         id: "rural-empowerment",
@@ -63,7 +63,7 @@ export default function ProgrammesSlider() {
         icon: "🎯",
         color: "#87CEEB",
         image:
-          "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1600&auto=format&fit=crop",
+          "/ngo-images/5.jpeg",
       },
       {
         id: "youth-fellowship",
@@ -74,7 +74,7 @@ export default function ProgrammesSlider() {
         icon: "🎓",
         color: "#FFA07A",
         image:
-          "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=1600&auto=format&fit=crop",
+          "/ngo-images/6.jpeg",
       },
     ],
     []

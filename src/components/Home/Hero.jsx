@@ -19,7 +19,7 @@ export default function Hero({
         "Join us in creating opportunities for underprivileged children through education, healthcare, and empowerment programs.",
     },
     {
-      img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1600&auto=format&fit=crop",
+      img: "/ngo-images/3.JPG",
       thumb: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=200&auto=format&fit=crop",
       title: "Learn, Grow\n& Dream Big!",
       subtitle: "Education Changes Everything",
@@ -27,7 +27,7 @@ export default function Hero({
         "Your support helps provide quality education, skill training, and resources to children who need it most.",
     },
     {
-      img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop",
+      img: "/ngo-images/2.JPG",
       thumb: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=200&auto=format&fit=crop",
       title: "Be The Change\nMakers!",
       subtitle: "Together We Make A Difference",
