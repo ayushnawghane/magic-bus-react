@@ -1,3 +1,4 @@
+// SuccessStories.jsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -7,69 +8,38 @@ const BASE_STORIES = [
       "Magic Bus gave me the confidence and skills to secure my first job. Today, I'm supporting my family and inspiring others in my community.",
     name: "Priya Sharma",
     role: "Digital Marketing Associate",
-    color: "yellow",
-    emoji: "🌟",
+    leftBorder: "brand-yellow",
+    avatarGradient: "from-brand-yellow to-brand-red",
   },
   {
     quote:
       "The employability program didn't just teach me skills—it changed my entire perspective on what I could achieve in life.",
     name: "Rahul Kumar",
     role: "Tech Support Specialist",
-    color: "red",
-    emoji: "🚀",
+    leftBorder: "brand-red",
+    avatarGradient: "from-brand-red to-brand-magenta",
   },
   {
     quote:
       "As a teacher, Magic Mitra has revolutionized how I engage with students. The AI support is incredible and truly innovative.",
     name: "Anjali Mehta",
     role: "School Teacher",
-    color: "blue",
-    emoji: "💡",
+    leftBorder: "brand-blue",
+    avatarGradient: "from-brand-blue to-brand-green",
   },
-  {
-    quote:
-      "I never thought I could become an entrepreneur. The skills training and mentorship gave me wings to start my own business!",
-    name: "Amit Patel",
-    role: "Small Business Owner",
-    color: "green",
-    emoji: "🎯",
-  },
+  // (Optional) add more items — the slider will adapt
 ];
 
-const colorSchemes = {
-  yellow: {
-    bg: "from-yellow-100 to-orange-100",
-    border: "border-yellow-400",
-    accent: "bg-yellow-400",
-    text: "text-yellow-600",
-    shadow: "shadow-yellow-200/50",
-  },
-  red: {
-    bg: "from-red-100 to-pink-100",
-    border: "border-red-400",
-    accent: "bg-red-400",
-    text: "text-red-600",
-    shadow: "shadow-red-200/50",
-  },
-  blue: {
-    bg: "from-blue-100 to-cyan-100",
-    border: "border-blue-400",
-    accent: "bg-blue-400",
-    text: "text-blue-600",
-    shadow: "shadow-blue-200/50",
-  },
-  green: {
-    bg: "from-green-100 to-teal-100",
-    border: "border-green-400",
-    accent: "bg-green-400",
-    text: "text-green-600",
-    shadow: "shadow-green-200/50",
-  },
+const borderClass = {
+  "brand-yellow": "border-brand-yellow",
+  "brand-red": "border-brand-red",
+  "brand-blue": "border-brand-blue",
 };
 
 export default function SuccessStories() {
+  // visible cards responsive: 1 (sm), 2 (md), 3 (lg+)
   const [visible, setVisible] = useState(3);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0); // position on extended track
   const [isAnimating, setIsAnimating] = useState(true);
   const [isMoving, setIsMoving] = useState(false);
   const trackRef = useRef(null);
@@ -88,12 +58,14 @@ export default function SuccessStories() {
     return () => window.removeEventListener("resize", calc);
   }, []);
 
+  // create clones for seamless loop
   const slides = useMemo(() => {
     const head = BASE_STORIES.slice(0, visible);
     const tail = BASE_STORIES.slice(-visible);
     return [...tail, ...BASE_STORIES, ...head];
   }, [visible]);
 
+  // snap to first real on visible change (without anim)
   useEffect(() => {
     setIsAnimating(false);
     setIndex(visible);
@@ -101,6 +73,7 @@ export default function SuccessStories() {
     return () => clearTimeout(t);
   }, [visible]);
 
+  // autoplay
   useEffect(() => {
     startAuto();
     return stopAuto;
@@ -123,6 +96,7 @@ export default function SuccessStories() {
     setIndex((i) => i - 1);
   };
 
+  // snap back after passing clones
   const onTransitionEnd = () => {
     const firstReal = visible;
     const lastReal = visible + BASE_STORIES.length - 1;
@@ -143,10 +117,12 @@ export default function SuccessStories() {
     }
   };
 
+  // swipe
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    let startX = 0, dx = 0;
+    let startX = 0,
+      dx = 0;
     const start = (e) => {
       startX = e.touches ? e.touches[0].clientX : e.clientX;
       dx = 0;
@@ -166,9 +142,16 @@ export default function SuccessStories() {
     el.addEventListener("touchend", end, { passive: true });
 
     let md = false;
-    const mdown = (e) => { md = true; start(e); };
+    const mdown = (e) => {
+      md = true;
+      start(e);
+    };
     const mmove = (e) => md && move(e);
-    const mup = () => { if (!md) return; md = false; end(); };
+    const mup = () => {
+      if (!md) return;
+      md = false;
+      end();
+    };
     el.addEventListener("mousedown", mdown);
     window.addEventListener("mousemove", mmove);
     window.addEventListener("mouseup", mup);
@@ -183,6 +166,7 @@ export default function SuccessStories() {
     };
   }, [visible]);
 
+  // keyboard
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowRight") moveNext();
@@ -192,92 +176,34 @@ export default function SuccessStories() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // translate calc: each card width = 100%/visible
   const transform = `translateX(-${(index * 100) / visible}%)`;
-  const activeReal = ((index - visible) % BASE_STORIES.length + BASE_STORIES.length) % BASE_STORIES.length;
+
+  // active page for dots (based on real items)
+  const activeReal =
+    ((index - visible) % BASE_STORIES.length + BASE_STORIES.length) %
+    BASE_STORIES.length;
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50/30 to-purple-50/30 py-24">
-      {/* Playful background decorations */}
-      <div className="pointer-events-none absolute inset-0">
-        {/* Floating shapes */}
-        <div className="absolute left-[8%] top-[15%] h-20 w-20 rotate-12 rounded-2xl bg-yellow-300/20 blur-xl"></div>
-        <div className="absolute right-[10%] top-[25%] h-24 w-24 rotate-45 rounded-full bg-pink-300/20 blur-2xl"></div>
-        <div className="absolute bottom-[20%] left-[15%] h-28 w-28 -rotate-12 rounded-2xl bg-blue-300/20 blur-xl"></div>
-        <div className="absolute bottom-[30%] right-[12%] h-16 w-16 rotate-45 rounded-full bg-green-300/20 blur-xl"></div>
-        
-        {/* Hand-drawn stars */}
-        <svg className="absolute left-[5%] top-[8%] h-10 w-10 rotate-12 text-yellow-400/40" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg className="absolute right-[8%] top-[12%] h-8 w-8 -rotate-6 text-pink-400/40" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        
-        {/* Crayon doodles */}
-        <svg className="absolute bottom-[10%] left-[3%] h-16 w-16 text-orange-400/30" viewBox="0 0 100 100">
-          <path d="M20,50 Q30,30 50,50 T80,50" stroke="currentColor" strokeWidth="4" fill="none" strokeLinecap="round"/>
-        </svg>
-        <svg className="absolute right-[5%] bottom-[15%] h-12 w-12 text-blue-400/30" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="25" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="8,4"/>
-        </svg>
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header with hand-drawn elements */}
+    <section className="bg-gray-50 py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.3 }}
-          className="mb-20 text-center"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.5 }}
+          className="text-center mb-16"
         >
-          {/* Badge */}
-          <div className="mb-6 inline-block">
-            <div className="relative inline-block">
-              <div className="rotate-1 rounded-2xl border-3 border-dashed border-orange-400 bg-white px-6 py-3 shadow-lg">
-                <span className="text-sm font-black uppercase tracking-wider text-orange-600" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                  ⭐ Our Impact Stories ⭐
-                </span>
-              </div>
-              {/* Small decorative stars */}
-              <svg className="absolute -right-2 -top-2 h-6 w-6 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            </div>
-          </div>
-
-          {/* Main heading with shadow */}
-          <h2 
-            className="mb-6 text-5xl font-black leading-tight text-gray-900 md:text-6xl lg:text-7xl"
-            style={{ 
-              fontFamily: 'Comic Sans MS, cursive',
-              textShadow: '4px 4px 0px rgba(255, 200, 87, 0.3), -2px -2px 0px rgba(147, 197, 253, 0.2)'
-            }}
-          >
-            Lives We've <span className="relative inline-block">
-              Transformed
-              {/* Underline scribble */}
-              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" preserveAspectRatio="none">
-                <path d="M5,8 Q50,2 100,6 T200,5 T290,7" stroke="#fb923c" strokeWidth="4" fill="none" strokeLinecap="round"/>
-              </svg>
-            </span>
+          <span className="text-brand-red font-dosis font-bold text-sm uppercase tracking-wider">
+            Success Stories
+          </span>
+          <h2 className="mt-3 text-5xl font-dosis font-bold text-brand-black">
+            Lives We've Transformed
           </h2>
-
-          <p 
-            className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-700 md:text-xl"
-            style={{ fontFamily: 'Comic Sans MS, cursive' }}
-          >
-            Real stories from amazing kids and youth who found their path through our programs! 🎉
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-lato text-lg">
+            Real stories from youth who found their path through Magic Bus programs.
           </p>
-
-          {/* Decorative line */}
-          <div className="mx-auto mt-8 flex items-center justify-center gap-3">
-            <div className="h-1 w-20 rounded-full bg-gradient-to-r from-red-400 to-yellow-400"></div>
-            <div className="h-2 w-2 rotate-45 bg-orange-400"></div>
-            <div className="h-1 w-20 rounded-full bg-gradient-to-r from-yellow-400 to-green-400"></div>
-            <div className="h-2 w-2 rotate-45 bg-blue-400"></div>
-            <div className="h-1 w-20 rounded-full bg-gradient-to-r from-green-400 to-blue-400"></div>
-          </div>
         </motion.div>
 
         {/* Slider */}
@@ -289,10 +215,10 @@ export default function SuccessStories() {
           <div className="overflow-hidden">
             <div
               ref={trackRef}
-              className="flex cursor-grab will-change-transform active:cursor-grabbing"
+              className="flex will-change-transform"
               style={{
                 transform,
-                transition: isAnimating ? "transform 600ms cubic-bezier(.22,.61,.36,1)" : "none",
+                transition: isAnimating ? "transform 500ms cubic-bezier(.22,.61,.36,1)" : "none",
               }}
               onTransitionEnd={onTransitionEnd}
             >
@@ -300,7 +226,7 @@ export default function SuccessStories() {
                 <div
                   key={`${s.name}-${i}`}
                   style={{ flex: `0 0 calc(100% / ${visible})` }}
-                  className="px-3 md:px-4"
+                  className="px-3 md:px-4 lg:px-5"
                 >
                   <StoryCard story={s} />
                 </div>
@@ -308,163 +234,78 @@ export default function SuccessStories() {
             </div>
           </div>
 
-          {/* Controls with playful styling */}
-          <div className="mt-12 flex flex-col items-center gap-6">
-            <div className="flex items-center gap-4">
+          {/* Controls */}
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <button
+              aria-label="Previous"
+              onClick={movePrev}
+              className="grid h-11 w-11 place-items-center rounded-full bg-white text-ink shadow-sm ring-1 ring-black/5 hover:shadow-md active:scale-95 transition"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              aria-label="Next"
+              onClick={moveNext}
+              className="grid h-11 w-11 place-items-center rounded-full bg-brand-red text-white shadow-sm hover:bg-brand-red/90 active:scale-95 transition"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Dots (based on real items) */}
+          <div className="mt-3 flex items-center justify-center gap-2">
+            {BASE_STORIES.map((_, i) => (
               <button
-                aria-label="Previous"
-                onClick={movePrev}
-                className="group relative h-14 w-14 overflow-hidden rounded-full border-4 border-white bg-gradient-to-br from-purple-400 to-pink-500 shadow-xl transition-all hover:scale-110 hover:shadow-2xl active:scale-95"
-                style={{ fontFamily: 'Comic Sans MS, cursive' }}
-              >
-                <div className="absolute inset-0 bg-white opacity-0 transition-opacity group-hover:opacity-20"></div>
-                <svg className="relative mx-auto h-6 w-6 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-
-              {/* Center indicator */}
-              <div className="rounded-full border-3 border-dashed border-gray-300 bg-white px-6 py-2 shadow-sm">
-                <span className="text-sm font-bold text-gray-700" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                  {activeReal + 1} / {BASE_STORIES.length}
-                </span>
-              </div>
-
-              <button
-                aria-label="Next"
-                onClick={moveNext}
-                className="group relative h-14 w-14 overflow-hidden rounded-full border-4 border-white bg-gradient-to-br from-orange-400 to-red-500 shadow-xl transition-all hover:scale-110 hover:shadow-2xl active:scale-95"
-                style={{ fontFamily: 'Comic Sans MS, cursive' }}
-              >
-                <div className="absolute inset-0 bg-white opacity-0 transition-opacity group-hover:opacity-20"></div>
-                <svg className="relative mx-auto h-6 w-6 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Playful dots */}
-            <div className="flex items-center gap-3">
-              {BASE_STORIES.map((_, i) => (
-                <button
-                  key={i}
-                  aria-label={`Go to story ${i + 1}`}
-                  onClick={() => {
-                    const delta = i - activeReal;
-                    if (delta === 0) return;
-                    setIndex((curr) => curr + delta);
-                  }}
-                  className={`transition-all ${
-                    i === activeReal 
-                      ? "h-3 w-8 rounded-full bg-gradient-to-r from-orange-400 to-red-500 shadow-md" 
-                      : "h-3 w-3 rounded-full bg-gray-300 hover:bg-gray-400 hover:scale-125"
-                  }`}
-                />
-              ))}
-            </div>
+                key={i}
+                aria-label={`Go to story ${i + 1}`}
+                onClick={() => {
+                  const delta = i - activeReal;
+                  if (delta === 0) return;
+                  setIndex((curr) => curr + delta);
+                }}
+                className={`h-2 w-2 rounded-full transition ${
+                  i === activeReal ? "bg-brand-red" : "bg-gray-300 hover:bg-gray-400"
+                }`}
+              />
+            ))}
           </div>
         </div>
-      </div>
-
-      {/* Bottom wave decoration */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0">
-        <svg className="w-full" viewBox="0 0 1200 80" preserveAspectRatio="none" style={{ height: '60px' }}>
-          <path d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z" fill="white" opacity="0.5"/>
-        </svg>
       </div>
     </section>
   );
 }
 
 function StoryCard({ story }) {
-  const { quote, name, role, color, emoji } = story;
-  const scheme = colorSchemes[color];
+  const { quote, name, role, leftBorder, avatarGradient } = story;
+  const borderColor = borderClass[leftBorder] || "border-brand-red";
 
   return (
-    <motion.article
-      whileHover={{ y: -8, rotate: Math.random() > 0.5 ? 1 : -1 }}
-      transition={{ type: "spring", stiffness: 200, damping: 15 }}
-      className="h-full"
+    <article
+      className={[
+        "h-full rounded-2xl bg-gradient-to-br from-gray-50 to-white p-6 md:p-7 lg:p-8",
+        "shadow-sm hover:shadow-xl transition-shadow",
+        "border-l-4",
+        borderColor,
+      ].join(" ")}
     >
-      <div className={`relative h-full overflow-hidden rounded-3xl border-4 border-white bg-gradient-to-br ${scheme.bg} p-8 shadow-xl ${scheme.shadow} transition-shadow hover:shadow-2xl`}>
-        {/* Paper texture overlay */}
-        <div 
-          className="pointer-events-none absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M0 0h20v20H0V0zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm20 0a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM10 37a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm10-17h20v20H20V20zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14z'/%3E%3C/g%3E%3C/svg%3E")`
-          }}
-        ></div>
-
-        {/* Top decorative element */}
-        <div className="relative mb-6 flex items-start justify-between">
-          {/* Stars */}
-          <div className="flex gap-1">
-            {[...Array(5)].map((_, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1, type: "spring" }}
-                className="text-2xl"
-              >
-                ⭐
-              </motion.span>
-            ))}
-          </div>
-
-          {/* Emoji badge */}
-          <div className={`-rotate-6 rounded-xl border-3 border-white ${scheme.accent} px-3 py-2 text-2xl shadow-md`}>
-            {emoji}
-          </div>
-        </div>
-
-        {/* Quote with hand-drawn quote marks */}
-        <div className="relative mb-6">
-          <svg className="absolute -left-2 -top-2 h-8 w-8 text-gray-400/40" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
-          </svg>
-          <p 
-            className="relative pl-6 pr-2 text-base leading-relaxed text-gray-800 md:text-lg"
-            style={{ fontFamily: 'Comic Sans MS, cursive' }}
-          >
-            {quote}
-          </p>
-        </div>
-
-        {/* Author section with crayon-style avatar */}
-        <div className="relative mt-8 flex items-center gap-4">
-          {/* Colorful avatar circle */}
-          <div className="relative">
-            <div className={`h-16 w-16 overflow-hidden rounded-full border-4 border-white ${scheme.accent} shadow-lg`}>
-              <div className="flex h-full w-full items-center justify-center text-3xl font-black text-white" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                {name.charAt(0)}
-              </div>
-            </div>
-            {/* Small decorative circle */}
-            <div className="absolute -bottom-1 -right-1 h-5 w-5 rotate-12 rounded-full border-2 border-white bg-yellow-400 shadow-sm"></div>
-          </div>
-
-          <div>
-            <div 
-              className="text-xl font-black text-gray-900"
-              style={{ fontFamily: 'Comic Sans MS, cursive' }}
-            >
-              {name}
-            </div>
-            <div 
-              className={`text-sm font-bold ${scheme.text}`}
-              style={{ fontFamily: 'Comic Sans MS, cursive' }}
-            >
-              {role}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom corner decoration */}
-        <svg className="absolute bottom-2 right-2 h-8 w-8 opacity-20" viewBox="0 0 100 100">
-          <path d="M50,10 L60,40 L90,50 L60,60 L50,90 L40,60 L10,50 L40,40 Z" fill="currentColor"/>
-        </svg>
+      <div className="mb-4 flex">
+        <span className="text-brand-yellow text-2xl leading-none">★★★★★</span>
       </div>
-    </motion.article>
+      <p className="font-lato italic leading-relaxed text-gray-700">
+        “{quote}”
+      </p>
+
+      <div className="mt-6 flex items-center gap-4">
+        <div className={`h-14 w-14 rounded-full bg-gradient-to-br ${avatarGradient}`} />
+        <div>
+          <div className="font-dosis text-lg font-bold text-ink">{name}</div>
+          <div className="font-lato text-sm text-gray-500">{role}</div>
+        </div>
+      </div>
+    </article>
   );
 }

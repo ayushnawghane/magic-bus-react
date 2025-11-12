@@ -1,345 +1,150 @@
-import { motion } from "framer-motion";
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
-const categories = [
-  {
-    title: "Companies",
-    copy: "Big businesses helping make dreams come true!",
-    icon: "🏢",
-    color: "#87CEEB",
-    sticker: "💼",
-  },
-  {
-    title: "Money Helpers",
-    copy: "Foundations giving love & support worldwide!",
-    icon: "🏛️",
-    color: "#98D8C8",
-    sticker: "💰",
-  },
-  {
-    title: "Government",
-    copy: "State & country teams working together!",
-    icon: "🏛️",
-    color: "#FFB6C1",
-    sticker: "🏅",
-  },
-  {
-    title: "Job Givers",
-    copy: "Companies hiring our amazing graduates!",
-    icon: "💼",
-    color: "#DDA0DD",
-    sticker: "⭐",
-  },
+/**
+ * Trusted by 500+ Organizations
+ * - 5 auto-scrolling columns (up/down alternating) with seamless loop
+ * - Logo image cards (glass, subtle border/shadow)
+ * - Brand-tinted light background + fade edges for the marquee
+ * - Grayscale → color on hover, scale lift
+ * - Respects prefers-reduced-motion
+ */
+
+
+
+const col1  = [
+  { name: "OTIS", src: "/partners/1 (1).jpg" },
+  { name: "Dow", src: "/partners/1 (1).png" },
+  { name: "Interactive Brokers", src: "/partners/1 (3).jpg" },
 ];
 
-const logos = [
-  { label: "TATA" },
-  { label: "Infosys" },
-  { label: "Microsoft" },
-  { label: "Accenture" },
-  { label: "Wipro" },
-  { label: "HCL" },
-  { label: "Capgemini" },
-  { label: "AWS" },
-  { label: "Meta" },
-  { label: "Google" },
+const col2  = [
+  { name: "Reliance", src: "/partners/1 (4).png" },
+  { name: "SBI Card", src: "/partners/1 (3).png" },
+  { name: "Deutsche Bank", src: "/partners/1 (2).jpg" },
+  { name: "Deloitte", src: "/partners/1 (2).png" },
 ];
 
-export default function PartnersShowcase() {
-  return (
-    <section 
-      className="relative py-16 md:py-24 overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #FFF9E6 0%, #E8F5E9 50%, #FFE4D6 100%)",
-      }}
-    >
-      {/* Paper texture */}
-      <div 
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E")`,
-        }}
+const col3  = [
+  { name: "KFC", src: "/partners/1 (4).jpg" },
+  { name: "Airbus", src: "/partners/1 (5).jpg" },
+  { name: "Cisco", src: "/partners/1 (14).jpg" },
+];
+
+const col4  = [
+  { name: "Puma", src: "/partners/1 (6).jpg" },
+  { name: "Convergys", src: "/partners/1 (13).jpg" },
+  { name: "IndiGo", src: "/partners/1 (7).jpg" },
+  { name: "Oracle", src: "/partners/1 (12).jpg" },
+];
+
+const col5  = [
+  { name: "MEL", src: "/partners/1 (8).jpg" },
+  { name: "Mitsubishi", src: "/partners/1 (11).jpg" },
+  { name: "Hexaware", src: "/partners/1 (9).jpg" },
+  { name: "Relaygo", src: "/partners/1 (10).jpg" },
+];
+
+function LogoCard({ logo }) {
+  const Img = (
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-border/70 shadow-sm hover:shadow-md transition-shadow duration-300 p-6 grid place-items-center h-28">
+      <img
+        src={logo.src}
+        alt={logo.name}
+        className="max-h-18 max-w-[180px] object-contain grayscale hover:grayscale-0 transition duration-300 ease-out will-change-transform"
+        loading="lazy"
+        decoding="async"
       />
+    </div>
+  );
+  return logo.href ? (
+    <a href={logo.href} aria-label={logo.name} className="block hover:scale-[1.01] transition-transform">
+      {Img}
+    </a>
+  ) : (
+    Img
+  );
+}
 
-      {/* Floating decorative elements */}
+function AnimatedColumn({
+  logos,
+  direction = "up",
+  duration = 22,
+}) {
+  const shouldReduce = useReducedMotion();
+  // Duplicate to create a seamless loop
+  const rows = [...logos, ...logos];
+
+  return (
+    <div className="relative h-[560px] overflow-hidden">
+      {/* top/bottom fades */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
+
       <motion.div
-        animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 left-12 text-6xl opacity-40 hidden lg:block"
+        animate={
+          shouldReduce
+            ? undefined
+            : {
+                y: direction === "up" ? ["0%", "-50%"] : ["-50%", "0%"],
+              }
+        }
+        transition={
+          shouldReduce
+            ? undefined
+            : { duration, repeat: Infinity, ease: "linear" }
+        }
+        className="will-change-transform"
       >
-        🎨
+        {rows.map((logo, i) => (
+          <div key={`${logo.name}-${i}`} className="mb-6">
+            <LogoCard logo={logo} />
+          </div>
+        ))}
       </motion.div>
+    </div>
+  );
+}
 
-      <motion.div
-        animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-32 right-16 text-5xl opacity-40 hidden lg:block"
-      >
-        🌟
-      </motion.div>
-
-      <motion.div
-        animate={{ rotate: [0, 15, -15, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-24 left-20 text-5xl opacity-40 hidden lg:block"
-      >
-        🏆
-      </motion.div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <motion.div
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="inline-flex items-center gap-2 mb-4 px-5 py-2 bg-white rounded-full shadow-lg border-3 border-dashed border-blue-400"
-          >
-            <span className="text-2xl">🤝</span>
-            <span 
-              className="text-blue-600 font-bold text-sm tracking-wide uppercase"
-              style={{ fontFamily: "'Comic Sans MS', 'Chalkboard SE', cursive" }}
-            >
-              Our Friends
-            </span>
-          </motion.div>
-
-          <h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-800 mb-5"
-            style={{ 
-              fontFamily: "'Fredoka', 'Baloo 2', 'Comic Sans MS', cursive",
-              textShadow: "3px 3px 0 rgba(255,255,255,0.8), -1px -1px 0 rgba(0,0,0,0.05)"
-            }}
-          >
-            <span className="text-orange-500">500+ Amazing</span>{" "}
-            <span className="text-purple-500">Partners!</span>
+export default function TrustedOrganizations() {
+  return (
+    <section className="py-20 md:py-24 bg-gradient-to-br from-brand-blue/10 via-brand-white to-brand-green/10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Heading */}
+        <div className="text-center mb-12">
+          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-brand-red/10 text-brand-red ring-1 ring-brand-red/20">
+            Trusted by 500+ Organizations
+          </p>
+          <h2 className="mt-4 text-3xl md:text-5xl font-extrabold text-ink">
+            Our Partners in <span className="text-brand-red">Change</span>
           </h2>
-          
-          <p 
-            className="text-gray-700 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'Quicksand', 'Arial Rounded MT Bold', sans-serif" }}
-          >
-            So many awesome companies & organizations helping us help kids! 🎉
+          <p className="mt-3 text-ink/70 max-w-2xl mx-auto">
+            Strategic employers, corporates and ecosystem allies who power scale with us.
           </p>
         </div>
 
-        {/* Categories - Crayon Box Style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {categories.map((cat, i) => (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 20, rotate: i % 2 === 0 ? -5 : 5 }}
-              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -8, rotate: i % 2 === 0 ? 2 : -2 }}
-              className="relative"
-            >
-              {/* Crayon-style card */}
-              <div 
-                className="relative bg-white rounded-3xl p-6 shadow-[6px_6px_0_rgba(0,0,0,0.1)] border-4 overflow-hidden"
-                style={{
-                  borderColor: cat.color,
-                  background: "linear-gradient(135deg, #FFFEF9 0%, #FFF9F0 100%)",
-                }}
-              >
-                {/* Top decorative strip */}
-                <div 
-                  className="absolute top-0 left-0 right-0 h-3"
-                  style={{
-                    background: `repeating-linear-gradient(90deg, ${cat.color} 0px, ${cat.color} 10px, transparent 10px, transparent 20px)`,
-                  }}
-                />
-
-                {/* Sticker badge */}
-                <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-yellow-300 shadow-lg grid place-items-center text-2xl border-3 border-white z-10"
-                >
-                  {cat.sticker}
-                </motion.div>
-
-                {/* Icon */}
-                <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 2.5 + i * 0.3, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-6xl text-center mb-4 mt-4"
-                >
-                  {cat.icon}
-                </motion.div>
-
-                {/* Content */}
-                <div className="text-center relative z-10">
-                  <h3 
-                    className="text-xl md:text-2xl font-black mb-2 leading-tight"
-                    style={{ 
-                      fontFamily: "'Fredoka', 'Comic Sans MS', cursive",
-                      color: cat.color.replace('C1', '').replace('EB', '').replace('C8', '').replace('DD', ''),
-                    }}
-                  >
-                    {cat.title}
-                  </h3>
-
-                  <p 
-                    className="text-gray-700 text-sm leading-relaxed"
-                    style={{ fontFamily: "'Quicksand', sans-serif" }}
-                  >
-                    {cat.copy}
-                  </p>
-                </div>
-
-                {/* Hand-drawn circle decoration */}
-                <svg className="absolute bottom-2 right-2 w-10 h-10 opacity-20" viewBox="0 0 40 40">
-                  <circle cx="20" cy="20" r="15" fill="none" stroke={cat.color} strokeWidth="2" strokeDasharray="3,2" />
-                </svg>
-              </div>
-            </motion.div>
-          ))}
+        {/* Columns */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <AnimatedColumn logos={col1} direction="up" duration={20} />
+          <AnimatedColumn logos={col2} direction="down" duration={24} />
+          <AnimatedColumn logos={col3} direction="up" duration={22} />
+          <AnimatedColumn logos={col4} direction="down" duration={23} />
+          <AnimatedColumn logos={col5} direction="up" duration={21} />
         </div>
 
-        {/* Logo Wall - Bulletin Board Style */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative mb-12"
-        >
-          {/* Push pins at corners */}
-          <div className="absolute -top-4 left-8 w-6 h-6 rounded-full bg-red-500 shadow-lg z-20" />
-          <div className="absolute -top-4 right-8 w-6 h-6 rounded-full bg-blue-500 shadow-lg z-20" />
-          <div className="absolute -bottom-4 left-12 w-6 h-6 rounded-full bg-green-500 shadow-lg z-20" />
-          <div className="absolute -bottom-4 right-12 w-6 h-6 rounded-full bg-yellow-500 shadow-lg z-20" />
-
-          {/* Cork board texture */}
-          <div 
-            className="bg-amber-100 rounded-3xl p-8 md:p-12 shadow-2xl border-8 border-amber-200 relative overflow-hidden"
-            style={{
-              backgroundImage: "radial-gradient(circle at 2px 2px, #d4a373 1px, transparent 1px)",
-              backgroundSize: "24px 24px",
-            }}
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <a
+            href="#"
+            className="inline-flex items-center gap-2 rounded-full bg-ink text-brand-white px-5 py-3 font-semibold shadow hover:opacity-90 transition"
           >
-            {/* Title on board */}
-            <div className="text-center mb-8">
-              <h3 
-                className="inline-block text-2xl md:text-3xl font-black text-gray-800 px-6 py-3 bg-white rounded-2xl shadow-lg border-3 border-dashed border-orange-400"
-                style={{ 
-                  fontFamily: "'Fredoka', cursive",
-                  transform: "rotate(-1deg)",
-                }}
-              >
-                Who's Helping Us? 🎯
-              </h3>
-            </div>
-
-            {/* Scrolling logos */}
-            <div className="relative overflow-hidden bg-white rounded-2xl py-8 shadow-inner">
-              <div className="flex items-center gap-6 animate-marquee">
-                {[...logos, ...logos].map((logo, idx) => (
-                  <motion.div
-                    key={`${logo.label}-${idx}`}
-                    whileHover={{ scale: 1.1, rotate: 3 }}
-                    className="shrink-0 h-20 min-w-[180px] rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-3 border-gray-200 flex items-center justify-center px-6 shadow-md"
-                  >
-                    <span 
-                      className="text-gray-600 font-black text-lg tracking-wide"
-                      style={{ fontFamily: "'Fredoka', cursive" }}
-                    >
-                      {logo.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Cute footer note */}
-            <div className="text-center mt-8">
-              <p 
-                className="text-amber-800 text-sm font-semibold"
-                style={{ fontFamily: "'Quicksand', sans-serif" }}
-              >
-                Companies • Foundations • Government • Job Partners 🌈
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CTA - Sticky Note Style */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <div className="inline-block relative">
-            {/* Tape at top */}
-            <div 
-              className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-yellow-200/70 backdrop-blur-sm rounded-sm shadow-sm"
-              style={{
-                transform: "translateX(-50%) rotate(-2deg)",
-                boxShadow: "inset 0 1px 2px rgba(0,0,0,0.1)",
-              }}
-            />
-
-            <motion.button
-              whileHover={{ scale: 1.08, rotate: 2 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative px-12 py-6 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 text-white font-black text-xl rounded-3xl shadow-[8px_8px_0_rgba(0,0,0,0.15)] border-4 border-white"
-              style={{ fontFamily: "'Fredoka', cursive" }}
-            >
-              <span className="flex items-center gap-3">
-                <span className="text-3xl">🤗</span>
-                Join Our Partner Family!
-                <span className="text-2xl">→</span>
-              </span>
-
-              {/* Sparkles */}
-              <motion.div
-                animate={{ scale: [0, 1, 0], rotate: [0, 180, 360] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute -top-2 -right-2 text-3xl"
-              >
-                ✨
-              </motion.div>
-            </motion.button>
-          </div>
-        </motion.div>
+            Partner With Us
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
       </div>
-
-      {/* Floating alphabet decorations */}
-      {['A', 'B', '1', '2', '⭐', '💡'].map((char, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-5xl font-black opacity-10 hidden xl:block"
-          style={{
-            fontFamily: "'Fredoka', cursive",
-            left: `${10 + i * 15}%`,
-            top: `${15 + (i % 2) * 60}%`,
-            color: ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181', '#AA96DA'][i],
-          }}
-          animate={{
-            y: [0, -25, 0],
-            rotate: [0, 15, -15, 0],
-          }}
-          transition={{
-            duration: 5 + i,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.3,
-          }}
-        >
-          {char}
-        </motion.div>
-      ))}
-
-      {/* Marquee animation */}
-      <style>{`
-        @keyframes marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-      `}</style>
     </section>
   );
 }

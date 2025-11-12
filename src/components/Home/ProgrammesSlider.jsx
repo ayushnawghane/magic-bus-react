@@ -1,91 +1,108 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+// at the top of the file
+import {
+  Users,
+  BriefcaseBusiness,
+  Handshake,
+  Sprout,
+  Target,
+  GraduationCap,
+  Star,
+} from "lucide-react";
 
 /**
- * Playful NGO Programmes Slider
- * - Child-friendly design with textures and playful elements
- * - Hand-drawn style cards with crayon aesthetics
- * - Scrapbook-inspired layout
+ * Fixed ProgrammesSlider
+ * - 3/2/1 visible per breakpoint
+ * - slides one card at a time, infinite loop with clones
+ * - translate logic fixed so cards remain visible
  */
 export default function ProgrammesSlider() {
-  const baseSlides = useMemo(
-    () => [
-      {
-        id: "adolescent-programme",
-        title: "Adolescent Programme",
-        summary:
-          "Fun learning & life skills for teens! We help young minds grow strong and confident for their amazing future.",
-        tags: ["Ages 11–18", "6 Months"],
-        icon: "🎒",
-        color: "#FFB6C1",
-        image:
-          "/ngo-images/2.JPG",
-      },
-      {
-        id: "livelihood-programme",
-        title: "Livelihood Programme",
-        summary:
-          "Learn cool job skills! We train youth for great careers and help them find awesome work opportunities.",
-        tags: ["95% Jobs!", "₹15K+ Pay"],
-        icon: "💼",
-        color: "#98D8C8",
-        image:
-          "/ngo-images/3.JPG",
-      },
-      {
-        id: "employee-volunteering",
-        title: "Employee Volunteering",
-        summary:
-          "Companies helping kids! Teams come together to make a real difference in children's lives.",
-        tags: ["500+ Teams", "Fun Impact"],
-        icon: "🤝",
-        color: "#FFD700",
-        image:
-          "/ngo-images/4.JPG",
-      },
-      {
-        id: "rural-empowerment",
-        title: "Rural Empowerment",
-        summary:
-          "Village heroes! Special programs helping rural youth dream big and grow their communities.",
-        tags: ["Village Kids", "Future Stars"],
-        icon: "🌾",
-        color: "#DDA0DD",
-        image:
-          "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1600&auto=format&fit=crop",
-      },
-      {
-        id: "magic-mitra",
-        title: "Magic Mitra",
-        summary:
-          "Technology magic! Using AI and smart tools to reach more kids and create bigger smiles.",
-        tags: ["AI Helper", "Big Reach"],
-        icon: "🎯",
-        color: "#87CEEB",
-        image:
-          "/ngo-images/5.jpeg",
-      },
-      {
-        id: "youth-fellowship",
-        title: "Youth Fellowship",
-        summary:
-          "Be a leader! Training young changemakers who inspire their friends and communities.",
-        tags: ["Leaders", "Changemakers"],
-        icon: "🎓",
-        color: "#FFA07A",
-        image:
-          "/ngo-images/6.jpeg",
-      },
-    ],
-    []
-  );
+const baseSlides = useMemo(
+  () => [
+    {
+      id: "adolescent-programme",
+      title: "Adolescent Programme",
+      summary:
+        "Foundational life skills for ages 11–18, building confidence and core competencies.",
+      tags: ["Ages 11–18", "6 Months"],
+      Icon: Users,
+      rating: "4.8",
+      image:
+        "/ngo-images/1.JPG",
+      gradient: "from-blue-400 via-purple-500 to-indigo-600",
+    },
+    {
+      id: "livelihood-programme",
+      title: "Livelihood Programme",
+      summary:
+        "Industry-aligned training that connects youth to sustainable jobs.",
+      tags: ["95% Placement", "₹15K+"],
+      Icon: BriefcaseBusiness,
+      rating: "4.9",
+      image:
+        "/ngo-images/2.JPG",
+      gradient: "from-green-400 via-emerald-500 to-teal-600",
+    },
+    {
+      id: "employee-volunteering",
+      title: "Employee Volunteering",
+      summary:
+        "Corporate partnerships for high-impact, structured volunteering.",
+      tags: ["500+ Companies", "Teams"],
+      Icon: Handshake,
+      rating: "4.7",
+      image:
+        "/ngo-images/3.JPG",
+      gradient: "from-orange-400 via-red-500 to-pink-600",
+    },
+    {
+      id: "rural-empowerment",
+      title: "Rural Empowerment",
+      summary:
+        "Programs tailored to rural youth and agri-innovation.",
+      tags: ["MB Dost", "Future X"],
+      Icon: Sprout,
+      rating: "4.6",
+      image:
+        "/ngo-images/4.JPG",
+      gradient: "from-purple-400 via-violet-500 to-indigo-600",
+    },
+    {
+      id: "magic-mitra",
+      title: "Magic Mitra",
+      summary:
+        "AI-powered community mobilization and engagement.",
+      tags: ["AI Platform"],
+      Icon: Target,
+      rating: "4.9",
+      image:
+        "/ngo-images/5.jpeg",
+      gradient: "from-cyan-400 via-blue-500 to-indigo-600",
+    },
+    {
+      id: "youth-fellowship",
+      title: "Youth Fellowship",
+      summary:
+        "Leadership pathway for next-gen social changemakers.",
+      tags: ["Leadership"],
+      Icon: GraduationCap,
+      rating: "4.8",
+      image:
+        "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1600&auto=format&fit=crop",
+      gradient: "from-amber-400 via-orange-500 to-red-600",
+    },
+  ],
+  []
+);
 
-  const [visible, setVisible] = useState(3);
-  const [index, setIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(true);
-  const [isMoving, setIsMoving] = useState(false);
+
+  const [visible, setVisible] = useState(3); // items per view responsive
+  const [index, setIndex] = useState(0); // absolute index on extended (cloned) track
+  const [isAnimating, setIsAnimating] = useState(true); // toggles CSS transition
+  const [isMoving, setIsMoving] = useState(false); // block repeated clicks while moving
   const trackRef = useRef(null);
 
+  // responsive visible calculation
   useEffect(() => {
     const calc = () => {
       const w = window.innerWidth;
@@ -98,46 +115,58 @@ export default function ProgrammesSlider() {
     return () => window.removeEventListener("resize", calc);
   }, []);
 
+  // Extended slides with clones at head and tail for infinite snapping
   const slides = useMemo(() => {
     const head = baseSlides.slice(0, visible);
     const tail = baseSlides.slice(-visible);
     return [...tail, ...baseSlides, ...head];
   }, [baseSlides, visible]);
 
+  // keep index on first real when visible changes
   useEffect(() => {
+    // snap to first real instantly then re-enable animation
     setIsAnimating(false);
     setIndex(visible);
+    // small tick to restore CSS transition for user actions
     const t = setTimeout(() => setIsAnimating(true), 20);
     return () => clearTimeout(t);
   }, [visible]);
 
+  // translate: each card occupies (100 / visible)% of the viewport
   const translatePct = index * (100 / visible);
   const transform = `translateX(-${translatePct}%)`;
 
+  // move handlers (prevent spamming)
   const moveNext = () => {
     if (isMoving) return;
     setIsMoving(true);
     setIndex((i) => i + 1);
   };
-  
   const movePrev = () => {
     if (isMoving) return;
     setIsMoving(true);
     setIndex((i) => i - 1);
   };
 
+  // transition end: handle snapping back from clones
   const handleTransitionEnd = () => {
     const firstReal = visible;
     const lastReal = visible + baseSlides.length - 1;
+
+    // clear moving flag
     setIsMoving(false);
 
     if (index > lastReal) {
+      // jumped to clones after last real, snap to firstReal (no animation)
       setIsAnimating(false);
       setIndex(firstReal);
+      // re-enable animation next frame
       requestAnimationFrame(() => {
+        // small delay to ensure DOM applied
         requestAnimationFrame(() => setIsAnimating(true));
       });
     } else if (index < firstReal) {
+      // jumped to clones before first real, snap to lastReal
       setIsAnimating(false);
       setIndex(lastReal);
       requestAnimationFrame(() => {
@@ -146,73 +175,87 @@ export default function ProgrammesSlider() {
     }
   };
 
+  // swipe support
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let startX = 0;
+    let dx = 0;
+    const onStart = (e) => {
+      startX = e.touches ? e.touches[0].clientX : e.clientX;
+      dx = 0;
+    };
+    const onMove = (e) => {
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      dx = x - startX;
+    };
+    const onEnd = () => {
+      if (Math.abs(dx) > 50) {
+        dx < 0 ? moveNext() : movePrev();
+      }
+    };
+
+    el.addEventListener("touchstart", onStart, { passive: true });
+    el.addEventListener("touchmove", onMove, { passive: true });
+    el.addEventListener("touchend", onEnd, { passive: true });
+
+    // optional mouse swipe
+    let mouseDown = false;
+    const ms = (e) => {
+      mouseDown = true;
+      onStart(e);
+    };
+    const mm = (e) => {
+      if (!mouseDown) return;
+      onMove(e);
+    };
+    const mu = () => {
+      if (!mouseDown) return;
+      mouseDown = false;
+      onEnd();
+    };
+    el.addEventListener("mousedown", ms);
+    window.addEventListener("mousemove", mm);
+    window.addEventListener("mouseup", mu);
+
+    return () => {
+      el.removeEventListener("touchstart", onStart);
+      el.removeEventListener("touchmove", onMove);
+      el.removeEventListener("touchend", onEnd);
+      el.removeEventListener("mousedown", ms);
+      window.removeEventListener("mousemove", mm);
+      window.removeEventListener("mouseup", mu);
+    };
+  }, [visible, isMoving]);
+
+  // keyboard navigation
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "ArrowRight") moveNext();
+      if (e.key === "ArrowLeft") movePrev();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isMoving]);
+
+  // active real index for dots
   const activeReal = ((index - visible) % baseSlides.length + baseSlides.length) % baseSlides.length;
 
   return (
-    <section 
-      className="py-16 md:py-24 relative overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #FFF9E6 0%, #FFE4D6 50%, #E8F5E9 100%)",
-      }}
-    >
-      {/* Paper texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Decorative crayon scribbles */}
-      <div className="absolute top-10 left-10 w-24 h-24 opacity-20 hidden lg:block">
-        <svg viewBox="0 0 100 100" className="text-red-400">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="5,5" />
-        </svg>
-      </div>
-      
-      <div className="absolute bottom-20 right-16 w-20 h-20 opacity-20 hidden lg:block">
-        <svg viewBox="0 0 100 100" className="text-blue-400">
-          <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="5,5" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Section Header with playful styling */}
+    <section className="py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <motion.div
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="inline-flex items-center gap-2 mb-4 px-5 py-2 bg-white rounded-full shadow-lg border-3 border-dashed border-yellow-400"
-          >
-            <span className="text-2xl">✨</span>
-            <span 
-              className="text-orange-600 font-bold text-sm tracking-wide uppercase"
-              style={{ fontFamily: "'Comic Sans MS', 'Chalkboard SE', cursive" }}
-            >
-              What We Do
-            </span>
-          </motion.div>
-
-          <h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-800 mb-5"
-            style={{ 
-              fontFamily: "'Fredoka', 'Baloo 2', 'Comic Sans MS', cursive",
-              textShadow: "3px 3px 0 rgba(255,255,255,0.8), -1px -1px 0 rgba(0,0,0,0.05)"
-            }}
-          >
-            <span className="text-red-500">Our Amazing</span>{" "}
-            <span className="text-blue-500">Programs!</span>
+          <p className="uppercase tracking-[0.22em] text-xs font-bold text-gray-500 mb-3">
+            Comprehensive Solutions
+          </p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
+            Our Core Programmes
           </h2>
-          
-          <p 
-            className="text-gray-700 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'Quicksand', 'Arial Rounded MT Bold', sans-serif" }}
-          >
-            Super cool ways we help kids & youth grow, learn, and shine bright! 🌟
+          <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
+            Transforming lives through structured pathways from adolescence to sustainable livelihoods.
           </p>
         </div>
 
-        {/* Slider */}
         <div className="relative">
           <div className="overflow-hidden">
             <div
@@ -236,214 +279,111 @@ export default function ProgrammesSlider() {
             </div>
           </div>
 
-          {/* Navigation with crayon buttons */}
-          <div className="mt-10 flex items-center justify-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: -10 }}
-              whileTap={{ scale: 0.9 }}
+          {/* Controls */}
+          <div className="mt-8 md:mt-10 flex items-center justify-center gap-3">
+            <button
               onClick={movePrev}
               aria-label="Previous"
-              className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 text-white shadow-[4px_4px_0_rgba(0,0,0,0.2)] border-3 border-white grid place-items-center"
+              className="w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 active:scale-95 transition grid place-items-center"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M15 18l-6-6 6-6" />
               </svg>
-            </motion.button>
-
-            {/* Dot indicators */}
-            <div className="flex items-center gap-2 px-4">
-              {baseSlides.map((_, i) => (
-                <motion.button
-                  key={i}
-                  whileHover={{ scale: 1.3 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => {
-                    const delta = i - activeReal;
-                    if (delta === 0) return;
-                    setIndex((curr) => curr + delta);
-                  }}
-                  className={`rounded-full transition-all ${
-                    i === activeReal 
-                      ? "w-8 h-3 bg-orange-500" 
-                      : "w-3 h-3 bg-gray-300 hover:bg-gray-400"
-                  }`}
-                  style={{
-                    boxShadow: i === activeReal ? "2px 2px 0 rgba(0,0,0,0.15)" : "none"
-                  }}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 10 }}
-              whileTap={{ scale: 0.9 }}
+            </button>
+            <button
               onClick={moveNext}
               aria-label="Next"
-              className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 to-pink-600 text-white shadow-[4px_4px_0_rgba(0,0,0,0.2)] border-3 border-white grid place-items-center"
+              className="w-12 h-12 rounded-full bg-red-600 text-white hover:bg-red-500 active:scale-95 transition grid place-items-center"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M9 6l6 6-6 6" />
               </svg>
-            </motion.button>
+            </button>
+          </div>
+
+          {/* Dots */}
+          <div className="mt-3 flex items-center justify-center gap-2">
+            {baseSlides.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => {
+                  // compute how many steps to move from current real to target real
+                  const delta = i - activeReal;
+                  if (delta === 0) return;
+                  setIndex((curr) => curr + delta);
+                }}
+                className={`w-2 h-2 rounded-full transition ${
+                  i === activeReal ? "bg-red-600" : "bg-gray-300 hover:bg-gray-400"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
-
-      {/* Floating stickers decoration */}
-      <motion.div
-        animate={{ y: [0, -10, 0], rotate: [-5, 5, -5] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-32 right-8 text-6xl hidden xl:block"
-      >
-        🌈
-      </motion.div>
-      
-      <motion.div
-        animate={{ y: [0, 10, 0], rotate: [5, -5, 5] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-32 left-8 text-5xl hidden xl:block"
-      >
-        ⭐
-      </motion.div>
     </section>
   );
 }
 
-/* Scrapbook-style card with hand-drawn elements */
 function ProgrammeCard({ slide }) {
-  const { image, icon, title, summary, tags, color } = slide;
+  const { image, gradient, Icon, rating, title, summary, tags } = slide;
 
   return (
-    <motion.div
-      whileHover={{ y: -8, rotate: 1 }}
-      className="relative h-[480px] md:h-[520px]"
-    >
-      {/* Tape effect at top */}
-      <div 
-        className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-8 bg-yellow-200/60 backdrop-blur-sm rounded-sm z-20"
-        style={{
-          boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
-        }}
+    <div className="group relative overflow-hidden rounded-[28px] h-[420px] md:h-[500px]">
+      {/* Image */}
+      <img
+        src={image}
+        alt={title}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
       />
 
-      {/* Main card with torn paper edge effect */}
-      <div 
-        className="relative h-full bg-white rounded-3xl overflow-hidden shadow-[6px_6px_0_rgba(0,0,0,0.1)] border-4 border-white"
-        style={{
-          transform: "rotate(-1deg)",
-          background: "linear-gradient(135deg, #FFFEF9 0%, #FFF9F0 100%)",
-        }}
-      >
-        {/* Image area with crayon border */}
-        <div className="relative h-[240px] overflow-hidden">
-          <div 
-            className="absolute inset-0 m-3"
-            style={{
-              clipPath: "polygon(2% 0%, 98% 0%, 100% 2%, 100% 98%, 98% 100%, 2% 100%, 0% 98%, 0% 2%)",
-            }}
-          >
-            <img
-              src={image}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            {/* Color wash overlay */}
-            <div 
-              className="absolute inset-0 mix-blend-overlay opacity-40"
-              style={{ backgroundColor: color }}
-            />
-          </div>
+      {/* Brand tint */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-35 mix-blend-multiply`}
+      />
 
-          {/* Icon badge with sticker style */}
-          <div 
-            className="absolute top-5 left-5 w-16 h-16 rounded-full bg-white shadow-lg grid place-items-center text-3xl border-4 border-dashed"
-            style={{ 
-              borderColor: color,
-              transform: "rotate(-8deg)",
-            }}
-          >
-            {icon}
-          </div>
+      {/* Legibility bottom gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/75" />
 
-          {/* Hand-drawn corner decoration */}
-          <svg 
-            className="absolute top-3 right-3 w-12 h-12 opacity-60" 
-            viewBox="0 0 50 50"
-            style={{ color }}
-          >
-            <path 
-              d="M 10 25 Q 25 10, 40 25 Q 25 40, 10 25" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2"
-              strokeDasharray="3,3"
-            />
-          </svg>
+      {/* Top row: icon + rating */}
+      <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+        <div className="h-10 px-3 rounded-full bg-black/35 backdrop-blur-[3px] text-white flex items-center gap-2">
+          <Icon className="w-5 h-5" />
         </div>
-
-        {/* Content area */}
-        <div className="p-5 md:p-6">
-          <h3 
-            className="text-2xl md:text-[26px] font-black mb-3 leading-tight"
-            style={{ 
-              fontFamily: "'Fredoka', 'Comic Sans MS', cursive",
-              color: color,
-              textShadow: "2px 2px 0 rgba(255,255,255,0.8)",
-            }}
-          >
-            {title}
-          </h3>
-
-          <p 
-            className="text-gray-700 text-sm md:text-[15px] leading-relaxed mb-4"
-            style={{ fontFamily: "'Quicksand', sans-serif" }}
-          >
-            {summary}
-          </p>
-
-          {/* Tags with crayon style */}
-          <div className="flex flex-wrap gap-2 mb-5">
-            {tags.map((t, i) => (
-              <span
-                key={t}
-                className="px-3 py-1.5 text-xs font-bold rounded-full border-2 border-dashed shadow-sm"
-                style={{
-                  backgroundColor: `${color}20`,
-                  borderColor: color,
-                  color: color,
-                  transform: `rotate(${i % 2 === 0 ? '-2' : '2'}deg)`,
-                  fontFamily: "'Comic Sans MS', cursive",
-                }}
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-
-          {/* CTA button with playful style */}
-          <motion.button 
-            whileHover={{ scale: 1.05, rotate: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full py-3.5 rounded-2xl font-bold text-white shadow-[3px_3px_0_rgba(0,0,0,0.2)] border-3 border-white"
-            style={{
-              background: `linear-gradient(135deg, ${color} 0%, ${color}DD 100%)`,
-              fontFamily: "'Fredoka', cursive",
-            }}
-          >
-            Learn More! →
-          </motion.button>
-        </div>
-
-        {/* Corner fold effect */}
-        <div 
-          className="absolute bottom-0 right-0 w-12 h-12"
-          style={{
-            background: "linear-gradient(225deg, #E0E0E0 0%, #F5F5F5 100%)",
-            clipPath: "polygon(100% 0, 100% 100%, 0 100%)",
-          }}
-        />
       </div>
-    </motion.div>
+
+      {/* Bottom Content Area */}
+      <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+
+        {/* Summary (hidden until hover) */}
+        <p
+          className="
+            hidden md:block text-white/90 text-[13.5px] leading-relaxed
+            opacity-0 translate-y-4
+            group-hover:opacity-100 group-hover:translate-y-0
+            transition-all duration-300 mb-3 max-w-[92%]
+          "
+        >
+          {summary}
+        </p>
+
+        {/* Title Always Visible */}
+        <h3
+          className="
+            text-white text-[22px] md:text-[26px] font-extrabold leading-tight
+            transition-all duration-300
+            group-hover:-translate-y-2 mb-2
+          "
+        >
+          {title}
+        </h3>
+
+        {/* CTA */}
+        <button className="w-full bg-white/95 text-gray-900 font-semibold py-3 rounded-2xl hover:bg-white active:scale-[0.99] transition">
+          Learn More
+        </button>
+      </div>
+    </div>
   );
 }
+
