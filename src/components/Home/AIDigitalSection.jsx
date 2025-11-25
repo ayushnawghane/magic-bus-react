@@ -1,20 +1,41 @@
 import React from "react";
-import { Cpu, BrainCircuit, MonitorSmartphone } from "lucide-react";
+import {
+  Cpu,
+  BrainCircuit,
+  MonitorSmartphone,
+} from "lucide-react";
 
 export default function AIDigitalSection() {
-  const stats = [
-    { kpi: "25K+", title: "Youth Reached via AI", sub: "Magic Mitra Platform" },
-    { kpi: "65%", title: "Efficiency Increase", sub: "Digital Mobilization" },
-    { kpi: "12", title: "Digital Programs", sub: "Across States" },
-    { kpi: "88%", title: "Job Conversion", sub: "Digital Skills Training" },
+  // NEW: Course cards instead of stats
+  const courses = [
+    {
+      title: "AWS Cloud",
+      sub: "Cloud Foundations & Deployment",
+      logo: "src/assets/logos/aws.png", // your logo path
+    },
+    {
+      title: "ChatGPT / OpenAI",
+      sub: "AI Prompting & Automation",
+      logo: "src/assets/logos/chatgpt.png",
+    },
+    {
+      title: "Python Programming",
+      sub: "Backend & ML Foundations",
+      logo: "src/assets/logos/python.png",
+    },
+    {
+      title: "Figma UI/UX",
+      sub: "Design Systems & Prototypes",
+      logo: "src/assets/logos/figma.png",   // ⭐ NEW FIGMA LOGO
+    },
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-900 to-black text-white">
+    <section className="py-20 bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-          {/* Left */}
+          {/* Left Section */}
           <div>
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
               First NGO to Launch{" "}
@@ -24,34 +45,41 @@ export default function AIDigitalSection() {
               Programmes
             </h2>
 
-            {/* ONE-LINE PARAGRAPH */}
+            {/* One-line paragraph */}
             <p className="text-gray-300 text-lg mb-8 max-w-xl truncate">
-              Pioneering technology-driven youth empowerment through advanced AI mobilization tools, digital skills training, and data-driven impact measurement.
+              Pioneering technology-driven youth empowerment through AI & digital skilling.
             </p>
 
+            {/* Course Cards Grid */}
             <div className="grid grid-cols-2 gap-6">
-              {stats.map((s, i) => (
+              {courses.map((c, i) => (
                 <div
                   key={i}
-                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20"
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 flex flex-col items-start gap-3"
                 >
-                  <div className="text-4xl font-black bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent mb-2">
-                    {s.kpi}
+                  {/* Logo */}
+                  <img
+                    src={c.logo}
+                    alt={c.title}
+                    className="h-10 w-auto object-contain"
+                  />
+
+                  <div className="text-base font-semibold text-white">
+                    {c.title}
                   </div>
-                  <div className="text-sm text-gray-300">{s.title}</div>
-                  <div className="text-xs text-gray-400 mt-1">{s.sub}</div>
+                  <div className="text-xs text-gray-300">{c.sub}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right visual - floating image with glow */}
+          {/* Right visual */}
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 blur-2xl rounded-3xl" />
 
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10">
               <img
-                src="/ngo-images/Ai.jpeg"
+                src="/ngo-images/1.jpeg"
                 alt="AI Dashboard"
                 className="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
               />

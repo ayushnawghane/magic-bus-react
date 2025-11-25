@@ -273,7 +273,8 @@ const baseSlides = useMemo(
                   style={{ flex: `0 0 calc(100% / ${visible})` }}
                   className="px-3 md:px-4 lg:px-5"
                 >
-                  <ProgrammeCard slide={s} />
+                  <ProgrammeCard slide={s} index={i - visible} /> 
+                  {/* ^ important: pass REAL index (not clone index) */}
                 </div>
               ))}
             </div>
@@ -325,8 +326,11 @@ const baseSlides = useMemo(
   );
 }
 
-function ProgrammeCard({ slide }) {
+function ProgrammeCard({ slide, index }) {
   const { image, gradient, Icon, rating, title, summary, tags } = slide;
+
+  // TRUE if description should ALWAYS be visible
+  const alwaysVisible = (index % 2 !== 0); // 2nd, 4th, 6th, etc.
 
   return (
     <div className="group relative overflow-hidden rounded-[28px] h-[420px] md:h-[500px]">
@@ -342,38 +346,41 @@ function ProgrammeCard({ slide }) {
         className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-35 mix-blend-multiply`}
       />
 
-      {/* Legibility bottom gradient */}
+      {/* Bottom gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/75" />
 
-      {/* Top row: icon + rating */}
+      {/* Icon row */}
       <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
         <div className="h-10 px-3 rounded-full bg-black/35 backdrop-blur-[3px] text-white flex items-center gap-2">
           <Icon className="w-5 h-5" />
         </div>
       </div>
 
-      {/* Bottom Content Area */}
+      {/* Bottom content */}
       <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
 
-        {/* Summary (hidden until hover) */}
+        {/* DESCRIPTION */}
         <p
-          className="
-            hidden md:block text-white/90 text-[13.5px] leading-relaxed
-            opacity-0 translate-y-4
-            group-hover:opacity-100 group-hover:translate-y-0
-            transition-all duration-300 mb-3 max-w-[92%]
-          "
+          className={`
+            text-white/90 text-[13.5px] leading-relaxed max-w-[92%] mb-3
+            transition-all duration-300
+            
+            ${alwaysVisible
+              ? "opacity-100 translate-y-0" 
+              : "opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0"
+            }
+          `}
         >
           {summary}
         </p>
 
-        {/* Title Always Visible */}
+        {/* TITLE */}
         <h3
-          className="
-            text-white text-[22px] md:text-[26px] font-extrabold leading-tight
+          className={`
+            text-white text-[24px] font-extrabold leading-tight mb-2
             transition-all duration-300
-            group-hover:-translate-y-2 mb-2
-          "
+            ${!alwaysVisible && "group-hover:-translate-y-2"}
+          `}
         >
           {title}
         </h3>
@@ -385,5 +392,5 @@ function ProgrammeCard({ slide }) {
       </div>
     </div>
   );
-}
+} 
 

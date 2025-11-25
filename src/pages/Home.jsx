@@ -3,7 +3,7 @@ import AwardsShowcase from '../components/Home/AwardsShowcase';
 import EventsCampaigns from '../components/Home/EventsCampaigns';
 import GetInvolvedSection from '../components/Home/GetInvolvedSection';
 import Hero from '../components/Home/Hero';
-import HeroCarousel from '../components/Home/Hero2';
+import HeroCarousel from '../components/Home/HeroCarousel';
 import ImpactHighlights from '../components/Home/ImpactHighlights';
 import JourneyStepper from '../components/Home/JourneyStepper';
 import OurOutreach from '../components/Home/OurOutreach';
@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <Layout>
         <HeroCarousel />
-        <Hero />
+        {/* <Hero /> */}
         <JourneyStepper   />
         <ProgrammesSlider />
         <AIDigitalSection />
@@ -25,10 +25,10 @@ export default function Home() {
         <GetInvolvedSection />
         <PartnersShowcase />
         <OutreachImpactBento />
-        <EventsCampaigns />
-        <SuccessStories />
         {/* <ImpactHighlights /> */}
-        <AwardsShowcase />
+        {/* <EventsCampaigns /> */}
+        <SuccessStories />
+        {/* <AwardsShowcase /> */}
     </Layout>
   );
 }

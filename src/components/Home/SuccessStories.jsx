@@ -1,311 +1,145 @@
-// SuccessStories.jsx
-import { useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
-const BASE_STORIES = [
-  {
-    quote:
-      "Magic Bus gave me the confidence and skills to secure my first job. Today, I'm supporting my family and inspiring others in my community.",
-    name: "Priya Sharma",
-    role: "Digital Marketing Associate",
-    leftBorder: "brand-yellow",
-    avatarGradient: "from-brand-yellow to-brand-red",
-  },
-  {
-    quote:
-      "The employability program didn't just teach me skills—it changed my entire perspective on what I could achieve in life.",
-    name: "Rahul Kumar",
-    role: "Tech Support Specialist",
-    leftBorder: "brand-red",
-    avatarGradient: "from-brand-red to-brand-magenta",
-  },
-  {
-    quote:
-      "As a teacher, Magic Mitra has revolutionized how I engage with students. The AI support is incredible and truly innovative.",
-    name: "Anjali Mehta",
-    role: "School Teacher",
-    leftBorder: "brand-blue",
-    avatarGradient: "from-brand-blue to-brand-green",
-  },
-  // (Optional) add more items — the slider will adapt
+/* === PROGRAM AREAS (images already in /ngo-images/) === */
+const PROGRAM_AREAS = [
+  { title: "Healthcare", icon: (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>), bgColor: "bg-emerald-600", image: "/ngo-images/1.JPG" },
+  { title: "Nutrition", icon: (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>), bgColor: "bg-amber-500", image: "/ngo-images/2.JPG" },
+  { title: "Education", icon: (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>), bgColor: "bg-red-600", image: "/ngo-images/3.JPG" },
+  { title: "WaSH", icon: (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>), bgColor: "bg-cyan-500", image: "/ngo-images/4.JPG" },
+  { title: "Livelihood", icon: (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>), bgColor: "bg-rose-700", image: "/ngo-images/5.jpeg" },
+  { title: "Digital Transformation", icon: (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>), bgColor: "bg-orange-600", image: "/ngo-images/6.jpeg" },
+  { title: "Migration and Urban Habitat", icon: (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>), bgColor: "bg-pink-600", image: "/ngo-images/6.jpg" },
+  { title: "Social Justice and Inclusion", icon: (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>), bgColor: "bg-teal-600", image: "/ngo-images/8.jpg" },
 ];
 
-const borderClass = {
-  "brand-yellow": "border-brand-yellow",
-  "brand-red": "border-brand-red",
-  "brand-blue": "border-brand-blue",
-};
+function ProgramCard({ program, index }) {
+  const [hovered, setHovered] = useState(false);
+  const reduce = useReducedMotion();
 
-export default function SuccessStories() {
-  // visible cards responsive: 1 (sm), 2 (md), 3 (lg+)
-  const [visible, setVisible] = useState(3);
-  const [index, setIndex] = useState(0); // position on extended track
-  const [isAnimating, setIsAnimating] = useState(true);
-  const [isMoving, setIsMoving] = useState(false);
-  const trackRef = useRef(null);
-  const timerRef = useRef(null);
-
-  // responsive calc
-  useEffect(() => {
-    const calc = () => {
-      const w = window.innerWidth;
-      if (w < 768) setVisible(1);
-      else if (w < 1024) setVisible(2);
-      else setVisible(3);
-    };
-    calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
-  }, []);
-
-  // create clones for seamless loop
-  const slides = useMemo(() => {
-    const head = BASE_STORIES.slice(0, visible);
-    const tail = BASE_STORIES.slice(-visible);
-    return [...tail, ...BASE_STORIES, ...head];
-  }, [visible]);
-
-  // snap to first real on visible change (without anim)
-  useEffect(() => {
-    setIsAnimating(false);
-    setIndex(visible);
-    const t = setTimeout(() => setIsAnimating(true), 20);
-    return () => clearTimeout(t);
-  }, [visible]);
-
-  // autoplay
-  useEffect(() => {
-    startAuto();
-    return stopAuto;
-  }, [visible]);
-
-  const startAuto = () => {
-    stopAuto();
-    timerRef.current = setInterval(() => moveNext(), 5000);
-  };
-  const stopAuto = () => timerRef.current && clearInterval(timerRef.current);
-
-  const moveNext = () => {
-    if (isMoving) return;
-    setIsMoving(true);
-    setIndex((i) => i + 1);
-  };
-  const movePrev = () => {
-    if (isMoving) return;
-    setIsMoving(true);
-    setIndex((i) => i - 1);
-  };
-
-  // snap back after passing clones
-  const onTransitionEnd = () => {
-    const firstReal = visible;
-    const lastReal = visible + BASE_STORIES.length - 1;
-    setIsMoving(false);
-
-    if (index > lastReal) {
-      setIsAnimating(false);
-      setIndex(firstReal);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setIsAnimating(true));
-      });
-    } else if (index < firstReal) {
-      setIsAnimating(false);
-      setIndex(lastReal);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setIsAnimating(true));
-      });
-    }
-  };
-
-  // swipe
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    let startX = 0,
-      dx = 0;
-    const start = (e) => {
-      startX = e.touches ? e.touches[0].clientX : e.clientX;
-      dx = 0;
-      stopAuto();
-    };
-    const move = (e) => {
-      const x = e.touches ? e.touches[0].clientX : e.clientX;
-      dx = x - startX;
-    };
-    const end = () => {
-      if (Math.abs(dx) > 50) (dx < 0 ? moveNext() : movePrev());
-      startAuto();
-    };
-
-    el.addEventListener("touchstart", start, { passive: true });
-    el.addEventListener("touchmove", move, { passive: true });
-    el.addEventListener("touchend", end, { passive: true });
-
-    let md = false;
-    const mdown = (e) => {
-      md = true;
-      start(e);
-    };
-    const mmove = (e) => md && move(e);
-    const mup = () => {
-      if (!md) return;
-      md = false;
-      end();
-    };
-    el.addEventListener("mousedown", mdown);
-    window.addEventListener("mousemove", mmove);
-    window.addEventListener("mouseup", mup);
-
-    return () => {
-      el.removeEventListener("touchstart", start);
-      el.removeEventListener("touchmove", move);
-      el.removeEventListener("touchend", end);
-      el.removeEventListener("mousedown", mdown);
-      window.removeEventListener("mousemove", mmove);
-      window.removeEventListener("mouseup", mup);
-    };
-  }, [visible]);
-
-  // keyboard
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "ArrowRight") moveNext();
-      if (e.key === "ArrowLeft") movePrev();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  // translate calc: each card width = 100%/visible
-  const transform = `translateX(-${(index * 100) / visible}%)`;
-
-  // active page for dots (based on real items)
-  const activeReal =
-    ((index - visible) % BASE_STORIES.length + BASE_STORIES.length) %
-    BASE_STORIES.length;
+  // transition config
+  const duration = reduce ? 0.12 : 1.0;
+  const easing = [0.4, 0, 0.2, 1];
 
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.5 }}
-          className="text-center mb-16"
-        >
-          <span className="text-brand-red font-dosis font-bold text-sm uppercase tracking-wider">
-            Success Stories
-          </span>
-          <h2 className="mt-3 text-5xl font-dosis font-bold text-brand-black">
-            Lives We've Transformed
-          </h2>
-          <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-lato text-lg">
-            Real stories from youth who found their path through Magic Bus programs.
-          </p>
-        </motion.div>
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, delay: index * 0.04 }}
+      viewport={{ once: true, amount: 0.3 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative overflow-hidden rounded-lg aspect-[4/3] group cursor-pointer"
+      aria-label={program.title}
+    >
+      {/* Background image */}
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${program.image})` }}
+        animate={{ scale: hovered ? 1.06 : 1 }}
+        transition={{ duration, ease: easing }}
+        aria-hidden="true"
+      />
 
-        {/* Slider */}
-        <div
-          className="relative"
-          onMouseEnter={stopAuto}
-          onMouseLeave={startAuto}
-        >
-          <div className="overflow-hidden">
-            <div
-              ref={trackRef}
-              className="flex will-change-transform"
-              style={{
-                transform,
-                transition: isAnimating ? "transform 500ms cubic-bezier(.22,.61,.36,1)" : "none",
-              }}
-              onTransitionEnd={onTransitionEnd}
-            >
-              {slides.map((s, i) => (
-                <div
-                  key={`${s.name}-${i}`}
-                  style={{ flex: `0 0 calc(100% / ${visible})` }}
-                  className="px-3 md:px-4 lg:px-5"
-                >
-                  <StoryCard story={s} />
-                </div>
-              ))}
-            </div>
+      {/* Dark gradient overlay */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7), transparent)" }}
+        animate={{ opacity: hovered ? 0.18 : 1 }}
+        transition={{ duration, ease: easing }}
+        aria-hidden="true"
+      />
+
+      {/* Colored overlay expands on hover; hidden pre-hover */}
+      <motion.div
+        className={`${program.bgColor} absolute`}
+        initial={false}
+        animate={
+          hovered
+            ? { left: 0, bottom: 0, width: "100%", height: "100%", opacity: 0.92 }
+            : { left: 28, bottom: 28, width: 0, height: 0, opacity: 0 }
+        }
+        transition={{ duration, ease: easing }}
+        style={{ transformOrigin: "left bottom", zIndex: 5, borderRadius: 8 }}
+        aria-hidden="true"
+      />
+
+      {/* PRE-HOVER: glued unit that sticks to left, right and bottom */}
+      <motion.div
+        className="absolute left-0 right-0 bottom-0 z-30"
+        initial={false}
+        animate={hovered ? { opacity: 0, y: 18 } : { opacity: 1, y: 0 }}
+        transition={{ duration, ease: easing }}
+      >
+        <div className="flex items-center h-16 w-full">
+          {/* Icon circle glued to left edge; rounded-bl to match card corner */}
+          <div
+            className={`${program.bgColor} w-16 h-16 flex items-center justify-center rounded-bl-lg`}
+            style={{ boxShadow: "0 6px 18px rgba(0,0,0,0.18)" }}
+          >
+            <div className="text-white">{program.icon}</div>
           </div>
 
-          {/* Controls */}
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <button
-              aria-label="Previous"
-              onClick={movePrev}
-              className="grid h-11 w-11 place-items-center rounded-full bg-white text-ink shadow-sm ring-1 ring-black/5 hover:shadow-md active:scale-95 transition"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-            <button
-              aria-label="Next"
-              onClick={moveNext}
-              className="grid h-11 w-11 place-items-center rounded-full bg-brand-red text-white shadow-sm hover:bg-brand-red/90 active:scale-95 transition"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 6l6 6-6 6" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Dots (based on real items) */}
-          <div className="mt-3 flex items-center justify-center gap-2">
-            {BASE_STORIES.map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Go to story ${i + 1}`}
-                onClick={() => {
-                  const delta = i - activeReal;
-                  if (delta === 0) return;
-                  setIndex((curr) => curr + delta);
-                }}
-                className={`h-2 w-2 rounded-full transition ${
-                  i === activeReal ? "bg-brand-red" : "bg-gray-300 hover:bg-gray-400"
-                }`}
-              />
-            ))}
+          {/* Title background fills entire remaining width and sticks to right edge */}
+          <div className="flex-1 bg-black/60 h-16 flex items-center px-5 rounded-br-lg">
+            <h3 className="text-white font-dosis font-semibold text-lg leading-none">
+              {program.title}
+            </h3>
           </div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+
+      {/* HOVER: centered icon + title (description removed) */}
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none z-40"
+        initial={{ opacity: 0, scale: 0.98, y: 8 }}
+        animate={ hovered ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.98, y: 8 } }
+        transition={{ duration, ease: easing }}
+        aria-hidden={!hovered}
+      >
+        <div className="max-w-lg">
+          <div className="mx-auto mb-4 w-16 h-16 flex items-center justify-center rounded-full bg-white/10">
+            <div className="text-white">{program.icon}</div>
+          </div>
+
+          <h3 className="text-white text-2xl font-dosis font-bold">
+            {program.title}
+          </h3>
+        </div>
+      </motion.div>
+
+      {/* Accessibility: keyboard focus toggles hover visuals */}
+      <button
+        className="absolute inset-0 z-50 bg-transparent"
+        onFocus={() => setHovered(true)}
+        onBlur={() => setHovered(false)}
+        aria-label={`View ${program.title}`}
+      />
+    </motion.div>
   );
 }
 
-function StoryCard({ story }) {
-  const { quote, name, role, leftBorder, avatarGradient } = story;
-  const borderColor = borderClass[leftBorder] || "border-brand-red";
-
+/* ProgramAreas grid */
+export default function ProgramAreas() {
   return (
-    <article
-      className={[
-        "h-full rounded-2xl bg-gradient-to-br from-gray-50 to-white p-6 md:p-7 lg:p-8",
-        "shadow-sm hover:shadow-xl transition-shadow",
-        "border-l-4",
-        borderColor,
-      ].join(" ")}
-    >
-      <div className="mb-4 flex">
-        <span className="text-brand-yellow text-2xl leading-none">★★★★★</span>
-      </div>
-      <p className="font-lato italic leading-relaxed text-gray-700">
-        “{quote}”
-      </p>
+    <section className="bg-white py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="text-brand-red font-dosis font-bold text-sm uppercase tracking-wider">Success Stories</span>
+          <h2 className="mt-3 text-5xl font-dosis font-bold text-brand-black">Lives We've Transformed</h2>
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-lato text-lg">
+            Real stories from youth who found their path through Magic Bus Programs
+          </p>
+        </div>
 
-      <div className="mt-6 flex items-center gap-4">
-        <div className={`h-14 w-14 rounded-full bg-gradient-to-br ${avatarGradient}`} />
-        <div>
-          <div className="font-dosis text-lg font-bold text-ink">{name}</div>
-          <div className="font-lato text-sm text-gray-500">{role}</div>
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {PROGRAM_AREAS.map((p, i) => (
+            <ProgramCard key={p.title} program={p} index={i} />
+          ))}
         </div>
       </div>
-    </article>
+    </section>
   );
 }

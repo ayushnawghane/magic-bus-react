@@ -31,11 +31,3 @@
 
 body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
 .font-dosis { font-family: "Baloo 2", system-ui, sans-serif; }
-
-/* 3) Optional: Navigation reset */
-.site-nav button,
-.site-nav a {
-  background: transparent;
-  box-shadow: none;
-  border: 0;
-}

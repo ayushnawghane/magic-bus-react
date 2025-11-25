@@ -76,7 +76,7 @@ function AnimatedColumn({
   const rows = [...logos, ...logos];
 
   return (
-    <div className="relative h-[560px] overflow-hidden">
+    <div className="relative h-[440px] overflow-hidden">
       {/* top/bottom fades */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white to-transparent z-10" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
@@ -123,13 +123,14 @@ export default function TrustedOrganizations() {
           </p>
         </div>
 
-        {/* Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          <AnimatedColumn logos={col1} direction="up" duration={20} />
-          <AnimatedColumn logos={col2} direction="down" duration={24} />
+        {/* 4 Columns, 3 Rows Visible */}
+        <div className="grid grid-cols-4 gap-6">
+
+          <AnimatedColumn logos={col2} direction="down" duration={22} />
           <AnimatedColumn logos={col3} direction="up" duration={22} />
-          <AnimatedColumn logos={col4} direction="down" duration={23} />
-          <AnimatedColumn logos={col5} direction="up" duration={21} />
+          <AnimatedColumn logos={col4} direction="down" duration={22} />
+          <AnimatedColumn logos={col5} direction="up" duration={22} />
+
         </div>
 
         {/* CTA */}
@@ -144,7 +145,9 @@ export default function TrustedOrganizations() {
             </svg>
           </a>
         </div>
+
       </div>
     </section>
   );
 }
+

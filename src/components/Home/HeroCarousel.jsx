@@ -17,7 +17,7 @@ export default function HeroCarousel() {
       title: "Effortless Banking",
       subtitle: "for India's boldest disruptors",
       desc: "Powerful automation, smart dashboards & integrated access.",
-      cta: { label: "Sign Up Now", href: "#" },
+      cta: { label: "Donate Now", href: "#" },
     },
     {
       image: "/ngo-images/4.JPG",
@@ -25,7 +25,7 @@ export default function HeroCarousel() {
       title: "Empowering Adolescents",
       subtitle: "Through Technology",
       desc: "AI-powered platform transforming adolescents into skilled professionals.",
-      cta: { label: "Know More", href: "#" },
+      cta: { label: "Donate Now", href: "#" },
     },
     {
       image: "/ngo-images/5.jpeg",
@@ -33,7 +33,7 @@ export default function HeroCarousel() {
       title: "Build Future-Ready Skills",
       subtitle: "Learn • Practice • Get Placed",
       desc: "Hands-on, market-aligned training for tomorrow's workforce.",
-      cta: { label: "Explore Programs", href: "#" },
+      cta: { label: "Donate Now", href: "#" },
     },
   ];
 
@@ -151,7 +151,7 @@ export default function HeroCarousel() {
             <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
               <div className="max-w-2xl pl-20">
                 {/* Eyebrow */}
-                {slides[i].eyebrow && (
+                {/* {slides[i].eyebrow && (
                   <motion.div
                     variants={textVariants}
                     initial="initial"
@@ -164,7 +164,7 @@ export default function HeroCarousel() {
                       {slides[i].eyebrow}
                     </span>
                   </motion.div>
-                )}
+                )} */}
 
                 {/* Title */}
                 <motion.h1
@@ -203,13 +203,13 @@ export default function HeroCarousel() {
                 >
                   <motion.a
                     href={slides[i].cta.href}
-                    className="group relative overflow-hidden rounded-full bg-brand-yellow px-8 py-4 font-semibold text-ink shadow-lg transition-all hover:shadow-2xl hover:shadow-brand-yellow/20"
+                    className="group relative overflow-hidden rounded-full bg-brand-red px-8 py-4 font-semibold text-white shadow-lg transition-all hover:shadow-2xl hover:shadow-brand-red/20"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <span className="relative z-10">{slides[i].cta.label}</span>
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-brand-yellow to-amber-400"
+                      className="absolute inset-0 bg-brand-red"
                       initial={{ x: "-100%" }}
                       whileHover={{ x: 0 }}
                       transition={{ duration: 0.3 }}
@@ -217,11 +217,11 @@ export default function HeroCarousel() {
                   </motion.a>
 
                   <motion.button
-                    className="group rounded-full border-2 border-white/80 bg-white/5 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/10"
+                    className="group rounded-full border-2 border-brand-yellow/80 bg-brand-yellow/5 px-8 py-4 font-semibold text-brand-yellow backdrop-blur-sm transition-all hover:border-brand-yellow hover:bg-brand-yellow/10"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Learn More
+                    Explore More
                   </motion.button>
                 </motion.div>
               </div>

@@ -3,213 +3,206 @@ import { motion, useReducedMotion } from "framer-motion";
 export default function GetInvolvedSection() {
   const prefersReduced = useReducedMotion();
 
-  // If user prefers reduced motion, keep very subtle drift (or none)
   const baseDrift = prefersReduced
     ? { x: 0, y: 0, opacity: 0.75, rotate: 0 }
     : undefined;
 
+  const blobDurations = { yellow: 28, red: 34, blue: 32 };
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-brand-black to-gray-900 py-20">
-      {/* --- Animated Blobs (Framer Motion) --- */}
+    <section className="relative overflow-hidden bg-gradient-to-b from-brand-red via-[#C11A1F] to-[#A81818] py-20">
+      {/* Animated Blobs (unchanged) */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Yellow blob */}
         <motion.div
-          className="absolute -top-24 -right-24 h-[30rem] w-[30rem] rounded-full mix-blend-screen"
+          className="absolute -top-28 -right-24 h-[28rem] w-[28rem] rounded-full mix-blend-screen"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(255,204,4,.55), rgba(255,204,4,.35), transparent 70%)",
-            filter: "blur(48px)",
+              "radial-gradient(closest-side, rgba(255,204,4,.18), rgba(255,204,4,.08), transparent 70%)",
+            filter: "blur(64px)",
           }}
-          initial={{ x: 0, y: 0, opacity: 0.85, rotate: 0 }}
+          initial={{ x: 0, y: 0, opacity: 0.7, rotate: 0 }}
           animate={
             baseDrift ?? {
-              x: [0, -30, -10, 25, 0],
-              y: [0, -25, 20, -10, 0],
-              opacity: [0.85, 0.7, 0.8, 0.75, 0.85],
-              rotate: [0, 5, -3, 4, 0],
+              x: [0, -20, -8, 18, 0],
+              y: [0, -18, 16, -8, 0],
+              opacity: [0.7, 0.58, 0.66, 0.62, 0.7],
+              rotate: [0, 4, -2, 3, 0],
             }
           }
-          transition={{ duration: 28, ease: "easeInOut", repeat: Infinity }}
+          transition={{ duration: blobDurations.yellow, ease: "easeInOut", repeat: Infinity }}
         />
 
-        {/* Red blob */}
         <motion.div
-          className="absolute -bottom-28 -left-24 h-[28rem] w-[28rem] rounded-full mix-blend-screen"
+          className="absolute -bottom-36 -left-24 h-[30rem] w-[30rem] rounded-full mix-blend-screen"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(225,34,40,.55), rgba(225,34,40,.35), transparent 70%)",
-            filter: "blur(48px)",
+              "radial-gradient(closest-side, rgba(225,34,40,.12), rgba(225,34,40,.06), transparent 70%)",
+            filter: "blur(64px)",
           }}
-          initial={{ x: 0, y: 0, opacity: 0.85, rotate: 0 }}
+          initial={{ x: 0, y: 0, opacity: 0.7, rotate: 0 }}
           animate={
             baseDrift ?? {
-              x: [0, 35, 10, -30, 0],
-              y: [0, 15, -20, 10, 0],
-              opacity: [0.8, 0.68, 0.78, 0.7, 0.8],
-              rotate: [0, -6, 4, -5, 0],
+              x: [0, 30, 6, -24, 0],
+              y: [0, 12, -18, 8, 0],
+              opacity: [0.68, 0.56, 0.66, 0.6, 0.68],
+              rotate: [0, -5, 3, -4, 0],
             }
           }
-          transition={{
-            duration: 34,
-            ease: "easeInOut",
-            repeat: Infinity,
-            delay: 0.6,
-          }}
+          transition={{ duration: blobDurations.red, ease: "easeInOut", repeat: Infinity, delay: 0.6 }}
         />
 
-        {/* Blue blob */}
         <motion.div
-          className="absolute top-1/3 left-1/4 h-[24rem] w-[24rem] rounded-full mix-blend-screen"
+          className="absolute top-1/3 left-1/4 h-[22rem] w-[22rem] rounded-full mix-blend-screen"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(33,189,234,.48), rgba(33,189,234,.32), transparent 70%)",
-            filter: "blur(48px)",
+              "radial-gradient(closest-side, rgba(33,189,234,.12), rgba(33,189,234,.06), transparent 70%)",
+            filter: "blur(56px)",
           }}
-          initial={{ x: 0, y: 0, opacity: 0.82, rotate: 0 }}
+          initial={{ x: 0, y: 0, opacity: 0.7, rotate: 0 }}
           animate={
             baseDrift ?? {
-              x: [0, -20, 25, -15, 0],
-              y: [0, 20, -15, 10, 0],
-              opacity: [0.82, 0.7, 0.8, 0.72, 0.82],
-              rotate: [0, 4, -4, 3, 0],
+              x: [0, -12, 18, -10, 0],
+              y: [0, 14, -10, 8, 0],
+              opacity: [0.7, 0.6, 0.68, 0.62, 0.7],
+              rotate: [0, 3, -3, 2, 0],
             }
           }
-          transition={{
-            duration: 32,
-            ease: "easeInOut",
-            repeat: Infinity,
-            delay: 1.2,
-          }}
+          transition={{ duration: blobDurations.blue, ease: "easeInOut", repeat: Infinity, delay: 1.2 }}
         />
       </div>
 
-      {/* --- Content --- */}
+      {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <span className="font-dosis font-bold uppercase tracking-wider text-sm text-brand-yellow">
-            Get Involved With Us
-          </span>
+
+        <div className="mb-12 text-center">
           <h2 className="mt-3 font-dosis text-4xl md:text-5xl font-bold text-white">
-            Transform Lives Through Partnership
+            Get Involved With Us
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl font-lato text-lg text-gray-300">
-            Join leading corporates and foundations in creating lasting social
-            impact through innovative CSR partnerships.
+          <p className="mx-auto mt-4 max-w-2xl font-lato text-lg text-white/90">
+            Here’s how you can get involved and make a change.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {/* Corporate CSR */}
-          <article className="group rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm transition-all hover:-translate-y-2 hover:bg-white/15">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-yellow shadow-xl transition-transform group-hover:scale-110">
-              <svg
-                className="h-8 w-8 text-brand-black"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-3 font-dosis text-xl font-bold text-white">
-              Corporate CSR
-            </h3>
-            <p className="font-lato text-sm leading-relaxed text-gray-300">
-              Strategic CSR partnerships aligned with ESG goals and sustainable
-              impact.
-            </p>
-          </article>
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 items-stretch">
+          {[
+            {
+              title: "Show Your Support",
+              iconBg: "bg-brand-yellow",
+              icon: (
+                <svg className="h-8 w-8 text-brand-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              ),
+              ctaText: "Donate Now",
+              ctaHref: "/donate",
+              primary: true,
+            },
+            {
+              title: "Partner With Us",
+              iconBg: "bg-brand-blue",
+              icon: (
+                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              ),
+              ctaText: "Become a Partner",
+              ctaHref: "/partner",
+              primary: true,
+            },
+            {
+              title: "Work With Us",
+              iconBg: "bg-brand-magenta",
+              icon: (
+                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              ),
+              ctaText: "Volunteer",
+              ctaHref: "/volunteer",
+              primary: true,
+            },
+            {
+              title: "Careers",
+              iconBg: "bg-brand-green",
+              icon: (
+                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              ),
+              ctaText: "View Openings",
+              ctaHref: "/careers",
+              primary: true,
+            },
+          ].map((card, idx) => (
+            <article
+              key={idx}
+              className="
+                group mx-auto max-w-sm rounded-2xl
+                bg-gray-900/90
+                backdrop-blur-xl
+                border border-white/10
+                shadow-2xl
+                relative overflow-hidden
+                transition-transform hover:-translate-y-2 hover:shadow-[0_12px_32px_rgba(0,0,0,0.45)]
+              "
+            >
+              {/* Gloss shine overlay */}
+              <div className="
+                absolute inset-0 pointer-events-none 
+                bg-gradient-to-tr from-white/30 via-transparent to-white/50 
+                opacity-20 group-hover:opacity-30 transition
+              " />
 
-          {/* Grant Funding */}
-          <article className="group rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm transition-all hover:-translate-y-2 hover:bg-white/15">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-blue shadow-xl transition-transform group-hover:scale-110">
-              <svg
-                className="h-8 w-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-3 font-dosis text-xl font-bold text-white">
-              Grant Funding
-            </h3>
-            <p className="font-lato text-sm leading-relaxed text-gray-300">
-              Foundation partnerships supporting scalable, tech-driven youth
-              programs.
-            </p>
-          </article>
+              <div className="relative p-6 flex flex-col items-center text-center">
+                {/* Icon box */}
+                <div className={`mb-5 flex h-14 w-14 items-center justify-center rounded-xl shadow-md ${card.iconBg}`}>
+                  {card.icon}
+                </div>
 
-          {/* Skill Partners */}
-          <article className="group rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm transition-all hover:-translate-y-2 hover:bg-white/15">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-magenta shadow-xl transition-transform group-hover:scale-110">
-              <svg
-                className="h-8 w-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-3 font-dosis text-xl font-bold text-white">
-              Skill Partners
-            </h3>
-            <p className="font-lato text-sm leading-relaxed text-gray-300">
-              Industry collaboration for curriculum design and placement support.
-            </p>
-          </article>
+                {/* Title */}
+                <h3 className="mb-3 text-lg font-dosis font-bold text-white">{card.title}</h3>
 
-          {/* Tech Partners */}
-          <article className="group rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm transition-all hover:-translate-y-2 hover:bg-white/15">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-green shadow-xl transition-transform group-hover:scale-110">
-              <svg
-                className="h-8 w-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-3 font-dosis text-xl font-bold text-white">
-              Tech Partners
-            </h3>
-            <p className="font-lato text-sm leading-relaxed text-gray-300">
-              Technology partnerships powering AI and digital innovation at
-              scale.
-            </p>
-          </article>
+                {/* Description */}
+                <p className="text-sm text-white/85 mb-6">
+                  {card.title === "Careers"
+                    ? "Find roles where your skills can change lives."
+                    : card.title === "Partner With Us"
+                    ? "Work together for sustainable community impact."
+                    : "Join us in creating opportunities for young people."}
+                </p>
+
+                {/* CTA */}
+                {card.primary ? (
+                  <a
+                    href={card.ctaHref}
+                    className="inline-flex items-center rounded-full bg-brand-yellow px-5 py-2.5 text-sm font-semibold text-brand-black shadow hover:-translate-y-0.5 transition"
+                  >
+                    {card.ctaText}
+                  </a>
+                ) : (
+                  <a
+                    href={card.ctaHref}
+                    className="inline-flex items-center rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition"
+                  >
+                    {card.ctaText}
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+          </div>
         </div>
 
-        {/* CTA */}
-        <div className="mt-12 text-center">
-          <button className="rounded-full bg-brand-yellow px-10 py-4 font-work font-bold text-brand-black shadow-xl transition hover:-translate-y-0.5 hover:bg-yellow-400 hover:shadow-2xl">
-            Become a Partner
-          </button>
+        <div className="mt-10 text-center">
+          <p className="text-sm text-white/80">
+            Want to do more?{" "}
+            <a href="/contact" className="underline text-white">
+              Get in touch
+            </a>
+            — we’d love to partner with you.
+          </p>
         </div>
       </div>
     </section>

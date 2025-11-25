@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -18,47 +19,48 @@ export default function Footer() {
 
           {/* Company Info */}
           <div>
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2 mb-3">
               {/* Put the image in public/ so src="/Magic Bus Logo - Usage As Per Background-01.png" works */}
               <img
-                src="/Magic Bus Logo - Usage As Per Background-01.png"
+                src="/Magic Bus Logo - Usage As Per Background-02.png"
                 alt="Magic Bus Logo"
-                className="w-auto h-16 object-contain"
+                className="w-28 h-28 object-contain"
               />
-              <span className="font-bold text-xl">Magic Bus</span>
             </div>
             <p className="text-gray-300 mb-6">
               Transforming lives through tech-led youth development programs across India.
             </p>
             <div className="flex gap-4">
-              <div
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
-                role="button"
-                aria-label="facebook"
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"
               >
-                <span className="text-sm">📘</span>
-              </div>
-              <div
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
-                role="button"
-                aria-label="twitter"
+                <Instagram className="w-5 h-5 text-white" />
+              </a>
+
+              <a
+                href="https://www.youtube.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="YouTube"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"
               >
-                <span className="text-sm">🐦</span>
-              </div>
-              <div
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
-                role="button"
-                aria-label="instagram"
+                <Youtube className="w-5 h-5 text-white" />
+              </a>
+
+              <a
+                href="https://www.linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"
               >
-                <span className="text-sm">📷</span>
-              </div>
-              <div
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
-                role="button"
-                aria-label="linkedin"
-              >
-                <span className="text-sm">💼</span>
-              </div>
+                <Linkedin className="w-5 h-5 text-white" />
+              </a>
+
             </div>
           </div>
 
