@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
 
 
 const ChevronDown = (props) => (
@@ -23,28 +24,64 @@ const MENUS = [
 ];
 
 const MEGA = {
-  about: { title: "About Us", items: ["Our Approach", "Our Team", "Our Culture", "Board of Directors"] },
+  about: { 
+    title: "About Us", 
+    items: [
+      { label: "Our Approach", path: "/our-approach" },
+      { label: "Our Team", path: "#" },
+      { label: "Our Culture", path: "#" },
+      { label: "Board of Directors", path: "#" }
+    ]
+  },
   programmes: {
     title: "Programmes",
     items: [
-      "Adolescent Programme",
-      "Government Partnership Programme",
-      "Youth for Change Fellowship Programme",
-      "Magic Mitra",
-      "Livelihood Programme",
-      "Standard Skilling",
-      "Digital Skilling",
+      { label: "Adolescent Programme", path: "#" },
+      { label: "Government Partnership Programme", path: "#" },
+      { label: "Youth for Change Fellowship Programme", path: "#" },
+      { label: "Magic Mitra", path: "#" },
+      { label: "Livelihood Programme", path: "#" },
+      { label: "Standard Skilling", path: "#" },
+      { label: "Digital Skilling", path: "#" },
     ],
   },
-  partners: { title: "Partners", items: ["Corporate Partners", "Foundations & Institutions", "Government Partners"] },
+  partners: { 
+    title: "Partners", 
+    items: [
+      { label: "Corporate Partners", path: "#" },
+      { label: "Foundations & Institutions", path: "#" },
+      { label: "Government Partners", path: "#" }
+    ]
+  },
   resources: {
     title: "Resources",
     groups: [
-      { title: "Reports & Publications", items: ["Impact Reports", "Annual Reports", "Gender Journey Report"] },
-      { title: "Media & Stories", items: ["News", "Podcast", "Blogs"] },
+      { 
+        title: "Reports & Publications", 
+        items: [
+          { label: "Impact Reports", path: "#" },
+          { label: "Annual Reports", path: "#" },
+          { label: "Gender Journey Report", path: "#" }
+        ]
+      },
+      { 
+        title: "Media & Stories", 
+        items: [
+          { label: "News", path: "#" },
+          { label: "Podcast", path: "#" },
+          { label: "Blogs", path: "#" }
+        ]
+      },
     ],
   },
-  life: { title: "Life @ Magic Bus", items: ["Work With Us", "Certifications", "Our Culture"] },
+  life: { 
+    title: "Life @ Magic Bus", 
+    items: [
+      { label: "Work With Us", path: "#" },
+      { label: "Certifications", path: "#" },
+      { label: "Our Culture", path: "#" }
+    ]
+  },
 };
 
 export default function Navbar() {
@@ -83,14 +120,14 @@ export default function Navbar() {
         {/* TOP ROW — Logo | (search absolutely centered) | CTAs */}
         <div className="flex items-center justify-between h-20 md:h-24 border-b border-gray-100">
           {/* Logo (left) */}
-          <a href="/" className="flex items-center gap-3 z-40">
+          <Link to="/" className="flex items-center gap-3 z-40">
             <img
               src="/Magic Bus Logo - Usage As Per Background-01.png"
               alt="Magic Bus Logo"
               className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain rounded-full"
             />
             <span className="sr-only">Magic Bus</span>
-          </a>
+          </Link>
 
           {/* SEARCH - absolutely centered in container so always centered */}
           <div
@@ -236,11 +273,17 @@ export default function Navbar() {
                   <div className="col-span-2">
                     <h3 className="font-bold text-base mb-4 text-gray-900">{MEGA[activeKey].title}</h3>
                     <ul className="space-y-2">
-                      {MEGA[activeKey].items?.map((t) => (
-                        <li key={t}>
-                          <a href="#" className="text-sm text-gray-700 hover:text-brand-red transition-colors block py-0.5">
-                            {t}
-                          </a>
+                      {MEGA[activeKey].items?.map((item) => (
+                        <li key={item.label}>
+                          {item.path.startsWith('#') ? (
+                            <a href={item.path} className="text-sm text-gray-700 hover:text-brand-red transition-colors block py-0.5">
+                              {item.label}
+                            </a>
+                          ) : (
+                            <Link to={item.path} className="text-sm text-gray-700 hover:text-brand-red transition-colors block py-0.5">
+                              {item.label}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -261,11 +304,17 @@ export default function Navbar() {
                     <div key={g.title}>
                       <h4 className="font-semibold text-gray-900 mb-3">{g.title}</h4>
                       <ul className="space-y-2">
-                        {g.items.map((t) => (
-                          <li key={t}>
-                            <a href="#" className="text-sm text-gray-700 hover:text-brand-red transition-colors block py-0.5">
-                              {t}
-                            </a>
+                        {g.items.map((item) => (
+                          <li key={item.label}>
+                            {item.path.startsWith('#') ? (
+                              <a href={item.path} className="text-sm text-gray-700 hover:text-brand-red transition-colors block py-0.5">
+                                {item.label}
+                              </a>
+                            ) : (
+                              <Link to={item.path} className="text-sm text-gray-700 hover:text-brand-red transition-colors block py-0.5">
+                                {item.label}
+                              </Link>
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -313,10 +362,16 @@ export default function Navbar() {
                     <div className="pl-1 pt-2 space-y-2">
                       {(MEGA[m.key].items || MEGA[m.key].groups?.flatMap((g) => g.items) || [])
                         .slice(0, 8)
-                        .map((t) => (
-                          <a key={t} href="#" className="block text-sm text-gray-700 hover:text-brand-red">
-                            {t}
-                          </a>
+                        .map((item) => (
+                          item.path?.startsWith('#') ? (
+                            <a key={item.label} href={item.path} className="block text-sm text-gray-700 hover:text-brand-red">
+                              {item.label}
+                            </a>
+                          ) : (
+                            <Link key={item.label} to={item.path} className="block text-sm text-gray-700 hover:text-brand-red">
+                              {item.label}
+                            </Link>
+                          )
                         ))}
                     </div>
                   </details>

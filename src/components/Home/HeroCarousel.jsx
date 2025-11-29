@@ -221,7 +221,7 @@ export default function HeroCarousel() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Explore More
+                    Explore About Programme
                   </motion.button>
                 </motion.div>
               </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -68,7 +69,8 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-300 hover:text-white transition">About Us</a></li>
+              <li><Link to="/" className="text-gray-300 hover:text-white transition">Home</Link></li>
+              <li><Link to="/our-approach" className="text-gray-300 hover:text-white transition">Our Approach</Link></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition">Our Programs</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition">Impact Stories</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition">Partner With Us</a></li>

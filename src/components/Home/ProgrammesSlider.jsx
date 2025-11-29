@@ -21,7 +21,7 @@ const baseSlides = useMemo(
   () => [
     {
       id: "adolescent-programme",
-      title: "Adolescent Programme",
+      title: "Adolescent Life Skills Programme",
       summary:
         "Foundational life skills for ages 11–18, building confidence and core competencies.",
       tags: ["Ages 11–18", "6 Months"],

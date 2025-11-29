@@ -33,6 +33,13 @@ const IconArticle = (props) => (
   </svg>
 );
 
+const IconAward = (props) => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
+    <circle cx="12" cy="8" r="5" />
+    <path d="M8.5 13l-1.5 7 5-3 5 3-1.5-7" />
+  </svg>
+);
+
 const StoryCard = ({ tag, title, body, img, className = "", cta = { text: "Read more", icon: null, href: "#" } }) => (
   <article
     className={[
@@ -95,7 +102,7 @@ export default function OutreachAndImpact() {
           </span>
 
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-brand-black">
-            Journey With US
+            Transforming Lives Together
           </h2>
 
           <p className="mt-4 text-lg md:text-xl text-brand-black/90 max-w-3xl mx-auto">
@@ -109,26 +116,26 @@ export default function OutreachAndImpact() {
 
           {/* Gallery */}
           <StoryCard
-            tag="Gallery"
+            tag="Images And Video Gallery"
             title="Bloomberg & Kapil Dev, 2022"
             img="/ngo-images/12.jpg"
             className="md:col-span-7 md:row-span-2"
             cta={{
               text: "View Gallery",
-              icon: <IconGallery className="text-white" />,
+              icon: <IconPlay className="text-white" />,
               href: "/gallery",
             }}
           />
 
-          {/* Videos */}
+          {/* Awards */}
           <StoryCard
-            tag="Videos"
-            title="Videos section"
-            img="/ngo-images/6.jpg"
+            tag="Awards"
+            title="Mother Teresa Memorial Award for Social Justice 2023"
+            img="/ngo-images/award1.jpg"
             className="md:col-span-5 md:row-span-2"
             cta={{
-              text: "Watch Videos",
-              icon: <IconPlay className="text-white" />,
+              text: "View Awards",
+              icon: <IconAward className="text-white" />,
               href: "/videos",
             }}
           />

@@ -79,7 +79,7 @@ export default function AIDigitalSection() {
 
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10">
               <img
-                src="/ngo-images/1.jpeg"
+                src="/ngo-images/ai2.jpg"
                 alt="AI Dashboard"
                 className="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
               />
