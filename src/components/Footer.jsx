@@ -69,9 +69,9 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              <li><Link to="/" className="text-gray-300 hover:text-white transition">Home</Link></li>
+              <li><Link to="/" className=" hover:text-white transition text-brand-red">Home</Link></li>
               <li><Link to="/our-approach" className="text-gray-300 hover:text-white transition">Our Approach</Link></li>
-              <li><Link to="/donate" className="text-gray-300 hover:text-white transition font-semibold text-red-300">Donate Now</Link></li>
+              <li><Link to="/donate" className="text-gray-300 hover:text-white transition font-semibold">Donate Now</Link></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition">Our Programs</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition">Impact Stories</a></li>
               <li><Link to="/partner" className="text-gray-300 hover:text-white transition">Partner With Us</Link></li>

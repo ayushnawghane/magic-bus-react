@@ -14,9 +14,9 @@ export default function HeroCarousel() {
     {
       image: "/ngo-images/1.JPG",
       eyebrow: "AI • Digital • Impact",
-      title: "Effortless Banking",
+      title: "AI & Digital Programmes",
       subtitle: "for India's boldest disruptors",
-      desc: "Powerful automation, smart dashboards & integrated access.",
+      desc: "First NGO to Launch AI & Digital Programmes",
       cta: { label: "Donate Now", href: "/donate" },
     },
     {
