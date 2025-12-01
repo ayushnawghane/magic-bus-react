@@ -1,7 +1,9 @@
 // faqData.js
 import React from "react";
-
-const faqItems = [
+/* -------------------------------------------------------------------------- */
+/*                               HOME PAGE FAQ                                */
+/* -------------------------------------------------------------------------- */
+export const homefaq = [
   {
     question: "What does Magic Bus do?",
     category: "Overview",
@@ -193,4 +195,377 @@ const faqItems = [
   },
 ];
 
-export default faqItems;
+
+/* -------------------------------------------------------------------------- */
+/*                              CONTACT PAGE FAQ                              */
+/* -------------------------------------------------------------------------- */
+// --- Contact page: detailed FAQs (matches the 4 screenshots) ---
+export const contactFAQ = [
+  /* 1) Regional Offices ---------------------------------------------------- */
+  {
+    question: "Magic Bus India Foundation – Regional Offices",
+    category: "Contact",
+    answer: (
+      <div className="grid md:grid-cols-2 gap-8 text-[15px] leading-relaxed">
+        {/* Delhi/NCR */}
+        <div>
+          <h4 className="font-semibold">
+            <span className="text-brand-yellow font-bold">Delhi/NCR</span>{" "}
+            – North Regional Office
+          </h4>
+          <div className="mt-2 space-y-1 text-ink/80">
+            <p>B-13, Third Floor,</p>
+            <p>Sector 2, Noida,</p>
+            <p>Uttar Pradesh – 201 301</p>
+          </div>
+          <div className="mt-3 space-y-1">
+            <p>
+              <span className="font-medium">Phone:</span>{" "}
+              <a href="tel:01204787400" className="text-brand-red hover:underline">
+                0120 4787400
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:info@magicbusindia.org" className="text-brand-red hover:underline">
+                info@magicbusindia.org
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* Hyderabad */}
+        <div>
+          <h4 className="font-semibold">
+            <span className="text-brand-yellow font-bold">Hyderabad</span>{" "}
+            – South Regional Office
+          </h4>
+          <div className="mt-2 space-y-1 text-ink/80">
+            <p>#317, 3rd Floor, Maheshwari Chambers,</p>
+            <p>6-3-650/317/A, Somajiguda,</p>
+            <p>Hyderabad – 500 082,</p>
+          </div>
+          <div className="mt-3 space-y-1">
+            <p>
+              <span className="font-medium">Phone:</span>{" "}
+              <a href="tel:+919885070526" className="text-brand-red hover:underline">
+                +91 98850 70526
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:info@magicbusindia.org" className="text-brand-red hover:underline">
+                info@magicbusindia.org
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* Mumbai */}
+        <div>
+          <h4 className="font-semibold">
+            <span className="text-brand-yellow font-bold">Mumbai</span>{" "}
+            – West Regional Office
+          </h4>
+          <div className="mt-2 space-y-1 text-ink/80">
+            <p>6th Floor, Dheeraj Kawal,</p>
+            <p>Above HDFC Bank, LBS Marg,</p>
+            <p>Vikhroli (W), Mumbai – 400079</p>
+          </div>
+          <div className="mt-3 space-y-1">
+            <p>
+              <span className="font-medium">Phone:</span>{" "}
+              <a href="tel:02268529696" className="text-brand-red hover:underline">
+                022 6852 9696
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:info@magicbusindia.org" className="text-brand-red hover:underline">
+                info@magicbusindia.org
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* Kolkata */}
+        <div>
+          <h4 className="font-semibold">
+            <span className="text-brand-yellow font-bold">Kolkata</span>{" "}
+            – East Regional Office
+          </h4>
+          <div className="mt-2 space-y-1 text-ink/80">
+            <p>4th Floor, P-179, Sector-A, Metropolitan</p>
+            <p>
+              Co-operative Housing Society Ltd., Canal South Road,
+            </p>
+            <p>P.S. – Pragati Maidan, Kolkata – 700 105</p>
+          </div>
+          <div className="mt-3 space-y-1">
+            <p>
+              <span className="font-medium">Phone 1:</span>{" "}
+              <a href="tel:03340049733" className="text-brand-red hover:underline">
+                033 40049733
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Phone 2:</span>{" "}
+              <a href="tel:+919830363038" className="text-brand-red hover:underline">
+                +91 98303 63038
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:info@magicbusindia.org" className="text-brand-red hover:underline">
+                info@magicbusindia.org
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  /* 2) Centre for Learning & Development ---------------------------------- */
+  {
+    question:
+      "Magic Bus India Foundation – Centre for Learning & Development",
+    category: "Contact",
+    answer: (
+      <div className="space-y-3 text-[15px] leading-relaxed">
+        <div className="text-ink/80 space-y-1">
+          <p>Village Aasrewadi at Post Chowk, Taluka Khalapur,</p>
+          <p>District Raigad,</p>
+          <p>Maharashtra – 410 206</p>
+        </div>
+        <div className="space-y-1">
+          <p>
+            <span className="font-medium">Phone:</span>{" "}
+            <a href="tel:8108101152" className="text-brand-red hover:underline">
+              810 810 1152
+            </a>
+          </p>
+          <p>
+            <span className="font-medium">Email:</span>{" "}
+            <a
+              href="mailto:centre@magicbusindia.org"
+              className="text-brand-red hover:underline"
+            >
+              centre@magicbusindia.org
+            </a>
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  /* 3) Global Entities ----------------------------------------------------- */
+  {
+    question: "Magic Bus India Foundation – Global Entities",
+    category: "Global",
+    answer: (
+      <div className="grid md:grid-cols-2 gap-8 text-[15px] leading-relaxed">
+        {/* Global */}
+        <div>
+          <h5 className="font-semibold">Magic Bus Foundation – Global</h5>
+          <p className="mt-2 text-ink/80">
+            Magic Bus Global is a charity established as a Private company
+            limited by guarantee. Company Number – 9925236 (incorporated on 21
+            December 2015).
+          </p>
+          <div className="mt-3 space-y-1">
+            <p>Cawley Priory, South Pallant, Chichester, PO19 1SY</p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:matthew@magicbusindia.org" className="text-brand-red hover:underline">
+                matthew@magicbusindia.org
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* UK */}
+        <div>
+          <h5 className="font-semibold">Magic Bus Foundation – UK</h5>
+          <p className="mt-2 text-ink/80">
+            Magic Bus UK is a charity established as a company limited by
+            guarantee. Company Number – 6580717 (incorporated on 30 April 2008).
+          </p>
+          <div className="mt-3 space-y-1">
+            <p>Cawley Priory, South Pallant, Chichester, PO19 1SY, England</p>
+            <p>
+              <span className="font-medium">Phone:</span>{" "}
+              <a href="tel:+447395586181" className="text-brand-red hover:underline">
+                +44 7395 586181
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:info@magicbusuk.org" className="text-brand-red hover:underline">
+                info@magicbusuk.org
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Website:</span>{" "}
+              <a
+                href="https://www.magicbusuk.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-red hover:underline"
+              >
+                www.magicbusuk.org
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* Germany */}
+        <div>
+          <h5 className="font-semibold">Magic Bus Foundation – Germany</h5>
+          <div className="mt-2 text-ink/80 space-y-1">
+            <p>
+              Post: C/o CMS Hasche Sigle Partnerschaft von Rechtsanwälten und
+              Steuerberatern mbB, Nymphenburger Str. 12, 80333 München
+            </p>
+          </div>
+          <div className="mt-3 space-y-1">
+            <p>
+              <span className="font-medium">Phone:</span>{" "}
+              <a href="tel:+4915160303538" className="text-brand-red hover:underline">
+                +49 1516 0303538
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:info@magicbusgermany.org" className="text-brand-red hover:underline">
+                info@magicbusgermany.org
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Website:</span>{" "}
+              <a
+                href="https://www.magicbusgermany.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-red hover:underline"
+              >
+                www.magicbusgermany.org
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* USA */}
+        <div>
+          <h5 className="font-semibold">Magic Bus Foundation – USA</h5>
+          <p className="mt-2 text-ink/80">
+            Magic Bus USA was formed in 2010 as a 501(c)(3) nonprofit entity.
+          </p>
+          <div className="mt-3 space-y-1">
+            <p>1080 Eldridge PKWY STE 1150, Houston, Texas 77077</p>
+            <p>
+              <span className="font-medium">Phone:</span>{" "}
+              <a href="tel:+4915160303538" className="text-brand-red hover:underline">
+                +49 1516 0303538
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:info@magicbususa.org" className="text-brand-red hover:underline">
+                info@magicbususa.org
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">Website:</span>{" "}
+              <a
+                href="https://www.magicbususa.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-red hover:underline"
+              >
+                www.magicbususa.org
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* Singapore */}
+        <div>
+          <h5 className="font-semibold">Magic Bus Foundation – Singapore</h5>
+          <p className="mt-2 text-ink/80">
+            Magic Bus Limited (Company Registration No: 201219058G) is domiciled
+            in Singapore. It is a public company limited by guarantee.
+          </p>
+          <div className="mt-3 space-y-1">
+            <p>1 Robinson Road, #17-00 AIA Tower, Singapore 048542</p>
+            <p>
+              <span className="font-medium">Email:</span>{" "}
+              <a href="mailto:purnima.kamath@magicbus.org" className="text-brand-red hover:underline">
+                purnima.kamath@magicbus.org
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  /* 4) Partnership enquiry emails ----------------------------------------- */
+  {
+    question:
+      "For Partnership Enquiry with Magic Bus India Foundation",
+    category: "Partnerships",
+    answer: (
+      <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3 text-[15px]">
+        <p>
+          <span className="font-semibold">CSR & Employee Volunteering Partnerships</span>
+          <span className="mx-2">:</span>
+          <a href="mailto:csr@magicbusindia.org" className="text-brand-red hover:underline">
+            csr@magicbusindia.org
+          </a>
+        </p>
+        <p>
+          <span className="font-semibold">Institutional Partnerships</span>
+          <span className="mx-2">:</span>
+          <a href="mailto:institutional@magicbusindia.org" className="text-brand-red hover:underline">
+            institutional@magicbusindia.org
+          </a>
+        </p>
+        <p>
+          <span className="font-semibold">Knowledge & Government Partnerships</span>
+          <span className="mx-2">:</span>
+          <a href="mailto:govtpartner@magicbusindia.org" className="text-brand-red hover:underline">
+            govtpartner@magicbusindia.org
+          </a>
+        </p>
+        <p>
+          <span className="font-semibold">Employer Partnerships</span>
+          <span className="mx-2">:</span>
+          <a href="mailto:emp-partner@magicbusindia.org" className="text-brand-red hover:underline">
+            emp-partner@magicbusindia.org
+          </a>
+        </p>
+        <p>
+          <span className="font-semibold">High Networth Individual Partnerships</span>
+          <span className="mx-2">:</span>
+          <a href="mailto:hni@magicbusindia.org" className="text-brand-red hover:underline">
+            hni@magicbusindia.org
+          </a>
+        </p>
+        <p>
+          <span className="font-semibold">Individual Partnerships</span>
+          <span className="mx-2">:</span>
+          <a href="mailto:donors@magicbusindia.org" className="text-brand-red hover:underline">
+            donors@magicbusindia.org
+          </a>
+        </p>
+      </div>
+    ),
+  },
+];
+
+
+/* -------------------------------------------------------------------------- */
+/*                               DEFAULT EXPORT                               */
+/* -------------------------------------------------------------------------- */
+export default { homefaq, contactFAQ };

@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function GetInvolvedSection() {
   const prefersReduced = useReducedMotion();
@@ -198,9 +199,9 @@ export default function GetInvolvedSection() {
         <div className="mt-10 text-center">
           <p className="text-sm text-white/80">
             Want to do more?{" "}
-            <a href="/contact" className="underline text-white">
+            <Link to="/contact" className="underline text-white">
               Get in touch
-            </a>
+            </Link>
             — we’d love to partner with you.
           </p>
         </div>

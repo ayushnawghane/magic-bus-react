@@ -17,7 +17,7 @@ export default function HeroCarousel() {
       title: "Effortless Banking",
       subtitle: "for India's boldest disruptors",
       desc: "Powerful automation, smart dashboards & integrated access.",
-      cta: { label: "Donate Now", href: "#" },
+      cta: { label: "Donate Now", href: "/donate" },
     },
     {
       image: "/ngo-images/4.JPG",
@@ -25,7 +25,7 @@ export default function HeroCarousel() {
       title: "Empowering Adolescents",
       subtitle: "Through Technology",
       desc: "AI-powered platform transforming adolescents into skilled professionals.",
-      cta: { label: "Donate Now", href: "#" },
+      cta: { label: "Donate Now", href: "/donate" },
     },
     {
       image: "/ngo-images/5.jpeg",
@@ -33,7 +33,7 @@ export default function HeroCarousel() {
       title: "Build Future-Ready Skills",
       subtitle: "Learn • Practice • Get Placed",
       desc: "Hands-on, market-aligned training for tomorrow's workforce.",
-      cta: { label: "Donate Now", href: "#" },
+      cta: { label: "Donate Now", href: "/donate" },
     },
   ];
 

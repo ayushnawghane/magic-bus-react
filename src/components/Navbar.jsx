@@ -155,27 +155,27 @@ export default function Navbar() {
             <div className="flex flex-col items-end gap-2"> 
               {/* CTA row */}
               <div className="flex items-center gap-2">
-                <a
-                  href="/donate"
+                <Link
+                  to="/donate"
                   className="inline-flex px-4 py-2 rounded-full bg-brand-red text-white text-sm font-semibold shadow-sm transition"
                   style={{ backgroundColor: "#E12228" }} // inline fallback
                 >
                   Donate Now
-                </a>
+                </Link>
 
-                <a
-                  href="/contact"
+                <Link
+                  to="/contact"
                   className="hidden sm:inline-flex px-3 py-2 rounded-full border border-gray-300 text-sm font-semibold hover:bg-brand-yellow hover:text-white transition"
                 >
                   Contact Us
-                </a>
+                </Link>
 
-                <a
-                  href="/partner"
+                <Link
+                  to="/partner"
                   className="hidden sm:inline-flex px-3 py-2 rounded-full border border-gray-300 text-sm font-semibold hover:bg-brand-yellow hover:text-white transition"
                 >
                   Partner
-                </a>
+                </Link>
 
                 {/* mobile menu toggle */}
                 <button
@@ -380,13 +380,13 @@ export default function Navbar() {
 
               {/* Mobile CTAs + socials */}
               <div className="mt-4 flex gap-2 flex-col">
-                <a href="/donate" className="px-4 py-2 rounded-full bg-brand-red text-white text-sm font-semibold">
+                <Link to="/donate" className="px-4 py-2 rounded-full bg-brand-red text-white text-sm font-semibold">
                   Donate Now
-                </a>
+                </Link>
 
                 <div className="flex gap-2">
-                  <a href="/contact" className="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold">Contact Us</a>
-                  <a href="/partner" className="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold">Partner</a>
+                  <Link to="/contact" className="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold">Contact Us</Link>
+                  <Link to="/partner" className="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold">Partner</Link>
                 </div>
 
                 <div className="w-full flex items-center gap-3 mt-3">

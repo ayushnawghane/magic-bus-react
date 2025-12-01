@@ -10,8 +10,9 @@ import {
   ArrowRight,
   BookOpen,
 } from "lucide-react";
-import Layout from "../components/Layout"; 
+import Layout from "../components/Layout";
 import StrategicFramework from "../components/AboutUs/StrategicFramework";
+import { Link } from "react-router-dom";
 
 // ===== Animation variants =====
 const container = {
@@ -85,27 +86,27 @@ function KeyComponentsGrid() {
       id: 1,
       title: "Life Skills\nEducation",
       icon: Sparkles,
-      color: "bg-brand-yellow", 
+      color: "bg-brand-yellow",
       borderColor: "border-brand-yellow",
       textColor: "text-brand-yellow",
-      position: { top: "0%", left: "35%", transform: "translate(-35%, 0%)" }, 
+      position: { top: "0%", left: "35%", transform: "translate(-35%, 0%)" },
       description: "Teaches core life skills to adolescents and youth, helping them become more resilient and show higher self-efficacy."
     },
     {
       id: 2,
       title: "Education\nEnhancement",
       icon: School,
-      color: "bg-brand-magenta", 
+      color: "bg-brand-magenta",
       borderColor: "border-brand-magenta",
       textColor: "text-brand-magenta",
-      position: { top: "30%", right: "0%", transform: "translate(0%, 0%)" }, 
+      position: { top: "30%", right: "0%", transform: "translate(0%, 0%)" },
       description: "Provides adolescents with learning support that improves their basic literacy and numeracy, to boost their overall grades."
     },
     {
       id: 3,
       title: "Employability\nSkills Education",
       icon: Briefcase,
-      color: "bg-brand-blue", 
+      color: "bg-brand-blue",
       borderColor: "border-brand-blue",
       textColor: "text-brand-blue",
       position: { bottom: "10%", right: "10%", transform: "translate(0%, 0%)" },
@@ -115,7 +116,7 @@ function KeyComponentsGrid() {
       id: 4,
       title: "Livelihood\nConnect",
       icon: Users,
-      color: "bg-brand-red", 
+      color: "bg-brand-red",
       borderColor: "border-brand-red",
       textColor: "text-brand-red",
       position: { bottom: "10%", left: "10%", transform: "translate(0%, 0%)" },
@@ -125,7 +126,7 @@ function KeyComponentsGrid() {
       id: 5,
       title: "Community\nEngagement",
       icon: Handshake,
-      color: "bg-brand-green", 
+      color: "bg-brand-green",
       borderColor: "border-brand-green",
       textColor: "text-brand-green",
       position: { top: "30%", left: "0%", transform: "translate(0%, 0%)" },
@@ -147,13 +148,13 @@ function KeyComponentsGrid() {
             KEY COMPONENTS
           </h3>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-             Five integrated pillars working together to move youth from childhood into secure livelihoods.
+            Five integrated pillars working together to move youth from childhood into secure livelihoods.
           </p>
         </motion.div>
 
         {/* ===== DESKTOP RADIAL LAYOUT (Visible on lg screens) ===== */}
         <div className="hidden lg:block relative w-full max-w-4xl mx-auto aspect-square max-h-[700px]">
-          
+
           {/* Central Hub */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
@@ -167,12 +168,12 @@ function KeyComponentsGrid() {
             <div className="absolute inset-0 rounded-full border border-gray-100 scale-[2.5] opacity-30"></div>
 
             <div className="w-48 h-48 bg-white rounded-full flex flex-col items-center justify-center shadow-2xl border-4 border-gray-50 z-20 relative">
-               <div className="p-3 bg-gray-50 rounded-full mb-2">
-                 <BookOpen className="w-8 h-8 text-gray-400" />
-               </div>
-               <h4 className="text-xl font-bold text-gray-800 text-center leading-none">
-                 OUR<br /><span className="text-brand-red">APPROACH</span>
-               </h4>
+              <div className="p-3 bg-gray-50 rounded-full mb-2">
+                <BookOpen className="w-8 h-8 text-gray-400" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-800 text-center leading-none">
+                OUR<br /><span className="text-brand-red">APPROACH</span>
+              </h4>
             </div>
           </motion.div>
 
@@ -181,7 +182,7 @@ function KeyComponentsGrid() {
             const Icon = component.icon;
             const delay = 0.5 + (index * 0.1);
             const isActive = activeId === component.id;
-            
+
             return (
               <motion.div
                 key={component.id}
@@ -199,7 +200,7 @@ function KeyComponentsGrid() {
                 onMouseEnter={() => setActiveId(component.id)} // Set Active on Hover
               >
                 <div className="flex flex-col items-center text-center">
-                  
+
                   {/* Icon Circle */}
                   <div className={`
                     w-20 h-20 rounded-full flex items-center justify-center shadow-lg mb-4
@@ -207,12 +208,12 @@ function KeyComponentsGrid() {
                     ${isActive ? 'scale-110 shadow-xl' : 'scale-100'}
                   `}>
                     <Icon size={32} className="relative z-10" />
-                    
+
                     {/* Rotating Dashed ring around icon */}
-                    <motion.div 
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                        className={`absolute inset-0 rounded-full border-2 border-dashed ${component.borderColor} opacity-60 scale-125`}
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                      className={`absolute inset-0 rounded-full border-2 border-dashed ${component.borderColor} opacity-60 scale-125`}
                     />
                   </div>
 
@@ -236,7 +237,7 @@ function KeyComponentsGrid() {
 
                 {/* Connecting Line to Center */}
                 <svg className="absolute top-1/2 left-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none opacity-20">
-                   <line x1="50%" y1="50%" x2="50%" y2="50%" stroke="currentColor" strokeWidth="1" />
+                  <line x1="50%" y1="50%" x2="50%" y2="50%" stroke="currentColor" strokeWidth="1" />
                 </svg>
 
               </motion.div>
@@ -247,33 +248,33 @@ function KeyComponentsGrid() {
         {/* ===== MOBILE/TABLET LIST LAYOUT (Visible on md/sm screens) ===== */}
         <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
           {components.map((component, index) => {
-             const Icon = component.icon;
-             return (
-               <motion.div 
-                 key={component.id}
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ delay: index * 0.1 }}
-                 className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center"
-               >
-                 <div className={`p-4 rounded-full ${component.color} text-white mb-4 relative`}>
-                   <Icon size={24} className="relative z-10" />
-                   {/* Mobile Rotation Effect */}
-                   <motion.div 
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-0 border-2 border-dashed border-white/50 rounded-full scale-110"
-                    />
-                 </div>
-                 <h4 className={`font-bold text-lg mb-2 ${component.textColor}`}>
-                   {component.title.replace('\n', ' ')}
-                 </h4>
-                 <p className="text-gray-600 text-sm leading-relaxed">
-                   {component.description}
-                 </p>
-               </motion.div>
-             )
+            const Icon = component.icon;
+            return (
+              <motion.div
+                key={component.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center"
+              >
+                <div className={`p-4 rounded-full ${component.color} text-white mb-4 relative`}>
+                  <Icon size={24} className="relative z-10" />
+                  {/* Mobile Rotation Effect */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 border-2 border-dashed border-white/50 rounded-full scale-110"
+                  />
+                </div>
+                <h4 className={`font-bold text-lg mb-2 ${component.textColor}`}>
+                  {component.title.replace('\n', ' ')}
+                </h4>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {component.description}
+                </p>
+              </motion.div>
+            )
           })}
         </div>
 
@@ -284,7 +285,7 @@ function KeyComponentsGrid() {
 
 // ===== Page component =====
 export default function OurApproach() {
-  const heroImg = "/src/assets/images/banner1.jpg"; 
+  const heroImg = "/src/assets/images/banner1.jpg";
   const adolescentImg = "/src/assets/images/approach1.jpg";
   const livelihoodImg = "/src/assets/images/approach2.jpg";
 
@@ -562,12 +563,12 @@ export default function OurApproach() {
               viewport={{ once: true }}
               className="mt-6 flex justify-center gap-4"
             >
-              <a className="px-5 py-2 rounded-md bg-white text-brand-red font-semibold" href="#">
+              <Link to="/donate" className="px-5 py-2 rounded-md bg-white text-brand-red font-semibold">
                 Donate
-              </a>
-              <a className="px-5 py-2 rounded-md border border-white/40 text-white" href="#">
+              </Link>
+              <Link to="/partner" className="px-5 py-2 rounded-md border border-white/40 text-white">
                 Partner with us
-              </a>
+              </Link>
             </motion.div>
           </div>
         </section>

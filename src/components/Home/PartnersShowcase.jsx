@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 /**
  * Trusted by 500+ Organizations
@@ -135,15 +136,15 @@ export default function TrustedOrganizations() {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <a
-            href="#"
+          <Link
+            to="/partner"
             className="inline-flex items-center gap-2 rounded-full bg-ink text-brand-white px-5 py-3 font-semibold shadow hover:opacity-90 transition"
           >
             Partner With Us
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M13 5l7 7-7 7" />
             </svg>
-          </a>
+          </Link>
         </div>
 
       </div>

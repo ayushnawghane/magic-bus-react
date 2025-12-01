@@ -71,11 +71,12 @@ export default function Footer() {
             <ul className="space-y-3">
               <li><Link to="/" className="text-gray-300 hover:text-white transition">Home</Link></li>
               <li><Link to="/our-approach" className="text-gray-300 hover:text-white transition">Our Approach</Link></li>
+              <li><Link to="/donate" className="text-gray-300 hover:text-white transition font-semibold text-red-300">Donate Now</Link></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition">Our Programs</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition">Impact Stories</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition">Partner With Us</a></li>
+              <li><Link to="/partner" className="text-gray-300 hover:text-white transition">Partner With Us</Link></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition">Careers</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition">Contact</a></li>
+              <li><Link to="/contact" className="text-gray-300 hover:text-white transition">Contact</Link></li>
             </ul>
           </div>
 
