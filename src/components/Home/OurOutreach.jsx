@@ -1,6 +1,7 @@
 // OutreachWithDonut.jsx
 import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+
 
 /* ---------- DonutChart (fixed labels, connectors, centered) ---------- */
 function DonutChart({
@@ -85,27 +86,38 @@ function DonutChart({
   );
 }
 
-/* ---------- StatTile ---------- */
+/* ---------- StatTile (counts when in view, once) ---------- */
 function StatTile({ value, suffix = "", label, delay = 0, accent }) {
   const [val, setVal] = React.useState(0);
+  const ref = React.useRef(null);
+  // fire once when ~35% of the card is visible
+  const isInView = useInView(ref, { once: true, amount: 0.35 });
 
   React.useEffect(() => {
-    const dur = 900;
+    if (!isInView) return; // don’t animate until visible
+
+    const dur = 900; // ms
     const start = performance.now();
-    const anim = (t) => {
+    let raf;
+
+    const tick = (t) => {
       const p = Math.min(1, (t - start) / dur);
-      setVal(Math.floor(value * p));
-      if (p < 1) requestAnimationFrame(anim);
+      // easeOutCubic for a nicer finish
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(Math.floor(value * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
     };
-    const raf = requestAnimationFrame(anim);
+
+    raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [value]);
+  }, [isInView, value]);
 
   return (
     <motion.div
+      ref={ref}
       initial={{ y: 12, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.32, delay }}
       className="rounded-2xl bg-white p-6 text-center border border-border shadow-[0_6px_24px_rgba(16,24,40,0.06)] hover:shadow-[0_10px_30px_rgba(16,24,40,0.1)] transition relative overflow-hidden"
     >
@@ -124,7 +136,7 @@ function StatTile({ value, suffix = "", label, delay = 0, accent }) {
             color: "transparent",
           }}
         >
-          {val.toLocaleString("en-IN")}
+          {(isInView ? val : 0).toLocaleString("en-IN")}
           {suffix}
         </div>
         <div className="mt-1 text-xs md:text-sm text-ink/70 font-medium">
@@ -183,7 +195,6 @@ export default function OutreachWithDonut() {
             { label: "Graduates • 99%", value: 99, color: "#B3CC35" },
             { label: "Girls Participation • 60%", value: 60, color: "#FFCC04" },
           ],
-          salaryNote: "Entry-Level Salary • ₹15,261",
         },
       },
     }),
