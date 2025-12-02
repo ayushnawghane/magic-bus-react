@@ -151,76 +151,49 @@ export default function PartnerWithUs() {
           </div>
         </section>
 
-        {/* ===== 3) TWO-COLUMN MAIN ===== */}
-        <section className="py-14 md:py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-10">
-            {/* Left – Intro copy */}
+        {/* ===== 3) VERTICAL INTRO + FORM ===== */}
+        <section className="py-14 md:py-16 bg-white" id="contact-form">
+          <div className="max-w-6xl mx-auto px-6 lg:px-8 flex flex-col gap-14">
+            {/* --- Left (Intro) --- */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
+              className="text-center"
             >
               <h2 className="text-3xl md:text-4xl font-extrabold text-ink">
                 Thank You for Showing Interest!
               </h2>
-              <div className="h-1 w-24 bg-brand-yellow rounded mt-3 mb-6" />
-              <p className="text-lg text-ink/80 leading-relaxed">
+              <div className="h-1 w-24 bg-brand-yellow rounded mx-auto mt-3 mb-6" />
+              <p className="text-lg text-ink/80 leading-relaxed max-w-5xl mx-auto">
                 Magic Bus works with children and young people taking them on a
-                journey from <strong>Childhood to Livelihood</strong> and out
-                of poverty. You can help us enable children to complete
-                secondary education, delay their age of marriage, and skill
-                young people to be in secure and stable employment — thereby
-                moving a generation out of poverty.
+                journey from <strong>Childhood to Livelihood</strong> and out of
+                poverty. You can help us enable children to complete secondary
+                education, delay their age of marriage, and skill young people to
+                be in secure and stable employment — thereby moving a generation
+                out of poverty.
               </p>
 
-              <div className="mt-8 grid sm:grid-cols-2 gap-4">
-                <div className="flex items-start gap-3 p-4 rounded-xl border border-border">
-                  <div className="p-2 rounded-lg bg-brand-red/10">
-                    <Mail className="w-5 h-5 text-brand-red" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-ink/60">Write to us</div>
-                    <a
-                      href="mailto:csr@magicbusindia.org"
-                      className="font-semibold hover:text-brand-red"
-                    >
-                      csr@magicbusindia.org
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-4 rounded-xl border border-border">
-                  <div className="p-2 rounded-lg bg-brand-yellow/20">
-                    <Phone className="w-5 h-5 text-brand-black" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-ink/60">Call / WhatsApp</div>
-                    <a href="tel:8976720830" className="font-semibold">
-                      +91 89767 20830
-                    </a>
-                  </div>
-                </div>
-              </div>
             </motion.div>
 
-            {/* Right – Yellow shell + white form */}
+            {/* --- Right (Form) --- */}
             <motion.div
               variants={fadeUp}
-              custom={1}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
               className="bg-brand-yellow/20 rounded-2xl p-1 shadow-sm border border-brand-yellow/40"
             >
-              <div className="bg-white rounded-xl p-6 md:p-7">
-                <h3 className="text-xl md:text-2xl font-extrabold text-ink">
+              <div className="bg-white rounded-xl p-6 md:p-8">
+                <h3 className="text-xl md:text-2xl font-extrabold text-ink text-center">
                   Let’s Get in Touch
                 </h3>
-                <p className="text-sm text-ink/60 mt-1">
+                <p className="text-sm text-ink/60 mt-2 text-center max-w-md mx-auto">
                   Share a few details and our partnerships team will reach out.
                 </p>
 
-                <form onSubmit={onSubmit} className="mt-6 space-y-5">
+                <form onSubmit={onSubmit} className="mt-8 space-y-5">
                   {/* Row 1 */}
                   <div className="grid md:grid-cols-2 gap-4">
                     <Input
@@ -283,7 +256,7 @@ export default function PartnerWithUs() {
                     />
                   </div>
 
-                  {/* Row 4 – Message */}
+                  {/* Message */}
                   <TextArea
                     label="Have a question? Write to us. (limit 100 words)*"
                     name="message"
@@ -302,17 +275,46 @@ export default function PartnerWithUs() {
                   </div>
 
                   {/* Submit */}
-                  <div className="pt-2">
+                  <div className="pt-2 text-center">
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="inline-flex items-center gap-2 rounded-full border-2 border-brand-red px-6 py-3 font-bold text-brand-red hover:bg-brand-red hover:text-white transition disabled:opacity-60"
+                      className="inline-flex items-center gap-2 rounded-full border-2 border-brand-red px-8 py-3 font-bold text-brand-red hover:bg-brand-red hover:text-white transition disabled:opacity-60"
                     >
                       SUBMIT
                       <ArrowUpRight size={18} />
                     </button>
                   </div>
                 </form>
+
+                {/* Contact quick links */}
+                <div className="mt-10 grid sm:grid-cols-2 gap-6 max-w-lg mx-auto">
+                  <div className="flex items-start gap-3 p-4 rounded-xl border border-border hover:shadow transition">
+                    <div className="p-2 rounded-lg bg-brand-red/10">
+                      <Mail className="w-5 h-5 text-brand-red" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-ink/60">Write to us</div>
+                      <a
+                        href="mailto:csr@magicbusindia.org"
+                        className="font-semibold hover:text-brand-red"
+                      >
+                        csr@magicbusindia.org
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-4 rounded-xl border border-border hover:shadow transition">
+                    <div className="p-2 rounded-lg bg-brand-yellow/20">
+                      <Phone className="w-5 h-5 text-brand-black" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-ink/60">Call / WhatsApp</div>
+                      <a href="tel:8976720830" className="font-semibold">
+                        +91 89767 20830
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
