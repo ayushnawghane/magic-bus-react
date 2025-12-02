@@ -16,7 +16,7 @@ export default function AIDigitalSection() {
     {
       title: "ChatGPT / OpenAI",
       sub: "AI Prompting & Automation",
-      logo: "/logos/chatgpt.png",
+      logo: "/logos/gptwhite.png",
     },
     {
       title: "Python Programming",
