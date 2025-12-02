@@ -11,22 +11,22 @@ export default function AIDigitalSection() {
     {
       title: "AWS Cloud",
       sub: "Cloud Foundations & Deployment",
-      logo: "/src/assets/images/logos/aws.png",
+      logo: "/logos/aws.png",
     },
     {
       title: "ChatGPT / OpenAI",
       sub: "AI Prompting & Automation",
-      logo: "/src/assets/images/logos/chatgpt.png",
+      logo: "/logos/chatgpt.png",
     },
     {
       title: "Python Programming",
       sub: "Backend & ML Foundations",
-      logo: "/src/assets/images/logos/python.png",
+      logo: "/logos/python.png",
     },
     {
       title: "Figma UI/UX",
       sub: "Design Systems & Prototypes",
-      logo: "/src/assets/images/logos/figma.png",   // ⭐ NEW FIGMA LOGO
+      logo: "/logos/figma.png",   // ⭐ NEW FIGMA LOGO
     },
   ];
 
