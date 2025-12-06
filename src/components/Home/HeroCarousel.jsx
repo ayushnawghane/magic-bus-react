@@ -12,7 +12,7 @@ export default function HeroCarousel() {
 
   const slides = [
     {
-      image: "/ngo-videos/4.MP4",
+      image: "/ngo-videos/4.MOVg",
       eyebrow: "Digital Skills",
       title: "Build Future-Ready Skills",
       subtitle: "Learn • Practice • Get Placed",
