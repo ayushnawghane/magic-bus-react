@@ -12,7 +12,7 @@ export default function HeroCarousel() {
 
   const slides = [
     {
-      image: "/ngo-images/5.jpeg",
+      image: "/ngo-videos/2.MP4",
       eyebrow: "Digital Skills",
       title: "Build Future-Ready Skills",
       subtitle: "Learn • Practice • Get Placed",
@@ -20,7 +20,7 @@ export default function HeroCarousel() {
       cta: { label: "Donate Now", href: "/donate" },
     },
     {
-      image: "/ngo-images/1.JPG",
+      image: "/ngo-videos/4.MOV",
       eyebrow: "AI • Digital • Impact",
       title: "AI & Digital Programmes",
       subtitle: "for India's boldest disruptors",
@@ -28,7 +28,7 @@ export default function HeroCarousel() {
       cta: { label: "Donate Now", href: "/donate" },
     },
     {
-      image: "/ngo-images/4.JPG",
+      image: "/ngo-videos/3.MOV",
       eyebrow: "Youth Empowerment",
       title: "Empowering Adolescents",
       subtitle: "Through Technology",
@@ -108,8 +108,8 @@ export default function HeroCarousel() {
   return (
     <section
       className="relative h-screen w-full overflow-hidden bg-ink"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      // onMouseEnter={() => setPaused(true)}
+      // onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
       onTouchEnd={(e) => {
         const dx = e.changedTouches[0].clientX - touchX.current;
@@ -126,19 +126,33 @@ export default function HeroCarousel() {
           exit="exit"
           custom={dir}
         >
-          {/* Image with Ken Burns */}
+          {/* Media with Ken Burns */}
           <motion.div
             className="absolute inset-0"
             variants={imgVariants}
             initial="initial"
             animate="animate"
           >
-            <img
-              src={slides[i].image}
-              alt={slides[i].title}
-              className="h-full w-full object-cover"
-            />
+            {slides[i].image.endsWith(".mp4") || slides[i].image.endsWith(".MP4") || slides[i].image.endsWith(".MOV") ? (
+              <motion.video
+                key={slides[i].image}        // force re-mount when slide changes
+                src={slides[i].image}
+                className="h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+              />
+            ) : (
+              <img
+                src={slides[i].image}
+                alt={slides[i].title}
+                className="h-full w-full object-cover"
+              />
+            )}
           </motion.div>
+
 
           {/* Modern gradient overlay - cleaner and softer */}
           <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/75 to-transparent" />
