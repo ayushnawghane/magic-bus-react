@@ -27,60 +27,84 @@ const MEGA = {
   about: { 
     title: "About Us", 
     items: [
-      { label: "Our Approach", path: "/our-approach" },
+      { label: "Our Approach", path: "#" },
       { label: "Our Team", path: "#" },
+      { label: "Board of Directors", path: "#" },
       { label: "Our Culture", path: "#" },
-      { label: "Board of Directors", path: "#" }
-    ]
+    ],
   },
+
   programmes: {
     title: "Programmes",
     items: [
       { label: "Adolescent Programme", path: "#" },
-      { label: "Government Partnership Programme", path: "#" },
-      { label: "Youth for Change Fellowship Programme", path: "#" },
-      { label: "Magic Mitra", path: "#" },
+      { label: "MB Dost", path: "#" },
       { label: "Livelihood Programme", path: "#" },
       { label: "Standard Skilling", path: "#" },
       { label: "Digital Skilling", path: "#" },
+      { label: "Rural Empowerment Programme", path: "#" },
+      { label: "Future X", path: "#" },
+      { label: "Employee Volunteering Programme", path: "#" },
     ],
   },
-  partners: { 
-    title: "Partners", 
+
+  partners: {
+    title: "Partners",
     items: [
       { label: "Corporate Partners", path: "#" },
       { label: "Foundations & Institutions", path: "#" },
-      { label: "Government Partners", path: "#" }
-    ]
+      { label: "Government Partners", path: "#" },
+      { label: "Knowledge Partners", path: "#" },
+      { label: "Employment Partners", path: "#" },
+      { label: "Partner Connect", path: "#" },
+    ],
   },
+
   resources: {
     title: "Resources",
     groups: [
-      { 
-        title: "Reports & Publications", 
+      {
+        title: "Reports & Publications",
         items: [
           { label: "Impact Reports", path: "#" },
+          { label: "Gender Journey Report", path: "#" },
           { label: "Annual Reports", path: "#" },
-          { label: "Gender Journey Report", path: "#" }
-        ]
+          { label: "FLFPR Report", path: "#" },
+        ],
       },
-      { 
-        title: "Media & Stories", 
+      {
+        title: "Media & Stories",
         items: [
-          { label: "News", path: "#" },
+          { label: "Blogs", path: "#" },
+          { label: "Webstories", path: "#" },
+          { label: "Awards", path: "#" },
+          { label: "Success Stories", path: "#" },
+          { label: "Testimonials", path: "#" },
           { label: "Podcast", path: "#" },
-          { label: "Blogs", path: "#" }
-        ]
+        ],
+      },
+      {
+        title: "Policies",
+        items: [
+          { label: "Privacy", path: "#" },
+          { label: "Terms & Conditions", path: "#" },
+          { label: "POSH Policy", path: "#" },
+          { label: "Child Protection Policy", path: "#" },
+        ],
       },
     ],
   },
-  life: { 
-    title: "Life @ Magic Bus", 
+
+  life: {
+    title: "Life @ Magic Bus",
     items: [
       { label: "Work With Us", path: "#" },
       { label: "Certifications", path: "#" },
-      { label: "Our Culture", path: "#" }
-    ]
+      { label: "Our Culture", path: "#" },
+      { label: "Learning Loop", path: "#" },
+      { label: "MB Academy", path: "#" },
+      { label: "Darwin (Employee Login)", path: "#" },
+    ],
   },
 };
 
