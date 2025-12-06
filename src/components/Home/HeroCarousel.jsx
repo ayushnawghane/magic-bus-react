@@ -12,7 +12,7 @@ export default function HeroCarousel() {
 
   const slides = [
     {
-      image: "/ngo-videos/1.MP4",
+      image: "/ngo-videos/4.MP4",
       eyebrow: "Digital Skills",
       title: "Build Future-Ready Skills",
       subtitle: "Learn • Practice • Get Placed",
@@ -28,7 +28,7 @@ export default function HeroCarousel() {
       cta: { label: "Donate Now", href: "/donate" },
     },
     {
-      image: "/ngo-videos/3.MOV",
+      image: "/ngo-videos/4.MOV",
       eyebrow: "Youth Empowerment",
       title: "Empowering Adolescents",
       subtitle: "Through Technology",
