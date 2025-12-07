@@ -2,8 +2,44 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
+/* ----- shared: angles & layout helpers ----- */
+const TAU = Math.PI * 2;
+// rotate whole chart (screen coords). -90 means start at top (12 o'clock)
+const START_ANGLE_DEG = -90;
+const deg2rad = (d) => (d * Math.PI) / 180;
 
-/* ---------- DonutChart (fixed labels, connectors, centered) ---------- */
+function computeLayout(segments) {
+  const total = Math.max(1, segments.reduce((s, x) => s + x.value, 0));
+  let acc = 0; // radians in data space, 0 at 3 o'clock
+  const rot = deg2rad(START_ANGLE_DEG); // screen rotation
+
+  const enriched = segments.map((seg) => {
+    const frac = seg.value / total;
+    const arc = frac * TAU;
+    const mid = acc + arc / 2; // data coords
+    const screenMid = mid + rot; // after rotation
+
+    // side by x of the unit circle after rotation: left if cos < 0
+    const side = Math.cos(screenMid) < 0 ? "left" : "right";
+    // y for vertical sort (smaller y is higher on screen)
+    const y = Math.sin(screenMid);
+
+    acc += arc;
+    return { ...seg, side, y, midAngle: screenMid };
+  });
+
+  // split & sort top→bottom per side
+  const left = enriched
+    .filter((s) => s.side === "left")
+    .sort((a, b) => a.y - b.y);
+  const right = enriched
+    .filter((s) => s.side === "right")
+    .sort((a, b) => a.y - b.y);
+
+  return { left, right, enriched };
+}
+
+/* ---------- DonutChart (animated when in view) ---------- */
 function DonutChart({
   size = 420,
   thickness = 42,
@@ -15,25 +51,36 @@ function DonutChart({
   const r = (size - thickness) / 2;
   const circumference = 2 * Math.PI * r;
   const total = Math.max(1, segments.reduce((s, x) => s + x.value, 0));
+  const rot = START_ANGLE_DEG; // keep in sync with computeLayout
 
   let accAngle = 0;
   const arcs = segments.map((seg, idx) => {
     const frac = seg.value / total;
-    const angle = frac * Math.PI * 2;
+    const angle = frac * TAU;
     const arcLen = circumference * frac;
     const gapLen = Math.min(arcLen * 0.06, gap);
     const visibleLen = Math.max(0.0001, arcLen - gapLen);
     const dashArray = `${visibleLen} ${Math.max(0.0001, circumference - visibleLen)}`;
-    const offsetPx = circumference * (accAngle / (2 * Math.PI));
+    const offsetPx = circumference * (accAngle / TAU);
     const dashOffset = circumference - offsetPx;
     accAngle += angle;
     return { ...seg, dashArray, dashOffset };
   });
 
+  const wrapRef = React.useRef(null);
+  const inView = useInView(wrapRef, { once: true, amount: 0.45 });
+
   return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <g transform={`translate(${size / 2}, ${size / 2}) rotate(-90)`}>
+    <motion.div
+      ref={wrapRef}
+      className="relative z-20 "
+      style={{ width: size, height: size }}
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.92 }}
+      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <svg className="bg-white rounded-full" width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        <g transform={`translate(${size / 2}, ${size / 2}) rotate(${rot})`}>
           <circle
             r={r}
             cx="0"
@@ -41,8 +88,8 @@ function DonutChart({
             fill="transparent"
             stroke="rgba(0,0,0,.06)"
             strokeWidth={thickness}
+            className="bg-white"
           />
-
           {arcs.map(({ color, dashArray, dashOffset }, idx) => (
             <motion.circle
               key={idx}
@@ -54,10 +101,9 @@ function DonutChart({
               strokeWidth={thickness}
               strokeLinecap="round"
               strokeDasharray={dashArray}
-              strokeDashoffset={dashOffset}
               initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset: dashOffset }}
-              transition={{ duration: 0.9 + idx * 0.08 }}
+              animate={{ strokeDashoffset: inView ? dashOffset : circumference }}
+              transition={{ duration: 0.9 + idx * 0.08, ease: "easeOut" }}
             />
           ))}
         </g>
@@ -76,38 +122,32 @@ function DonutChart({
         <img src={centerImage} className="w-full h-full object-cover" />
       </div>
 
-      {/* caption */}
       {caption && (
         <div className="absolute -bottom-8 w-full text-center text-xs text-ink/60">
           {caption}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
-/* ---------- StatTile (counts when in view, once) ---------- */
+/* ---------- StatTile (unchanged) ---------- */
 function StatTile({ value, suffix = "", label, delay = 0, accent }) {
   const [val, setVal] = React.useState(0);
   const ref = React.useRef(null);
-  // fire once when ~35% of the card is visible
   const isInView = useInView(ref, { once: true, amount: 0.35 });
 
   React.useEffect(() => {
-    if (!isInView) return; // don’t animate until visible
-
-    const dur = 900; // ms
+    if (!isInView) return;
+    const dur = 900;
     const start = performance.now();
     let raf;
-
     const tick = (t) => {
       const p = Math.min(1, (t - start) / dur);
-      // easeOutCubic for a nicer finish
       const eased = 1 - Math.pow(1 - p, 3);
       setVal(Math.floor(value * eased));
       if (p < 1) raf = requestAnimationFrame(tick);
     };
-
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [isInView, value]);
@@ -126,7 +166,6 @@ function StatTile({ value, suffix = "", label, delay = 0, accent }) {
         className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
         style={{ background: accent }}
       />
-
       <div className="relative">
         <div
           className="text-2xl md:text-3xl font-extrabold mb-1"
@@ -147,9 +186,9 @@ function StatTile({ value, suffix = "", label, delay = 0, accent }) {
   );
 }
 
-/* ---------- OutreachWithDonut Section ---------- */
+/* ---------- OutreachWithDonut ---------- */
 export default function OutreachWithDonut() {
-  const [tab, setTab] = useState("adolescent");
+  const [tab, setTab] = useState("livelihood");
 
   const TABS = useMemo(
     () => ({
@@ -169,10 +208,10 @@ export default function OutreachWithDonut() {
           img: "/ngo-images/girl.jpeg",
           caption: "Data as on April 2024 – March 2025",
           segments: [
-            { label: "School Regularity • 27%", value: 27, color: "#21BDEA" },
-            { label: "Higher Studies • 34%", value: 34, color: "#B3CC35" },
-            { label: "Resilience • 45%", value: 45, color: "#FFCC04" },
-            { label: "Self Efficacy • 20%", value: 20, color: "#E12228" },
+            { label: "School Regularity • 27%", value: 27, color: "#21BDEA" }, // blue
+            { label: "Higher Studies • 34%", value: 34, color: "#B3CC35" },   // green
+            { label: "Resilience • 45%", value: 45, color: "#FFCC04" },       // yellow
+            { label: "Self Efficacy • 20%", value: 20, color: "#E12228" },    // red
           ],
         },
       },
@@ -190,10 +229,10 @@ export default function OutreachWithDonut() {
           img: "/ngo-images/girl.jpeg",
           caption: "Data as on April 2024 – March 2025",
           segments: [
-            { label: "Placement • 74%", value: 74, color: "#21BDEA" },
-            { label: "Retention • 65%", value: 65, color: "#FF8A65" },
-            { label: "Graduates • 99%", value: 99, color: "#B3CC35" },
-            { label: "Girls Participation • 60%", value: 60, color: "#FFCC04" },
+            { label: "Placement • 74%", value: 74, color: "#21BDEA" },   // blue
+            { label: "Retention • 65%", value: 65, color: "#FF8A65" },   // orange
+            { label: "Graduates • 99%", value: 99, color: "#B3CC35" },   // green
+            { label: "Girls Participation • 60%", value: 60, color: "#FFCC04" }, // yellow
           ],
         },
       },
@@ -202,19 +241,14 @@ export default function OutreachWithDonut() {
   );
 
   const active = TABS[tab];
-  const accents = [
-    "#4F5BFE",
-    "#FF7A59",
-    "#21BDEA",
-    "#B3CC35",
-    "#FFCC04",
-    "#E12228",
-    "#8B5CF6",
-    "#06B6D4",
-  ];
 
-  const leftHighlights = active.donut.segments.slice(0, 2);
-  const rightHighlights = active.donut.segments.slice(2);
+  // compute placement for label columns based on segment mid-angles
+  const { left: leftHighlights, right: rightHighlights } = useMemo(
+    () => computeLayout(active.donut.segments),
+    [active.donut.segments]
+  );
+
+  const accents = ["#4F5BFE", "#FF7A59", "#21BDEA", "#B3CC35", "#FFCC04", "#E12228", "#8B5CF6", "#06B6D4"];
 
   return (
     <section className="py-16 md:py-20 relative">
@@ -232,14 +266,10 @@ export default function OutreachWithDonut() {
               key={t}
               onClick={() => setTab(t)}
               className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-                tab === t
-                  ? "bg-ink text-white shadow"
-                  : "bg-white text-ink border border-border hover:bg-gray-50"
+                tab === t ? "bg-ink text-white shadow" : "bg-white text-ink border border-border hover:bg-gray-50"
               }`}
             >
-              {t === "adolescent"
-                ? "Adolescent Programme"
-                : "Livelihood Programme"}
+              {t === "adolescent" ? "Adolescent Programme" : "Livelihood Programme"}
             </button>
           ))}
         </div>
@@ -258,7 +288,7 @@ export default function OutreachWithDonut() {
           ))}
         </div>
 
-        {/* ✅ CTA Button */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -267,18 +297,12 @@ export default function OutreachWithDonut() {
           className="my-8 flex justify-center"
         >
           <button
-            className="px-8 py-3 text-sm md:text-base font-semibold rounded-full text-white 
-                        bg-brand-red
-                        shadow-md hover:shadow-lg transition-transform duration-300 
-                        hover:scale-105 active:scale-95"
-            onClick={() =>
-              window.scrollTo({ top: 0, behavior: "smooth" })
-            } // change this to link or action as needed
+            className="px-8 py-3 text-sm md:text-base font-semibold rounded-full text-white bg-brand-red shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             View Our Outreach
           </button>
         </motion.div>
-
 
         <div className="text-center my-8">
           <h2 className="mt-4 text-3xl md:text-5xl font-extrabold text-ink">
@@ -286,7 +310,7 @@ export default function OutreachWithDonut() {
           </h2>
         </div>
 
-        {/* Donut & animated highlights */}
+        {/* Donut & labels aligned by side and vertical position */}
         <AnimatePresence mode="wait">
           <motion.div
             key={tab}
@@ -296,12 +320,12 @@ export default function OutreachWithDonut() {
             transition={{ duration: 0.45 }}
             className="mt-12"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
-              {/* left highlight cards */}
-              <div className="space-y-6">
+            <div className="relative isolate grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+              {/* LEFT column (segments whose midpoint lies on left half) */}
+              <div className="space-y-6 relative z-0">
                 {leftHighlights.map((seg, i) => (
                   <motion.div
-                    key={i}
+                    key={`${seg.label}-${i}`}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -313,29 +337,23 @@ export default function OutreachWithDonut() {
                       aria-hidden
                     />
                     <div className="flex items-center gap-3 mb-2">
-                      <div
-                        className="w-4 h-4 rounded-full"
-                        style={{ background: seg.color }}
-                      />
+                      <div className="w-4 h-4 rounded-full" style={{ background: seg.color }} />
                       <div className="text-sm font-semibold text-ink">
                         {seg.label.split("•")[0].trim()}
                       </div>
                     </div>
-                    <div
-                      className="text-3xl font-extrabold"
-                      style={{ color: seg.color }}
-                    >
+                    <div className="text-3xl font-extrabold" style={{ color: seg.color }}>
                       {seg.value}%
                     </div>
                   </motion.div>
                 ))}
               </div>
 
-              {/* center donut */}
+              {/* center donut (animated when in view) */}
               <div className="flex items-center justify-center">
                 <DonutChart
-                  size={400}
-                  thickness={42}
+                  size={500}
+                  thickness={48}
                   centerImage={active.donut.img}
                   segments={active.donut.segments}
                   caption={active.donut.caption}
@@ -343,77 +361,34 @@ export default function OutreachWithDonut() {
                 />
               </div>
 
-              {/* right highlight cards */}
-              <div className="space-y-6">
+              {/* RIGHT column (segments on right half) */}
+              <div className="space-y-6 relative z-0">
                 {rightHighlights.map((seg, i) => (
                   <motion.div
-                    key={i}
+                    key={`${seg.label}-${i}`}
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.18 + i * 0.08 }}
-                    className="bg-white rounded-xl p-5 border border-border shadow-md hover:shadow-lg transition relative overflow-hidden"
+                    className="bg-white rounded-xl p-5 pl-14 border border-border shadow-md hover:shadow-lg transition relative overflow-hidden"
                   >
                     <div
                       className="absolute -left-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-white border-t border-l border-border rounded-tr-md transform -rotate-45 shadow-sm"
                       aria-hidden
                     />
                     <div className="flex items-center gap-3 mb-2">
-                      <div
-                        className="w-4 h-4 rounded-full"
-                        style={{ background: seg.color }}
-                      />
+                      <div className="w-4 h-4 rounded-full" style={{ background: seg.color }} />
                       <div className="text-sm font-semibold text-ink">
                         {seg.label.split("•")[0].trim()}
                       </div>
                     </div>
-                    <div
-                      className="text-3xl font-extrabold"
-                      style={{ color: seg.color }}
-                    >
+                    <div className="text-3xl font-extrabold" style={{ color: seg.color }}>
                       {seg.value}%
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
-
-            {/* Salary note for livelihood tab */}
-            {active.donut.salaryNote && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-8 text-center"
-              >
-                <div className="inline-block bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-full px-6 py-3">
-                  <span className="text-sm font-semibold text-green-800">
-                    💰 {active.donut.salaryNote}
-                  </span>
-                </div>
-              </motion.div>
-            )}
-
-            {/* ✅ CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-12 flex justify-center"
-            >
-              <button
-                className="px-8 py-3 text-sm md:text-base font-semibold rounded-full text-white 
-                           bg-brand-red
-                           shadow-md hover:shadow-lg transition-transform duration-300 
-                           hover:scale-105 active:scale-95"
-                onClick={() =>
-                  window.scrollTo({ top: 0, behavior: "smooth" })
-                } // change this to link or action as needed
-              >
-                View Our Impact
-              </button>
-            </motion.div>
           </motion.div>
         </AnimatePresence>
       </div>
