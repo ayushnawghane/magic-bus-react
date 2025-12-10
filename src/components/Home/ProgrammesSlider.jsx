@@ -317,7 +317,7 @@ function ProgrammeCard({ slide }) {
       <div
         className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-35 mix-blend-multiply`}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/75" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
 
       <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
         <div className="h-10 px-3 rounded-full bg-black/35 backdrop-blur-[3px] text-white flex items-center gap-2">

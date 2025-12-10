@@ -39,7 +39,7 @@ function computeLayout(segments) {
   return { left, right, enriched };
 }
 
-/* ---------- DonutChart (animated when in view) ---------- */
+/* ---------- DonutChart (re-animates on each re-entry) ---------- */
 function DonutChart({
   size = 420,
   thickness = 42,
@@ -54,7 +54,7 @@ function DonutChart({
   const rot = START_ANGLE_DEG; // keep in sync with computeLayout
 
   let accAngle = 0;
-  const arcs = segments.map((seg, idx) => {
+  const arcs = segments.map((seg) => {
     const frac = seg.value / total;
     const angle = frac * TAU;
     const arcLen = circumference * frac;
@@ -68,19 +68,25 @@ function DonutChart({
   });
 
   const wrapRef = React.useRef(null);
-  const inView = useInView(wrapRef, { once: true, amount: 0.45 });
+  const inView = useInView(wrapRef, { once: false, amount: 0.45 });
+
+  // bump "run" each time we re-enter viewport to remount the <g> and replay strokes
+  const [run, setRun] = React.useState(0);
+  React.useEffect(() => {
+    if (inView) setRun((n) => n + 1);
+  }, [inView]);
 
   return (
     <motion.div
       ref={wrapRef}
-      className="relative z-20 "
+      className="relative z-20"
       style={{ width: size, height: size }}
       initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.92 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      animate={{ opacity: inView ? 1 : 0.9, scale: inView ? 1 : 0.96 }}
+      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
     >
       <svg className="bg-white rounded-full" width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <g transform={`translate(${size / 2}, ${size / 2}) rotate(${rot})`}>
+        <g key={run} transform={`translate(${size / 2}, ${size / 2}) rotate(${rot})`}>
           <circle
             r={r}
             cx="0"
@@ -88,7 +94,6 @@ function DonutChart({
             fill="transparent"
             stroke="rgba(0,0,0,.06)"
             strokeWidth={thickness}
-            className="bg-white"
           />
           {arcs.map(({ color, dashArray, dashOffset }, idx) => (
             <motion.circle
@@ -102,8 +107,8 @@ function DonutChart({
               strokeLinecap="round"
               strokeDasharray={dashArray}
               initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset: inView ? dashOffset : circumference }}
-              transition={{ duration: 0.9 + idx * 0.08, ease: "easeOut" }}
+              animate={{ strokeDashoffset: dashOffset }}
+              transition={{ duration: 2.2 + idx * 0.25, ease: [0.22, 1, 0.36, 1] }}
             />
           ))}
         </g>
@@ -131,24 +136,29 @@ function DonutChart({
   );
 }
 
-/* ---------- StatTile (unchanged) ---------- */
+/* ---------- StatTile (re-animates on each re-entry) ---------- */
 function StatTile({ value, suffix = "", label, delay = 0, accent }) {
   const [val, setVal] = React.useState(0);
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.35 });
+  const isInView = useInView(ref, { once: false, amount: 0.35 });
 
   React.useEffect(() => {
-    if (!isInView) return;
-    const dur = 900;
-    const start = performance.now();
     let raf;
-    const tick = (t) => {
-      const p = Math.min(1, (t - start) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setVal(Math.floor(value * eased));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
+    if (isInView) {
+      const dur = 900;
+      const start = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setVal(Math.floor(value * eased));
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      setVal(0); // restart
+      raf = requestAnimationFrame(tick);
+    } else {
+      // reset when out of view so it can replay
+      setVal(0);
+    }
     return () => cancelAnimationFrame(raf);
   }, [isInView, value]);
 
@@ -157,7 +167,7 @@ function StatTile({ value, suffix = "", label, delay = 0, accent }) {
       ref={ref}
       initial={{ y: 12, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true, amount: 0.35 }}
+      viewport={{ once: false, amount: 0.35 }}
       transition={{ duration: 0.32, delay }}
       className="rounded-2xl bg-white p-6 text-center border border-border shadow-[0_6px_24px_rgba(16,24,40,0.06)] hover:shadow-[0_10px_30px_rgba(16,24,40,0.1)] transition relative overflow-hidden"
     >
@@ -175,7 +185,7 @@ function StatTile({ value, suffix = "", label, delay = 0, accent }) {
             color: "transparent",
           }}
         >
-          {(isInView ? val : 0).toLocaleString("en-IN")}
+          {val.toLocaleString("en-IN")}
           {suffix}
         </div>
         <div className="mt-1 text-xs md:text-sm text-ink/70 font-medium">
@@ -292,7 +302,7 @@ export default function OutreachWithDonut() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.5, delay: 0.4 }}
           className="my-8 flex justify-center"
         >
@@ -328,7 +338,7 @@ export default function OutreachWithDonut() {
                     key={`${seg.label}-${i}`}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ delay: 0.18 + i * 0.08 }}
                     className="bg-white rounded-xl p-5 border border-border shadow-md hover:shadow-lg transition relative overflow-hidden"
                   >
@@ -349,7 +359,7 @@ export default function OutreachWithDonut() {
                 ))}
               </div>
 
-              {/* center donut (animated when in view) */}
+              {/* center donut (re-animates when in view) */}
               <div className="flex items-center justify-center">
                 <DonutChart
                   size={500}
@@ -368,7 +378,7 @@ export default function OutreachWithDonut() {
                     key={`${seg.label}-${i}`}
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ delay: 0.18 + i * 0.08 }}
                     className="bg-white rounded-xl p-5 pl-14 border border-border shadow-md hover:shadow-lg transition relative overflow-hidden"
                   >
