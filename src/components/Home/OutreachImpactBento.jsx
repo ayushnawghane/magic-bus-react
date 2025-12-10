@@ -170,14 +170,14 @@ export default function OutreachAndImpact() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-6">
+        {/* <div className="text-center mt-6">
           <button className="inline-flex items-center gap-2 rounded-full bg-brand-red text-white px-8 py-4 text-lg font-semibold hover:bg-red-700 transition active:scale-[0.99]">
             View Impact Dashboard
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
               <path d="M9 6l6 6-6 6" />
             </svg>
           </button>
-        </div>
+        </div> */}
 
       </div>
     </section>
