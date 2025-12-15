@@ -75,7 +75,8 @@ const MEGA = {
       {
         title: "Media & Stories",
         items: [
-          { label: "Blogs", path: "#" },
+          { label: "Blogs", path: "/blogs" },
+          { label: "News", path: "/news" },
           { label: "Webstories", path: "#" },
           { label: "Awards", path: "#" },
           { label: "Success Stories", path: "#" },
