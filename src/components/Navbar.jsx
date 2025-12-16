@@ -24,8 +24,8 @@ const MENUS = [
 ];
 
 const MEGA = {
-  about: { 
-    title: "About Us", 
+  about: {
+    title: "About Us",
     items: [
       { label: "Our Approach", path: "#" },
       { label: "Our Team", path: "#" },
@@ -66,15 +66,16 @@ const MEGA = {
       {
         title: "Reports & Publications",
         items: [
-          { label: "Impact Reports", path: "#" },
-          { label: "Gender Journey Report", path: "#" },
-          { label: "Annual Reports", path: "#" },
-          { label: "FLFPR Report", path: "#" },
+          { label: "Impact Reports", path: "/impact-reports" },
+          { label: "Gender Journey Report", path: "/gender-journey-report" },
+          { label: "Annual Reports", path: "/annual-reports" },
+          { label: "FLFPR Report", path: "/flfpr-report" },
         ],
       },
       {
         title: "Media & Stories",
         items: [
+          { label: "Gallery", path: "/gallery" },
           { label: "Blogs", path: "/blogs" },
           { label: "News", path: "/news" },
           { label: "Webstories", path: "#" },
@@ -100,7 +101,7 @@ const MEGA = {
     title: "Life @ Magic Bus",
     items: [
       { label: "Work With Us", path: "#" },
-      { label: "Certifications", path: "#" },
+      { label: "Certifications", path: "/certifications" },
       { label: "Our Culture", path: "#" },
       { label: "Learning Loop", path: "#" },
       { label: "MB Academy", path: "#" },
@@ -177,7 +178,7 @@ export default function Navbar() {
 
           {/* CTAs (right) */}
           <div className="flex items-center gap-3 z-40">
-            <div className="flex flex-col items-end gap-2"> 
+            <div className="flex flex-col items-end gap-2">
               {/* CTA row */}
               <div className="flex items-center gap-2">
                 <Link

@@ -285,7 +285,17 @@ export default function OutreachWithDonut() {
         </div>
 
         {/* Stats grid */}
-        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div
+          className={`mt-4 grid gap-4
+            grid-cols-2
+            sm:grid-cols-3
+            ${
+              tab === "livelihood"
+                ? "lg:grid-cols-3"
+                : "lg:grid-cols-4"
+            }
+          `}
+        >
           {active.stats.map((s, i) => (
             <StatTile
               key={s.label}

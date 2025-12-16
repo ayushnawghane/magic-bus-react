@@ -186,227 +186,225 @@ function ContactForm({ onSuccess }) {
   };
 
   return (
-    <form
-      className="max-w-3xl mx-auto bg-white border border-slate-100 rounded-2xl p-8 shadow-xl"
-      onSubmit={handleSubmit}
-    >
-      <h3 className="text-xl font-semibold mb-4">Contact Form</h3>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <label className="block">
-          <span className="text-sm font-medium">Full Name *</span>
-          <input
-            value={values.fullName}
-            onChange={handleChange("fullName")}
-            className={`mt-2 block w-full rounded-md border px-3 py-2 ${
-              errors.fullName ? "border-red-500" : "border-gray-200"
-            }`}
-            placeholder="Your full name"
-          />
-          {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName}</p>}
-        </label>
-
-        <label className="block">
-          <span className="text-sm font-medium">Email Address *</span>
-          <input
-            value={values.email}
-            onChange={handleChange("email")}
-            type="email"
-            className={`mt-2 block w-full rounded-md border px-3 py-2 ${
-              errors.email ? "border-red-500" : "border-gray-200"
-            }`}
-            placeholder="name@domain.com"
-          />
-          {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
-        </label>
-
-        <label className="block">
-          <span className="text-sm font-medium">Mobile Number *</span>
-          <input
-            value={values.mobile}
-            onChange={handleChange("mobile")}
-            className={`mt-2 block w-full rounded-md border px-3 py-2 ${
-              errors.mobile ? "border-red-500" : "border-gray-200"
-            }`}
-            placeholder="+91 98765 43210"
-          />
-          {errors.mobile && <p className="text-xs text-red-600 mt-1">{errors.mobile}</p>}
-        </label>
-
-        <label className="block">
-          <span className="text-sm font-medium">City / Location</span>
-          <input
-            value={values.city}
-            onChange={handleChange("city")}
-            className="mt-2 block w-full rounded-md border border-gray-200 px-3 py-2"
-            placeholder="City"
-          />
-        </label>
+    <div className="max-w-5xl mx-auto">
+      <div className="text-center mb-8">
+        <h3 className="text-2xl font-bold text-ink mb-2">Send us a Message</h3>
+        <p className="text-slate-600">Fill out the form below and we'll get back to you as soon as possible</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-        <label>
-          <span className="text-sm font-medium">Organisation Type</span>
-          <select
-            value={values.orgType}
-            onChange={handleChange("orgType")}
-            className="mt-2 block w-full rounded-md border border-gray-200 px-3 py-2"
-          >
-            <option value="">Select</option>
-            <option value="corporate">Corporate</option>
-            <option value="sme">SME</option>
-            <option value="individual">Individual Donor</option>
-            <option value="school">School / College</option>
-            <option value="ngo">NGO</option>
-            <option value="government">Government Body</option>
-            <option value="media">Media</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
+      <form
+        className="bg-white border border-slate-200 rounded-2xl p-8 shadow-lg"
+        onSubmit={handleSubmit}
+      >
 
-        <label>
-          <span className="text-sm font-medium">Type of Enquiry *</span>
-          <select
-            value={values.enquiryType}
-            onChange={handleChange("enquiryType")}
-            className={`mt-2 block w-full rounded-md border px-3 py-2 ${
-              errors.enquiryType ? "border-red-500" : "border-gray-200"
-            }`}
-          >
-            <option value="">Choose</option>
-            <option value="partnership">Partnership</option>
-            <option value="volunteering">Employee Volunteering</option>
-            <option value="donation">Donations / Fundraising</option>
-            <option value="media">Media / Press</option>
-            <option value="careers">Career Opportunities</option>
-            <option value="general">General / Other</option>
-          </select>
-          {errors.enquiryType && <p className="text-xs text-red-600 mt-1">{errors.enquiryType}</p>}
-        </label>
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <label className="block">
+            <span className="text-sm font-medium">Full Name *</span>
+            <input
+              value={values.fullName}
+              onChange={handleChange("fullName")}
+              className={`mt-2 block w-full rounded-md border px-3 py-2 ${errors.fullName ? "border-red-500" : "border-gray-200"
+                }`}
+              placeholder="Your full name"
+            />
+            {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName}</p>}
+          </label>
 
-      {/* conditional - partnership */}
-      {enquiryType === "partnership" && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          <label>
-            <span className="text-sm font-medium">Company name *</span>
+          <label className="block">
+            <span className="text-sm font-medium">Email Address *</span>
             <input
-              value={values.companyName}
-              onChange={handleChange("companyName")}
-              className={`mt-2 block w-full rounded-md border px-3 py-2 ${
-                errors.companyName ? "border-red-500" : "border-gray-200"
-              }`}
+              value={values.email}
+              onChange={handleChange("email")}
+              type="email"
+              className={`mt-2 block w-full rounded-md border px-3 py-2 ${errors.email ? "border-red-500" : "border-gray-200"
+                }`}
+              placeholder="name@domain.com"
             />
-            {errors.companyName && <p className="text-xs text-red-600 mt-1">{errors.companyName}</p>}
+            {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
           </label>
-          <label>
-            <span className="text-sm font-medium">Employee size *</span>
+
+          <label className="block">
+            <span className="text-sm font-medium">Mobile Number *</span>
             <input
-              value={values.employeeSize}
-              onChange={handleChange("employeeSize")}
-              className={`mt-2 block w-full rounded-md border px-3 py-2 ${
-                errors.employeeSize ? "border-red-500" : "border-gray-200"
-              }`}
-              placeholder="eg. 50, 250"
+              value={values.mobile}
+              onChange={handleChange("mobile")}
+              className={`mt-2 block w-full rounded-md border px-3 py-2 ${errors.mobile ? "border-red-500" : "border-gray-200"
+                }`}
+              placeholder="+91 98765 43210"
             />
-            {errors.employeeSize && <p className="text-xs text-red-600 mt-1">{errors.employeeSize}</p>}
+            {errors.mobile && <p className="text-xs text-red-600 mt-1">{errors.mobile}</p>}
           </label>
-          <label>
-            <span className="text-sm font-medium">Partnership focus areas</span>
+
+          <label className="block">
+            <span className="text-sm font-medium">City / Location</span>
             <input
-              value={values.partnershipFocus}
-              onChange={handleChange("partnershipFocus")}
+              value={values.city}
+              onChange={handleChange("city")}
               className="mt-2 block w-full rounded-md border border-gray-200 px-3 py-2"
-              placeholder="Education, Health, Skills..."
+              placeholder="City"
             />
           </label>
         </div>
-      )}
 
-      {/* conditional - volunteering */}
-      {enquiryType === "volunteering" && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <label>
-            <span className="text-sm font-medium">Preferred activity *</span>
-            <input
-              value={values.preferredActivity}
-              onChange={handleChange("preferredActivity")}
-              className={`mt-2 block w-full rounded-md border px-3 py-2 ${
-                errors.preferredActivity ? "border-red-500" : "border-gray-200"
-              }`}
-              placeholder="eg. mentoring, teaching, events"
-            />
-            {errors.preferredActivity && (
-              <p className="text-xs text-red-600 mt-1">{errors.preferredActivity}</p>
-            )}
+            <span className="text-sm font-medium">Organisation Type</span>
+            <select
+              value={values.orgType}
+              onChange={handleChange("orgType")}
+              className="mt-2 block w-full rounded-md border border-gray-200 px-3 py-2"
+            >
+              <option value="">Select</option>
+              <option value="corporate">Corporate</option>
+              <option value="sme">SME</option>
+              <option value="individual">Individual Donor</option>
+              <option value="school">School / College</option>
+              <option value="ngo">NGO</option>
+              <option value="government">Government Body</option>
+              <option value="media">Media</option>
+              <option value="other">Other</option>
+            </select>
           </label>
+
           <label>
-            <span className="text-sm font-medium">No. of volunteers *</span>
-            <input
-              value={values.volunteersCount}
-              onChange={handleChange("volunteersCount")}
-              className={`mt-2 block w-full rounded-md border px-3 py-2 ${
-                errors.volunteersCount ? "border-red-500" : "border-gray-200"
-              }`}
-              placeholder="e.g. 5"
-            />
-            {errors.volunteersCount && <p className="text-xs text-red-600 mt-1">{errors.volunteersCount}</p>}
+            <span className="text-sm font-medium">Type of Enquiry *</span>
+            <select
+              value={values.enquiryType}
+              onChange={handleChange("enquiryType")}
+              className={`mt-2 block w-full rounded-md border px-3 py-2 ${errors.enquiryType ? "border-red-500" : "border-gray-200"
+                }`}
+            >
+              <option value="">Choose</option>
+              <option value="partnership">Partnership</option>
+              <option value="volunteering">Employee Volunteering</option>
+              <option value="donation">Donations / Fundraising</option>
+              <option value="media">Media / Press</option>
+              <option value="careers">Career Opportunities</option>
+              <option value="general">General / Other</option>
+            </select>
+            {errors.enquiryType && <p className="text-xs text-red-600 mt-1">{errors.enquiryType}</p>}
           </label>
         </div>
-      )}
 
-      <label className="block mt-4">
-        <span className="text-sm font-medium">Message</span>
-        <textarea
-          value={values.message}
-          onChange={handleChange("message")}
-          rows={5}
-          className="mt-2 block w-full rounded-md border border-gray-200 px-3 py-2"
-          placeholder="Describe your query..."
-        />
-      </label>
+        {/* conditional - partnership */}
+        {enquiryType === "partnership" && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            <label>
+              <span className="text-sm font-medium">Company name *</span>
+              <input
+                value={values.companyName}
+                onChange={handleChange("companyName")}
+                className={`mt-2 block w-full rounded-md border px-3 py-2 ${errors.companyName ? "border-red-500" : "border-gray-200"
+                  }`}
+              />
+              {errors.companyName && <p className="text-xs text-red-600 mt-1">{errors.companyName}</p>}
+            </label>
+            <label>
+              <span className="text-sm font-medium">Employee size *</span>
+              <input
+                value={values.employeeSize}
+                onChange={handleChange("employeeSize")}
+                className={`mt-2 block w-full rounded-md border px-3 py-2 ${errors.employeeSize ? "border-red-500" : "border-gray-200"
+                  }`}
+                placeholder="eg. 50, 250"
+              />
+              {errors.employeeSize && <p className="text-xs text-red-600 mt-1">{errors.employeeSize}</p>}
+            </label>
+            <label>
+              <span className="text-sm font-medium">Partnership focus areas</span>
+              <input
+                value={values.partnershipFocus}
+                onChange={handleChange("partnershipFocus")}
+                className="mt-2 block w-full rounded-md border border-gray-200 px-3 py-2"
+                placeholder="Education, Health, Skills..."
+              />
+            </label>
+          </div>
+        )}
 
-      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mt-4">
-        <label className="inline-flex items-center gap-2">
-          <input type="checkbox" checked={values.consentContact} onChange={handleChange("consentContact")} />
-          <span className="text-sm">I agree to be contacted by Magic Bus India Foundation.</span>
+        {/* conditional - volunteering */}
+        {enquiryType === "volunteering" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <label>
+              <span className="text-sm font-medium">Preferred activity *</span>
+              <input
+                value={values.preferredActivity}
+                onChange={handleChange("preferredActivity")}
+                className={`mt-2 block w-full rounded-md border px-3 py-2 ${errors.preferredActivity ? "border-red-500" : "border-gray-200"
+                  }`}
+                placeholder="eg. mentoring, teaching, events"
+              />
+              {errors.preferredActivity && (
+                <p className="text-xs text-red-600 mt-1">{errors.preferredActivity}</p>
+              )}
+            </label>
+            <label>
+              <span className="text-sm font-medium">No. of volunteers *</span>
+              <input
+                value={values.volunteersCount}
+                onChange={handleChange("volunteersCount")}
+                className={`mt-2 block w-full rounded-md border px-3 py-2 ${errors.volunteersCount ? "border-red-500" : "border-gray-200"
+                  }`}
+                placeholder="e.g. 5"
+              />
+              {errors.volunteersCount && <p className="text-xs text-red-600 mt-1">{errors.volunteersCount}</p>}
+            </label>
+          </div>
+        )}
+
+        <label className="block mt-4">
+          <span className="text-sm font-medium">Message</span>
+          <textarea
+            value={values.message}
+            onChange={handleChange("message")}
+            rows={5}
+            className="mt-2 block w-full rounded-md border border-gray-200 px-3 py-2"
+            placeholder="Describe your query..."
+          />
         </label>
-        <label className="inline-flex items-center gap-2">
-          <input type="checkbox" checked={values.consentNewsletter} onChange={handleChange("consentNewsletter")} />
-          <span className="text-sm">I want to receive newsletters.</span>
-        </label>
-      </div>
 
-      <div className="mt-6 flex items-center gap-4">
-        <button type="submit" className="px-6 py-3 bg-brand-red text-white rounded-full font-semibold shadow">
-          Submit
-        </button>
-        <button
-          type="button"
-          onClick={() =>
-            setValues({
-              fullName: "",
-              email: "",
-              mobile: "",
-              city: "",
-              orgType: "",
-              enquiryType: "",
-              companyName: "",
-              employeeSize: "",
-              partnershipFocus: "",
-              preferredActivity: "",
-              volunteersCount: "",
-              message: "",
-              consentContact: false,
-              consentNewsletter: false,
-            })
-          }
-          className="px-4 py-2 border rounded-md"
-        >
-          Reset
-        </button>
-      </div>
-    </form>
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mt-4">
+          <label className="inline-flex items-center gap-2">
+            <input type="checkbox" checked={values.consentContact} onChange={handleChange("consentContact")} />
+            <span className="text-sm">I agree to be contacted by Magic Bus India Foundation.</span>
+          </label>
+          <label className="inline-flex items-center gap-2">
+            <input type="checkbox" checked={values.consentNewsletter} onChange={handleChange("consentNewsletter")} />
+            <span className="text-sm">I want to receive newsletters.</span>
+          </label>
+        </div>
+
+        <div className="mt-6 flex items-center gap-4">
+          <button type="submit" className="px-6 py-3 bg-brand-red text-white rounded-full font-semibold shadow">
+            Submit
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              setValues({
+                fullName: "",
+                email: "",
+                mobile: "",
+                city: "",
+                orgType: "",
+                enquiryType: "",
+                companyName: "",
+                employeeSize: "",
+                partnershipFocus: "",
+                preferredActivity: "",
+                volunteersCount: "",
+                message: "",
+                consentContact: false,
+                consentNewsletter: false,
+              })
+            }
+            className="px-4 py-2 border rounded-md"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
@@ -417,9 +415,9 @@ function BranchLocator() {
   const activeOffice = useMemo(() => OFFICES.find((o) => o.id === active) || OFFICES[0], [active]);
 
   return (
-    <div className="mt-10 grid lg:grid-cols-5 gap-6 items-stretch">
+    <div className="mt-10 grid lg:grid-cols-7 gap-8 items-stretch">
       {/* Info / Office list */}
-      <div className="lg:col-span-2 p-6 bg-white rounded-2xl shadow-lg border border-slate-100">
+      <div className="lg:col-span-3 p-6 bg-white rounded-2xl shadow-lg border border-slate-200">
         <div className="flex items-start gap-4 mb-6">
           <div className="p-3 bg-brand-yellow/20 rounded-xl shadow-sm">
             <MapPin className="w-6 h-6 text-brand-red" />
@@ -435,11 +433,10 @@ function BranchLocator() {
             <button
               key={office.id}
               onClick={() => setActive(office.id)}
-              className={`w-full text-left p-3 rounded-lg transition-all ${
-                active === office.id
-                  ? "bg-brand-red/5 shadow-sm"
-                  : "hover:bg-ink/5"
-              }`}
+              className={`w-full text-left p-3 rounded-lg transition-all ${active === office.id
+                ? "bg-brand-red/5 shadow-sm"
+                : "hover:bg-ink/5"
+                }`}
             >
               <div className="flex justify-between items-start">
                 <div>
@@ -471,13 +468,13 @@ function BranchLocator() {
       </div>
 
       {/* Map iframe */}
-      <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-lg">
+      <div className="lg:col-span-4 rounded-2xl overflow-hidden shadow-lg border border-slate-200">
         <iframe
           title="Magic Bus offices map"
           src={buildMapSrc(activeOffice.lat, activeOffice.lng)}
           width="100%"
           height="100%"
-          className="w-full h-[380px] lg:h-full"
+          className="w-full h-[400px] lg:h-full"
           allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -490,7 +487,7 @@ function BranchLocator() {
 /* ---------------- ContactSection (cards + map + form + CTA) ---------------- */
 function ContactSection() {
   return (
-    <section id="contact-details" className="py-20 bg-gradient-to-b from-white to-brand-yellow/5">
+    <section id="contact-details" className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
@@ -504,7 +501,7 @@ function ContactSection() {
         <BranchLocator />
 
         {/* Contact form + CTA */}
-        <div className="mt-12 gap-8 items-start">
+        <div className="mt-16 gap-8 items-start">
           <div>
             <ContactForm onSuccess={() => alert("Thanks! We received your message. We'll get back to you soon.")} />
           </div>
@@ -522,9 +519,8 @@ function DonateCTA({
 }) {
   return (
     <section
-      className={`relative py-10 ${
-        subtle ? "bg-transparent" : "bg-gradient-to-r from-brand-blue to-brand-red"
-      }`}
+      className={`relative py-10 ${subtle ? "bg-transparent" : "bg-gradient-to-r from-brand-blue to-brand-red"
+        }`}
     >
       {/* background wash (ultra subtle) */}
       <div
@@ -718,7 +714,7 @@ export default function ContactUs() {
         <section className="py-4 bg-white border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-6 text-sm text-gray-500">Home / Contact Us</div>
         </section>
-        
+
         <ContactYellowStripe />
 
         {/* ===== CONTACT SECTION (enhanced) ===== */}

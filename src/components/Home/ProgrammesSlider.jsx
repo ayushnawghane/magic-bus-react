@@ -290,11 +290,10 @@ export default function ProgrammesSlider() {
                   if (delta === 0) return;
                   setIndex((curr) => curr + delta);
                 }}
-                className={`w-2 h-2 rounded-full transition ${
-                  i === activeReal
-                    ? "bg-red-600"
-                    : "bg-gray-300 hover:bg-gray-400"
-                }`}
+                className={`w-2 h-2 rounded-full transition ${i === activeReal
+                  ? "bg-red-600"
+                  : "bg-gray-300 hover:bg-gray-400"
+                  }`}
               />
             ))}
           </div>
@@ -308,19 +307,19 @@ function ProgrammeCard({ slide }) {
   const { image, gradient, Icon, title, summary } = slide;
 
   return (
-    <div className="group relative overflow-hidden rounded-[28px] h-[420px] md:h-[500px]">
+    <div className="group relative overflow-hidden rounded-[28px] h-[420px] md:h-[500px] cursor-pointer">
       <img
         src={image}
         alt={title}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
       />
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-35 mix-blend-multiply`}
+        className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-35 group-hover:opacity-80 mix-blend-multiply transition-opacity duration-300`}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
 
       <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-        <div className="h-10 px-3 rounded-full bg-black/35 backdrop-blur-[3px] text-white flex items-center gap-2">
+        <div className="h-10 px-3 rounded-full bg-black/35 backdrop-blur-[3px] text-white flex items-center gap-2 group-hover:bg-black/50 transition-colors duration-300">
           <Icon className="w-5 h-5" />
         </div>
       </div>
@@ -347,7 +346,7 @@ function ProgrammeCard({ slide }) {
           {title}
         </h3>
 
-        <button className="w-full bg-white/95 text-gray-900 font-semibold py-3 rounded-2xl hover:bg-white active:scale-[0.99] transition">
+        <button className="w-full bg-white/95 text-gray-900 font-semibold py-3 rounded-2xl hover:bg-white active:scale-[0.99] transition group-hover:bg-white group-hover:shadow-lg">
           Learn More
         </button>
       </div>
