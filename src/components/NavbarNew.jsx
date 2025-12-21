@@ -289,7 +289,7 @@ export default function NavbarNew() {
                         transition={{ duration: 0.2 }}
                         className={`absolute top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-50 ${
                           item.key === 'resources' 
-                            ? 'right-0 w-[600px] max-w-[90vw]' 
+                            ? 'left-1/2 -translate-x-1/2 w-[720px] max-w-[95vw]'
                             : 'left-0 w-80'
                         }`}
                       >
