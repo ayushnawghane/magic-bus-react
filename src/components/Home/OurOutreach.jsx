@@ -1,6 +1,105 @@
 // OutreachWithDonut.jsx
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+/**
+ * Four-Quadrant Impact Chart (Exact Image Match)
+ */
+export function ImpactChart({ size = 520, segments, centerImage }) {
+  const ref = React.useRef(null);
+  const inView = useInView(ref, { once: false, amount: 0.3 });
+
+  const center = size / 2;
+  const strokeWidth = size * 0.22;
+  const radius = (size - strokeWidth) / 2 - 10;
+  const textRadius = radius + strokeWidth / 2 + 18;
+
+  const polarToCartesian = (cx, cy, r, deg) => {
+    const rad = ((deg - 90) * Math.PI) / 180;
+    return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+  };
+
+  // Updated helper with clockwise support
+  const getArcPath = (start, end, r, clockwise = false) => {
+    const s = polarToCartesian(center, center, r, clockwise ? start : end);
+    const e = polarToCartesian(center, center, r, clockwise ? end : start);
+    const large = Math.abs(end - start) <= 180 ? 0 : 1;
+    const sweep = clockwise ? 1 : 0;
+    return `M ${s.x} ${s.y} A ${r} ${r} 0 ${large} ${sweep} ${e.x} ${e.y}`;
+  };
+
+  const quadrants = [
+    { start: -88, end: -2, id: "tr" },
+    { start: 2, end: 88, id: "br" },
+    { start: 92, end: 178, id: "bl" },
+    { start: 182, end: 268, id: "tl" },
+  ];
+
+  return (
+    <div ref={ref} className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg width={size} height={size}>
+        <defs>
+          {quadrants.map((q) => (
+            <path
+              key={q.id}
+              id={`path-${q.id}`}
+              // FIX: Only Top-Left (tl) and Top-Right (tr) should be Clockwise (true).
+              // Bottom-Right (br) and Bottom-Left (bl) must be Counter-Clockwise (false) to be readable.
+              d={getArcPath(
+                q.start - 6, 
+                q.end + 6, 
+                textRadius, 
+                q.id === "br" || q.id === "tr"
+              )}
+            />
+          ))}
+        </defs>
+
+        {quadrants.map((q, i) => {
+          const d = segments[i];
+          const mid = (q.start + q.end) / 2;
+          const pos = polarToCartesian(center, center, radius, mid);
+
+          return (
+            <g key={q.id}>
+              <motion.path
+                d={getArcPath(q.start, q.end, radius, false)}
+                fill="none"
+                stroke="#FFCC04"
+                strokeWidth={strokeWidth}
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={inView ? { pathLength: 1, opacity: 1 } : {}}
+                transition={{ duration: 1, delay: i * 0.1 }}
+              />
+
+              <text className="text-[14px] font-bold fill-slate-800 uppercase">
+                <textPath href={`#path-${q.id}`} startOffset="50%" textAnchor="middle">
+                  {d.label}
+                </textPath>
+              </text>
+
+              <motion.text
+                x={pos.x} y={pos.y + 6}
+                textAnchor="middle"
+                className="fill-red-600 font-black"
+                style={{ fontSize: 28 }}
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={inView ? { scale: 1, opacity: 1 } : {}}
+                transition={{ delay: 0.7 + i * 0.1 }}
+              >
+                {d.value}%<tspan dx="3" dy="-3">↑</tspan>
+              </motion.text>
+            </g>
+          );
+        })}
+      </svg>
+
+      <div className="absolute rounded-full overflow-hidden border-[6px] border-white shadow-xl"
+        style={{ width: size * 0.48, height: size * 0.48 }}>
+        <img src={centerImage} className="w-full h-full object-cover" alt="center" />
+      </div>
+    </div>
+  );
+}
 
 /* ----- shared: angles & layout helpers ----- */
 const TAU = Math.PI * 2;
@@ -340,9 +439,9 @@ export default function OutreachWithDonut() {
             transition={{ duration: 0.45 }}
             className="mt-12"
           >
-            <div className="relative isolate grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+            <div className="relative isolate gap-8 items-center max-w-6xl mx-auto">
               {/* LEFT column (segments whose midpoint lies on left half) */}
-              <div className="space-y-6 relative z-0">
+              {/* <div className="space-y-6 relative z-0">
                 {leftHighlights.map((seg, i) => (
                   <motion.div
                     key={`${seg.label}-${i}`}
@@ -367,22 +466,27 @@ export default function OutreachWithDonut() {
                     </div>
                   </motion.div>
                 ))}
-              </div>
+              </div> */}
 
               {/* center donut (re-animates when in view) */}
               <div className="flex items-center justify-center">
-                <DonutChart
+                {/* <DonutChart
                   size={500}
                   thickness={48}
                   centerImage={active.donut.img}
                   segments={active.donut.segments}
                   caption={active.donut.caption}
                   gap={6}
+                /> */}
+                <ImpactChart
+                  size={550}
+                  centerImage={active.donut.img}
+                  segments={active.donut.segments}
                 />
               </div>
 
               {/* RIGHT column (segments on right half) */}
-              <div className="space-y-6 relative z-0">
+              {/* <div className="space-y-6 relative z-0">
                 {rightHighlights.map((seg, i) => (
                   <motion.div
                     key={`${seg.label}-${i}`}
@@ -407,7 +511,7 @@ export default function OutreachWithDonut() {
                     </div>
                   </motion.div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </AnimatePresence>

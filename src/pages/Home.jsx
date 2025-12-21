@@ -11,7 +11,7 @@ import PartnersShowcase from '../components/Home/PartnersShowcase';
 import ProgrammesSlider from '../components/Home/ProgrammesSlider';
 import SuccessStories from '../components/Home/SuccessStories';
 import Layout from '../components/Layout';
-import ho, { homefaq } from '../components/Home/faqItems';
+import { homefaq } from '../components/Home/faqItems';
 
 export default function Home() {
   return (

@@ -1,7 +1,19 @@
 // src/pages/DonateNow.jsx
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, ArrowRight, X as XIcon } from "lucide-react";
+import {
+  CheckCircle,
+  ArrowRight,
+  X as XIcon,
+  Heart,
+  Users,
+  BookOpen,
+  Briefcase,
+  GraduationCap,
+  Target,
+  TrendingUp,
+  Globe,
+} from "lucide-react";
 import Layout from "../components/Layout";
 
 const fadeUp = {
@@ -80,7 +92,18 @@ export default function DonateNow() {
 
   const validate = () => {
     const errs = {};
-    const required = ["firstName", "lastName", "address", "city", "state", "postal", "pan", "mobile", "dob", "email"];
+    const required = [
+      "firstName",
+      "lastName",
+      "address",
+      "city",
+      "state",
+      "postal",
+      "pan",
+      "mobile",
+      "dob",
+      "email",
+    ];
     required.forEach((k) => {
       if (!form[k]?.trim()) errs[k] = "Required";
     });
@@ -102,6 +125,7 @@ export default function DonateNow() {
     setTimeout(() => {
       setSubmitting(false);
       setSuccess(true);
+      // NOTE: integrate real payment flow / API here
     }, 700);
   };
 
@@ -115,11 +139,12 @@ export default function DonateNow() {
             alt="Smiling young girl - Donate"
             className="absolute inset-0 w-full h-full object-cover"
             onError={(ev) => {
-              ev.currentTarget.src = "https://images.unsplash.com/photo-1524504388940-b1c1722653e1";
+              ev.currentTarget.src =
+                "https://images.unsplash.com/photo-1524504388940-b1c1722653e1";
             }}
           />
 
-          {/* ⬇️ Same tint as the carousel */}
+          {/* tint */}
           <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/75 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
 
@@ -138,8 +163,9 @@ export default function DonateNow() {
                 Spark a bright future.
               </h1>
               <p className="mt-4 text-base md:text-lg text-white/90">
-                Empower the future of India — support life skills education, education enhancement and livelihood
-                skilling for children and youth. Your donation helps them break the cycle of poverty.
+                Empower the future of India — support life skills education,
+                education enhancement and livelihood skilling for children and youth. Your donation
+                helps them break the cycle of poverty.
               </p>
               <div className="mt-6">
                 <motion.a
@@ -151,21 +177,14 @@ export default function DonateNow() {
                   <span className="relative z-10 flex items-center gap-2">
                     Donate Now <ArrowRight size={16} />
                   </span>
-                  <motion.div
-                    className="absolute inset-0 bg-brand-red"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
                 </motion.a>
               </div>
             </motion.div>
           </div>
         </section>
 
-
         {/* ===== BREADCRUMB ===== */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
           <div className="bg-white px-4 py-3 rounded-md shadow-sm">
             <nav className="text-sm text-gray-500" aria-label="Breadcrumb">
               Home / Donate Now
@@ -173,266 +192,333 @@ export default function DonateNow() {
           </div>
         </div>
 
-        {/* ===== MAIN: TWO COLUMN ===== */}
+        {/* ===== MAIN: SIDE-BY-SIDE (text left, wider form right) ===== */}
         <section className="py-10 md:py-12">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 gap-8">
-            {/* LEFT: CONTENT */}
-            <motion.div
-              className=""
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={fadeUp}
-            >
-              <h2 className="text-2xl md:text-3xl font-semibold text-brand-black">
-                Empower the Future of India with Magic Bus
-              </h2>
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            {/* Use 12-column grid so we can allocate more width to the form */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* LEFT: Content — narrower on large screens */}
+              <motion.div
+                className="lg:col-span-5 space-y-6"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                variants={fadeUp}
+              >
+                <h2 className="text-2xl md:text-3xl font-semibold text-brand-black">
+                  Empower the Future of India with Magic Bus
+                </h2>
 
-              <div className="mt-5 text-gray-700 space-y-4 leading-relaxed">
-                <p>
-                  Imagine a world where every young person has access to education and the opportunity to reach their
-                  full potential. This is the world that Magic Bus is striving to create. With your support, we can make
-                  this a reality.
-                </p>
+                <div className="text-gray-700 space-y-4 leading-relaxed">
+                  <p>
+                    Imagine a world where every young person has access to education and the opportunity to reach their full potential.
+                    This is the world that Magic Bus is striving to create. With your support, we can make this a reality.
+                  </p>
 
-                <p>
-                  Your contribution will help us give young people the tools they need to succeed. Through our
-                  programmes, we empower young people with <strong>life skills education</strong>,{" "}
-                  <strong>education enhancement</strong>, and <strong>livelihood skilling</strong> to equip them to
-                  break out of poverty and build a better life for themselves and their families.
-                </p>
+                  <p>
+                    Your contribution will help us give young people the tools they need to succeed. Through our
+                    programmes, we empower young people with <strong>life skills education</strong>, <strong>education enhancement</strong>,
+                    and <strong>livelihood skilling</strong> to equip them to break out of poverty and build a better life for themselves and their families.
+                  </p>
 
-                <p>
-                  Every donation can make a difference in a young person's life. Donate today and help us create a more
-                  just and equitable society for all.
-                </p>
+                  <p>
+                    Every donation can make a difference. Donate today and help us create a more just and equitable society for all.
+                  </p>
+                </div>
 
                 {/* Legal / disclaimer */}
-                <div className="mt-4 p-4 rounded-lg bg-yellow-50 border-l-4 border-brand-yellow/70">
+                <div className="mt-2 p-4 rounded-lg bg-yellow-50 border-l-4 border-brand-yellow/70">
                   <p className="text-sm text-brand-red font-semibold">
-                    All donations to Magic Bus are eligible for <strong>50% tax exemption under Section 80G</strong> of
-                    the Income Tax Act.
+                    All donations to Magic Bus are eligible for <strong>50% tax exemption under Section 80G</strong> of the Income Tax Act.
                   </p>
                   <p className="text-xs text-gray-600 mt-2">
-                    Magic Bus is a non-profit organisation registered as <em>Magic Bus India Foundation</em> under
-                    Section 25 of the Companies Act 1956.
+                    Magic Bus is a non-profit organisation registered as <em>Magic Bus India Foundation</em>.
                   </p>
                 </div>
-              </div>
-            </motion.div>
 
-            {/* RIGHT: FORM */}
-            <motion.aside
-              id="donation-form"
-              className="bg-brand-yellow/5 rounded-2xl p-5 md:p-6 lg:p-7 shadow-soft-lg border border-brand-yellow/20 lg:sticky lg:top-6"
+                {/* Impact / quick stats */}
+                <div className="grid grid-cols-3 gap-4 pt-2">
+                  <div className="text-center p-4 bg-neutral-50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-600 mb-1">1.6M</div>
+                    <div className="text-xs text-gray-600 uppercase font-semibold">Children Educated</div>
+                  </div>
+                  <div className="text-center p-4 bg-neutral-50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-600 mb-1">735</div>
+                    <div className="text-xs text-gray-600 uppercase font-semibold">Education Centres</div>
+                  </div>
+                  <div className="text-center p-4 bg-neutral-50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-600 mb-1">21</div>
+                    <div className="text-xs text-gray-600 uppercase font-semibold">States</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* RIGHT: Form — wider (7/12) */}
+              <motion.aside
+                id="donation-form"
+                className="lg:col-span-7"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                variants={fadeUp}
+              >
+                <div className="bg-brand-yellow/5 rounded-2xl p-6 lg:p-8 shadow-soft-lg border border-brand-yellow/20 lg:sticky lg:top-6">
+                  {/* header strip */}
+                  <div className="bg-brand-yellow text-brand-black p-4 rounded-lg mb-6 text-center">
+                    <div className="text-sm md:text-base font-bold">50% Tax Exemption Under Section 80G*</div>
+                    <div className="text-xs text-gray-800 mt-1">*Only Applicable for Indian Citizens</div>
+                  </div>
+
+                  {/* frequency toggle */}
+                  <div className="mb-5">
+                    <div className="inline-flex w-full rounded-full bg-white border p-1 shadow-sm" role="tablist">
+                      <button
+                        type="button"
+                        onClick={() => handleFrequencyChange("one-time")}
+                        role="tab"
+                        aria-selected={frequency === "one-time"}
+                        className={`flex-1 px-4 py-2 rounded-full text-sm font-bold transition ${frequency === "one-time" ? "bg-brand-red text-white shadow" : "text-gray-700"
+                          }`}
+                      >
+                        One-time
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleFrequencyChange("monthly")}
+                        role="tab"
+                        aria-selected={frequency === "monthly"}
+                        className={`flex-1 px-4 py-2 rounded-full text-sm font-bold transition ${frequency === "monthly" ? "bg-brand-red text-white shadow" : "text-gray-700"
+                          }`}
+                      >
+                        Monthly
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* citizenship */}
+                  <div className="mb-5 flex flex-col sm:flex-row gap-3 sm:items-center">
+                    <label className="inline-flex items-center gap-2 text-sm font-medium cursor-pointer">
+                      <input
+                        type="radio"
+                        name="citizenship"
+                        className="h-4 w-4 accent-brand-red"
+                        checked={citizenship === "indian"}
+                        onChange={() => setCitizenship("indian")}
+                      />
+                      <span>I am an Indian citizen</span>
+                    </label>
+                    <label className="inline-flex items-center gap-2 text-sm font-medium cursor-pointer">
+                      <input
+                        type="radio"
+                        name="citizenship"
+                        className="h-4 w-4 accent-brand-red"
+                        checked={citizenship === "non-indian"}
+                        onChange={() => setCitizenship("non-indian")}
+                      />
+                      <span>I am not an Indian citizen</span>
+                    </label>
+                  </div>
+
+                  {/* amounts */}
+                  <div className="mb-5">
+                    <div className="text-sm font-semibold mb-2">Choose an amount</div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {currentConfig.amounts.map((amt) => {
+                        const isSelected = selectedAmount === amt && customAmount === "";
+                        return (
+                          <button
+                            key={amt}
+                            type="button"
+                            onClick={() => handleAmountClick(amt)}
+                            className={`py-3 px-2 rounded-lg text-sm font-bold border flex items-center justify-center gap-2 transition
+                            ${isSelected
+                                ? "bg-brand-red text-white border-brand-red shadow"
+                                : "bg-white text-gray-800 border-gray-200 hover:border-brand-red/50"
+                              }`}
+                            aria-pressed={isSelected}
+                          >
+                            <span>₹ {amt.toLocaleString()}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* custom amount */}
+                    <div className="mt-3">
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold">₹</span>
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          placeholder={`Min. ${currentConfig.min}`}
+                          value={customAmount}
+                          onChange={handleCustomAmountChange}
+                          className={`w-full pl-8 pr-3 py-3 rounded-lg border text-sm font-medium focus:ring-2 focus:ring-brand-yellow focus:border-transparent outline-none ${customAmount !== "" ? "border-brand-yellow bg-yellow-50" : "border-gray-200"
+                            }`}
+                          aria-label="Custom amount"
+                        />
+                      </div>
+                      {errors.amount && <p className="text-xs text-brand-red mt-1 font-medium">{errors.amount}</p>}
+                      <p className="text-xs text-gray-600 mt-2">
+                        <strong>Total to be charged:</strong> ₹ {effectiveAmount().toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* form */}
+                  <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <Field
+                        name="firstName"
+                        placeholder="First Name *"
+                        value={form.firstName}
+                        onChange={handleChange}
+                        error={errors.firstName}
+                      />
+                      <Field
+                        name="lastName"
+                        placeholder="Last Name *"
+                        value={form.lastName}
+                        onChange={handleChange}
+                        error={errors.lastName}
+                      />
+
+                      <TextArea
+                        name="address"
+                        placeholder="Address *"
+                        rows={2}
+                        value={form.address}
+                        onChange={handleChange}
+                        error={errors.address}
+                        className="sm:col-span-2"
+                      />
+
+                      <Field name="city" placeholder="City *" value={form.city} onChange={handleChange} error={errors.city} />
+                      <Field name="state" placeholder="State *" value={form.state} onChange={handleChange} error={errors.state} />
+                      <Field
+                        name="postal"
+                        placeholder="Postal code *"
+                        value={form.postal}
+                        onChange={handleChange}
+                        error={errors.postal}
+                      />
+                      <Field name="pan" placeholder="PAN NUMBER *" value={form.pan} onChange={handleChange} error={errors.pan} />
+                      <Field
+                        name="mobile"
+                        placeholder="Mobile *"
+                        value={form.mobile}
+                        onChange={handleChange}
+                        error={errors.mobile}
+                      />
+                      <Field
+                        name="dob"
+                        type="date"
+                        placeholder="DATE OF BIRTH *"
+                        value={form.dob}
+                        onChange={handleChange}
+                        error={errors.dob}
+                      />
+                      <Field
+                        name="email"
+                        placeholder="Email Id *"
+                        value={form.email}
+                        onChange={handleChange}
+                        error={errors.email}
+                        className="sm:col-span-2"
+                      />
+
+                      <div className="sm:col-span-2">
+                        <select
+                          name="referral"
+                          value={form.referral}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-md border bg-white border-gray-200 text-sm"
+                          aria-label="How did you know about us?"
+                        >
+                          <option value="">How did you know about us?</option>
+                          <option>Social Media</option>
+                          <option>Search</option>
+                          <option>Friend / Family</option>
+                          <option>Event</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <motion.button
+                      type="submit"
+                      disabled={submitting}
+                      className="group relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-brand-red text-white text-base font-bold shadow-lg transition-all hover:shadow-2xl hover:shadow-brand-red/20 disabled:opacity-70 disabled:cursor-not-allowed"
+                      whileHover={!submitting ? { scale: 1.02 } : {}}
+                      whileTap={!submitting ? { scale: 0.98 } : {}}
+                    >
+                      <span className="relative z-10 flex items-center gap-2">
+                        {submitting ? "Processing…" : "DONATE NOW"} <ArrowRight size={16} />
+                      </span>
+                    </motion.button>
+                  </form>
+                </div>
+              </motion.aside>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== IMPACT SECTION ===== */}
+        <section className="bg-gradient-to-b from-neutral-50 to-white py-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
               variants={fadeUp}
+              className="text-center mb-16"
             >
-              {/* header strip */}
-              <div className="bg-brand-yellow text-brand-black p-4 rounded-lg mb-5 text-center">
-                <div className="text-sm md:text-base font-bold">50% Tax Exemption Under Section 80G*</div>
-                <div className="text-xs text-gray-800 mt-1">*Only Applicable for Indian Citizens</div>
-              </div>
+              <h2 className="text-4xl font-black text-slate-900 mb-4 uppercase">What Will Your Donation Support?</h2>
+              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                Your contribution directly impacts the lives of children across India
+              </p>
+            </motion.div>
 
-              {/* frequency toggle */}
-              <div className="mb-5">
-                <div className="inline-flex w-full rounded-full bg-white border p-1 shadow-sm" role="tablist">
-                  <button
-                    type="button"
-                    onClick={() => handleFrequencyChange("one-time")}
-                    role="tab"
-                    aria-selected={frequency === "one-time"}
-                    className={`flex-1 px-4 py-2 rounded-full text-sm font-bold transition ${frequency === "one-time" ? "bg-brand-red text-white shadow" : "text-gray-700"
-                      }`}
-                  >
-                    One-time
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleFrequencyChange("monthly")}
-                    role="tab"
-                    aria-selected={frequency === "monthly"}
-                    className={`flex-1 px-4 py-2 rounded-full text-sm font-bold transition ${frequency === "monthly" ? "bg-brand-red text-white shadow" : "text-gray-700"
-                      }`}
-                  >
-                    Monthly
-                  </button>
-                </div>
-              </div>
-
-              {/* citizenship */}
-              <div className="mb-5 flex flex-col sm:flex-row gap-3 sm:items-center">
-                <label className="inline-flex items-center gap-2 text-sm font-medium cursor-pointer">
-                  <input
-                    type="radio"
-                    name="citizenship"
-                    className="h-4 w-4 accent-brand-red"
-                    checked={citizenship === "indian"}
-                    onChange={() => setCitizenship("indian")}
-                  />
-                  <span>I am an Indian citizen</span>
-                </label>
-                <label className="inline-flex items-center gap-2 text-sm font-medium cursor-pointer">
-                  <input
-                    type="radio"
-                    name="citizenship"
-                    className="h-4 w-4 accent-brand-red"
-                    checked={citizenship === "non-indian"}
-                    onChange={() => setCitizenship("non-indian")}
-                  />
-                  <span>I am not an Indian citizen</span>
-                </label>
-              </div>
-
-              {/* amounts */}
-              <div className="mb-5">
-                <div className="text-sm font-semibold mb-2">Choose an amount</div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {currentConfig.amounts.map((amt) => {
-                    const isSelected = selectedAmount === amt && customAmount === "";
-                    return (
-                      <button
-                        key={amt}
-                        type="button"
-                        onClick={() => handleAmountClick(amt)}
-                        className={`py-3 px-2 rounded-lg text-sm font-bold border flex items-center justify-center gap-2 transition
-                        ${isSelected
-                            ? "bg-brand-red text-white border-brand-red shadow"
-                            : "bg-white text-gray-800 border-gray-200 hover:border-brand-red/50"
-                          }`}
-                        aria-pressed={isSelected}
-                      >
-                        <span>₹ {amt.toLocaleString()}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* custom amount */}
-                <div className="mt-3">
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold">₹</span>
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      placeholder={`Min. ${currentConfig.min}`}
-                      value={customAmount}
-                      onChange={handleCustomAmountChange}
-                      className={`w-full pl-8 pr-3 py-3 rounded-lg border text-sm font-medium focus:ring-2 focus:ring-brand-yellow focus:border-transparent outline-none ${customAmount !== "" ? "border-brand-yellow bg-yellow-50" : "border-gray-200"
-                        }`}
-                      aria-label="Custom amount"
-                    />
-                  </div>
-                  {errors.amount && <p className="text-xs text-brand-red mt-1 font-medium">{errors.amount}</p>}
-                  <p className="text-xs text-gray-600 mt-2">
-                    <strong>Total to be charged:</strong> ₹ {effectiveAmount().toLocaleString()}
-                  </p>
-                </div>
-              </div>
-
-              {/* form */}
-              <form onSubmit={handleSubmit} noValidate className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <Field
-                    name="firstName"
-                    placeholder="First Name *"
-                    value={form.firstName}
-                    onChange={handleChange}
-                    error={errors.firstName}
-                  />
-                  <Field
-                    name="lastName"
-                    placeholder="Last Name *"
-                    value={form.lastName}
-                    onChange={handleChange}
-                    error={errors.lastName}
-                  />
-
-                  <TextArea
-                    name="address"
-                    placeholder="Address *"
-                    rows={2}
-                    value={form.address}
-                    onChange={handleChange}
-                    error={errors.address}
-                    className="sm:col-span-2"
-                  />
-
-                  <Field name="city" placeholder="City *" value={form.city} onChange={handleChange} error={errors.city} />
-                  <Field name="state" placeholder="State *" value={form.state} onChange={handleChange} error={errors.state} />
-                  <Field
-                    name="postal"
-                    placeholder="Postal code *"
-                    value={form.postal}
-                    onChange={handleChange}
-                    error={errors.postal}
-                  />
-                  <Field name="pan" placeholder="PAN NUMBER *" value={form.pan} onChange={handleChange} error={errors.pan} />
-                  <Field
-                    name="mobile"
-                    placeholder="Mobile *"
-                    value={form.mobile}
-                    onChange={handleChange}
-                    error={errors.mobile}
-                  />
-                  <Field
-                    name="dob"
-                    type="date"
-                    placeholder="DATE OF BIRTH *"
-                    value={form.dob}
-                    onChange={handleChange}
-                    error={errors.dob}
-                  />
-                  <Field
-                    name="email"
-                    placeholder="Email Id *"
-                    value={form.email}
-                    onChange={handleChange}
-                    error={errors.email}
-                    className="sm:col-span-2"
-                  />
-
-                  <div className="sm:col-span-2">
-                    <select
-                      name="referral"
-                      value={form.referral}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-md border bg-white border-gray-200 text-sm"
-                      aria-label="How did you know about us?"
-                    >
-                      <option value="">How did you know about us?</option>
-                      <option>Social Media</option>
-                      <option>Search</option>
-                      <option>Friend / Family</option>
-                      <option>Event</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <motion.button
-                  type="submit"
-                  disabled={submitting}
-                  className="group relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-brand-red text-white text-base font-bold shadow-lg transition-all hover:shadow-2xl hover:shadow-brand-red/20 disabled:opacity-70 disabled:cursor-not-allowed"
-                  whileHover={!submitting ? { scale: 1.02 } : {}}
-                  whileTap={!submitting ? { scale: 0.98 } : {}}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  icon: <BookOpen className="w-12 h-12" />,
+                  title: "Primary & Secondary Education",
+                  desc: "Quality learning for children",
+                },
+                {
+                  icon: <Users className="w-12 h-12" />,
+                  title: "Regular Health Check-ups",
+                  desc: "Medical support & nutrition",
+                },
+                {
+                  icon: <GraduationCap className="w-12 h-12" />,
+                  title: "Transferable Skills & Youth Training",
+                  desc: "Building future leaders",
+                },
+                {
+                  icon: <Briefcase className="w-12 h-12" />,
+                  title: "Vocational Education & Skill Training",
+                  desc: "Career opportunities",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all border border-gray-100 text-center group hover:-translate-y-2"
                 >
-                  <span className="relative z-10 flex items-center gap-2">
-                    {submitting ? "Processing…" : "DONATE NOW"} <ArrowRight size={16} />
-                  </span>
-                  {!submitting && (
-                    <motion.div
-                      className="absolute inset-0 bg-red-700"
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
-                </motion.button>
-              </form>
-            </motion.aside>
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-neutral-100 text-slate-800 mb-6 group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </div>
+                  <h3 className="font-bold text-slate-900 mb-3 text-lg">{item.title}</h3>
+                  <p className="text-gray-600 text-sm">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 

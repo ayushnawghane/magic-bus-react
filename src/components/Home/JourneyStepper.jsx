@@ -2,147 +2,203 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Layers, Users, Code2, Briefcase, Network } from "lucide-react";
 
+// (Data array 'steps' remains exactly the same)
 const steps = [
   {
     id: 1,
     title: "Strong Foundation",
-    desc: "Ages 11–18 — foundational development & life skills",
+    subTitle: "SCHOOL OUTCOMES",
+    bullets: [
+      "School regularity",
+      "Grade transition",
+      "Foundational literacy and numeracy",
+    ],
+    age: "12-18 Yrs",
     icon: Layers,
-    grad: "from-orange-400 to-red-500",
+    colorTheme: { bg: "#FBBF24", ring: "#FEF3C7" },
+    cardImage: "/ngo-images/test1.png", 
   },
   {
     id: 2,
     title: "Develop Life Skills",
-    desc: "Communication, leadership & personal development",
+    subTitle: "LIFE OUTCOMES",
+    bullets: [
+      "Agency (especially for girls)",
+      "Resilience & problem solving",
+      "Gender equality & aspirations",
+    ],
+    age: "12-18 Yrs",
     icon: Users,
-    grad: "from-blue-500 to-indigo-600",
+    colorTheme: { bg: "#3B82F6", ring: "#DBEAFE" },
+    cardImage: "/ngo-images/test2.png",
   },
   {
     id: 3,
     title: "Market Skills",
-    desc: "Technical & digital skills aligned with market needs",
+    subTitle: "COLLEGE TO CAREER TRANSITION",
+    bullets: [
+      "Livelihood Support",
+      "Career awareness & work readiness",
+      "Future skills (AI, Green skills)",
+    ],
+    age: "16-18 Yrs",
     icon: Code2,
-    grad: "from-emerald-400 to-teal-500",
+    colorTheme: { bg: "#10B981", ring: "#D1FAE5" },
+    cardImage: "/ngo-images/test1.png",
   },
   {
     id: 4,
     title: "Secure Career",
-    desc: "Career counselling & placement opportunities for all",
+    subTitle: "WORKPLACE SUCCESS & RETENTION",
+    bullets: [
+      "Workplace Success",
+      "Workplace Retention",
+      "Sustainable income",
+    ],
+    age: "18-25 Yrs",
     icon: Briefcase,
-    grad: "from-amber-400 to-orange-500",
+    colorTheme: { bg: "#F97316", ring: "#FFEDD5" },
+    cardImage: "/ngo-images/test1.png",
   },
   {
     id: 5,
     title: "Alumni Network",
-    desc: "Lifelong support & community of successful graduates",
+    subTitle: "PERI-URBAN & RURAL WOMEN EMPOWERMENT",
+    bullets: [
+      "Entrepreneurial Success",
+      "Business acumen",
+      "Launch of sustainable enterprises",
+    ],
+    age: "25 Yrs & above",
     icon: Network,
-    grad: "from-fuchsia-500 to-violet-500",
+    colorTheme: { bg: "#8B5CF6", ring: "#EDE9FE" },
+    cardImage: "/ngo-images/test2.png",
   },
 ];
 
-// Small helper to stagger card fades
-const fade = (i) => ({
-  initial: { opacity: 0, y: 10 },
+const fadeUp = (i) => ({
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-10% 0px -10% 0px" },
-  transition: { delay: 0.05 * i, duration: 0.45, ease: "easeOut" },
+  viewport: { once: true, margin: "-50px" },
+  transition: { delay: 0.15 * i, duration: 0.6, ease: "easeOut" },
 });
 
-export default function JourneyZigzagAnimated() {
+export default function JourneyRedesignExact() {
+  const baseCardOffset = 40; 
+  const slopeStep = 18;
+
   return (
-    <section className="py-16 md:py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-10 md:mb-12">
-          <p className="uppercase tracking-[0.22em] text-xs font-bold text-gray-500 mb-3">
-            Our proven model
-          </p>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-ink mb-4">
+    <section className="py-20 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-40">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
             Childhood to Livelihood Journey
           </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            A clear, practical 5-step pathway that prepares young people for
-            meaningful careers and lifelong success.
-          </p>
         </div>
 
         <div className="relative">
-          {/* Straight dotted line behind the icons */}
-          <svg
-            className="pointer-events-none absolute inset-x-0 top-[48px] hidden md:block"
-            viewBox="0 0 1200 4"
-            fill="none"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <motion.line
-              x1="60"
-              y1="2"
-              x2="1140"
-              y2="2"
-              stroke="#9B87F5"
-              strokeWidth="5"
-              strokeLinecap="round"
-              strokeDasharray="6 12"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-              opacity="0.75"
-            />
-          </svg>
-
-          {/* Steps in a straight line */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 relative">
-            {steps.map((s, i) => (
-              <div key={s.id} className="relative flex flex-col items-center">
-                {/* Icon sits centered on the straight line */}
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{
-                    duration: 3 + i * 0.15,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  whileHover={{ scale: 1.06 }}
-                  className={`relative z-10 w-[96px] h-[96px] rounded-full grid place-items-center shadow-xl
-                              bg-gradient-to-br ${s.grad}`}
-                >
-                  <s.icon className="w-10 h-10 text-white drop-shadow-md" />
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-white text-ink text-xs font-bold grid place-items-center shadow">
-                    {s.id}
-                  </span>
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 rounded-full blur-2xl opacity-30 bg-white"
-                    style={{ maskImage: "radial-gradient(white, transparent 60%)" }}
-                  />
-                </motion.div>
-
-                {/* Card */}
-                <motion.div {...fade(i)} className="mt-6 w-full">
-                  <div className="bg-white rounded-2xl shadow-[0_10px_30px_rgba(16,24,40,0.08)] p-6 text-center">
-                    <h3 className="text-lg font-semibold text-ink mb-2">
-                      {s.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {s.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="text-center mt-10">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center rounded-full px-8 py-4
-                         font-semibold bg-brand-red text-white shadow-lg hover:shadow-xl
-                         transition hover:-translate-y-0.5 active:translate-y-0"
+          {/* Wavy Line */}
+          <div className="hidden lg:block absolute top-[60px] left-0 w-full h-[150px] pointer-events-none z-0">
+            <svg
+              className="w-full h-full"
+              viewBox="0 160 1200 150"
+              fill="none"
+              preserveAspectRatio="none"
+              overflow="visible"
             >
-              Know Our Model
-            </a>
+              <motion.path
+                d="M0,100 C200,110 350,70 600,60 C850,50 1000,20 1200,20"
+                stroke="#8B5CF6"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeDasharray="8 8"
+                fill="none"
+                initial={{ pathLength: 0, opacity: 0 }}
+                whileInView={{ pathLength: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.8, ease: "easeInOut" }}
+              />
+            </svg>
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4 relative z-10 pb-24 lg:pb-32">
+            {steps.map((s, i) => {
+              const marginTopStyle = { marginTop: `-${baseCardOffset + i * slopeStep}px` };
+              const connectorHeightStyle = { height: `${30 + (steps.length - 1 - i) * slopeStep * 0.8}px` };
+
+              return (
+                <div key={s.id} className="flex flex-col items-center relative transition-all" style={marginTopStyle}>
+                  {/* Icon Circle */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, type: "spring", stiffness: 200, damping: 15 }}
+                    style={{ backgroundColor: s.colorTheme.bg, boxShadow: `0 0 0 8px ${s.colorTheme.ring}` }}
+                    className="relative w-20 h-20 rounded-full flex items-center justify-center text-white shadow-lg z-20"
+                  >
+                    <s.icon className="w-9 h-9" />
+                  </motion.div>
+
+                  {/* Connector */}
+                  <div className="w-px border-l-2 border-dotted border-slate-300 my-2 z-0" style={connectorHeightStyle}></div>
+
+                  {/* CARD */}
+                  <motion.div
+                    {...fadeUp(i)}
+                    className="w-full h-full bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-slate-100 flex flex-col overflow-hidden z-10 hover:shadow-xl transition-shadow relative"
+                  >
+                    {/* Content Container */}
+                    <div className="p-6 flex-grow relative z-10">
+                      <h3 className="text-lg font-bold text-brand-red leading-tight mb-2">
+                        {s.title}
+                      </h3>
+                      <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+                        {s.subTitle}
+                      </p>
+                      <ul className="space-y-2.5">
+                        {s.bullets.map((bullet, idx) => (
+                          <li key={idx} className="flex items-start text-[13px] text-slate-600 font-medium leading-snug">
+                            <span className="mr-2 mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Bottom Age Bar */}
+                    <div className="px-6 pb-5 pt-2 relative z-10">
+                      <p className="text-sm font-bold text-blue-600">
+                        {s.age}
+                      </p>
+                    </div>
+
+                    {/* --- UPDATED: Image Overlay for Card --- */}
+                    {/* Increased size from w-28 to w-44 and adjusted translation */}
+                    <div className="absolute bottom-0 right-0 w-44 h-44 pointer-events-none z-0">
+                       <img 
+                          src={s.cardImage} 
+                          alt="" 
+                          className="w-full h-full object-contain translate-x-6 translate-y-6"
+                          onError={(e) => e.target.style.display = 'none'}
+                       />
+                    </div>
+
+                  </motion.div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="text-center relative z-40 -mt-6 lg:-mt-16">
+          <motion.button
+            whileHover={{ scale: 1.05, backgroundColor: "#b91c1c" }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-[#D9232D] text-white font-bold text-base md:text-lg px-10 py-3.5 rounded-full shadow-md hover:shadow-lg transition-all"
+          >
+            Know Our Model
+          </motion.button>
         </div>
       </div>
     </section>
