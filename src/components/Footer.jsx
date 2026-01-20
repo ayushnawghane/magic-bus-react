@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -17,14 +18,14 @@ export default function Footer() {
 
           {/* ABOUT US */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-2 border-b border-white/10 pb-1">
+          <h4 className="text-sm font-semibold text-white mb-2 border-b border-white/10 pb-1">
               About Us
             </h4>
             <ul className="space-y-1">
-              <li>Our Approach</li>
-              <li>Our Team</li>
-              <li>Our Culture</li>
-              <li>Board of Directors</li>
+              <li><a href="#" className="hover:text-white transition-colors">Our Approach</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Our Team</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Our Culture</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Board of Directors</a></li>
             </ul>
           </div>
 
@@ -36,33 +37,34 @@ export default function Footer() {
 
             <p className="font-semibold text-white mt-2">Adolescent Programme</p>
             <ul className="space-y-1">
-              <li>Government Partnership Programme</li>
-              <li>Youth for Change Fellowship Programme</li>
-              <li>MB Dost</li>
+              <li><a href="#" className="hover:text-white transition-colors">Government Partnership Programme</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Youth for Change Fellowship Programme</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">MB Dost</a></li>
             </ul>
 
             <p className="font-semibold text-white mt-3">Livelihood Programme</p>
             <ul className="space-y-1">
-              <li>Standard Skilling</li>
-              <li>Digital Skilling</li>
-              <li>Rural Youth Livelihoods</li>
-              <li>Employee Volunteering Program</li>
-              <li>Future X</li>
+              <li><a href="#" className="hover:text-white transition-colors">Standard Skilling</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Digital Skilling</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Rural Youth Livelihoods</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Future X</a></li>
             </ul>
+
+            <p className="font-semibold text-white mt-3"><a href="#" className="hover:text-white transition-colors">Employee Volunteering Programme</a></p>
           </div>
 
           {/* PARTNERS */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-2 border-b border-white/10 pb-1">
+          <h4 className="text-sm font-semibold text-white mb-2 border-b border-white/10 pb-1">
               Partners
             </h4>
             <ul className="space-y-1">
-              <li>Corporate Partners</li>
-              <li>Foundations & Institutions</li>
-              <li>Government Partners</li>
-              <li>Knowledge Partners</li>
-              <li>Employment Partners</li>
-              <li>Partner Connect</li>
+              <li><a href="#" className="hover:text-white transition-colors">Corporate Partners</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Foundations & Institutions</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Government Partners</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Knowledge Partners</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Employment Partners</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Partner Connect</a></li>
             </ul>
           </div>
 
@@ -74,40 +76,40 @@ export default function Footer() {
 
             <p className="font-semibold text-white mt-2">Reports & Publications</p>
             <ul className="space-y-1">
-              <li>Impact Reports</li>
-              <li>Annual Reports</li>
-              <li>Gender Journey Report</li>
-              <li>FLFPR Report</li>
+              <li><Link to="/impact-reports" className="hover:text-white transition-colors">Impact Reports</Link></li>
+              <li><Link to="/annual-reports" className="hover:text-white transition-colors">Annual Reports</Link></li>
+              <li><Link to="/gender-journey-report" className="hover:text-white transition-colors">Gender Journey Report</Link></li>
+              <li><Link to="/flfpr-report" className="hover:text-white transition-colors">FLFPR Report</Link></li>
             </ul>
 
             <p className="font-semibold text-white mt-3">Media & Stories</p>
             <ul className="space-y-1">
-              <li>News</li>
-              <li>Blogs</li>
-              <li>Podcast</li>
-              <li>Web Stories</li>
-              <li>Success Stories</li>
-              <li>Testimonials</li>
-              <li>Awards</li>
+              <li><Link to="/news" className="hover:text-white transition-colors">News</Link></li>
+              <li><Link to="/blogs" className="hover:text-white transition-colors">Blogs</Link></li>
+              <li><a href="#" className="hover:text-white transition-colors">Podcast</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Web Stories</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Success Stories</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Testimonials</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Awards</a></li>
             </ul>
           </div>
 
           {/* INTERNATIONAL PRESENCE */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-2 border-b border-white/10 pb-1">
+          <h4 className="text-sm font-semibold text-white mb-2 border-b border-white/10 pb-1">
               International Presence
             </h4>
             <ul className="space-y-1 mb-3">
-              <li>Magic Bus USA</li>
-              <li>Magic Bus UK</li>
+              <li><a href="#" className="hover:text-white transition-colors">Magic Bus USA</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Magic Bus UK</a></li>
             </ul>
 
             <p className="font-semibold text-white">India Locations</p>
             <ul className="space-y-1">
-              <li>Mumbai</li>
-              <li>Hyderabad</li>
-              <li>Kolkata</li>
-              <li>Noida</li>
+              <li><a href="#" className="hover:text-white transition-colors">Mumbai</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Hyderabad</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Kolkata</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Noida</a></li>
             </ul>
           </div>
 
@@ -144,9 +146,15 @@ export default function Footer() {
             </form>
 
             <div className="flex gap-3 mt-3">
-              <Instagram className="w-4 h-4" />
-              <Linkedin className="w-4 h-4" />
-              <Youtube className="w-4 h-4" />
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:scale-110 hover:text-pink-500 transition-all">
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:scale-110 hover:text-blue-600 transition-all">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube" className="hover:scale-110 hover:text-red-600 transition-all">
+                <Youtube className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
@@ -157,10 +165,10 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-gray-400">
           <p>© {new Date().getFullYear()} Magic Bus. All rights reserved.</p>
           <div className="flex gap-4">
-            <a>Privacy Policy</a>
-            <a>Terms & Conditions</a>
-            <a>POSH Policy</a>
-            <a>Child Protection Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>
+            <a href="#" className="hover:text-white transition-colors">POSH Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Child Protection Policy</a>
           </div>
         </div>
       </div>

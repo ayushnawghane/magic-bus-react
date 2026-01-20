@@ -13,6 +13,7 @@ const NAVIGATION_ITEMS = [
     key: "about",
     label: "About Us",
     items: [
+      { label: "About Magic Bus", path: "#" },
       { label: "Our Approach", path: "/our-approach" },
       { label: "Our Team", path: "#" },
       { label: "Board of Directors", path: "#" },
