@@ -18,7 +18,7 @@ const steps = [
     description:
       "Agency (especially for girls), resilience, problem solving, gender equality, and career aspirations",
     age: "12 to 18 Yrs.",
-    image: "/ngo-images/approach2.png",
+    image: "/ngo-images/approach1.png",
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const steps = [
     description:
       "Career awareness, digital/financial literacy, placement and retention",
     age: "18 to 25 Yrs.",
-    image: "/ngo-images/approach2.png",
+    image: "/ngo-images/approach5.png",
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ const steps = [
     description:
       "Increased job satisfaction and performance, and sustainable income",
     age: "18 to 25 Yrs.",
-    image: "/ngo-images/approach2.png",
+    image: "/ngo-images/approach3.png",
   },
   {
     id: 5,
@@ -45,7 +45,7 @@ const steps = [
     description:
       "Improved business acumen, launch of sustainable enterprises",
     age: "+25 Yrs.",
-    image: "/ngo-images/approach2.png",
+    image: "/ngo-images/approach4.png",
   },
 ];
 
