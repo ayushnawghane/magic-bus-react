@@ -19,7 +19,12 @@ import {
 
 /**
  * Gender Journey Report Page
- * Dedicated page for gender-focused research and reports
+ * Colors updated: purple/pink -> brand-red / brand-yellow
+ * Text normalized to neutral shades (text-ink, slate, neutral)
+ *
+ * NOTE:
+ * - This file uses utility classes like `brand-red`, `brand-yellow`, `text-ink`.
+ *   Make sure these tokens exist in your Tailwind config (or replace with hex/classes).
  */
 
 const GENDER_REPORTS_DATA = [
@@ -28,7 +33,8 @@ const GENDER_REPORTS_DATA = [
     title: "Gender Journey Report 2023-24",
     subtitle: "Empowering Girls Through Education and Life Skills",
     year: "2023-24",
-    description: "Comprehensive analysis of our gender-focused interventions, tracking the journey of adolescent girls through education, life skills development, and empowerment programs.",
+    description:
+      "Comprehensive analysis of our gender-focused interventions, tracking the journey of adolescent girls through education, life skills development, and empowerment programs.",
     fileSize: "6.8 MB",
     pages: 95,
     downloadUrl: "#",
@@ -38,16 +44,17 @@ const GENDER_REPORTS_DATA = [
       "85% improvement in self-confidence among participants",
       "78% increase in school retention rates",
       "92% completion rate for life skills programs",
-      "67% participants pursuing higher education"
+      "67% participants pursuing higher education",
     ],
-    methodology: "Mixed-methods research with 2,500+ participants across 8 states"
+    methodology: "Mixed-methods research with 2,500+ participants across 8 states",
   },
   {
     id: 2,
     title: "Adolescent Girls Empowerment Study 2022-23",
     subtitle: "Breaking Barriers, Building Futures",
     year: "2022-23",
-    description: "In-depth study examining the challenges faced by adolescent girls in rural and urban settings, and the effectiveness of our intervention programs.",
+    description:
+      "In-depth study examining the challenges faced by adolescent girls in rural and urban settings, and the effectiveness of our intervention programs.",
     fileSize: "5.4 MB",
     pages: 78,
     downloadUrl: "#",
@@ -57,16 +64,17 @@ const GENDER_REPORTS_DATA = [
       "73% reduction in early marriage intentions",
       "89% improvement in health awareness",
       "65% increase in career aspirations",
-      "81% participants became peer educators"
+      "81% participants became peer educators",
     ],
-    methodology: "Longitudinal study with control groups across 6 states"
+    methodology: "Longitudinal study with control groups across 6 states",
   },
   {
     id: 3,
     title: "Women's Leadership Development Report 2021-22",
     subtitle: "From Participants to Leaders",
     year: "2021-22",
-    description: "Analysis of leadership development outcomes among women participants, tracking their progression from beneficiaries to community leaders and change agents.",
+    description:
+      "Analysis of leadership development outcomes among women participants, tracking their progression from beneficiaries to community leaders and change agents.",
     fileSize: "4.9 MB",
     pages: 68,
     downloadUrl: "#",
@@ -76,10 +84,10 @@ const GENDER_REPORTS_DATA = [
       "156 women became community leaders",
       "45% started their own enterprises",
       "91% reported increased decision-making power",
-      "68% became mentors for other women"
+      "68% became mentors for other women",
     ],
-    methodology: "Case study approach with 500+ women leaders"
-  }
+    methodology: "Case study approach with 500+ women leaders",
+  },
 ];
 
 function GenderJourneyHero() {
@@ -90,12 +98,13 @@ function GenderJourneyHero() {
         alt="Gender Journey Report"
         className="absolute inset-0 w-full h-full object-cover"
         onError={(e) => {
-          e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2";
+          e.currentTarget.src =
+            "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2";
         }}
       />
-      
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-900/90 via-pink-900/70 to-transparent" />
-      
+
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
+
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-center">
         <motion.div
           className="max-w-3xl text-white"
@@ -103,7 +112,7 @@ function GenderJourneyHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span className="inline-block bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+          <span className="inline-block bg-brand-yellow text-brand-black px-3 py-1 rounded-full text-sm font-semibold">
             Gender Empowerment
           </span>
 
@@ -112,14 +121,15 @@ function GenderJourneyHero() {
           </h1>
 
           <p className="mt-4 text-base md:text-lg text-white/90">
-            Our Gender Journey Reports document the transformative impact of our gender-focused programs, 
-            showcasing how we empower girls and women to become leaders and change agents in their communities.
+            Our Gender Journey Reports document the transformative impact of our
+            gender-focused programs, showcasing how we empower girls and women
+            to become leaders and change agents in their communities.
           </p>
 
           <div className="mt-6">
             <motion.a
               href="#reports"
-              className="group relative overflow-hidden rounded-full bg-pink-600 px-8 py-4 font-semibold text-white shadow-lg transition-all hover:shadow-2xl hover:shadow-pink-600/20 inline-flex items-center gap-2"
+              className="group relative overflow-hidden rounded-full bg-brand-red px-8 py-4 font-semibold text-white shadow-lg transition-all hover:shadow-2xl hover:shadow-brand-yellow/20 inline-flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -144,7 +154,7 @@ function GenderStats() {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-br from-pink-50 to-purple-50">
+    <section className="py-16 bg-gradient-to-br from-red-50 to-yellow-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
@@ -156,7 +166,7 @@ function GenderStats() {
               transition={{ delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="w-16 h-16 bg-pink-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-pink-600">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-red">
                 {stat.icon}
               </div>
               <div className="text-3xl font-bold text-ink mb-2">{stat.number}</div>
@@ -176,14 +186,14 @@ function GenderReportCard({ report, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="bg-white rounded-xl border border-slate-200 hover:border-pink-500/30 hover:shadow-lg transition-all duration-300 overflow-hidden group"
+      className="bg-white rounded-xl border border-slate-200 hover:border-brand-red/30 hover:shadow-lg transition-all duration-300 overflow-hidden group"
     >
       <div className="p-6">
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-pink-50 rounded-lg flex items-center justify-center">
-              <Heart className="w-6 h-6 text-pink-600" />
+            <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
+              <Heart className="w-6 h-6 text-brand-red" />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-1">
@@ -191,7 +201,7 @@ function GenderReportCard({ report, index }) {
                   {report.year}
                 </span>
                 {report.featured && (
-                  <span className="bg-pink-500 text-white px-2 py-1 rounded-md text-xs font-medium">
+                  <span className="bg-brand-yellow text-black px-2 py-1 rounded-md text-xs font-medium">
                     Latest
                   </span>
                 )}
@@ -202,29 +212,29 @@ function GenderReportCard({ report, index }) {
         </div>
 
         {/* Title & Subtitle */}
-        <h3 className="text-lg font-bold text-ink mb-1 line-clamp-2 group-hover:text-pink-600 transition-colors">
+        <h3 className="text-lg font-bold text-ink mb-1 line-clamp-2 group-hover:text-brand-red transition-colors">
           {report.title}
         </h3>
-        
-        <p className="text-sm text-pink-600 font-medium mb-3">{report.subtitle}</p>
+
+        <p className="text-sm text-brand-red font-medium mb-3">{report.subtitle}</p>
 
         {/* Description */}
-        <p className="text-slate-600 text-sm mb-4 line-clamp-3">
-          {report.description}
-        </p>
+        <p className="text-slate-600 text-sm mb-4 line-clamp-3">{report.description}</p>
 
         {/* Key Findings */}
         <div className="mb-4">
-          <h4 className="text-xs font-semibold text-slate-700 mb-2 uppercase tracking-wide">Key Findings</h4>
+          <h4 className="text-xs font-semibold text-slate-700 mb-2 uppercase tracking-wide">
+            Key Findings
+          </h4>
           <div className="space-y-1">
             {report.keyFindings.slice(0, 2).map((finding, idx) => (
               <div key={idx} className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-pink-500 rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-brand-red rounded-full"></div>
                 <span className="text-xs text-slate-600">{finding}</span>
               </div>
             ))}
             {report.keyFindings.length > 2 && (
-              <div className="text-xs text-pink-600 font-medium">
+              <div className="text-xs text-brand-red font-medium">
                 +{report.keyFindings.length - 2} more findings
               </div>
             )}
@@ -232,9 +242,11 @@ function GenderReportCard({ report, index }) {
         </div>
 
         {/* Methodology */}
-        <div className="mb-4 p-3 bg-pink-50 rounded-lg">
-          <h4 className="text-xs font-semibold text-pink-800 mb-1 uppercase tracking-wide">Methodology</h4>
-          <p className="text-xs text-pink-700">{report.methodology}</p>
+        <div className="mb-4 p-3 bg-red-50 rounded-lg">
+          <h4 className="text-xs font-semibold text-brand-red mb-1 uppercase tracking-wide">
+            Methodology
+          </h4>
+          <p className="text-xs text-brand-red">{report.methodology}</p>
         </div>
 
         {/* Stats */}
@@ -256,17 +268,17 @@ function GenderReportCard({ report, index }) {
         {/* Footer */}
         <div className="flex items-center justify-between pt-4 border-t border-slate-100">
           <span className="text-xs text-slate-500">
-            {new Date(report.publishDate).toLocaleDateString('en-GB', { 
-              day: 'numeric', 
-              month: 'short', 
-              year: 'numeric' 
+            {new Date(report.publishDate).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
             })}
           </span>
           <div className="flex gap-2">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-pink-600 transition-colors flex items-center gap-2"
+              className="bg-brand-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
               Download
@@ -305,7 +317,8 @@ export default function GenderJourneyReport() {
                 Gender Journey Reports
               </h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                Research-based reports documenting the empowerment journey of girls and women through our programs
+                Research-based reports documenting the empowerment journey of girls
+                and women through our programs
               </p>
             </motion.div>
 
@@ -334,10 +347,26 @@ export default function GenderJourneyReport() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { title: "Education", icon: <BookOpen className="w-8 h-8" />, desc: "Keeping girls in school and supporting higher education" },
-                { title: "Life Skills", icon: <Target className="w-8 h-8" />, desc: "Building confidence, communication, and leadership skills" },
-                { title: "Health Awareness", icon: <Heart className="w-8 h-8" />, desc: "Reproductive health education and wellness programs" },
-                { title: "Leadership", icon: <Award className="w-8 h-8" />, desc: "Developing women leaders and change agents" }
+                {
+                  title: "Education",
+                  icon: <BookOpen className="w-8 h-8" />,
+                  desc: "Keeping girls in school and supporting higher education",
+                },
+                {
+                  title: "Life Skills",
+                  icon: <Target className="w-8 h-8" />,
+                  desc: "Building confidence, communication, and leadership skills",
+                },
+                {
+                  title: "Health Awareness",
+                  icon: <Heart className="w-8 h-8" />,
+                  desc: "Reproductive health education and wellness programs",
+                },
+                {
+                  title: "Leadership",
+                  icon: <Award className="w-8 h-8" />,
+                  desc: "Developing women leaders and change agents",
+                },
               ].map((area, index) => (
                 <motion.div
                   key={area.title}
@@ -345,9 +374,9 @@ export default function GenderJourneyReport() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-center p-6 rounded-xl bg-gradient-to-br from-pink-50 to-purple-50 hover:shadow-lg transition-shadow"
+                  className="text-center p-6 rounded-xl bg-gradient-to-br from-red-50 to-yellow-50 hover:shadow-lg transition-shadow"
                 >
-                  <div className="w-16 h-16 bg-pink-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-pink-600">
+                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-red">
                     {area.icon}
                   </div>
                   <h3 className="text-lg font-semibold text-ink mb-2">{area.title}</h3>
@@ -359,7 +388,7 @@ export default function GenderJourneyReport() {
         </section>
 
         {/* Call to Action */}
-        <section className="py-16 bg-gradient-to-br from-pink-500 via-purple-600 to-pink-700">
+        <section className="py-16 bg-gradient-to-br from-brand-red via-brand-yellow to-brand-red">
           <div className="max-w-4xl mx-auto px-6 text-center text-white">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -369,18 +398,19 @@ export default function GenderJourneyReport() {
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Heart className="w-8 h-8 text-white" />
               </div>
-              
+
               <h3 className="text-3xl font-bold mb-4">Empowering the Next Generation</h3>
               <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-                Our gender journey reports showcase the transformative power of education, life skills, 
-                and empowerment programs in creating lasting change for girls and women.
+                Our gender journey reports showcase the transformative power of
+                education, life skills, and empowerment programs in creating
+                lasting change for girls and women.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white text-pink-600 font-semibold px-6 py-3 rounded-xl hover:bg-white/90 transition-colors flex items-center gap-2"
+                  className="bg-white text-brand-red font-semibold px-6 py-3 rounded-xl hover:bg-white/90 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
                   Download All Gender Reports
