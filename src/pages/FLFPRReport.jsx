@@ -2,6 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
+import FAQSection from "../components/Home/FAQSectiom";
+import { flfprFAQ } from "../components/Home/faqItems";
 import {
   FileText,
   Download,
@@ -451,6 +453,14 @@ export default function FLFPRReport() {
             </motion.div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection
+          items={flfprFAQ}
+          title="FLFPR Report FAQs"
+          subtitle="Frequently asked questions about our Female Labour Force Participation Rate research and reports."
+          categoriesLabel="Filter by topic"
+        />
       </main>
     </Layout>
   );

@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
+import FAQSection from "../components/Home/FAQSectiom";
+import { annualReportsFAQ } from "../components/Home/faqItems";
 import {
   FileText,
   Download,
@@ -404,6 +406,14 @@ export default function AnnualReports() {
             </motion.div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection
+          items={annualReportsFAQ}
+          title="Frequently Asked Questions"
+          subtitle="Clear answers about our annual reports, financial statements, and impact documentation."
+          categoriesLabel="Filter by topic"
+        />
       </main>
     </Layout>
   );

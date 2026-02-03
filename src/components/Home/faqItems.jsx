@@ -566,6 +566,445 @@ export const contactFAQ = [
 
 
 /* -------------------------------------------------------------------------- */
+/*                           ANNUAL REPORTS PAGE FAQ                          */
+/* -------------------------------------------------------------------------- */
+export const annualReportsFAQ = [
+  {
+    question: "What types of reports does Magic Bus India Foundation publish?",
+    category: "Reports",
+    answer: (
+      <p>
+        Magic Bus publishes annual impact reports, audited financial statements,
+        and programme evaluation reports. These documents explain how programmes are run,
+        how funds are used, and what impact is created for adolescents and youth across India.
+      </p>
+    ),
+  },
+  {
+    question: "Where can I find the latest Magic Bus annual report?",
+    category: "Access",
+    answer: (
+      <p>
+        The latest annual impact report is available on the Reports page of the Magic Bus website.
+        Each report can be viewed online or downloaded as a PDF for easy access.
+      </p>
+    ),
+  },
+  {
+    question: "What information is covered in the Magic Bus annual impact report?",
+    category: "Content",
+    answer: (
+      <p>
+        The annual impact report shares programme reach, key outcomes, success stories,
+        partnerships, and year-on-year progress. It also highlights how Magic Bus supports
+        education, life skills, and livelihoods for young people.
+      </p>
+    ),
+  },
+  {
+    question: "How do Magic Bus reports show real impact on youth?",
+    category: "Impact",
+    answer: (
+      <p>
+        Magic Bus reports include verified data on school attendance, life skills development,
+        employability, and job placements. They also feature real stories from adolescents and youth
+        whose lives have changed through the programmes.
+      </p>
+    ),
+  },
+  {
+    question: "Are Magic Bus financial reports audited?",
+    category: "Compliance",
+    answer: (
+      <p>
+        Yes. All financial statements published by Magic Bus are independently audited. This
+        ensures accuracy, compliance, and transparency in how funds are managed and spent.
+      </p>
+    ),
+  },
+  {
+    question: "Why are Magic Bus reports important for donors and partners?",
+    category: "Donors",
+    answer: (
+      <p>
+        The reports help donors and partners understand how contributions are used and what
+        outcomes are achieved. They provide clear evidence of impact, accountability, and long-term
+        value creation.
+      </p>
+    ),
+  },
+  {
+    question: "Can corporates and institutions use these reports for CSR planning?",
+    category: "CSR",
+    answer: (
+      <p>
+        Yes. Corporates and institutions often use Magic Bus reports to
+        assess programme credibility, scale, and alignment with CSR and ESG goals before forming
+        partnerships.
+      </p>
+    ),
+  },
+  {
+    question: "Do Magic Bus reports align with national and global development goals?",
+    category: "Alignment",
+    answer: (
+      <p>
+        Yes. Magic Bus programmes and reports align with national priorities and global goals such
+        as education, decent work, gender equality, and poverty reduction.
+      </p>
+    ),
+  },
+  {
+    question: "Are older Magic Bus reports available for reference?",
+    category: "Archive",
+    answer: (
+      <p>
+        Yes. The Reports page hosts past annual and financial reports, allowing stakeholders to
+        track progress and impact over multiple years.
+      </p>
+    ),
+  },
+  {
+    question: "How can I download Magic Bus reports or request more details?",
+    category: "Download",
+    answer: (
+      <p>
+        Reports can be downloaded directly from the website. For additional information or specific
+        queries, users can reach out through the contact details provided on the site.
+      </p>
+    ),
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                              NEWS & UPDATES FAQ                            */
+/* -------------------------------------------------------------------------- */
+export const newsFAQ = [
+  {
+    question: "What kind of news is featured on the Magic Bus news page?",
+    category: "Content",
+    answer: (
+      <p>
+        The Magic Bus news page highlights the latest media coverage, organisational achievements,
+        recognitions, and public announcements related to the foundation's work empowering youth
+        through education, life skills, and livelihood programmes.
+      </p>
+    ),
+  },
+  {
+    question: "How often is the Magic Bus news page updated?",
+    category: "Updates",
+    answer: (
+      <p>
+        The news page is updated regularly as new articles, press releases, and external media
+        mentions are published about Magic Bus and its impact across India.
+      </p>
+    ),
+  },
+  {
+    question: "Where can I find recent media coverage of Magic Bus India Foundation?",
+    category: "Media",
+    answer: (
+      <p>
+        Recent media coverage, including press articles and news stories about Magic Bus's programmes,
+        recognitions, and impact, is available on the Magic Bus news page.
+      </p>
+    ),
+  },
+  {
+    question: "Why is Magic Bus frequently featured in national and regional media?",
+    category: "Coverage",
+    answer: (
+      <p>
+        Magic Bus is often covered by the media for its large-scale work in youth education, life
+        skills, and employability. News features highlight programme impact, innovative approaches,
+        and partnerships that contribute to long-term social change across India.
+      </p>
+    ),
+  },
+  {
+    question: "Can I read Magic Bus's news about youth skilling and employability programmes?",
+    category: "Programmes",
+    answer: (
+      <p>
+        Yes. News items often cover updates and launches of programmes such as youth skilling,
+        digital curriculum innovations, and partnerships that support employability for underserved youth.
+      </p>
+    ),
+  },
+  {
+    question: "Does the news page include stories from external media sources?",
+    category: "Sources",
+    answer: (
+      <p>
+        The news page aggregates external media stories, showcasing how national and local outlets
+        report Magic Bus achievements, partnerships, and social impact work.
+      </p>
+    ),
+  },
+  {
+    question: "Is the news page the same as the blog page on Magic Bus?",
+    category: "Comparison",
+    answer: (
+      <p>
+        No. The news page features media coverage and press mentions, while the blog page contains
+        opinion pieces, organisational updates, and longer feature narratives written by the Magic Bus team itself.
+      </p>
+    ),
+  },
+  {
+    question: "How can I stay updated with new news from Magic Bus?",
+    category: "Subscription",
+    answer: (
+      <p>
+        You can visit the Magic Bus news page regularly or subscribe to the newsletter to receive
+        updates when new articles and media coverage are published.
+      </p>
+    ),
+  },
+  {
+    question: "Does Magic Bus news cover partnerships and collaborations?",
+    category: "Partnerships",
+    answer: (
+      <p>
+        Yes. The news often features stories about new partnerships with corporates, foundations,
+        government bodies, and global organisations that help expand programmes and reach more young people.
+      </p>
+    ),
+  },
+  {
+    question: "Are news stories on this page linked to Magic Bus impact reports?",
+    category: "Reports",
+    answer: (
+      <p>
+        Many news items reference recent reports and surveys that showcase Magic Bus's outcomes and
+        impact, linking readers to deeper insights and downloadable impact documents.
+      </p>
+    ),
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                            CERTIFICATIONS PAGE FAQ                         */
+/* -------------------------------------------------------------------------- */
+export const certificationsFAQ = [
+  {
+    question: "Why does Magic Bus display all its certificates publicly?",
+    category: "Transparency",
+    answer: (
+      <p>
+        Magic Bus shares its certificates openly to maintain transparency and build trust. Public
+        access helps donors, CSR teams, and partners complete due diligence quickly and confidently.
+      </p>
+    ),
+  },
+  {
+    question: "Which certificates are mandatory for NGOs to operate in India?",
+    category: "Legal",
+    answer: (
+      <p>
+        NGOs in India must have legal registration, PAN, and compliance documents. Additional
+        certificates like 12A, 80G, CSR-1, and FCRA enable funding, tax benefits, and partnerships.
+      </p>
+    ),
+  },
+  {
+    question: "How do Magic Bus certificates support corporate due diligence?",
+    category: "CSR",
+    answer: (
+      <p>
+        The certificates help CSR teams verify legal status, tax compliance, and funding eligibility.
+        This reduces onboarding time and simplifies internal approval processes for partnerships.
+      </p>
+    ),
+  },
+  {
+    question: "Are these certificates required for CSR audits and compliance checks?",
+    category: "Compliance",
+    answer: (
+      <p>
+        Yes. Certificates such as CSR-1, audited compliance documents, and registrations are commonly
+        required during CSR audits, statutory reviews, and internal governance checks.
+      </p>
+    ),
+  },
+  {
+    question: "How often are Magic Bus certificates renewed or updated?",
+    category: "Renewal",
+    answer: (
+      <p>
+        Certificates are renewed or updated as per legal and regulatory timelines. The website
+        reflects the most current versions to ensure accuracy and compliance.
+      </p>
+    ),
+  },
+  {
+    question: "Do Magic Bus certificates meet government and corporate standards?",
+    category: "Standards",
+    answer: (
+      <p>
+        Yes. All certificates comply with Indian government regulations and align with corporate
+        governance and CSR compliance requirements.
+      </p>
+    ),
+  },
+  {
+    question: "Can institutions use these certificates for grant or funding approvals?",
+    category: "Funding",
+    answer: (
+      <p>
+        Yes. Funding institutions and foundations often use these certificates to validate eligibility,
+        governance standards, and regulatory compliance before approving grants.
+      </p>
+    ),
+  },
+  {
+    question: "How do accreditations strengthen Magic Bus credibility?",
+    category: "Accreditations",
+    answer: (
+      <p>
+        Accreditations show that Magic Bus meets external quality and transparency standards.
+        They signal strong systems, ethical practices, and reliable programme delivery.
+      </p>
+    ),
+  },
+  {
+    question: "Are these certificates applicable across all Magic Bus programmes?",
+    category: "Coverage",
+    answer: (
+      <p>
+        Yes. The certificates apply to the organisation as a whole and cover all programmes run
+        by Magic Bus across education, life skills, and livelihoods.
+      </p>
+    ),
+  },
+  {
+    question: "Who should review these certificates before partnering with Magic Bus?",
+    category: "Review",
+    answer: (
+      <p>
+        CSR teams, legal teams, finance teams, donors, auditors, and institutional partners typically
+        review these documents during evaluation and onboarding.
+      </p>
+    ),
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                              FLFPR REPORT FAQ                              */
+/* -------------------------------------------------------------------------- */
+export const flfprFAQ = [
+  {
+    question: "What is FLFPR and why is it important?",
+    category: "Overview",
+    answer: (
+      <p>
+        FLFPR (Female Labour Force Participation Rate) measures the percentage of working-age women
+        who are employed or actively seeking employment. It is a critical indicator of gender equality
+        and economic empowerment.
+      </p>
+    ),
+  },
+  {
+    question: "What does the Magic Bus FLFPR report cover?",
+    category: "Content",
+    answer: (
+      <p>
+        The FLFPR report presents data, analysis, and insights on female labour force participation
+        trends, barriers faced by women, and Magic Bus interventions to improve women's economic inclusion.
+      </p>
+    ),
+  },
+  {
+    question: "How does Magic Bus work to improve FLFPR?",
+    category: "Interventions",
+    answer: (
+      <p>
+        Magic Bus implements skill development programmes, livelihood training, and career counselling
+        specifically designed for women and girls to enhance their employability and economic participation.
+      </p>
+    ),
+  },
+  {
+    question: "Who can benefit from the FLFPR report insights?",
+    category: "Audience",
+    answer: (
+      <p>
+        Policymakers, researchers, CSR professionals, donors, and development practitioners can use
+        the FLFPR report insights to design effective interventions for women's economic empowerment.
+      </p>
+    ),
+  },
+  {
+    question: "Where can I download the FLFPR report?",
+    category: "Download",
+    answer: (
+      <p>
+        The FLFPR report is available for download on the Reports page or this dedicated FLFPR
+        report page in PDF format.
+      </p>
+    ),
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                          GENDER JOURNEY REPORT FAQ                       */
+/* -------------------------------------------------------------------------- */
+export const genderJourneyFAQ = [
+  {
+    question: "What is the Gender Journey Report?",
+    category: "Overview",
+    answer: (
+      <p>
+        The Gender Journey Report documents Magic Bus's approach to promoting gender equality through
+        life skills education, challenging gender norms, and empowering adolescents to create
+        gender-equitable communities.
+      </p>
+    ),
+  },
+  {
+    question: "What topics are covered in the Gender Journey Report?",
+    category: "Content",
+    answer: (
+      <p>
+        The report covers gender sensitisation, life skills curriculum, behaviour change outcomes,
+        community engagement strategies, and impact stories demonstrating shifts in gender attitudes.
+      </p>
+    ),
+  },
+  {
+    question: "How does Magic Bus address gender inequality?",
+    category: "Approach",
+    answer: (
+      <p>
+        Magic Bus uses a sports-based curriculum integrated with gender sessions to challenge stereotypes,
+        build confidence, and create safe spaces for boys and girls to discuss gender issues.
+      </p>
+    ),
+  },
+  {
+    question: "What age groups does the gender programme target?",
+    category: "Target",
+    answer: (
+      <p>
+        The programme targets adolescents aged 12-18 years, a critical period for forming attitudes
+        and behaviours around gender roles and relationships.
+      </p>
+    ),
+  },
+  {
+    question: "Can I access previous Gender Journey Reports?",
+    category: "Archive",
+    answer: (
+      <p>
+        Yes, previous editions of the Gender Journey Report are available in the reports archive
+        section for longitudinal comparison and research purposes.
+      </p>
+    ),
+  },
+];
+
+/* -------------------------------------------------------------------------- */
 /*                               DEFAULT EXPORT                               */
 /* -------------------------------------------------------------------------- */
-export default { homefaq, contactFAQ };
+export default { homefaq, contactFAQ, annualReportsFAQ, newsFAQ, certificationsFAQ, flfprFAQ, genderJourneyFAQ };

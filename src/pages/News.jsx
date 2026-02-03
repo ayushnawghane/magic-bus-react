@@ -2,6 +2,8 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "../components/Layout";
+import FAQSection from "../components/Home/FAQSectiom";
+import { newsFAQ } from "../components/Home/faqItems";
 import {
   Calendar,
   Clock,
@@ -771,6 +773,14 @@ export default function News() {
         </div>
 
         <NewsletterSignup />
+
+        {/* FAQ Section */}
+        <FAQSection
+          items={newsFAQ}
+          title="News & Updates FAQs"
+          subtitle="Find answers to common questions about our news coverage, media mentions, and updates."
+          categoriesLabel="Filter by topic"
+        />
       </main>
     </Layout>
   );

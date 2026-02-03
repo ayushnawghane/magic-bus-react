@@ -2,6 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
+import FAQSection from "../components/Home/FAQSectiom";
+import { certificationsFAQ } from "../components/Home/faqItems";
 import {
   Shield,
   Award,
@@ -491,6 +493,14 @@ export default function Certifications() {
             </motion.div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection
+          items={certificationsFAQ}
+          title="Certifications FAQs"
+          subtitle="Common questions about our certifications, compliance documents, and transparency practices."
+          categoriesLabel="Filter by category"
+        />
       </main>
     </Layout>
   );

@@ -2,6 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
+import FAQSection from "../components/Home/FAQSectiom";
+import { genderJourneyFAQ } from "../components/Home/faqItems";
 import {
   FileText,
   Download,
@@ -426,6 +428,14 @@ export default function GenderJourneyReport() {
             </motion.div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection
+          items={genderJourneyFAQ}
+          title="Gender Journey FAQs"
+          subtitle="Common questions about our gender empowerment research, programmes, and impact."
+          categoriesLabel="Filter by topic"
+        />
       </main>
     </Layout>
   );

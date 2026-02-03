@@ -20,7 +20,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/our-approach" element={<OurApproach />} />
+        {/* <Route path="/our-approach" element={<OurApproach />} />
         <Route path="/donate" element={<DonateNow />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/partner" element={<PartnerWithUs />} />
@@ -32,7 +32,7 @@ function App() {
         <Route path="/annual-reports" element={<AnnualReports />} />
         <Route path="/gender-journey-report" element={<GenderJourneyReport />} />
         <Route path="/flfpr-report" element={<FLFPRReport />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/gallery" element={<Gallery />} /> */}
       </Routes>
     </Router>
   )
