@@ -343,6 +343,35 @@ export default function AnnualReports() {
     <Layout>
       <main className="bg-slate-50 text-ink min-h-screen">
         <AnnualReportsHero />
+
+        {/* Annual Reports Content Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-ink mb-6">
+                Annual Reports
+              </h2>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                At Magic Bus India Foundation, we are committed to upholding the highest
+                standards of transparency and accountability. Our financial statements, audit reports, and
+                evaluations undergo rigorous reviews and are shared with stakeholders for timely disclosure.
+                These reports are also published in our annual reports and made accessible on our website.
+              </p>
+              <p className="text-lg text-slate-600 leading-relaxed mt-4">
+                Our annual reports serve as a testament to our impact, showcasing key initiatives that
+                empower adolescents and youth. They provide a snapshot of our financial health, progress,
+                and real-life stories of transformation, highlighting the resilience and growth of the
+                communities we serve.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
         <AnnualReportsStats />
         <YearFilter activeYear={activeYear} setActiveYear={setActiveYear} />
 
