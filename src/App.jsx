@@ -1,6 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import "./index.css";
 import Home from './pages/Home'
+import AboutUs from './pages/AboutUs';
+import WhoWeAre from './pages/WhoWeAre';
+import OurTeam from './pages/OurTeam';
+import OurCulture from './pages/OurCulture';
 import OurApproach from './pages/OurApproach'
 import DonateNow from './pages/DonateNow';
 import ContactUs from './pages/ContactUs';
@@ -20,6 +24,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/who-we-are" element={<WhoWeAre />} />
+        <Route path="/our-team" element={<OurTeam />} />
+        <Route path="/our-culture" element={<OurCulture />} />
         {/* <Route path="/our-approach" element={<OurApproach />} />
         <Route path="/donate" element={<DonateNow />} />
         <Route path="/contact" element={<ContactUs />} />

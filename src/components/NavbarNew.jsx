@@ -13,11 +13,12 @@ const NAVIGATION_ITEMS = [
     key: "about",
     label: "About Us",
     items: [
-      { label: "About Magic Bus", path: "#" },
+      { label: "About Magic Bus", path: "/about-us" },
       { label: "Our Approach", path: "/our-approach" },
-      { label: "Our Team", path: "#" },
+      { label: "Who We Are", path: "/who-we-are" },
+      { label: "Our Team", path: "/our-team" },
       { label: "Board of Directors", path: "#" },
-      { label: "Our Culture", path: "#" },
+      { label: "Our Culture", path: "/our-culture" },
     ],
   },
   {
@@ -150,11 +151,10 @@ export default function NavbarWireframe() {
 
   return (
     <nav
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/50"
-          : "bg-white"
-      }`}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled
+        ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/50"
+        : "bg-white"
+        }`}
     >
       <div className="max-w-7xl mx-auto">
         {/* Top Bar */}
@@ -260,11 +260,10 @@ export default function NavbarWireframe() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <button
-                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                      activeDropdown === item.key
-                        ? "text-brand-red bg-brand-red/5"
-                        : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
-                    }`}
+                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${activeDropdown === item.key
+                      ? "text-brand-red bg-brand-red/5"
+                      : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                      }`}
                   >
                     {item.label}
                     <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === item.key ? "rotate-180" : ""}`} />
@@ -278,11 +277,10 @@ export default function NavbarWireframe() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.18 }}
-                        className={`absolute top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-50 ${
-                          item.key === 'resources' || item.key === 'programmes'
-                            ? 'left-1/2 -translate-x-1/2 w-[800px]'
-                            : 'left-0 w-72'
-                        }`}
+                        className={`absolute top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-50 ${item.key === 'resources' || item.key === 'programmes'
+                          ? 'left-1/2 -translate-x-1/2 w-[800px]'
+                          : 'left-0 w-72'
+                          }`}
                       >
                         {/* If groups exist (multi-column) */}
                         {item.groups ? (
@@ -290,19 +288,19 @@ export default function NavbarWireframe() {
                             {item.groups.map((group, gi) => (
                               <div key={gi} className="p-4 border-r border-slate-100 last:border-r-0 md:border-b-0 border-b last:border-b-0">
                                 {/* Group title rendered as bold heading (not a link) */}
-                                  {group.path ? (
-                                    <Link
-                                      to={group.path}
-                                      className="block text-sm font-semibold text-slate-700 mb-3 hover:text-brand-red transition-colors"
-                                      onClick={() => setActiveDropdown(null)}
-                                    >
-                                      {group.title}
-                                    </Link>
-                                  ) : (
-                                    <div className="text-sm font-semibold text-slate-700 mb-3">
-                                      {group.title}
-                                    </div>
-                                  )}
+                                {group.path ? (
+                                  <Link
+                                    to={group.path}
+                                    className="block text-sm font-semibold text-slate-700 mb-3 hover:text-brand-red transition-colors"
+                                    onClick={() => setActiveDropdown(null)}
+                                  >
+                                    {group.title}
+                                  </Link>
+                                ) : (
+                                  <div className="text-sm font-semibold text-slate-700 mb-3">
+                                    {group.title}
+                                  </div>
+                                )}
 
 
                                 {/* Items under the heading (links) */}
