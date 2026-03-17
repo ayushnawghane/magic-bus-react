@@ -5,6 +5,10 @@ import AboutUs from './pages/AboutUs';
 import WhoWeAre from './pages/WhoWeAre';
 import OurTeam from './pages/OurTeam';
 import OurCulture from './pages/OurCulture';
+import BoardOfDirectors from './pages/BoardOfDirectors';
+import LearningDevelopment from './pages/LearningDevelopment';
+import AdolescentProgramme from './pages/AdolescentProgramme';
+import GovernmentPartnershipProgramme from './pages/GovernmentPartnershipProgramme';
 import OurApproach from './pages/OurApproach'
 import DonateNow from './pages/DonateNow';
 import ContactUs from './pages/ContactUs';
@@ -28,6 +32,10 @@ function App() {
         <Route path="/who-we-are" element={<WhoWeAre />} />
         <Route path="/our-team" element={<OurTeam />} />
         <Route path="/our-culture" element={<OurCulture />} />
+        <Route path="/board-of-directors" element={<BoardOfDirectors />} />
+        <Route path="/learning-development" element={<LearningDevelopment />} />
+        <Route path="/adolescent-programme" element={<AdolescentProgramme />} />
+        <Route path="/government-partnership-programme" element={<GovernmentPartnershipProgramme />} />
         {/* <Route path="/our-approach" element={<OurApproach />} />
         <Route path="/donate" element={<DonateNow />} />
         <Route path="/contact" element={<ContactUs />} />

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+const _MOTION = motion;
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -29,7 +30,7 @@ const MEGA = {
     items: [
       { label: "Our Approach", path: "#" },
       { label: "Our Team", path: "#" },
-      { label: "Board of Directors", path: "#" },
+      { label: "Board of Directors", path: "/board-of-directors" },
       { label: "Our Culture", path: "#" },
     ],
   },
@@ -103,7 +104,7 @@ const MEGA = {
       { label: "Work With Us", path: "#" },
       { label: "Certifications", path: "/certifications" },
       { label: "Our Culture", path: "#" },
-      { label: "Learning Loop", path: "#" },
+      { label: "Learning Loop", path: "/learning-development" },
       { label: "MB Academy", path: "#" },
       { label: "Darwin (Employee Login)", path: "#" },
     ],
@@ -284,7 +285,7 @@ export default function Navbar() {
       {/* MEGA MENU */}
       <AnimatePresence>
         {activeKey && (
-          <motion.div
+          <_MOTION.div
             key={activeKey}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -349,14 +350,14 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-          </motion.div>
+          </_MOTION.div>
         )}
       </AnimatePresence>
 
       {/* MOBILE DRAWER */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <_MOTION.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -428,9 +429,11 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </_MOTION.div>
         )}
       </AnimatePresence>
     </nav>
   );
 }
+
+

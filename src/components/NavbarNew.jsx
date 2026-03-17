@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+const _MOTION = motion;
 import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown } from "lucide-react";
 
@@ -17,7 +18,7 @@ const NAVIGATION_ITEMS = [
       { label: "Our Approach", path: "/our-approach" },
       { label: "Who We Are", path: "/who-we-are" },
       { label: "Our Team", path: "/our-team" },
-      { label: "Board of Directors", path: "#" },
+      { label: "Board of Directors", path: "/board-of-directors" },
       { label: "Our Culture", path: "/our-culture" },
     ],
   },
@@ -28,8 +29,9 @@ const NAVIGATION_ITEMS = [
     groups: [
       {
         title: "Adolescent Programme",
+        path: "/adolescent-programme",
         items: [
-          { label: "Government Partnership Programme", path: "#" },
+          { label: "Government Partnership Programme", path: "/government-partnership-programme" },
           { label: "Youth for Change Fellowship Programme", path: "#" },
           { label: "Magic Mitra", path: "#" },
         ],
@@ -107,7 +109,7 @@ const NAVIGATION_ITEMS = [
       { label: "Work With Us", path: "#" },
       { label: "Certifications", path: "/certifications" },
       { label: "Our Culture", path: "#" },
-      { label: "Learning Loop", path: "#" },
+      { label: "Learning Loop", path: "/learning-development" },
       { label: "MB Academy", path: "#" },
       { label: "Darwin (Employee Login)", path: "#" },
     ],
@@ -272,7 +274,7 @@ export default function NavbarWireframe() {
                   {/* Dropdown */}
                   <AnimatePresence>
                     {activeDropdown === item.key && (
-                      <motion.div
+                      <_MOTION.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
@@ -329,7 +331,7 @@ export default function NavbarWireframe() {
                             ))}
                           </div>
                         )}
-                      </motion.div>
+                      </_MOTION.div>
                     )}
                   </AnimatePresence>
                 </div>
@@ -342,7 +344,7 @@ export default function NavbarWireframe() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="lg:hidden border-t border-slate-200 bg-white">
+          <_MOTION.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="lg:hidden border-t border-slate-200 bg-white">
             <div className="px-6 py-4 space-y-4">
               <form onSubmit={handleSearchSubmit} className="flex gap-2">
                 <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search..." className="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red" />
@@ -361,7 +363,17 @@ export default function NavbarWireframe() {
                       {item.groups ? (
                         item.groups.map((group, gidx) => (
                           <div key={gidx} className="mb-3">
-                            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">{group.title}</div>
+                            {group.path ? (
+                              <Link
+                                to={group.path}
+                                className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2 hover:text-brand-red"
+                                onClick={() => setMobileOpen(false)}
+                              >
+                                {group.title}
+                              </Link>
+                            ) : (
+                              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">{group.title}</div>
+                            )}
                             {group.items.map((subItem, si) => (
                               <Link key={si} to={subItem.path} className="block py-1 text-sm text-slate-600 hover:text-brand-red" onClick={() => setMobileOpen(false)}>{subItem.label}</Link>
                             ))}
@@ -385,9 +397,11 @@ export default function NavbarWireframe() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </_MOTION.div>
         )}
       </AnimatePresence>
     </nav>
   );
 }
+
+
