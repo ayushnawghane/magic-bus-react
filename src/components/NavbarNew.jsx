@@ -32,6 +32,7 @@ const NAVIGATION_ITEMS = [
         path: "/adolescent-programme",
         items: [
           { label: "Government Partnership Programme", path: "/government-partnership-programme" },
+          { label: "Learning & Development", path: "/learning-development" },
           { label: "Youth for Change Fellowship Programme", path: "#" },
           { label: "Magic Mitra", path: "#" },
         ],
@@ -109,7 +110,7 @@ const NAVIGATION_ITEMS = [
       { label: "Work With Us", path: "#" },
       { label: "Certifications", path: "/certifications" },
       { label: "Our Culture", path: "#" },
-      { label: "Learning Loop", path: "/learning-development" },
+      { label: "Learning & Development", path: "/learning-development" },
       { label: "MB Academy", path: "#" },
       { label: "Darwin (Employee Login)", path: "#" },
     ],

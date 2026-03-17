@@ -104,7 +104,7 @@ const MEGA = {
       { label: "Work With Us", path: "#" },
       { label: "Certifications", path: "/certifications" },
       { label: "Our Culture", path: "#" },
-      { label: "Learning Loop", path: "/learning-development" },
+      { label: "Learning & Development", path: "/learning-development" },
       { label: "MB Academy", path: "#" },
       { label: "Darwin (Employee Login)", path: "#" },
     ],
