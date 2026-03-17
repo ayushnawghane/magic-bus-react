@@ -444,11 +444,11 @@ const detailedBios = [
 
 const boards = {
     india: ["Deval Sanghavi", "Jaideep Khanna", "Rajiv Dube", "Rajeev Dubey", "Sandeep Murthy", "Shaneen Parikh", "Vivek Pandit"],
-    global: [],
-    usa: [],
-    uk: [],
-    singapore: [],
-    germany: []
+    global: ["Amit Bhandari", "Clive Lewis", "Deval Sanghavi", "Ivan Levy", "Jayant Rastogi", "Lindsay Cooper", "Matthew Spacie", "Shaneen Parikh"],
+    usa: ["Amit Bhandari", "Arpan Sheth", "ASH SOMANI", "Kapil Mathur", "Ram Shriram"],
+    uk: ["Anne Makepeace", "Diwakar Singh", "Ned Wills", "Ruby Parmar", "Sanjay Jawa", "Sanjiv Padmanabhan"],
+    singapore: ["Bina Rampuria", "Deepak Shahdadpuri", "Jai Pathak", "Lindsay Cooper", "Stephen Hunt", "Vivek Salgaocar", "Purnima Gandhi"],
+    germany: ["Barbara Muller", "Jens Neitzel"]
 };
 
 function HeroSection({ totalMembers, totalRegions }) {
