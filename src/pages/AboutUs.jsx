@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
-    ChevronDown,
     Heart,
     Target,
     Lightbulb,
@@ -12,13 +11,14 @@ import {
     TrendingUp,
     Shield,
     Zap,
-    HelpCircle,
     ArrowRight,
     CheckCircle,
     Quote,
 } from "lucide-react";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
+import HeroBanner from "../components/HeroBanner";
+import FAQSection from "../components/Home/FAQSectiom";
 
 /* ─────────────────────────────────────────────────────────────
    ANIMATION HELPERS
@@ -103,154 +103,133 @@ function AnimatedCounter({ value, suffix = "", duration = 2 }) {
     );
 }
 
+function SectionTag({ children }) {
+    return (
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-black/15 bg-brand-yellow px-4 py-1.5 text-[11px] font-bold tracking-[0.2em] uppercase text-brand-black mb-4">
+            {children}
+        </span>
+    );
+}
+
+/* ─────────────────────────────── VISION & MISSION ─────────────────────────────── */
+function VisionMission() {
+    return (
+        <section className="py-20 bg-[#F7F7F5]">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+                <FadeUp className="text-center mb-14">
+                    <SectionTag>Purpose</SectionTag>
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A]">
+                        What Drives Us Every Day
+                    </h2>
+                </FadeUp>
+
+                <div className="grid md:grid-cols-2 gap-7">
+                    {/* Vision */}
+                    <FadeUp delay={0.05}>
+                        <div className="relative h-full rounded-3xl bg-[#1A1A1A] text-white p-8 md:p-10 overflow-hidden">
+                            <div className="pointer-events-none absolute -bottom-16 -right-16 w-56 h-56 rounded-full bg-brand-red/15 blur-2xl" />
+                            <div className="relative z-10">
+                                <div className="inline-flex items-center gap-2 bg-brand-red rounded-xl px-3.5 py-2 mb-6">
+                                    <Target className="w-4.5 h-4.5 text-white" />
+                                    <span className="text-xs font-bold uppercase tracking-widest text-white">Our Vision</span>
+                                </div>
+                                <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-snug mb-4">
+                                    Breaking the Cycle of Poverty
+                                </h2>
+                                <p className="text-white/70 leading-relaxed text-base">
+                                    A world where young people break out of poverty to lead fulfilling,
+                                    rewarding lives and contribute positively to their communities.
+                                </p>
+                            </div>
+                        </div>
+                    </FadeUp>
+
+                    {/* Mission */}
+                    <FadeUp delay={0.12}>
+                        <div className="relative h-full rounded-3xl border-2 border-brand-yellow bg-white p-8 md:p-10 overflow-hidden">
+                            <div className="pointer-events-none absolute -bottom-16 -right-16 w-56 h-56 rounded-full bg-brand-yellow/20 blur-2xl" />
+                            <div className="relative z-10">
+                                <div className="inline-flex items-center gap-2 bg-brand-yellow rounded-xl px-3.5 py-2 mb-6">
+                                    <Zap className="w-4.5 h-4.5 text-brand-black" />
+                                    <span className="text-xs font-bold uppercase tracking-widest text-brand-black">Our Mission</span>
+                                </div>
+                                <h2 className="text-2xl md:text-3xl font-extrabold text-[#1A1A1A] leading-snug mb-4">
+                                    Equipping for Adulthood
+                                </h2>
+                                <p className="text-[#1A1A1A]/70 leading-relaxed text-base">
+                                    To equip vulnerable young people with life skills that enable them
+                                    to thrive in the transition to adulthood.
+                                </p>
+                            </div>
+                        </div>
+                    </FadeUp>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 /* ─────────────────────────────────────────────────────────────
    FAQ DATA
-───────────────────────────────────────────────────────────────*/
+ ───────────────────────────────────────────────────────────────*/
 const aboutFAQ = [
     {
-        q: "When was Magic Bus established and where?",
-        a: "Magic Bus India Foundation was established in Mumbai in 1999. Our founder noticed the transformative power of sport to change the lives of young boys from underserved communities, which sparked the creation of the organisation.",
+        question: "When was Magic Bus established and where?",
+        category: "Overview",
+        answer: "Magic Bus India Foundation was established in Mumbai in 1999. Our founder noticed the transformative power of sport to change the lives of young boys from underserved communities, which sparked the creation of the organisation.",
     },
     {
-        q: "Who does Magic Bus work with?",
-        a: "We work with adolescents and youth from underserved communities, supporting them from school days through to their career phase. We also engage with families, communities, schools, employers, and local institutions to scale sustainable transformation.",
+        question: "Who does Magic Bus work with?",
+        category: "Impact",
+        answer: "We work with adolescents and youth from underserved communities, supporting them from school days through to their career phase. We also engage with families, communities, schools, employers, and local institutions to scale sustainable transformation.",
     },
     {
-        q: "What is the Magic Bus approach to education?",
-        a: "Magic Bus integrates life skills education with academic learning and employability pathways. We believe academic education alone is not sufficient — young people also need resilience, communication skills, and the confidence to navigate real-world challenges.",
+        question: "What is the Magic Bus approach to education?",
+        category: "Programmes",
+        answer: "Magic Bus integrates life skills education with academic learning and employability pathways. We believe academic education alone is not sufficient — young people also need resilience, communication skills, and the confidence to navigate real-world challenges.",
     },
     {
-        q: "What are the key challenges Magic Bus addresses?",
-        a: "We address three core challenges: gender disparity (2 out of 5 girls drop out before completing education), learning gaps (45.8% of 8th graders cannot solve simple arithmetic), and skill mismatch (43.6% of youth are considered unemployable due to lack of future-ready skills).",
+        question: "What are the key challenges Magic Bus addresses?",
+        category: "Impact",
+        answer: "We address three core challenges: gender disparity (2 out of 5 girls drop out before completing education), learning gaps (45.8% of 8th graders cannot solve simple arithmetic), and skill mismatch (43.6% of youth are considered unemployable due to lack of future-ready skills).",
     },
     {
-        q: "What does Magic Bus mean by 'life skills'?",
-        a: "Life skills at Magic Bus include resilience, aspiration, self-belief, effective communication, conscious decision-making, emotional management, and readiness for real-world scenarios. These skills help young people thrive beyond the classroom.",
+        question: "What does Magic Bus mean by 'life skills'?",
+        category: "Programmes",
+        answer: "Life skills at Magic Bus include resilience, aspiration, self-belief, effective communication, conscious decision-making, emotional management, and readiness for real-world scenarios. These skills help young people thrive beyond the classroom.",
     },
     {
-        q: "How does Magic Bus support livelihoods?",
-        a: "Magic Bus supports youth in acquiring employability skills, accessing job opportunities or self-employment, and sustaining livelihoods. Our programmes create pathways from education to economic independence.",
+        question: "How does Magic Bus support livelihoods?",
+        category: "Programmes",
+        answer: "Magic Bus supports youth in acquiring employability skills, accessing job opportunities or self-employment, and sustaining livelihoods. Our programmes create pathways from education to economic independence.",
     },
     {
-        q: "What is the 'ecosystem approach' of Magic Bus?",
-        a: "Our ecosystem approach means we engage with all stakeholders — families, communities, schools, employers, and local institutions — to create an enabling environment for young people. This holistic approach ensures sustainable transformation that lasts beyond the programme.",
+        question: "What is the 'ecosystem approach' of Magic Bus?",
+        category: "Approach",
+        answer: "Our ecosystem approach means we engage with all stakeholders — families, communities, schools, employers, and local institutions — to create an enabling environment for young people. This holistic approach ensures sustainable transformation that lasts beyond the programme.",
     },
     {
-        q: "How can I partner with or support Magic Bus?",
-        a: "Magic Bus is open to collaborating with donors, corporates, foundations, and government partners. You can reach out through the Contact Us or Partner With Us pages on our website to explore how we can work together to create sustainable impact.",
+        question: "How can I partner with or support Magic Bus?",
+        category: "Support",
+        answer: "Magic Bus is open to collaborating with donors, corporates, foundations, and government partners. You can reach out through the Contact Us or Partner With Us pages on our website to explore how we can work together to create sustainable impact.",
     },
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   BANNER
-───────────────────────────────────────────────────────────────*/
-function HeroBanner() {
+   HERO BANNER
+──────────────────────────────────────────────────────────────*/
+function HeroSection() {
     return (
-        <section className="relative h-[70vh] min-h-[520px] w-full overflow-hidden bg-[#1A1A1A]">
-            {/* Background image */}
-            <div className="absolute inset-0">
-                <img
-                    src="/ngo-images/1.jpeg"
-                    alt="Magic Bus – Transforming Lives"
-                    className="h-full w-full object-cover opacity-50"
-                />
-                {/* Rich gradient overlays */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/95 via-[#1A1A1A]/70 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/60 via-transparent to-transparent" />
-            </div>
-
-            {/* Decorative accent shapes */}
-            <motion.div
-                className="pointer-events-none absolute -right-20 top-1/4 h-80 w-80 rounded-full bg-brand-red/20 blur-3xl"
-                animate={{ y: [0, 25, 0], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.div
-                className="pointer-events-none absolute right-1/4 bottom-1/4 h-56 w-56 rounded-full bg-brand-yellow/15 blur-3xl"
-                animate={{ y: [0, -30, 0], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            />
-
-            {/* Content */}
-            <div className="relative z-10 flex h-full items-center">
-                <div className="mx-auto w-full max-w-7xl px-6 lg:px-12">
-                    <div className="max-w-3xl">
-                        {/* Eyebrow */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1, duration: 0.6, ease: EASE }}
-                            className="mb-5"
-                        >
-                            <span className="inline-flex items-center gap-2 rounded-full border border-brand-yellow/40 bg-brand-yellow/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-brand-yellow backdrop-blur-sm">
-                                <span className="h-1.5 w-1.5 rounded-full bg-brand-yellow animate-pulse" />
-                                About Magic Bus
-                            </span>
-                        </motion.div>
-
-                        {/* Headline */}
-                        <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2, duration: 0.8, ease: EASE }}
-                            className="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl"
-                        >
-                            Transforming Lives{" "}
-                            <span className="block mt-1 bg-gradient-to-r from-brand-red via-brand-yellow to-brand-red bg-clip-text text-transparent">
-                                from Childhood to Livelihood
-                            </span>
-                        </motion.h1>
-
-                        {/* Subtext */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.35, duration: 0.7, ease: EASE }}
-                            className="mt-6 max-w-xl text-lg leading-relaxed text-white/80"
-                        >
-                            Helping young people from underserved communities complete education
-                            and build sustainable livelihoods since 1999.
-                        </motion.p>
-
-                        {/* CTAs */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5, duration: 0.6, ease: EASE }}
-                            className="mt-8 flex flex-wrap items-center gap-4"
-                        >
-                            <Link
-                                to="/donate"
-                                className="inline-flex items-center gap-2 rounded-full bg-brand-red px-7 py-3.5 font-semibold text-white shadow-lg transition-all hover:bg-brand-red/90 hover:shadow-brand-red/30 hover:shadow-xl"
-                            >
-                                Donate Now <ArrowRight className="w-4 h-4" />
-                            </Link>
-                            <Link
-                                to="/partner"
-                                className="inline-flex items-center gap-2 rounded-full border-2 border-brand-yellow/70 bg-transparent px-7 py-3.5 font-semibold text-brand-yellow backdrop-blur-sm transition-all hover:border-brand-yellow hover:bg-brand-yellow/10"
-                            >
-                                Partner With Us
-                            </Link>
-                        </motion.div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Scroll cue */}
-            <motion.div
-                className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-1 text-white/50"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2 }}
-            >
-                <span className="text-[10px] uppercase tracking-widest">Scroll</span>
-                <motion.div
-                    className="h-7 w-[2px] rounded-full bg-white/30"
-                    animate={{ scaleY: [1, 1.6, 1], opacity: [0.3, 0.7, 0.3] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                />
-            </motion.div>
-        </section>
+        <HeroBanner
+            badgeText="About Magic Bus"
+            title="Transforming Lives"
+            subtitle="from Childhood to Livelihood"
+            description="Helping young people from underserved communities complete education and build sustainable livelihoods since 1999."
+            ctas={[
+                { to: "/donate", label: "Donate Now", variant: "primary", showArrow: true },
+                { to: "/partner", label: "Partner With Us" },
+            ]}
+        />
     );
 }
 
@@ -263,7 +242,7 @@ const challenges = [
         label: "Gender Disparity",
         stat: "2 in 5",
         color: "bg-brand-magenta",
-        desc: "Girls drop out of school before completing education — losing their voice and chances of financial independence.",
+        desc: "Girls drop out of school before completing education  losing their voice and chances of financial independence.",
     },
     {
         icon: BookOpen,
@@ -277,7 +256,7 @@ const challenges = [
         label: "Skill Mismatch",
         stat: "43.6%",
         color: "bg-brand-green",
-        desc: "Of youth are considered unemployable — they have potential, but lack future-ready skills that employers seek.",
+        desc: "Of youth are considered unemployable  they have potential, but lack future-ready skills that employers seek.",
     },
 ];
 
@@ -293,7 +272,7 @@ function ProblemStatement() {
                     <p className="mt-5 text-lg text-[#1A1A1A]/70 max-w-3xl leading-relaxed">
                         India has the biggest population of young people globally. However,
                         millions of adolescents and youth from underserved areas are at risk
-                        of being left behind — dropping out of school, struggling at
+                        of being left behind  dropping out of school, struggling at
                         workplaces, and being stuck in intergenerational poverty.
                     </p>
                 </FadeUp>
@@ -335,8 +314,8 @@ function ProblemStatement() {
                 {/* Poverty trap callout */}
                 <FadeUp delay={0.2} className="mt-10">
                     <div className="rounded-2xl bg-gradient-to-r from-brand-red/10 via-brand-yellow/10 to-brand-red/5 border border-brand-red/15 p-7">
-                        <p className="text-base md:text-lg font-medium text-[#1A1A1A] leading-relaxed">
-                            <span className="text-brand-red font-bold">When gaps in education, life skills, and employability are not tackled,</span>{" "}
+                        <p className="text-base md:text-lg font-medium text-[#1A1A1A] text-center">
+                            <span className="text-brand-red font-bold">When gaps in education, life skills, and employability are not tackled,</span>{" "}<br/>
                             young people are deprived of opportunities due to the poverty trap.
                         </p>
                     </div>
@@ -395,7 +374,7 @@ function WhyLifeSkills() {
                             <p className="mt-4 text-base text-[#1A1A1A]/70 leading-relaxed">
                                 Academic education alone may not be sufficient to help young minds overcome
                                 poverty. Adolescents from underserved communities often deal with challenges
-                                beyond academics — low confidence, absence of role models, decision-making
+                                beyond academics  low confidence, absence of role models, decision-making
                                 struggles, and limited exposure.
                             </p>
                             <p className="mt-3 text-base text-[#1A1A1A]/70 leading-relaxed">
@@ -449,11 +428,12 @@ function WhoWeAre() {
             <div className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-brand-red/20 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-brand-yellow/15 blur-3xl" />
 
+
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                <SectionLabel>Who We Are</SectionLabel>
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     <div>
                         <FadeUp>
-                            <SectionLabel>Who We Are</SectionLabel>
                             <h2 className="text-3xl md:text-4xl font-extrabold leading-tight text-white">
                                 One of India's Top NGOs in{" "}
                                 <span className="text-brand-yellow">Life Skills & Livelihoods</span>
@@ -462,7 +442,7 @@ function WhoWeAre() {
                                 Established in Mumbai in 1999, Magic Bus India Foundation works in the areas
                                 of life skills education, employability skilling, and livelihoods. We support
                                 adolescents and youth from underserved communities at crucial stages of
-                                transformation — from their school days to their career phase.
+                                transformation  from their school days to their career phase.
                             </p>
                             <p className="mt-4 text-white/70 leading-relaxed">
                                 We work towards making sure challenging circumstances at birth do not
@@ -478,7 +458,7 @@ function WhoWeAre() {
                     </div>
 
                     {/* Stats grid */}
-                    <div className="grid grid-cols-2 gap-5">
+                    <div className="grid grid-cols-2 gap-5 items-center">
                         {stats.map((s, i) => (
                             <FadeUp key={s.label} delay={0.1 * i}>
                                 <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 hover:bg-white/10 transition-colors">
@@ -506,6 +486,14 @@ function WhoWeAre() {
                             </div>
                         ))}
                     </div>
+                    <FadeUp delay={0.3} className="mt-8 text-center">
+                        <Link
+                            to="/who-we-are"
+                            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-6 py-3 text-sm font-bold text-brand-black hover:bg-brand-yellow/90 transition-colors"
+                        >
+                            Know More <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </FadeUp>
                 </FadeIn>
             </div>
         </section>
@@ -521,7 +509,7 @@ const whatWeDo = [
         color: "text-brand-blue",
         bg: "bg-brand-blue/10",
         title: "Education & Adolescents",
-        desc: "Adolescents stay in school, acquire important life skills, and finish secondary education.",
+        desc: "Adolescents stay in school, acquire life skills through our curriculum, and finish secondary education.",
     },
     {
         icon: Briefcase,
@@ -546,7 +534,7 @@ function WhatWeDo() {
                 <FadeUp>
                     <SectionLabel icon={TrendingUp}>What We Do</SectionLabel>
                     <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A] leading-tight max-w-2xl">
-                        From Classrooms to Careers — an Integrated Approach
+                        From Classrooms to Careers  an Integrated Approach
                     </h2>
                     <p className="mt-4 text-[#1A1A1A]/70 max-w-2xl leading-relaxed">
                         Our work aims to achieve long-term goals, ensuring that progress made in classrooms
@@ -584,12 +572,12 @@ const timelineEvents = [
     {
         year: "1999",
         title: "Founded in Mumbai",
-        desc: "Our founder noticed the transformative power of sport to change the lives of young boys from underserved communities — simple rugby sessions growing into activity-based camps.",
+        desc: "Our founder noticed the transformative power of sport to change the lives of young boys from underserved communities  simple rugby sessions growing into activity-based camps.",
     },
     {
         year: "Early 2000s",
         title: "The Magic Bus Moment",
-        desc: "A group of young students boarded the 'magic bus' — a turning point using structured activities and mentorship to connect young people to education and life skills.",
+        desc: "A group of young students boarded the 'magic bus'  a turning point using structured activities and mentorship to connect young people to education and life skills.",
     },
     {
         year: "2010+",
@@ -683,7 +671,7 @@ function WhyMagicBus() {
                         <FadeUp>
                             <SectionLabel icon={Zap}>Why Magic Bus?</SectionLabel>
                             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A] leading-tight">
-                                Operating Across the Full Journey —{" "}
+                                Operating Across the Full Journey {" "}
                                 <span className="text-brand-red">Adolescence to Employment</span>
                             </h2>
                             <p className="mt-5 text-[#1A1A1A]/70 leading-relaxed">
@@ -800,41 +788,6 @@ function VisionMissionValues() {
             </div>
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-                {/* Vision & Mission */}
-                <div className="grid md:grid-cols-2 gap-8 mb-20">
-                    <FadeUp>
-                        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 h-full">
-                            <div className="flex items-center gap-3 mb-5">
-                                <div className="bg-brand-red rounded-xl p-2.5">
-                                    <Target className="w-5 h-5 text-white" />
-                                </div>
-                                <span className="text-xs font-semibold uppercase tracking-widest text-white/50">Our Vision</span>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Breaking the Poverty Cycle</h3>
-                            <p className="text-white/65 leading-relaxed">
-                                A world where young people break out of poverty to lead fulfilling, rewarding lives
-                                and contribute positively to their communities.
-                            </p>
-                        </div>
-                    </FadeUp>
-
-                    <FadeUp delay={0.1}>
-                        <div className="rounded-2xl border border-brand-yellow/30 bg-brand-yellow/5 backdrop-blur-sm p-8 h-full">
-                            <div className="flex items-center gap-3 mb-5">
-                                <div className="bg-brand-yellow rounded-xl p-2.5">
-                                    <Zap className="w-5 h-5 text-brand-black" />
-                                </div>
-                                <span className="text-xs font-semibold uppercase tracking-widest text-white/50">Our Mission</span>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Equipping for Adulthood</h3>
-                            <p className="text-white/65 leading-relaxed">
-                                To equip vulnerable young people with life skills that enable them to thrive in
-                                the transition to adulthood.
-                            </p>
-                        </div>
-                    </FadeUp>
-                </div>
-
                 {/* Values */}
                 <FadeUp className="text-center mb-12">
                     <SectionLabel>Our Values</SectionLabel>
@@ -850,7 +803,7 @@ function VisionMissionValues() {
                     {values.map((v, i) => (
                         <FadeUp key={v.title} delay={0.07 * i}>
                             <motion.div
-                                className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center hover:bg-white/10 transition-colors group cursor-default"
+                                className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center hover:bg-white/10 transition-colors group cursor-default h-full flex flex-col"
                                 whileHover={{ y: -4 }}
                                 transition={{ duration: 0.25 }}
                             >
@@ -858,7 +811,7 @@ function VisionMissionValues() {
                                     <v.icon className={`w-5 h-5 ${v.title === "Innovation" || v.title === "Collaboration" ? "text-brand-black" : "text-white"}`} />
                                 </div>
                                 <h4 className="font-bold text-white mb-2">{v.title}</h4>
-                                <p className="text-xs text-white/50 leading-relaxed">{v.desc}</p>
+                                <p className="text-xs text-white/50 leading-relaxed mt-auto">{v.desc}</p>
                             </motion.div>
                         </FadeUp>
                     ))}
@@ -869,93 +822,25 @@ function VisionMissionValues() {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   FAQ
-───────────────────────────────────────────────────────────────*/
-function FAQItem({ q, a, isOpen, onToggle }) {
-    return (
-        <div className="border-b border-gray-100 last:border-0">
-            <button
-                onClick={onToggle}
-                className="w-full flex items-start gap-4 py-5 text-left hover:bg-gray-50 px-2 rounded-xl transition-colors focus:outline-none"
-            >
-                <span className={`mt-1 h-2 w-2 shrink-0 rounded-full transition-colors ${isOpen ? "bg-brand-red" : "bg-[#1A1A1A]/20"}`} />
-                <span className={`flex-1 font-semibold text-sm md:text-base ${isOpen ? "text-brand-red" : "text-[#1A1A1A]"}`}>{q}</span>
-                <ChevronDown className={`w-5 h-5 shrink-0 mt-0.5 transition-transform text-[#1A1A1A]/40 ${isOpen ? "rotate-180 text-brand-red" : ""}`} />
-            </button>
-            <AnimatePresence initial={false}>
-                {isOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                    >
-                        <p className="pb-5 pl-6 pr-4 text-sm leading-relaxed text-[#1A1A1A]/65">{a}</p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
-}
-
-function FAQSection() {
-    const [open, setOpen] = useState(null);
-    return (
-        <section className="py-20 bg-[#F7F7F5]">
-            <div className="max-w-4xl mx-auto px-6 lg:px-8">
-                <FadeUp className="text-center mb-12">
-                    <SectionLabel icon={HelpCircle}>FAQs</SectionLabel>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A] mt-2">
-                        Frequently Asked Questions
-                    </h2>
-                    <p className="mt-3 text-[#1A1A1A]/60 max-w-xl mx-auto">
-                        Clear answers about Magic Bus, our programmes, and how we create impact.
-                    </p>
-                </FadeUp>
-
-                <FadeUp delay={0.1}>
-                    <div className="rounded-2xl border border-gray-100 bg-white px-6 py-2 shadow-sm">
-                        {aboutFAQ.map((item, i) => (
-                            <FAQItem
-                                key={item.q}
-                                q={item.q}
-                                a={item.a}
-                                isOpen={open === i}
-                                onToggle={() => setOpen(open === i ? null : i)}
-                            />
-                        ))}
-                    </div>
-                </FadeUp>
-
-                <FadeUp delay={0.2} className="mt-8 text-center">
-                    <Link
-                        to="/contact"
-                        className="inline-flex items-center gap-2 rounded-full bg-brand-red text-white px-6 py-3 text-sm font-semibold hover:bg-brand-red/90 transition-colors"
-                    >
-                        Still have questions? Contact us
-                        <ArrowRight className="w-4 h-4" />
-                    </Link>
-                </FadeUp>
-            </div>
-        </section>
-    );
-}
-
-/* ─────────────────────────────────────────────────────────────
    PAGE EXPORT
-───────────────────────────────────────────────────────────────*/
+ ───────────────────────────────────────────────────────────────*/
 export default function AboutUs() {
     return (
         <Layout>
-            <HeroBanner />
+            <HeroSection />
             <ProblemStatement />
             <WhyLifeSkills />
             <WhoWeAre />
             <WhatWeDo />
             <OurStory />
             <WhyMagicBus />
+            <VisionMission />
             <VisionMissionValues />
-            <FAQSection />
+            <FAQSection
+                items={aboutFAQ}
+                title="Frequently Asked Questions"
+                subtitle="Clear answers about Magic Bus, our programmes, and how we create impact."
+            />
         </Layout>
     );
 }

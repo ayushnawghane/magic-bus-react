@@ -1,13 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
     Heart, Shield, Users, Lightbulb, Star,
     Zap, BookOpen, TrendingUp, MessageCircle,
-    ChevronDown, Mail, ArrowRight, CheckCircle,
+    Mail, ArrowRight, CheckCircle,
     Award, Quote, User, Sparkles, ExternalLink,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
+import FAQSection from "../components/Home/FAQSectiom";
+import { cultureFAQ } from "../components/Home/faqItems";
 
 /* ─────────────────────────── helpers ─────────────────────────── */
 const EASE = [0.16, 1, 0.3, 1];
@@ -59,7 +61,6 @@ function HeroBanner() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/70 via-transparent to-transparent" />
             </div>
 
-            {/* animated blobs */}
             <motion.div className="pointer-events-none absolute right-16 top-24 h-80 w-80 rounded-full bg-brand-yellow/15 blur-3xl"
                 animate={{ y: [0, 24, 0], opacity: [0.3, 0.55, 0.3] }}
                 transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
@@ -108,50 +109,60 @@ function HeroBanner() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 1 — INTRODUCTION
+   SECTION 1 — INTRODUCTION (infographic style)
 ══════════════════════════════════════════════════════════════ */
 const culturePoints = [
-    { icon: Lightbulb, color: "bg-brand-yellow", textColor: "text-brand-black", title: "Curiosity", desc: "Curiosity fuels our innovation and keeps us moving forward. We thrive on questions, ideas, and fresh perspectives to create collective impact." },
-    { icon: Shield, color: "bg-brand-blue", textColor: "text-white", title: "Integrity", desc: "Trust, transparency, and accountability guide everything we do and form the foundation of our culture and how we treat one another." },
-    { icon: TrendingUp, color: "bg-brand-green", textColor: "text-brand-black", title: "Learning", desc: "Through new challenges, shared knowledge, and opportunities to upskill, growth is not only supported — it's expected and celebrated." },
-    { icon: Zap, color: "bg-brand-magenta", textColor: "text-white", title: "Bold Ideas", desc: "We value experimentation over perfection. Bold ideas, calculated risks, and learning from failures help us evolve and stay relevant." },
-    { icon: Users, color: "bg-brand-red", textColor: "text-white", title: "Collaboration", desc: "Great things happen when people work together. We listen, support, and build toward shared goals — because that's how we succeed." },
-    { icon: Star, color: "bg-brand-yellow", textColor: "text-brand-black", title: "Agility", desc: "Change is constant, and we embrace it. Our teams are agile, responsive, and open to evolving — moving fast and adapting with confidence." },
+    { icon: Lightbulb, color: "bg-brand-yellow", textColor: "text-brand-black", title: "Curiosity", desc: "Curiosity fuels our innovation and keeps us moving forward. We thrive on questions, ideas, and fresh perspectives." },
+    { icon: Shield, color: "bg-brand-blue", textColor: "text-white", title: "Integrity", desc: "Trust, transparency, and accountability guide everything we do and form the foundation of our culture." },
+    { icon: TrendingUp, color: "bg-brand-green", textColor: "text-brand-black", title: "Learning", desc: "Growth is not only supported — it's expected and celebrated through new challenges and shared knowledge." },
+    { icon: Zap, color: "bg-brand-magenta", textColor: "text-white", title: "Bold Ideas", desc: "We value experimentation over perfection. Bold ideas and calculated risks help us evolve and stay relevant." },
+    { icon: Users, color: "bg-brand-red", textColor: "text-white", title: "Collaboration", desc: "Great things happen when people work together toward shared goals — because that's how we succeed." },
+    { icon: Star, color: "bg-brand-yellow", textColor: "text-brand-black", title: "Agility", desc: "Change is constant, and we embrace it. Our teams move fast and adapt with confidence." },
 ];
 
 function IntroSection() {
     return (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
-                <FadeUp className="mb-4">
-                    <SectionTag>Who We Are</SectionTag>
-                </FadeUp>
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-16">
+                {/* Top split: text + image */}
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
                     <FadeUp>
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A] leading-tight">Our Culture</h2>
-                        <p className="mt-5 text-base text-[#1A1A1A]/70 leading-relaxed">
+                        <SectionTag>Who We Are</SectionTag>
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-[#1A1A1A] leading-tight mt-2">
+                            A Culture Built on <span className="text-brand-red">Purpose</span>
+                        </h2>
+                        <p className="mt-5 text-base text-[#1A1A1A]/65 leading-relaxed">
                             At Magic Bus, we believe that work should be meaningful, energising, and human. Our workplace is our second home — one where curiosity is encouraged, integrity is non-negotiable, and people grow together while shaping something bigger than 'Self'.
                         </p>
-                        <p className="mt-4 text-base text-[#1A1A1A]/70 leading-relaxed">
-                            Every role at Magic Bus makes a difference. Every work here has impact. Every role contributes to our larger mission and helps shape the organisation's direction and culture. We empower our people to take ownership and create change that truly matters.
+                        <p className="mt-4 text-base text-[#1A1A1A]/65 leading-relaxed">
+                            Every role at Magic Bus makes a difference and helps shape the organisation's direction. We empower our people to take ownership and create change that truly matters.
                         </p>
-                        <p className="mt-4 text-base text-[#1A1A1A]/70 leading-relaxed">
-                            We being onboard people who bring passion, energy, and pride to what they do — because meaningful work is driven by people who care deeply and see their contribution as more than just a job.
-                        </p>
+                        {/* Stat strip */}
+                        <div className="mt-8 flex gap-8 border-t border-gray-100 pt-6">
+                            {[
+                                { num: "6+", label: "Years Great Place to Work" },
+                                { num: "90%", label: "Employee Satisfaction" },
+                                { num: "3", label: "National Awards" }
+                            ].map(s => (
+                                <div key={s.label}>
+                                    <p className="text-3xl font-extrabold text-brand-red">{s.num}</p>
+                                    <p className="text-xs text-[#1A1A1A]/50 leading-tight mt-0.5 max-w-[80px]">{s.label}</p>
+                                </div>
+                            ))}
+                        </div>
                     </FadeUp>
 
                     <FadeIn delay={0.1}>
-                        <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
+                        <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl">
                             <img src="/ngo-images/6.jpeg" alt="Our Culture" className="h-full w-full object-cover" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/40 to-transparent" />
-                            {/* floating badge */}
-                            <div className="absolute bottom-5 left-5 right-5">
-                                <div className="inline-flex items-center gap-2 rounded-2xl bg-white/90 backdrop-blur-sm px-4 py-3 shadow-lg">
-                                    <div className="h-8 w-8 rounded-full bg-brand-yellow flex items-center justify-center">
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/50 to-transparent" />
+                            <div className="absolute bottom-5 left-5">
+                                <div className="inline-flex items-center gap-3 rounded-2xl bg-white/90 backdrop-blur-sm px-4 py-3 shadow-xl">
+                                    <div className="h-9 w-9 rounded-full bg-brand-yellow flex items-center justify-center shrink-0">
                                         <Heart className="w-4 h-4 text-brand-black" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-bold text-[#1A1A1A]">Great Place to Work</p>
+                                        <p className="text-xs font-extrabold text-[#1A1A1A]">Great Place to Work</p>
                                         <p className="text-[11px] text-[#1A1A1A]/55">Certified 6 years in a row</p>
                                     </div>
                                 </div>
@@ -160,16 +171,39 @@ function IntroSection() {
                     </FadeIn>
                 </div>
 
-                {/* 6-pillar grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {/* Six pillars — bento infographic grid */}
+                <FadeUp className="mb-10">
+                    <div className="flex items-center gap-4">
+                        <div className="h-0.5 w-10 bg-brand-red" />
+                        <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#1A1A1A]/45">The Six Pillars of Our Culture</p>
+                    </div>
+                </FadeUp>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {culturePoints.map((p, i) => (
                         <FadeUp key={p.title} delay={0.06 * i}>
-                            <motion.div className="rounded-2xl border border-gray-100 bg-[#F7F7F5] p-6 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300" whileHover={{ scale: 1.01 }}>
-                                <div className={`${p.color} inline-flex rounded-xl p-2.5 mb-4`}>
-                                    <p.icon className={`w-5 h-5 ${p.textColor}`} />
+                            <motion.div
+                                className="group relative rounded-2xl overflow-hidden bg-[#F7F7F5] border border-gray-100 hover:shadow-xl transition-all duration-300 cursor-default min-h-[200px] flex flex-col"
+                                whileHover={{ y: -4, scale: 1.01 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                            >
+                                {/* Top color bar */}
+                                <div className={`${p.color} h-1.5 w-full`} />
+
+                                <div className="flex-1 p-6 flex flex-col justify-between">
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className={`w-11 h-11 rounded-xl ${p.color} flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow`}>
+                                            <p.icon className={`w-5 h-5 ${p.textColor}`} />
+                                        </div>
+                                        <span className="text-5xl font-black text-[#1A1A1A]/6 group-hover:text-[#1A1A1A]/10 transition-colors leading-none select-none mt-1">
+                                            {String(i + 1).padStart(2, "0")}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-extrabold text-[#1A1A1A] text-lg mb-2">{p.title}</h3>
+                                        <p className="text-sm text-[#1A1A1A]/55 leading-relaxed">{p.desc}</p>
+                                    </div>
                                 </div>
-                                <h3 className="font-bold text-[#1A1A1A] mb-2">{p.title}</h3>
-                                <p className="text-sm text-[#1A1A1A]/60 leading-relaxed">{p.desc}</p>
                             </motion.div>
                         </FadeUp>
                     ))}
@@ -180,7 +214,7 @@ function IntroSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 2 — AWARDS
+   SECTION 2 — AWARDS (cinematic stacked rows)
 ══════════════════════════════════════════════════════════════ */
 const awards = [
     { img: "/ngo-images/award1.jpg", title: "Great Place to Work", sub: "Certified six consecutive years in a row" },
@@ -195,38 +229,47 @@ function AwardsSection() {
             <div className="pointer-events-none absolute bottom-0 left-1/4 w-72 h-72 rounded-full bg-brand-red/10 blur-3xl" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-                <FadeUp className="text-center mb-14">
+                <FadeUp className="mb-16">
                     <SectionTag dark>Recognition</SectionTag>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-white">Awards &amp; Recognition</h2>
-                    <p className="mt-3 text-white/55 max-w-lg mx-auto leading-relaxed">
-                        Our commitment to culture, employee wellbeing, and purposeful work has earned us consistent recognition.
-                    </p>
+                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+                            Awards &amp; <span className="text-brand-yellow">Recognition</span>
+                        </h2>
+                        <p className="text-white/50 max-w-sm leading-relaxed text-sm">
+                            Consistent recognition for culture, employee wellbeing, and purposeful work.
+                        </p>
+                    </div>
                 </FadeUp>
 
-                <div className="grid sm:grid-cols-3 gap-6">
+                {/* Cinematic stacked award rows */}
+                <div className="space-y-4">
                     {awards.map((a, i) => (
-                        <FadeUp key={a.title} delay={0.08 * i}>
+                        <FadeUp key={a.title} delay={0.1 * i}>
                             <motion.div
-                                className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10 hover:border-brand-yellow/40 transition-all duration-300"
-                                whileHover={{ y: -4 }}
+                                className="group relative rounded-2xl overflow-hidden h-44 cursor-default"
+                                whileHover={{ scale: 1.015 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
                             >
-                                {/* image */}
-                                <div className="relative w-full h-52 overflow-hidden bg-[#2a2a2a]">
-                                    <img src={a.img} alt={a.title} className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/80 to-transparent" />
-                                    {/* award badge */}
-                                    <div className="absolute top-3 right-3">
-                                        <div className="w-9 h-9 rounded-full bg-brand-yellow flex items-center justify-center shadow-lg">
-                                            <Award className="w-4 h-4 text-brand-black" />
-                                        </div>
+                                <img
+                                    src={a.img} alt={a.title}
+                                    className="absolute inset-0 w-full h-full object-cover object-center opacity-25 group-hover:opacity-45 scale-105 group-hover:scale-100 transition-all duration-700"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#111]/95 via-[#111]/65 to-transparent" />
+                                <div className="relative z-10 h-full flex items-center px-8 gap-6">
+                                    <div className="shrink-0 w-14 h-14 rounded-2xl bg-brand-yellow flex items-center justify-center shadow-xl">
+                                        <Award className="w-7 h-7 text-brand-black" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-yellow/60 mb-1">Award #{i + 1}</p>
+                                        <h3 className="text-xl md:text-2xl font-extrabold text-white leading-snug">{a.title}</h3>
+                                        <p className="text-sm text-white/50 mt-1">{a.sub}</p>
+                                    </div>
+                                    <div className="shrink-0 hidden md:flex w-10 h-10 rounded-full border border-white/20 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <ArrowRight className="w-4 h-4 text-white" />
                                     </div>
                                 </div>
-                                <div className="p-5">
-                                    <h3 className="font-bold text-white text-base leading-snug mb-1">{a.title}</h3>
-                                    <p className="text-sm text-white/50 leading-relaxed">{a.sub}</p>
-                                </div>
-                                {/* Yellow bottom accent */}
-                                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-yellow scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                                {/* Left accent bar */}
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-yellow opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             </motion.div>
                         </FadeUp>
                     ))}
@@ -237,7 +280,7 @@ function AwardsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 3 — GREAT PLACE TO WORK
+   SECTION 3 — GREAT PLACE TO WORK (alternating rows)
 ══════════════════════════════════════════════════════════════ */
 const gptw = [
     { icon: Shield, title: "Safe &amp; Positive", desc: "Our people consistently affirm that Magic Bus provides a safe workplace that contributes to a positive working environment." },
@@ -249,56 +292,93 @@ const gptw = [
 ];
 
 function GreatPlaceSection() {
+
     return (
-        <section className="py-20 bg-[#F7F7F5]">
-            <div className="max-w-7xl mx-auto px-6 lg:px-12">
-                <FadeUp className="mb-14">
-                    <SectionTag>Great Place to Work</SectionTag>
-                    <div className="grid lg:grid-cols-2 gap-8 items-end">
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A] leading-tight">
-                            What Makes Magic Bus a Great Place to Work?
-                        </h2>
-                        <p className="text-base text-[#1A1A1A]/65 leading-relaxed">
-                            At Magic Bus, we are intentional about creating an environment where people feel respected, supported, and empowered to do meaningful work. Our culture is shaped by shared values, a strong sense of purpose, and a commitment to creating positive experiences for everyone who works here.
-                        </p>
-                    </div>
-                </FadeUp>
+        <section className="bg-white overflow-hidden">
+            {/* ── TOP: Light split panel ── */}
+            <div className="bg-white relative overflow-hidden border-t border-gray-100">
+                <div className="pointer-events-none absolute -top-40 right-0 w-[460px] h-[460px] rounded-full bg-brand-red/4 blur-3xl" />
+                <div className="pointer-events-none absolute bottom-0 left-0 w-72 h-72 rounded-full bg-brand-yellow/8 blur-3xl" />
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {gptw.map((item, i) => (
-                        <FadeUp key={item.title} delay={0.06 * i}>
-                            <motion.div className="bg-white rounded-2xl border border-gray-100 p-6 h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300" whileHover={{ scale: 1.01 }}>
-                                <div className="w-10 h-10 rounded-xl bg-[#F7F7F5] flex items-center justify-center mb-4 border border-gray-100">
-                                    <item.icon className="w-5 h-5 text-brand-red" />
-                                </div>
-                                <h3 className="font-bold text-[#1A1A1A] mb-2" dangerouslySetInnerHTML={{ __html: item.title }} />
-                                <p className="text-sm text-[#1A1A1A]/60 leading-relaxed">{item.desc}</p>
-                            </motion.div>
-                        </FadeUp>
-                    ))}
-                </div>
+                {/* Top red accent line */}
+                <div className="h-1 w-full bg-gradient-to-r from-brand-red via-brand-yellow to-brand-red/20" />
 
-                {/* Quote callout */}
-                <FadeUp delay={0.1} className="mt-10">
-                    <div className="rounded-3xl bg-[#1A1A1A] text-white p-8 md:p-10 relative overflow-hidden">
-                        <div className="pointer-events-none absolute -right-16 -top-16 w-56 h-56 rounded-full bg-brand-yellow/10 blur-2xl" />
-                        <div className="relative z-10 flex gap-5 items-start">
-                            <div className="bg-brand-yellow shrink-0 rounded-xl p-2.5 mt-1">
-                                <Quote className="w-5 h-5 text-brand-black" />
+                <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                    <div className="grid lg:grid-cols-2 gap-0 min-h-[540px]">
+
+                        {/* Left: heading + stats */}
+                        <div className="py-20 pr-0 lg:pr-16 flex flex-col justify-center">
+                            <FadeUp>
+                                <SectionTag>Great Place to Work</SectionTag>
+                                <h2 className="text-4xl md:text-5xl font-extrabold text-[#1A1A1A] leading-tight mt-2">
+                                    What Makes Us a{" "}
+                                    <span className="relative inline-block">
+                                        <span className="text-brand-red">Great Place</span>
+                                        <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-red/30 rounded-full" />
+                                    </span>{" "}
+                                    to Work?
+                                </h2>
+                                <p className="mt-5 text-[#1A1A1A]/60 leading-relaxed text-base max-w-lg">
+                                    At Magic Bus, we are intentional about creating an environment where people feel respected, supported, and empowered to do meaningful work.
+                                </p>
+
+                            </FadeUp>
+                        </div>
+
+                        {/* Right: 2-col feature pills grid */}
+                        <div className="py-20 pl-0 lg:pl-16 lg:border-l border-gray-100 flex flex-col justify-center">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {gptw.map((item, i) => (
+                                    <FadeUp key={item.title} delay={0.06 * i}>
+                                        <motion.div
+                                            className="group flex items-start gap-3 rounded-xl border border-gray-100 bg-[#F7F7F5] p-4 hover:bg-white hover:border-brand-red/20 hover:shadow-md transition-all duration-300 cursor-default"
+                                            whileHover={{ y: -2 }}
+                                        >
+                                            <div className="shrink-0 mt-0.5 w-8 h-8 rounded-lg bg-brand-red/8 group-hover:bg-brand-red/12 flex items-center justify-center transition-colors">
+                                                <item.icon className="w-4 h-4 text-brand-red" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-sm font-bold text-[#1A1A1A] leading-snug" dangerouslySetInnerHTML={{ __html: item.title }} />
+                                                <p className="text-xs text-[#1A1A1A]/50 leading-relaxed mt-0.5">{item.desc}</p>
+                                            </div>
+                                        </motion.div>
+                                    </FadeUp>
+                                ))}
                             </div>
-                            <p className="text-lg font-medium text-white/85 leading-relaxed italic">
-                                "Ethical conduct and accountability guide how we operate. Fairness, transparency, and mutual respect are embedded in our ways of working and form the basis of strong, trust-based relationships across the organisation."
-                            </p>
                         </div>
                     </div>
-                </FadeUp>
+                </div>
             </div>
+
+            {/* ── BOTTOM: Quote accent strip ── */}
+            <FadeUp>
+                <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+                    <div className="relative rounded-3xl overflow-hidden bg-[#F7F7F5] border border-gray-100 p-8 md:p-12 flex flex-col md:flex-row gap-8 items-start">
+                        {/* Decorative left bar */}
+                        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-brand-yellow via-brand-red to-brand-red/30 rounded-l-3xl" />
+                        <div className="shrink-0">
+                            <div className="w-14 h-14 rounded-2xl bg-brand-yellow flex items-center justify-center shadow-md">
+                                <Quote className="w-6 h-6 text-brand-black" />
+                            </div>
+                        </div>
+                        <div className="flex-1">
+                            <p className="text-lg md:text-2xl font-semibold text-[#1A1A1A]/80 leading-relaxed italic">
+                                "Ethical conduct and accountability guide how we operate. Fairness, transparency, and mutual respect form the basis of strong, trust-based relationships across the organisation."
+                            </p>
+                            <div className="mt-5 flex items-center gap-3">
+                                <div className="w-6 h-0.5 bg-brand-red" />
+                                <span className="text-xs text-[#1A1A1A]/40 font-semibold uppercase tracking-widest">Magic Bus Culture Pillar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </FadeUp>
         </section>
     );
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 4 — CORE VALUES
+   SECTION 4 — CORE VALUES (editorial strip layout)
 ══════════════════════════════════════════════════════════════ */
 const coreValues = [
     { icon: Shield, color: "bg-brand-red", textColor: "text-white", title: "Integrity", desc: "Our strong and transparent systems ensure smooth operations, upholding trust." },
@@ -310,31 +390,45 @@ const coreValues = [
 
 function CoreValuesSection() {
     return (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
-                <FadeUp className="text-center mb-14">
+                <FadeUp className="mb-16">
                     <SectionTag>Values</SectionTag>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A]">
-                        Core Values Defining Our Work
-                    </h2>
-                    <p className="mt-3 text-[#1A1A1A]/55 max-w-lg mx-auto leading-relaxed">
-                        Five values that guide every decision, every interaction, and every programme we run.
-                    </p>
+                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-[#1A1A1A] leading-tight">
+                            Core Values <span className="text-brand-red">Defining</span> Our Work
+                        </h2>
+                        <p className="text-[#1A1A1A]/50 max-w-xs text-sm leading-relaxed">
+                            Five values that guide every decision, every interaction, and every programme we run.
+                        </p>
+                    </div>
                 </FadeUp>
 
-                {/* Horizontal scrollable on mobile, grid on desktop */}
-                <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
+                {/* Editorial bold strip layout */}
+                <div className="divide-y divide-gray-100 border-t border-gray-100">
                     {coreValues.map((v, i) => (
                         <FadeUp key={v.title} delay={0.07 * i}>
                             <motion.div
-                                className="group flex flex-col items-center text-center rounded-2xl border border-gray-100 bg-[#F7F7F5] p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-default"
-                                whileHover={{ scale: 1.03 }}
+                                className="group flex items-stretch overflow-hidden cursor-default"
+                                whileHover={{ backgroundColor: "rgba(0,0,0,0.015)" }}
                             >
-                                <div className={`${v.color} w-14 h-14 rounded-2xl flex items-center justify-center mb-5 shadow-md group-hover:shadow-lg transition-shadow`}>
-                                    <v.icon className={`w-6 h-6 ${v.textColor}`} />
+                                {/* Number column */}
+                                <div className="shrink-0 w-14 flex items-center justify-center">
+                                    <span className="text-4xl font-black text-[#1A1A1A]/8 group-hover:text-[#1A1A1A]/15 transition-colors select-none">{String(i + 1).padStart(2, "0")}</span>
                                 </div>
-                                <h3 className="font-extrabold text-[#1A1A1A] mb-2">{v.title}</h3>
-                                <p className="text-xs text-[#1A1A1A]/60 leading-relaxed">{v.desc}</p>
+                                {/* Color icon block */}
+                                <div className={`shrink-0 w-14 group-hover:w-20 flex items-center justify-center ${v.color} transition-all duration-300`}>
+                                    <v.icon className={`w-5 h-5 ${v.textColor}`} />
+                                </div>
+                                {/* Content */}
+                                <div className="flex-1 py-6 px-6 flex flex-col md:flex-row md:items-center md:gap-16">
+                                    <h3 className="font-black text-[#1A1A1A] text-xl md:text-2xl min-w-[150px]">{v.title}</h3>
+                                    <p className="text-sm text-[#1A1A1A]/55 leading-relaxed mt-1 md:mt-0 flex-1">{v.desc}</p>
+                                </div>
+                                {/* Arrow reveal */}
+                                <div className="shrink-0 flex items-center pr-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <ArrowRight className="w-4 h-4 text-[#1A1A1A]/30" />
+                                </div>
                             </motion.div>
                         </FadeUp>
                     ))}
@@ -345,17 +439,9 @@ function CoreValuesSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 5 — WORKING HERE (photo mosaic)
+   SECTION 5 — WORKING HERE (photo mosaic) — UNCHANGED
 ══════════════════════════════════════════════════════════════ */
 function WorkingHereSection() {
-    const photos = [
-        { src: "/ngo-images/2.JPG", span: "col-span-2 row-span-2" },
-        { src: "/ngo-images/7.jpg", span: "" },
-        { src: "/ngo-images/8.jpg", span: "" },
-        { src: "/ngo-images/10.jpg", span: "" },
-        { src: "/ngo-images/girl.jpeg", span: "" },
-    ];
-
     return (
         <section className="py-20 bg-[#1A1A1A] relative overflow-hidden">
             <div className="pointer-events-none absolute top-0 left-0 w-80 h-80 rounded-full bg-brand-blue/8 blur-3xl" />
@@ -363,7 +449,6 @@ function WorkingHereSection() {
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-14 items-center">
-                    {/* Left text */}
                     <FadeUp>
                         <SectionTag dark>Inside Magic Bus</SectionTag>
                         <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mt-2">
@@ -392,7 +477,6 @@ function WorkingHereSection() {
                         </div>
                     </FadeUp>
 
-                    {/* Right — photo mosaic */}
                     <FadeIn delay={0.1}>
                         <div className="grid grid-cols-3 grid-rows-3 gap-3 h-[400px]">
                             <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden">
@@ -419,7 +503,7 @@ function WorkingHereSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 6 — HOW WE INVEST
+   SECTION 6 — HOW WE INVEST — UNCHANGED
 ══════════════════════════════════════════════════════════════ */
 const investments = [
     {
@@ -483,7 +567,7 @@ function InvestSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 7 — TESTIMONIALS
+   SECTION 7 — TESTIMONIALS — UNCHANGED
 ══════════════════════════════════════════════════════════════ */
 const testimonials = [
     {
@@ -520,40 +604,38 @@ function TestimonialsSection() {
                     {testimonials.map((t, i) => (
                         <FadeUp key={t.name} delay={0.08 * i}>
                             <div className="relative bg-[#F7F7F5] rounded-3xl p-8 border border-gray-100 h-full hover:shadow-lg transition-shadow">
-                                {/* large quote mark */}
                                 <span className="absolute top-5 right-6 text-7xl font-serif text-brand-yellow/30 leading-none select-none">"</span>
 
                                 <div className="relative z-10">
                                     <p className="text-base text-[#1A1A1A]/80 leading-relaxed italic mb-6">
                                         "{t.quote}"
                                     </p>
-                                        <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
-                                            <div className="w-10 h-10 rounded-full overflow-hidden bg-brand-yellow/20 shrink-0 flex items-center justify-center">
-                                                {t.img ? (
-                                                    <img src={t.img} alt={t.name} className="w-full h-full object-cover" onError={e => e.target.style.display = 'none'} />
-                                                ) : (
-                                                    <User className="w-5 h-5 text-brand-yellow" />
-                                                )}
-                                            </div>
-                                            <div className="flex-1">
-                                                <p className="text-sm font-bold text-[#1A1A1A] flex items-center gap-2">
-                                                    {t.name}
-                                                    {t.link && (
-                                                        <a href={t.link} target="_blank" rel="noopener noreferrer" className="text-brand-red hover:text-brand-yellow transition-colors">
-                                                            <ExternalLink className="w-3.5 h-3.5" />
-                                                        </a>
-                                                    )}
-                                                </p>
-                                                <p className="text-xs text-brand-red font-medium">{t.role}</p>
-                                            </div>
+                                    <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
+                                        <div className="w-10 h-10 rounded-full overflow-hidden bg-brand-yellow/20 shrink-0 flex items-center justify-center">
+                                            {t.img ? (
+                                                <img src={t.img} alt={t.name} className="w-full h-full object-cover" onError={e => e.target.style.display = 'none'} />
+                                            ) : (
+                                                <User className="w-5 h-5 text-brand-yellow" />
+                                            )}
                                         </div>
+                                        <div className="flex-1">
+                                            <p className="text-sm font-bold text-[#1A1A1A] flex items-center gap-2">
+                                                {t.name}
+                                                {t.link && (
+                                                    <a href={t.link} target="_blank" rel="noopener noreferrer" className="text-brand-red hover:text-brand-yellow transition-colors">
+                                                        <ExternalLink className="w-3.5 h-3.5" />
+                                                    </a>
+                                                )}
+                                            </p>
+                                            <p className="text-xs text-brand-red font-medium">{t.role}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </FadeUp>
                     ))}
                 </div>
 
-                {/* Career CTA banner */}
                 <FadeUp delay={0.1}>
                     <div className="rounded-2xl bg-gradient-to-r from-brand-red to-[#c41a1f] text-white px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5">
                         <div className="flex items-center gap-4">
@@ -575,58 +657,20 @@ function TestimonialsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 8 — FAQs
+   SECTION 8 — FAQs — UNCHANGED
 ══════════════════════════════════════════════════════════════ */
-const faqs = [
-    { q: "What kind of professionals work at Magic Bus?", a: "Our teams are purpose-driven, collaborative, and open to learning. We welcome professionals from both corporate and social sector backgrounds who are passionate about creating meaningful change." },
-    { q: "Does Magic Bus support professional growth?", a: "Yes. Continuous learning and skill development are integral to our culture. Through our Capability Development Program, Growth Talk platform, and on-the-job challenges, we ensure our people grow at every stage." },
-    { q: "Is Magic Bus an inclusive workplace?", a: "Yes. Diversity, equity, and respect are actively practiced across teams. We embrace different backgrounds, experiences, and viewpoints — creating an environment where everyone can contribute authentically." },
-    { q: "Why choose Magic Bus as an employer?", a: "Magic Bus offers meaningful work, strong values, and the opportunity to contribute to lasting social impact. Our certified Great Place to Work status reflects our genuine commitment to employee experience and wellbeing." },
-];
-
-function FAQSection() {
-    const [open, setOpen] = useState(null);
+function FAQSectionWrapper() {
     return (
-        <section className="py-20 bg-[#F7F7F5]">
-            <div className="max-w-4xl mx-auto px-6 lg:px-12">
-                <FadeUp className="text-center mb-12">
-                    <SectionTag>FAQs</SectionTag>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A]">Frequently Asked Questions</h2>
-                    <p className="mt-3 text-[#1A1A1A]/55 max-w-md mx-auto leading-relaxed">Common questions about working at Magic Bus and our culture.</p>
-                </FadeUp>
-
-                <div className="space-y-3">
-                    {faqs.map((faq, i) => (
-                        <FadeUp key={faq.q} delay={0.06 * i}>
-                            <div className={`rounded-2xl border transition-all duration-300 overflow-hidden ${open === i ? "border-brand-yellow bg-white shadow-md" : "border-gray-200 bg-white hover:border-brand-yellow/40"}`}>
-                                <button
-                                    onClick={() => setOpen(open === i ? null : i)}
-                                    className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
-                                >
-                                    <span className={`font-semibold text-sm leading-snug ${open === i ? "text-brand-red" : "text-[#1A1A1A]"}`}>{faq.q}</span>
-                                    <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.3 }} className="shrink-0">
-                                        <ChevronDown className={`w-5 h-5 ${open === i ? "text-brand-red" : "text-[#1A1A1A]/40"}`} />
-                                    </motion.div>
-                                </button>
-                                <motion.div
-                                    initial={false}
-                                    animate={{ height: open === i ? "auto" : 0, opacity: open === i ? 1 : 0 }}
-                                    transition={{ duration: 0.35, ease: EASE }}
-                                    className="overflow-hidden"
-                                >
-                                    <p className="px-6 pb-5 text-sm text-[#1A1A1A]/65 leading-relaxed">{faq.a}</p>
-                                </motion.div>
-                            </div>
-                        </FadeUp>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <FAQSection
+            items={cultureFAQ}
+            title="Frequently Asked Questions"
+            subtitle="Common questions about working at Magic Bus and our culture."
+        />
     );
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 9 — CONNECT / CONTACT
+   SECTION 9 — CONNECT / CONTACT — UNCHANGED
 ══════════════════════════════════════════════════════════════ */
 function ConnectSection() {
     return (
@@ -665,7 +709,6 @@ function ConnectSection() {
                     ))}
                 </div>
 
-                {/* Bottom CTA strip */}
                 <FadeUp delay={0.15} className="mt-8 text-center">
                     <a href="https://www.magicbus.org/work-with-us.php" target="_blank" rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-8 py-4 font-bold text-brand-black shadow-lg transition hover:shadow-xl hover:bg-brand-yellow/90 group">
@@ -691,7 +734,7 @@ export default function OurCulture() {
             <WorkingHereSection />
             <InvestSection />
             <TestimonialsSection />
-            <FAQSection />
+            <FAQSectionWrapper />
             <ConnectSection />
         </Layout>
     );

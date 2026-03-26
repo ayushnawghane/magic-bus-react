@@ -1,7 +1,10 @@
 ﻿import React, { useMemo, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, ChevronDown, Mail } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 import Layout from "../components/Layout";
+import HeroBanner from "../components/HeroBanner";
+import FAQSection from "../components/Home/FAQSectiom";
+import { adolescentFAQ } from "../components/Home/faqItems";
 
 const _MOTION = motion;
 const EASE = [0.16, 1, 0.3, 1];
@@ -122,40 +125,6 @@ function SectionTag({ children, dark = false }) {
   );
 }
 
-function HeroBanner() {
-  return (
-    <section className="relative overflow-hidden bg-[#0D1321] pb-20 pt-32 sm:pt-36">
-      <div className="absolute inset-0 opacity-35">
-        <img src="/ngo-images/girl.jpeg" alt="Adolescent programme banner" className="h-full w-full object-cover" />
-      </div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(33,189,234,0.28),transparent_36%),radial-gradient(circle_at_80%_10%,rgba(225,34,40,0.3),transparent_42%),linear-gradient(100deg,rgba(13,19,33,0.98),rgba(13,19,33,0.74),rgba(13,19,33,0.9))]" />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <FadeUp className="max-w-4xl">
-          <SectionTag dark>Adolescent Programme</SectionTag>
-          <h1 className="mt-5 text-5xl font-black leading-tight text-white md:text-7xl">Adolescent Programme</h1>
-          <h2 className="mt-4 text-2xl font-semibold leading-relaxed text-white/90 md:text-3xl">
-            Helping Adolescents Ace Life and Learning
-          </h2>
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur">
-              <p className="text-sm uppercase tracking-[0.12em] text-white/70">Target Group</p>
-              <p className="mt-2 text-xl font-bold text-white">Ages 12-18</p>
-            </div>
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur">
-              <p className="text-sm uppercase tracking-[0.12em] text-white/70">Girls Participation</p>
-              <p className="mt-2 text-xl font-bold text-white">52%</p>
-            </div>
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur">
-              <p className="text-sm uppercase tracking-[0.12em] text-white/70">States & UTs Reached</p>
-              <p className="mt-2 text-xl font-bold text-white">22</p>
-            </div>
-          </div>
-        </FadeUp>
-      </div>
-    </section>
-  );
-}
-
 function NeedSection() {
   return (
     <section className="bg-[#F6F8FB] py-16 sm:py-20">
@@ -268,10 +237,12 @@ function DiagramSection({ title, label, imagePath }) {
           <h2 className="mt-5 text-3xl font-black text-[#0F172A] md:text-4xl">{title}</h2>
           <button
             onClick={() => setZoom(true)}
-            className="mt-6 w-full overflow-hidden rounded-3xl border border-black/10 bg-[#F8FAFC]"
+            className="mt-6 mx-auto block w-full max-w-6xl overflow-hidden rounded-3xl border border-black/10 bg-gradient-to-b from-[#F8FAFC] to-white p-3 sm:p-4"
             aria-label={`Open ${title} diagram`}
           >
-            <img src={imagePath} alt={title} className="w-full object-contain" />
+            <div className="overflow-hidden rounded-2xl border border-black/10 bg-white">
+              <img src={imagePath} alt={title} className="mx-auto w-full max-h-[520px] object-contain" />
+            </div>
           </button>
         </FadeUp>
       </div>
@@ -378,25 +349,25 @@ function OutreachImpactSection() {
           </div>
         </FadeUp>
 
-        <FadeUp className="mt-10 max-w-4xl">
+        <FadeUp className="mt-10">
           <h2 className="text-3xl font-black text-[#0F172A] md:text-4xl">Our Impact</h2>
           <p className="mt-4 text-sm text-slate-600">Source: Annual report 2024-25</p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-black/10 bg-[#F8FAFC] p-5">
+          <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="h-full rounded-2xl border border-black/10 bg-[#F8FAFC] p-5 shadow-sm">
               <p className="text-4xl font-black text-brand-red">27%</p>
-              <p className="mt-2 text-slate-700">Increase in attendance and school regularity</p>
+              <p className="mt-2 leading-relaxed text-slate-700">Increase in attendance and school regularity</p>
             </div>
-            <div className="rounded-2xl border border-black/10 bg-[#F8FAFC] p-5">
+            <div className="h-full rounded-2xl border border-black/10 bg-[#F8FAFC] p-5 shadow-sm">
               <p className="text-4xl font-black text-brand-blue">46%</p>
-              <p className="mt-2 text-slate-700">Improvement in perceived ability to withstand and recover from difficulties</p>
+              <p className="mt-2 leading-relaxed text-slate-700">Improvement in perceived ability to withstand and recover from difficulties</p>
             </div>
-            <div className="rounded-2xl border border-black/10 bg-[#F8FAFC] p-5">
+            <div className="h-full rounded-2xl border border-black/10 bg-[#F8FAFC] p-5 shadow-sm">
               <p className="text-4xl font-black text-brand-green">20%</p>
-              <p className="mt-2 text-slate-700">Increase in perceived ability to act as required to achieve goals</p>
+              <p className="mt-2 leading-relaxed text-slate-700">Increase in perceived ability to act as required to achieve goals</p>
             </div>
-            <div className="rounded-2xl border border-black/10 bg-[#F8FAFC] p-5">
+            <div className="h-full rounded-2xl border border-black/10 bg-[#F8FAFC] p-5 shadow-sm">
               <p className="text-4xl font-black text-brand-magenta">6%</p>
-              <p className="mt-2 text-slate-700">Improvement in adolescents&apos; gender attitude</p>
+              <p className="mt-2 leading-relaxed text-slate-700">Improvement in adolescents&apos; gender attitude</p>
             </div>
           </div>
         </FadeUp>
@@ -412,8 +383,10 @@ function OutreachMapSection() {
         <FadeUp>
           <SectionTag>Geographical Presence</SectionTag>
           <h2 className="mt-5 text-3xl font-black text-[#0F172A] md:text-4xl">Our Reach Across India</h2>
-          <div className="mt-6 overflow-hidden rounded-3xl border border-black/10 bg-white">
-            <img src="/mapnew.jpg" alt="Magic Bus outreach map" className="w-full object-cover" />
+          <div className="mt-6 mx-auto max-w-6xl overflow-hidden rounded-3xl border border-black/10 bg-white p-3 sm:p-4">
+            <div className="overflow-hidden rounded-2xl border border-black/10 bg-white">
+              <img src="/mapnew.jpg" alt="Magic Bus outreach map" className="w-full max-h-[560px] object-contain" />
+            </div>
           </div>
         </FadeUp>
       </div>
@@ -504,39 +477,6 @@ function SuccessStoriesSection() {
   );
 }
 
-function FAQSection() {
-  const [openFaq, setOpenFaq] = useState(0);
-  return (
-    <section className="bg-[#F6F8FB] py-16 sm:py-20">
-      <div className="mx-auto max-w-5xl px-6 lg:px-12">
-        <FadeUp className="text-center">
-          <SectionTag>FAQs</SectionTag>
-          <h2 className="mt-5 text-3xl font-black text-[#0F172A] md:text-4xl">Frequently Asked Questions</h2>
-        </FadeUp>
-        <div className="mt-8 space-y-3">
-          {faqs.map((item, idx) => (
-            <FadeUp key={item.q} delay={idx * 0.04}>
-              <div className="rounded-2xl border border-black/10 bg-white p-2">
-                <button
-                  className="flex w-full items-start justify-between gap-3 rounded-xl px-4 py-4 text-left"
-                  onClick={() => setOpenFaq((prev) => (prev === idx ? -1 : idx))}
-                  aria-expanded={openFaq === idx}
-                >
-                  <span className="font-semibold text-slate-900">{item.q}</span>
-                  <ChevronDown
-                    className={`mt-1 h-4 w-4 flex-shrink-0 text-slate-500 transition ${openFaq === idx ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {openFaq === idx && <p className="px-4 pb-4 leading-relaxed text-slate-700">{item.a}</p>}
-              </div>
-            </FadeUp>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ContactSection() {
   return (
     <section className="bg-white pb-20 pt-16 sm:pt-20">
@@ -575,7 +515,19 @@ function ContactSection() {
 export default function AdolescentProgramme() {
   return (
     <Layout>
-      <HeroBanner />
+      <HeroBanner
+        badgeText="Adolescent Programme"
+        title="Adolescent Programme"
+        subtitle="Helping Adolescents Ace Life and Learning"
+        image="/ngo-images/girl.jpeg"
+        showStats
+        statsVariant="boxes"
+        stats={[
+          { label: "Target Group", value: "Ages 12-18" },
+          { label: "Girls Participation", value: "52%" },
+          { label: "States & UTs Reached", value: "22" }
+        ]}
+      />
       <NeedSection />
       <AboutProgramme />
       <WhatWeDo />
@@ -594,9 +546,8 @@ export default function AdolescentProgramme() {
       <OutreachMapSection />
       <PartnersSection />
       <SuccessStoriesSection />
-      <FAQSection />
+      <FAQSection items={adolescentFAQ} />
       <ContactSection />
     </Layout>
   );
 }
-

@@ -1005,6 +1005,204 @@ export const genderJourneyFAQ = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/*                               DEFAULT EXPORT                               */
+/*                           OUR CULTURE PAGE FAQ                             */
 /* -------------------------------------------------------------------------- */
-export default { homefaq, contactFAQ, annualReportsFAQ, newsFAQ, certificationsFAQ, flfprFAQ, genderJourneyFAQ };
+export const cultureFAQ = [
+  {
+    question: "What kind of professionals work at Magic Bus?",
+    category: "Workplace",
+    answer: (
+      <p>
+        Our teams are purpose-driven, collaborative, and open to learning. We welcome professionals from both corporate and social sector backgrounds who are passionate about creating meaningful change.
+      </p>
+    ),
+  },
+  {
+    question: "Does Magic Bus support professional growth?",
+    category: "Growth",
+    answer: (
+      <p>
+        Yes. Continuous learning and skill development are integral to our culture. Through our Capability Development Program, Growth Talk platform, and on-the-job challenges, we ensure our people grow at every stage.
+      </p>
+    ),
+  },
+  {
+    question: "Is Magic Bus an inclusive workplace?",
+    category: "Workplace",
+    answer: (
+      <p>
+        Yes. Diversity, equity, and respect are actively practiced across teams. We embrace different backgrounds, experiences, and viewpoints — creating an environment where everyone can contribute authentically.
+      </p>
+    ),
+  },
+  {
+    question: "Why choose Magic Bus as an employer?",
+    category: "Benefits",
+    answer: (
+      <p>
+        Magic Bus offers meaningful work, strong values, and the opportunity to contribute to lasting social impact. Our certified Great Place to Work status reflects our genuine commitment to employee experience and wellbeing.
+      </p>
+    ),
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                        ADOLESCENT PROGRAMME PAGE FAQ                       */
+/* -------------------------------------------------------------------------- */
+export const adolescentFAQ = [
+  {
+    question: "How does Magic Bus promote adolescent well-being?",
+    category: "Programme",
+    answer: (
+      <p>
+        Magic Bus equips underserved adolescents with life skills to help them realise their full potential, build agency, and become resilient in the face of life's challenges.
+      </p>
+    ),
+  },
+  {
+    question: "Why is the stage of adolescence considered to be a crucial phase of growth?",
+    category: "Development",
+    answer: (
+      <p>
+        Adolescence is a phase of accelerated social, physical, and cognitive development. The experiences of people aged 10-19 years have significant impacts on their well-being in the short term as well as long term. The right support at this stage can ensure holistic development of adolescents.
+      </p>
+    ),
+  },
+  {
+    question: "What are life skills?",
+    category: "Programme",
+    answer: (
+      <p>
+        As defined by the World Health Organisation, life skills are abilities for positive and adaptive behaviour that helps individuals deal effectively with the challenges and demands of daily life.
+      </p>
+    ),
+  },
+  {
+    question: "What is the aim of the Adolescent Programme of Magic Bus?",
+    category: "Programme",
+    answer: (
+      <p>
+        The Adolescent Programme of Magic Bus aims to help adolescents complete their education, build brighter futures, and guard themselves from destabilisers like child labour and early marriage.
+      </p>
+    ),
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                GOVERNMENT PARTNERSHIP PROGRAMME PAGE FAQ                   */
+/* -------------------------------------------------------------------------- */
+export const governmentPartnershipFAQ = [
+  {
+    question: "Does the Government Partnership Programme cover tribal areas?",
+    category: "Coverage",
+    answer: (
+      <p>
+        Yes. The programme engages closely with underserved adolescents in tribal and
+        remote regions, equipping them with life skills education and foundational learning support.
+      </p>
+    ),
+  },
+  {
+    question: "Is the programme active across India?",
+    category: "Reach",
+    answer: (
+      <p>
+        Yes. Magic Bus has active Memorandums of Understanding (MOUs) with 11 states,
+        along with strategic collaboration through NITI Aayog-linked initiatives.
+      </p>
+    ),
+  },
+  {
+    question: "How does Magic Bus work with government teachers?",
+    category: "Implementation",
+    answer: (
+      <p>
+        Magic Bus trains teachers and school leaders to integrate life skills into classroom and
+        playground learning, and supports education departments with monitoring and implementation tools.
+      </p>
+    ),
+  },
+  {
+    question: "What outcomes does this partnership model aim to achieve?",
+    category: "Impact",
+    answer: (
+      <p>
+        The model aims to improve adolescents&apos; resilience, self-efficacy, and agency while
+        strengthening school systems to sustain life skills education at scale.
+      </p>
+    ),
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                           WHO WE ARE PAGE FAQ                              */
+/* -------------------------------------------------------------------------- */
+export const whoWeAreFAQ = [
+  {
+    question: "What is Magic Bus India Foundation?",
+    category: "Overview",
+    answer: (
+      <p>
+        Magic Bus India Foundation is one of India's largest NGOs working in the areas of life skills
+        education and employability skilling for young people living in underserved communities. Founded
+        in 1999, we have impacted over 1 million lives across 14+ states in India.
+      </p>
+    ),
+  },
+  {
+    question: "What is the vision of Magic Bus?",
+    category: "Vision",
+    answer: (
+      <p>
+        Our vision is to see a world where young people break out of poverty to lead fulfilling,
+        rewarding lives and contribute positively to their communities.
+      </p>
+    ),
+  },
+  {
+    question: "What is the mission of Magic Bus?",
+    category: "Mission",
+    answer: (
+      <p>
+        Our mission is to equip vulnerable young people with life skills that enable them to thrive
+        in the transition to adulthood, helping them complete secondary education and build sustainable livelihoods.
+      </p>
+    ),
+  },
+  {
+    question: "How does Magic Bus work with communities?",
+    category: "Approach",
+    answer: (
+      <p>
+        We use an ecosystem approach that involves families, communities, and employers. Our trained
+        community mentors deliver a sports-based curriculum that integrates life skills education with
+        academic outcomes, creating lasting behaviour change.
+      </p>
+    ),
+  },
+  {
+    question: "What programmes does Magic Bus run?",
+    category: "Programmes",
+    answer: (
+      <div className="space-y-2">
+        <p>Magic Bus runs two parallel programmes:</p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>A <span className="font-semibold">childhood development programme</span> focused on mentoring adolescents</li>
+          <li>A <span className="font-semibold">livelihood development programme (CONNECT)</span> focused on youth employment</li>
+        </ul>
+      </div>
+    ),
+  },
+  {
+    question: "Where does Magic Bus operate?",
+    category: "Reach",
+    answer: (
+      <p>
+        Magic Bus operates across 14+ states in India through our network of regional offices in Delhi/NCR,
+        Mumbai, Hyderabad, and Kolkata. We also have global presence in the UK, USA, Singapore, and Germany.
+      </p>
+    ),
+  },
+];
+
+export default { homefaq, contactFAQ, annualReportsFAQ, newsFAQ, certificationsFAQ, flfprFAQ, genderJourneyFAQ, whoWeAreFAQ, cultureFAQ, adolescentFAQ, governmentPartnershipFAQ };

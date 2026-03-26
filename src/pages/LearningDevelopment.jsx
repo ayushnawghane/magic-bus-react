@@ -2,6 +2,7 @@
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Layout from "../components/Layout";
+import HeroBanner from "../components/HeroBanner";
 
 const _MOTION = motion;
 const EASE = [0.16, 1, 0.3, 1];
@@ -140,25 +141,14 @@ const testimonials = [
   }
 ];
 
-function HeroBanner() {
+function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-[#111111] pt-28 pb-20 sm:pt-32">
-      <div className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-brand-red/30 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 top-16 h-72 w-72 rounded-full bg-brand-blue/25 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-yellow/20 blur-3xl" />
-
-      <div className="relative mx-auto grid max-w-7xl gap-8 px-6 lg:items-end lg:px-12">
-        <FadeUp>
-          <SectionTag dark>Learning & Development</SectionTag>
-          <h1 className="mt-5 text-5xl font-black leading-tight text-white md:text-6xl">
-            Learning & Development at Magic Bus
-          </h1>
-          <h2 className="mt-6 max-w-3xl text-2xl font-semibold leading-relaxed text-white/85 md:text-3xl">
-            Helping our people grow with continuous learning
-          </h2>
-        </FadeUp>
-      </div>
-    </section>
+    <HeroBanner
+      badgeText="Learning & Development"
+      title="Learning & Development at Magic Bus"
+      subtitle="Helping our people grow with continuous learning"
+      description="At Magic Bus, our teams engage in continuous learning, promoting a culture of continuous improvement across the organisation."
+    />
   );
 }
 
@@ -198,19 +188,18 @@ function BeliefsSection() {
           <h2 className="mt-5 text-3xl font-black text-[#1A1A1A] md:text-4xl">Our Beliefs</h2>
         </FadeUp>
 
-        <div className="relative">
-          <div className="absolute left-[18px] top-0 hidden h-full w-[2px] bg-gradient-to-b from-brand-red/50 via-brand-blue/35 to-brand-yellow/40 md:block" />
-          <div className="space-y-5">
+        <div className="relative lg:pt-10">
+          <div className="pointer-events-none absolute left-0 right-0 top-0 hidden h-[2px] bg-gradient-to-r from-brand-red/45 via-brand-blue/35 to-brand-yellow/40 lg:block" />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {beliefs.map((belief, index) => (
               <FadeUp key={belief} delay={index * 0.06}>
                 <_MOTION.div
-                  whileHover={{ x: 4 }}
+                  whileHover={{ y: -4 }}
                   transition={{ duration: 0.2 }}
-                  className={`relative rounded-2xl border border-black/5 bg-white p-5 shadow-sm md:ml-10 ${
-                    index % 2 === 0 ? "md:mr-14" : "md:ml-20"
-                  }`}
+                  className="relative h-full rounded-2xl border border-black/5 bg-white p-5 shadow-sm"
                 >
-                  <span className="absolute -left-10 top-5 hidden h-5 w-5 rounded-full border-4 border-white bg-brand-red shadow md:block" />
+                  <span className="absolute -top-8 left-1/2 hidden h-8 w-[2px] -translate-x-1/2 bg-black/15 lg:block" />
+                  <span className="absolute -top-10 left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-4 border-[#f8f8f6] bg-brand-red shadow-sm lg:block" />
                   <p className="text-sm font-semibold uppercase tracking-[0.16em] text-brand-red">Belief {index + 1}</p>
                   <p className="mt-2 text-lg font-medium leading-relaxed text-[#1A1A1A]">{belief}</p>
                 </_MOTION.div>
@@ -254,13 +243,13 @@ function InitiativesSection() {
                     onClick={() => setActiveTab(tab.key)}
                     className={`flex w-full items-center gap-3 rounded-2xl border px-4 py-3 text-left transition ${
                       isActive
-                        ? "border-transparent bg-[#1A1A1A] text-white shadow-lg"
-                        : "border-black/10 bg-white text-[#1A1A1A] hover:border-black/25"
+                        ? "border-transparent bg-brand-red text-white shadow-lg"
+                        : "border-brand-red/15 bg-white text-[#1A1A1A] hover:border-brand-red/35 hover:bg-brand-yellow/10"
                     }`}
                   >
                     <span
                       className={`grid h-8 w-8 place-items-center rounded-full text-xs font-bold ${
-                        isActive ? "bg-white/20 text-white" : "bg-brand-red/10 text-brand-red"
+                        isActive ? "bg-brand-yellow text-brand-black" : "bg-brand-yellow/40 text-brand-red"
                       }`}
                     >
                       {tab.letter}
@@ -470,7 +459,7 @@ function ContactSection() {
 export default function LearningDevelopment() {
   return (
     <Layout>
-      <HeroBanner />
+      <HeroSection />
       <IntroductionSection />
       <BeliefsSection />
       <InitiativesSection />

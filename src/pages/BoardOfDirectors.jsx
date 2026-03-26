@@ -1,6 +1,9 @@
 import React, { useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
+import { ArrowRight, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
+import HeroBanner from "../components/HeroBanner";
 
 const EASE = [0.16, 1, 0.3, 1];
 const _MOTION = motion;
@@ -443,8 +446,8 @@ const detailedBios = [
 ];
 
 const boards = {
-    india: ["Deval Sanghavi", "Jaideep Khanna", "Rajiv Dube", "Rajeev Dubey", "Sandeep Murthy", "Shaneen Parikh", "Vivek Pandit"],
-    global: [],
+    // india: ["Deval Sanghavi", "Jaideep Khanna", "Rajiv Dube", "Rajeev Dubey", "Sandeep Murthy", "Shaneen Parikh", "Vivek Pandit"],
+    // global: [],
     usa: [],
     uk: [],
     singapore: [],
@@ -453,22 +456,12 @@ const boards = {
 
 function HeroSection({ totalMembers, totalRegions }) {
     return (
-        <section className="relative overflow-hidden bg-[#111111] pt-28 pb-20 sm:pt-32">
-            <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand-red/25 blur-3xl" />
-            <div className="pointer-events-none absolute right-0 top-14 h-72 w-72 rounded-full bg-brand-blue/20 blur-3xl" />
-            <div className="pointer-events-none absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-brand-yellow/15 blur-3xl" />
-            <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-                <FadeUp className="max-w-3xl">
-                    <SectionTag dark>Magic Bus India Foundation</SectionTag>
-                    <h1 className="mt-5 text-5xl font-extrabold leading-tight text-white md:text-6xl lg:text-7xl">
-                        Board of Directors
-                    </h1>
-                    <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
-                        Transforming lives with visionary leaders
-                    </p>
-                </FadeUp>
-            </div>
-        </section>
+        <HeroBanner
+            badgeText="Magic Bus India Foundation"
+            title="Board of Directors"
+            subtitle="Transforming lives with visionary leaders"
+            description="Meet the distinguished leaders who guide our mission to empower children and youth through education, life skills, and livelihood opportunities."
+        />
     );
 }
 
@@ -497,8 +490,8 @@ function IntroductionSection({ onReadMore }) {
 
 function RegionalBoardsSection({ selectedBoard, onSelectBoard, onReadMore }) {
     const boardTabs = [
-        { key: "india", title: "India Board" },
-        { key: "global", title: "Global Board" },
+        // { key: "india", title: "India Board" },
+        // { key: "global", title: "Global Board" },
         { key: "usa", title: "USA Board" },
         { key: "uk", title: "UK Board" },
         { key: "singapore", title: "Singapore Board" },
@@ -550,6 +543,46 @@ function RegionalBoardsSection({ selectedBoard, onSelectBoard, onReadMore }) {
     );
 }
 
+function JoinCTA() {
+    return (
+        <section className="py-20 bg-white">
+            <div className="max-w-5xl mx-auto px-6 lg:px-12">
+                <FadeUp>
+                    <div className="relative rounded-3xl overflow-hidden p-10 md:p-14 text-center bg-gradient-to-br from-[#1A1A1A] via-[#2a2a2a] to-[#1A1A1A] text-white">
+                        <div className="pointer-events-none absolute -top-20 -right-20 w-64 h-64 rounded-full bg-brand-yellow/10 blur-3xl" />
+                        <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-brand-red/10 blur-3xl" />
+
+                        <div className="relative z-10">
+                            <div className="inline-flex items-center gap-2 rounded-full bg-brand-yellow/15 border border-brand-yellow/30 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-6">
+                                <Users className="w-3.5 h-3.5" />
+                                Explore Our People
+                            </div>
+
+                            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+                                Meet The Team Driving Impact
+                            </h2>
+                            <p className="text-white/60 text-base leading-relaxed max-w-xl mx-auto mb-8">
+                                Discover the wider leadership and programme teams who work every day
+                                to support children and young people from education to livelihood.
+                            </p>
+
+                            <div className="flex items-center justify-center">
+                                <Link
+                                    to="/our-team"
+                                    className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-8 py-4 font-bold text-brand-black shadow-lg transition hover:shadow-xl hover:bg-brand-yellow/90 group"
+                                >
+                                    View Our Team
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </FadeUp>
+            </div>
+        </section>
+    );
+}
+
 export default function BoardOfDirectors() {
     const [selectedDirector, setSelectedDirector] = useState(null);
     const [selectedBoard, setSelectedBoard] = useState("india");
@@ -566,6 +599,7 @@ export default function BoardOfDirectors() {
                 onSelectBoard={setSelectedBoard}
                 onReadMore={setSelectedDirector}
             />
+            <JoinCTA />
             <BioModal director={selectedDirector} isOpen={!!selectedDirector} onClose={() => setSelectedDirector(null)} />
         </Layout>
     );

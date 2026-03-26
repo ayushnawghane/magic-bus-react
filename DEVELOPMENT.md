@@ -83,3 +83,39 @@
 - `src/pages/AdolescentProgramme.jsx`
 - `src/pages/GovernmentPartnershipProgramme.jsx`
 - `PAGE_COUNT.md`
+
+## Date: March 26, 2026
+
+### Changes Made Today
+
+#### Existing Pages Updated (No New Pages Created)
+
+1. `src/pages/OurTeam.jsx`
+   - Added leadership intro section and leadership cards.
+   - Added `Read More` modal with full bio content.
+   - Integrated leadership images and polished modal/card design.
+
+2. `src/pages/BoardOfDirectors.jsx`
+   - Added CTA section.
+   - Updated CTA to `View Our Team` with route `/our-team`.
+
+3. `src/pages/LearningDevelopment.jsx`
+   - Updated `Our Beliefs` arrangement and hanging line treatment.
+   - Updated tab colors to theme red/yellow.
+   - Resolved hero naming conflict (`HeroSection`).
+
+4. `src/pages/AdolescentProgramme.jsx`
+   - Replaced local hero with shared `HeroBanner`.
+   - Preserved 3 stats using boxed variant.
+   - Adjusted large image sections and map visibility.
+   - Fixed `Our Impact` card spacing/alignment.
+
+5. FAQ reuse updates
+   - `src/pages/GovernmentPartnershipProgramme.jsx`
+   - `src/components/Home/faqItems.jsx`
+   - Replaced local FAQ with shared `FAQSectiom` and added `governmentPartnershipFAQ`.
+
+### Documentation Updates
+
+- Updated `PAGE_COUNT.md` with route column and latest update date.
+- Created `CHANGES.md` to capture this client-driven update cycle.

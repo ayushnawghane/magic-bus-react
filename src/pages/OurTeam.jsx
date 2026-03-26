@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Globe, Users, ArrowRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
@@ -250,6 +250,165 @@ const internationalTeam = {
     ],
 };
 
+const featuredLeadership = [
+    {
+        name: "Matthew Spacie",
+        role: "Founder",
+        image: "/board-of-directors/matthew-sapacie.png",
+        shortBio:
+            "Formerly Chief Operating Officer of Cox and Kings and Founder of Cleartrip.com, Matthew comes with an extensive experience in senior positions in the corporate sector and an intuitive understanding of the needs of children and youth in India.",
+        fullBio: [
+            "Formerly Chief Operating Officer of Cox and Kings and Founder of Cleartrip.com, Matthew comes with an extensive experience in senior positions in the corporate sector and an intuitive understanding of the needs of children and youth in India.",
+            "In 1999, Matthew established Magic Bus, and he has grown the organization from an informal, volunteer-led activity for disadvantaged children, into a leading organization working in the area of mentoring some of India's poorest children and young people from education to livelihood.",
+            "Matthew has been elected an Ashoka Fellow, a TED Fellow and more recently an ACSEP Asia Centre for Social Entrepreneurship and Philanthropy (ACSEP) Fellow.",
+            "In 2007, he was awarded an MBE for services to children in the Commonwealth.",
+        ],
+    },
+    {
+        name: "Jayant Rastogi",
+        role: "Global CEO",
+        image: "/board-of-directors/jayant-rastogi-global-ceo-ourteamimg.webp",
+        shortBio:
+            "Jayant is an industry veteran with over 28 years of extensive experience in setting up and driving successful and scalable businesses for MNCs and startups.",
+        fullBio: [
+            "Jayant is an industry veteran with over 28 years of extensive experience in setting up and driving successful and scalable businesses for MNCs and startups.",
+            "An entrepreneur for the last three years, with a strong corporate background, Jayant has diverse experience of working in the technology, distribution and enterprise segment.",
+            "He has comprehensive exposure to operations and business development, both in strategy formulation as well as at the implementation level.",
+            "In his recent entrepreneurial avatar, he has co-founded two ventures. Both these ventures are strongly technology led, one is a social venture focused on providing affordable healthcare for the less privileged and the other is an aggregator platform for commercial transportation.",
+            "During his corporate stint, he has worked with MNCs namely Motorola Solutions (Enterprise Mobility biz) and Novell as the CEO for India and ASEAN region. He has been a part of senior management teams, both in India and in APAC, and also been a part of Global strategy teams.",
+            "Jayant is a mechanical engineer, with a flair for scaling up and driving large business operations. He is an avid believer in the benefits of Yoga and plays tennis and badminton.",
+        ],
+    },
+];
+
+function LeadershipBioModal({ leader, isOpen, onClose }) {
+    return (
+        <AnimatePresence>
+            {isOpen && leader && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                    onClick={onClose}
+                >
+                    <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.96, y: 12 }}
+                        transition={{ duration: 0.3, ease: EASE }}
+                        className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-2xl [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={onClose}
+                            className="absolute top-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white transition-colors hover:bg-black/65"
+                            aria-label="Close bio"
+                        >
+                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <div className="grid grid-cols-1 lg:grid-cols-2">
+                            <div className="relative min-h-[300px] lg:min-h-full">
+                                <img
+                                    src={leader.image}
+                                    alt={leader.name}
+                                    className="h-full w-full object-cover object-top"
+                                />
+                                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                                    <h3 className="text-3xl font-extrabold text-white">{leader.name}</h3>
+                                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-yellow">
+                                        {leader.role}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="px-5 py-5 sm:px-6 sm:py-6 lg:py-7">
+                                {leader.fullBio.map((paragraph) => (
+                                    <p key={paragraph} className="mb-3 text-[13px] leading-relaxed text-[#1A1A1A]/80 last:mb-0">
+                                        {paragraph}
+                                    </p>
+                                ))}
+                            </div>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+    );
+}
+
+function LeadershipIntroSection({ onReadMore }) {
+    return (
+        <section className="bg-[#F4F4F2] py-16 lg:py-20">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+                {/* <FadeUp className="max-w-3xl mx-auto text-center">
+                    <SectionTag>Our Team</SectionTag>
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A] leading-tight">
+                        Meet the People Behind Magic Bus
+                    </h2>
+                    <p className="mt-4 text-base leading-relaxed text-[#1A1A1A]/65">
+                        One of Magic Bus' biggest strengths is its people, who ensure they strive to fulfil the organisation's mission and vision while upholding its values. If we have been able to impact one million lives since 1999, it is primarily because of the people who have made it happen through their dedication and expertise.
+                    </p>
+                </FadeUp> */}
+
+                <FadeUp className="mt-16">
+                    <div className="flex items-start gap-5 mb-10">
+                        <div className="bg-brand-yellow rounded-xl p-3 mt-1 shrink-0">
+                            <Users className="w-6 h-6 text-brand-black" />
+                        </div>
+                        <div>
+                            <h3 className="text-2xl md:text-3xl font-extrabold text-[#1A1A1A]">Leadership</h3>
+                            <p className="mt-2 text-[#1A1A1A]/60 max-w-2xl leading-relaxed">
+                                Magic Bus is fortunate to have some of the brightest minds from both the corporate and non-profit world working towards empowering and changing the lives of children.
+                            </p>
+                        </div>
+                    </div>
+                </FadeUp>
+
+                <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {featuredLeadership.map((leader) => (
+                        <FadeUp key={leader.name}>
+                            <motion.article
+                                whileHover={{ y: -4 }}
+                                transition={{ duration: 0.25 }}
+                                className="group h-full overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_12px_30px_rgba(0,0,0,0.06)]"
+                            >
+                                <div className="relative h-64 overflow-hidden">
+                                    <img
+                                        src={leader.image}
+                                        alt={leader.name}
+                                        className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-5">
+                                        <h4 className="text-3xl font-bold text-white leading-tight">{leader.name}</h4>
+                                        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-yellow">{leader.role}</p>
+                                    </div>
+                                </div>
+                                <div className="p-6 flex flex-col min-h-[220px]">
+                                    <p className="text-base leading-relaxed text-[#1A1A1A]/75">
+                                        {leader.shortBio}
+                                    </p>
+                                    <button
+                                        onClick={() => onReadMore(leader)}
+                                        className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-brand-red/25 px-4 py-2 text-sm font-bold text-brand-red hover:bg-brand-red/5 transition-colors"
+                                    >
+                                        Read More
+                                        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-yellow text-brand-black font-extrabold">
+                                            +
+                                        </span>
+                                    </button>
+                                </div>
+                            </motion.article>
+                        </FadeUp>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
 /* ─────────────────────────── SECTIONS ─────────────────────────── */
 
 /* HERO */
@@ -312,17 +471,6 @@ function HeroSection() {
                         </div>
                     ))}
                 </motion.div>
-
-                {/* Upload hint */}
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 0.5 }}
-                    className="mt-8 text-xs text-white/25 font-mono"
-                >
-                    📁 Add team photos to <span className="text-white/40">public/team/</span> named as{" "}
-                    <span className="text-white/40">firstname-lastname.jpg</span>
-                </motion.p>
             </div>
         </section>
     );
@@ -470,12 +618,20 @@ function JoinCTA() {
 
 /* ─────────────────────────── PAGE EXPORT ─────────────────────────── */
 export default function OurTeam() {
+    const [selectedLeader, setSelectedLeader] = useState(null);
+
     return (
         <Layout>
             <HeroSection />
+            <LeadershipIntroSection onReadMore={setSelectedLeader} />
             <IndiaTeamSection />
             <InternationalTeamSection />
             <JoinCTA />
+            <LeadershipBioModal
+                leader={selectedLeader}
+                isOpen={!!selectedLeader}
+                onClose={() => setSelectedLeader(null)}
+            />
         </Layout>
     );
 }
