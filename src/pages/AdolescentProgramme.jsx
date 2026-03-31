@@ -115,8 +115,8 @@ function SectionTag({ children, dark = false }) {
     <span
       className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] ${
         dark
-          ? "border-white/30 bg-white/10 text-white"
-          : "border-black/10 bg-brand-yellow/25 text-[#0F172A]"
+          ? "border-white bg-white text-white"
+          : "border-black bg-brand-yellow text-[#0F172A]"
       }`}
     >
       <span className={`h-1.5 w-1.5 rounded-full ${dark ? "bg-brand-yellow" : "bg-brand-red"}`} />

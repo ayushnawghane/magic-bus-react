@@ -6,8 +6,8 @@ import {
     Mail, ArrowRight, CheckCircle,
     Award, Quote, User, Sparkles, ExternalLink,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
+import HeroBanner from "../components/HeroBanner";
 import FAQSection from "../components/Home/FAQSectiom";
 import { cultureFAQ } from "../components/Home/faqItems";
 
@@ -42,7 +42,7 @@ function FadeIn({ children, delay = 0, className = "" }) {
 
 function SectionTag({ children, dark = false }) {
     return (
-        <span className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-bold tracking-[0.2em] uppercase mb-4 ${dark ? "border border-white/20 bg-white/10 text-white" : "border border-brand-black/15 bg-brand-yellow text-brand-black"
+        <span className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-bold tracking-[0.2em] uppercase mb-4 ${dark ? "border border-brand-yellow/20 bg-brand-yellow/10 text-brand-yellow" : "border border-brand-black/15 bg-brand-yellow text-brand-black"
             }`}>
             {children}
         </span>
@@ -52,59 +52,33 @@ function SectionTag({ children, dark = false }) {
 /* ══════════════════════════════════════════════════════════════
    SECTION 0 — HERO / BANNER
 ══════════════════════════════════════════════════════════════ */
-function HeroBanner() {
+function CultureHeroBanner() {
     return (
-        <section className="relative min-h-[80vh] flex items-end overflow-hidden bg-[#1A1A1A]">
-            <div className="absolute inset-0">
-                <img src="/ngo-images/4.JPG" alt="Our Culture" className="h-full w-full object-cover object-center opacity-40" />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A]/20 via-[#1A1A1A]/55 to-[#1A1A1A]/97" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/70 via-transparent to-transparent" />
-            </div>
-
-            <motion.div className="pointer-events-none absolute right-16 top-24 h-80 w-80 rounded-full bg-brand-yellow/15 blur-3xl"
-                animate={{ y: [0, 24, 0], opacity: [0.3, 0.55, 0.3] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
-            <motion.div className="pointer-events-none absolute left-1/3 bottom-1/4 h-56 w-56 rounded-full bg-brand-red/15 blur-3xl"
-                animate={{ y: [0, -20, 0], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
-
-            <div className="relative z-10 w-full pb-20 pt-36">
-                <div className="max-w-7xl mx-auto px-6 lg:px-12">
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6, ease: EASE }} className="mb-5">
-                        <span className="inline-flex items-center gap-2 rounded-full border border-brand-yellow/40 bg-brand-yellow/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-brand-yellow backdrop-blur-sm">
-                            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-yellow" />
-                            Magic Bus India Foundation
-                        </span>
-                    </motion.div>
-
-                    <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8, ease: EASE }}
-                        className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-white">
-                        Our Culture
-                    </motion.h1>
-
-                    <motion.h2 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32, duration: 0.7, ease: EASE }}
-                        className="mt-3 text-xl md:text-2xl font-semibold text-brand-yellow">
-                        Purpose is part of who we are
-                    </motion.h2>
-
-                    <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.65, ease: EASE }}
-                        className="mt-5 max-w-2xl text-base md:text-lg text-white/70 leading-relaxed">
-                        A workplace where curiosity is encouraged, integrity is non-negotiable, and people grow
-                        together while shaping something bigger than 'Self'.
-                    </motion.p>
-
-                    <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.58, duration: 0.6, ease: EASE }}
-                        className="mt-8 flex flex-wrap gap-4">
-                        <a href="#connect" className="inline-flex items-center gap-2 rounded-full bg-brand-red px-7 py-3.5 font-semibold text-white shadow-lg transition hover:bg-brand-red/90 hover:shadow-xl hover:shadow-brand-red/25">
-                            Join Our Team <ArrowRight className="w-4 h-4" />
-                        </a>
-                        <a href="#awards" className="inline-flex items-center gap-2 rounded-full border-2 border-white/30 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 hover:border-white/50">
-                            <Award className="w-4 h-4" /> Our Awards
-                        </a>
-                    </motion.div>
-                </div>
-            </div>
-        </section>
+        <HeroBanner
+            badgeText="Magic Bus India Foundation"
+            title="Our Culture"
+            subtitle="Purpose is part of who we are"
+            description="A workplace where curiosity is encouraged, integrity is non-negotiable, and people grow together while shaping something bigger than 'Self'."
+            image="/great-place-to-work.jpg"
+            titleGradient
+            showTitleDivider
+            subtitleClassName="mt-3 text-xl md:text-2xl font-semibold text-white"
+            descriptionClassName="mt-7 max-w-2xl text-base md:text-lg text-white/70 leading-relaxed"
+            ctas={[
+                {
+                    href: "#connect",
+                    variant: "primary",
+                    label: "Join Our Team",
+                    showArrow: true,
+                },
+                {
+                    href: "#awards",
+                    variant: "secondary",
+                    label: "Our Awards",
+                    icon: Award,
+                },
+            ]}
+        />
     );
 }
 
@@ -153,17 +127,24 @@ function IntroSection() {
                     </FadeUp>
 
                     <FadeIn delay={0.1}>
-                        <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl">
-                            <img src="/ngo-images/6.jpeg" alt="Our Culture" className="h-full w-full object-cover" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/50 to-transparent" />
-                            <div className="absolute bottom-5 left-5">
-                                <div className="inline-flex items-center gap-3 rounded-2xl bg-white/90 backdrop-blur-sm px-4 py-3 shadow-xl">
-                                    <div className="h-9 w-9 rounded-full bg-brand-yellow flex items-center justify-center shrink-0">
-                                        <Heart className="w-4 h-4 text-brand-black" />
+                        <div className="relative rounded-3xl aspect-[4/3] shadow-2xl overflow-visible">
+                            <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                                <img src="/ngo-images/6.jpeg" alt="Our Culture" className="h-full w-full object-cover" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/50 to-transparent" />
+                            </div>
+
+                            <div className="absolute bottom-5 left-5 z-20">
+                                <div className="relative inline-flex items-center rounded-3xl border border-white/70 bg-white/95 backdrop-blur-sm pl-10 pr-6 py-4 shadow-[0_18px_35px_rgba(0,0,0,0.25)]">
+                                    <div className="absolute -left-16 top-2/3 h-48 w-24 -translate-y-1/2">
+                                        <img
+                                            src="/great-place-to-work-logo.png"
+                                            alt="Great Place to Work logo"
+                                            className="h-full w-full object-contain"
+                                        />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-extrabold text-[#1A1A1A]">Great Place to Work</p>
-                                        <p className="text-[11px] text-[#1A1A1A]/55">Certified 6 years in a row</p>
+                                        <p className="text-sm font-extrabold text-[#1A1A1A] leading-tight">Great Place to Work</p>
+                                        <p className="text-[13px] text-[#1A1A1A]/70 leading-tight mt-1">Certified 6 years in a row</p>
                                     </div>
                                 </div>
                             </div>
@@ -263,9 +244,6 @@ function AwardsSection() {
                                         <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-yellow/60 mb-1">Award #{i + 1}</p>
                                         <h3 className="text-xl md:text-2xl font-extrabold text-white leading-snug">{a.title}</h3>
                                         <p className="text-sm text-white/50 mt-1">{a.sub}</p>
-                                    </div>
-                                    <div className="shrink-0 hidden md:flex w-10 h-10 rounded-full border border-white/20 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <ArrowRight className="w-4 h-4 text-white" />
                                     </div>
                                 </div>
                                 {/* Left accent bar */}
@@ -726,7 +704,7 @@ function ConnectSection() {
 export default function OurCulture() {
     return (
         <Layout>
-            <HeroBanner />
+            <CultureHeroBanner />
             <IntroSection />
             <AwardsSection />
             <GreatPlaceSection />

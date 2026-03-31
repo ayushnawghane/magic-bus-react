@@ -181,7 +181,7 @@ function AboutSection() {
 function WhatWeDo() {
     const steps = [
         { icon: BookOpen, num: "01", title: "Classroom Life Skills", desc: "Teachers deliver life skills education in schools for adolescents from grades 6 to 10." },
-        { icon: Users, num: "02", title: "Community Engagement", desc: "Interventions activate School Management Committees, parent outreach and community engagement." },
+        { icon: Users, num: "02", title: "Community Engagement", desc: "Interventions activate School Management Committees, outreach & community engagement." },
         { icon: CheckCircle2, num: "03", title: "Peer Support Structures", desc: "Peer support structures are established to sustain adolescent participation and confidence." },
         { icon: Building2, num: "04", title: "System Strengthening", desc: "System-level officials and cluster heads are oriented for collective planning and monitoring." },
     ];

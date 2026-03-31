@@ -13,7 +13,7 @@ export default function ProgrammesSlider() {
     () => [
       {
         id: "adolescent-programme",
-        title: "Adolescent Life Skills Programme",
+        title: "Adolescent Programme",
         summary:
           "Foundational life skills for ages 11–18, building confidence and core competencies.",
         tags: ["Ages 11–18", "6 Months"],

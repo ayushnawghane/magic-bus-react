@@ -15,6 +15,10 @@ function HeroBanner({
     showStats = false,
     stats = [],
     statsVariant = "inline",
+    titleGradient = true,
+    showTitleDivider = true,
+    subtitleClassName = "mt-3 text-xl md:text-2xl font-semibold text-white",
+    descriptionClassName = "mt-7 max-w-2xl text-base md:text-lg text-white/70 leading-relaxed",
 }) {
     return (
         <section className="relative min-h-[75vh] w-full flex items-end overflow-hidden bg-[#1A1A1A]">
@@ -57,7 +61,11 @@ function HeroBanner({
                         initial={{ opacity: 0, y: 32 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.8, ease: EASE }}
-                        className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-white"
+                        className={`text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight ${
+                            titleGradient
+                                ? "bg-gradient-to-r from-brand-red via-brand-yellow to-white bg-clip-text text-transparent"
+                                : "text-white"
+                        }`}
                     >
                         {title}
                     </motion.h1>
@@ -67,10 +75,19 @@ function HeroBanner({
                             initial={{ opacity: 0, y: 24 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.32, duration: 0.7, ease: EASE }}
-                            className="mt-3 text-xl md:text-2xl font-semibold text-brand-yellow"
+                            className={subtitleClassName}
                         >
                             {subtitle}
                         </motion.h2>
+                    )}
+
+                    {showTitleDivider && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.28, duration: 0.55, ease: EASE }}
+                            className="mt-4 h-1 w-28 rounded-full bg-white/95"
+                        />
                     )}
 
                     {description && (
@@ -78,7 +95,7 @@ function HeroBanner({
                             initial={{ opacity: 0, y: 18 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.45, duration: 0.65, ease: EASE }}
-                            className="mt-5 max-w-2xl text-lg text-white/75 leading-relaxed"
+                            className={descriptionClassName}
                         >
                             {description}
                         </motion.p>
@@ -91,21 +108,37 @@ function HeroBanner({
                             transition={{ delay: 0.58, duration: 0.6, ease: EASE }}
                             className="mt-8 flex flex-wrap gap-4"
                         >
-                            {ctas.map((cta, i) => (
-                                <Link
-                                    key={i}
-                                    to={cta.to}
-                                    className={`inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold transition ${
-                                        cta.variant === "primary"
-                                            ? "bg-brand-red text-white shadow-lg hover:bg-brand-red/90 hover:shadow-xl hover:shadow-brand-red/25"
-                                            : "border-2 border-white/30 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 hover:border-white/50"
-                                    }`}
-                                >
-                                    {cta.icon && <cta.icon className="w-4 h-4" />}
-                                    {cta.label}
-                                    {cta.showArrow && <ArrowRight className="w-4 h-4" />}
-                                </Link>
-                            ))}
+                            {ctas.map((cta, i) => {
+                                const ctaClass = `inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold transition ${
+                                    cta.variant === "primary"
+                                        ? "bg-brand-red text-white shadow-lg hover:bg-brand-red/90 hover:shadow-xl hover:shadow-brand-red/25"
+                                        : "border-2 border-white/30 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 hover:border-white/50"
+                                }`;
+
+                                if (cta.href) {
+                                    return (
+                                        <a
+                                            key={i}
+                                            href={cta.href}
+                                            target={cta.target}
+                                            rel={cta.rel}
+                                            className={ctaClass}
+                                        >
+                                            {cta.icon && <cta.icon className="w-4 h-4" />}
+                                            {cta.label}
+                                            {cta.showArrow && <ArrowRight className="w-4 h-4" />}
+                                        </a>
+                                    );
+                                }
+
+                                return (
+                                    <Link key={i} to={cta.to} className={ctaClass}>
+                                        {cta.icon && <cta.icon className="w-4 h-4" />}
+                                        {cta.label}
+                                        {cta.showArrow && <ArrowRight className="w-4 h-4" />}
+                                    </Link>
+                                );
+                            })}
                         </motion.div>
                     )}
 

@@ -52,7 +52,7 @@ function LogoCard({ logo }) {
       <img
         src={logo.src}
         alt={logo.name}
-        className="max-h-18 max-w-[180px] object-contain grayscale hover:grayscale-0 transition duration-300 ease-out will-change-transform"
+        className="max-h-18 max-w-[180px] object-contain hover:grayscale transition duration-300 ease-out will-change-transform"
         loading="lazy"
         decoding="async"
       />
