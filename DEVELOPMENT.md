@@ -1,5 +1,18 @@
 # Development Log
 
+## Date: April 4, 2026
+
+### Changes Made Today
+
+#### Government Partnership Programme (`src/pages/GovernmentPartnershipProgramme.jsx`)
+
+1. Text cleanup - removed redundant word "outreach" from Community Engagement description
+
+#### Learning & Development (`src/pages/LearningDevelopment.jsx`)
+
+1. Added auto-rotation to testimonials carousel - cycles every 5 seconds
+2. Added useEffect import for setInterval functionality
+
 ## Date: March 9, 2026
 
 ### Changes Made Today

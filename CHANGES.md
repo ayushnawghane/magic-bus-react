@@ -1,5 +1,21 @@
 # Client Change Log
 
+## Date: April 4, 2026
+
+### Government Partnership Programme: Text Cleanup
+
+- File: `src/pages/GovernmentPartnershipProgramme.jsx`
+- Removed redundant word "outreach" from Community Engagement description
+- Changed: "Interventions activate School Management Committees, outreach & community engagement"
+- To: "Interventions activate School Management Committees and community outreach"
+
+### Learning & Development: Auto-Rotating Testimonials
+
+- File: `src/pages/LearningDevelopment.jsx`
+- Added auto-rotation to testimonials carousel
+- Automatically cycles through testimonials every 5 seconds
+- User can still manually navigate using arrows or dots
+
 ## Date: March 31, 2026
 
 ### About Us: Our Story Redesign & Timeline Interaction Updates

@@ -181,7 +181,7 @@ function AboutSection() {
 function WhatWeDo() {
     const steps = [
         { icon: BookOpen, num: "01", title: "Classroom Life Skills", desc: "Teachers deliver life skills education in schools for adolescents from grades 6 to 10." },
-        { icon: Users, num: "02", title: "Community Engagement", desc: "Interventions activate School Management Committees, outreach & community engagement." },
+        { icon: Users, num: "02", title: "Community Engagement", desc: "Interventions activate School Management Committees and community outreach." },
         { icon: CheckCircle2, num: "03", title: "Peer Support Structures", desc: "Peer support structures are established to sustain adolescent participation and confidence." },
         { icon: Building2, num: "04", title: "System Strengthening", desc: "System-level officials and cluster heads are oriented for collective planning and monitoring." },
     ];
@@ -429,7 +429,7 @@ function SuccessStory() {
                         onClick={() => setZoom(true)}
                         className="group w-full overflow-hidden rounded-3xl border border-gray-200 bg-[#F7F7F5] p-4 hover:border-brand-red/30 hover:shadow-xl transition-all duration-300"
                         aria-label="Open Kridangan Framework">
-                        <img src="/Government of Odisha and Magic Bus India Foundation's Kridangan Framework.png"
+                        <img src="/Kridangan.png"
                             alt="Kridangan Framework"
                             className="w-full rounded-2xl object-cover group-hover:scale-[1.005] transition-transform duration-500" />
                         <p className="mt-3 text-xs text-center text-[#1A1A1A]/35 font-medium">Click to enlarge</p>
@@ -440,7 +440,7 @@ function SuccessStory() {
             {zoom && (
                 <button className="fixed inset-0 z-50 grid place-items-center bg-black/85 p-5"
                     onClick={() => setZoom(false)} aria-label="Close">
-                    <img src="/Government of Odisha and Magic Bus India Foundation's Kridangan Framework.png"
+                    <img src="/Kridangan.png"
                         alt="Kridangan Framework enlarged"
                         className="max-h-[90vh] max-w-[90vw] rounded-2xl bg-white p-3 shadow-2xl" />
                 </button>

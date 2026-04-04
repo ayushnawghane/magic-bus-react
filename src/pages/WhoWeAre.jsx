@@ -1,17 +1,11 @@
-import React, { useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import {
-    Heart,
-    Shield,
-    Users,
-    Lightbulb,
-    Star,
-    Target,
-    Zap,
     ArrowRight,
     BookOpen,
     ChevronRight,
     FileText,
+    PlayCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
@@ -163,101 +157,150 @@ function IntroSection() {
 
 
 /* ─────────────────────────────── VALUES ─────────────────────────────── */
-const values = [
-    {
-        icon: Heart,
-        color: "bg-brand-red",
-        textColor: "text-white",
-        title: "Passion",
-        desc: "We work with entrepreneurial zeal to achieve organizational objectives.",
-    },
-    {
-        icon: Shield,
-        color: "bg-brand-blue",
-        textColor: "text-white",
-        title: "Integrity",
-        desc: "We are truthful to ourselves and Magic Bus.",
-    },
-    {
-        icon: Users,
-        color: "bg-brand-magenta",
-        textColor: "text-white",
-        title: "Respect",
-        desc: "We respect our internal and external stakeholders, diversity of people, ideas and culture.",
-    },
-    {
-        icon: Lightbulb,
-        color: "bg-brand-green",
-        textColor: "text-brand-black",
-        title: "Innovation",
-        desc: "We promote viable and implementable innovation at our workplace, constantly seeking new ways to improve our programmes and impact.",
-    },
-    {
-        icon: Star,
-        color: "bg-brand-yellow",
-        textColor: "text-brand-black",
-        title: "Collaboration",
-        desc: "We are a united team at Magic Bus, upholding our core purpose, cooperating with each other, and honoring one another's commitments.",
-    },
-];
-
-function ValuesSection() {
+/* ─────────────────────────────── HISTORY ─────────────────────────────── */
+function HistorySection() {
     return (
         <section className="py-20 bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
-                <FadeUp className="text-center mb-14">
-                    <SectionTag>Our Values</SectionTag>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A]">
-                        The Principles That Guide Us
-                    </h2>
-                    <p className="mt-3 text-[#1A1A1A]/55 max-w-lg mx-auto text-base">
-                        At Magic Bus, we abide by values that drive every decision we make.
-                    </p>
-                </FadeUp>
-
-                {/* Top row — 3 cards */}
-                <div className="grid md:grid-cols-3 gap-6 mb-6">
-                    {values.slice(0, 3).map((v, i) => (
-                        <FadeUp key={v.title} delay={0.07 * i}>
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+                    <FadeUp delay={0.08} className="h-full">
+                        <div className="relative grid h-full min-h-[520px] grid-cols-2 grid-rows-[1.4fr_1fr] gap-4 lg:gap-5">
                             <motion.div
-                                className="rounded-2xl border border-gray-200 bg-white p-7 group cursor-default hover:shadow-lg hover:border-brand-yellow/50 transition-all duration-300"
-                                whileHover={{ y: -5 }}
+                                className="col-span-2 row-span-1 rounded-3xl overflow-hidden border border-gray-200 shadow-sm bg-[#EFEDE6]"
+                                whileHover={{ y: -4, rotate: -0.4 }}
                             >
-                                <div className={`${v.color} inline-flex rounded-xl p-3 mb-5`}>
-                                    <v.icon className={`w-6 h-6 ${v.textColor}`} />
-                                </div>
-                                <h3 className="text-lg font-bold text-[#1A1A1A] mb-2">{v.title}</h3>
-                                <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">{v.desc}</p>
+                                <img
+                                    src="/history_2002.png"
+                                    alt="Magic Bus history in 2002"
+                                    className="h-full w-full object-cover object-center"
+                                />
                             </motion.div>
-                        </FadeUp>
-                    ))}
-                </div>
 
-                {/* Bottom row — 2 wider cards */}
-                <div className="grid md:grid-cols-2 gap-6">
-                    {values.slice(3).map((v, i) => (
-                        <FadeUp key={v.title} delay={0.07 * (i + 3)}>
                             <motion.div
-                                className="rounded-2xl border border-gray-200 bg-white p-7 group cursor-default hover:shadow-lg hover:border-brand-yellow/50 transition-all duration-300 flex items-start gap-5"
-                                whileHover={{ y: -5 }}
+                                className="col-span-1 row-span-1 rounded-2xl overflow-hidden border border-gray-200 bg-[#EFEDE6]"
+                                whileHover={{ y: -4 }}
                             >
-                                <div className={`${v.color} shrink-0 inline-flex rounded-xl p-3`}>
-                                    <v.icon className={`w-6 h-6 ${v.textColor}`} />
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-bold text-[#1A1A1A] mb-2">{v.title}</h3>
-                                    <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">{v.desc}</p>
-                                </div>
+                                <img
+                                    src="/history1-1.jpg"
+                                    alt="Magic Bus early journey"
+                                    className="h-full w-full object-cover object-center"
+                                />
                             </motion.div>
-                        </FadeUp>
-                    ))}
+
+                            <motion.div
+                                className="col-span-1 row-span-1 rounded-2xl overflow-hidden border border-gray-200 bg-[#EFEDE6]"
+                                whileHover={{ y: -4 }}
+                            >
+                                <img
+                                    src="/history2-1.jpg"
+                                    alt="Magic Bus community engagement"
+                                    className="h-full w-full object-cover object-center"
+                                />
+                            </motion.div>
+
+                            <div className="pointer-events-none absolute -bottom-4 left-4 rounded-xl bg-brand-yellow/95 px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-brand-black shadow-md">
+                                Since 1999
+                            </div>
+                        </div>
+                    </FadeUp>
+
+                    <FadeUp>
+                        <SectionTag>Our History</SectionTag>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A] leading-tight">
+                            Over 26 Years of Magic
+                        </h2>
+                        <div className="mt-6 space-y-5 text-[#1A1A1A]/75 leading-relaxed">
+                            <p>
+                                In 1999, while playing rugby at Bombay Gymkhana, Matthew Spacie noticed
+                                a group of boys watching from outside and invited them to join. What
+                                began as a simple game soon became regular coaching sessions. As a team,
+                                the boys grew in confidence and ambition. Many returned to school, pursued
+                                vocational courses, and began mentoring others in their community.
+                            </p>
+                            <p>
+                                Seeing a larger gap, Matthew engaged these boys to bring more children
+                                into weekend activity camps. One such trip became the start of the
+                                "Magic Bus", offering adolescents a chance to experience freedom, teamwork,
+                                and life skills education. Inspired by its impact, he left his corporate
+                                role to build the organisation full-time. What began with rugby soon
+                                expanded into multiple sports, reaching many more young people.
+                            </p>
+                            <p className="rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 text-[#1A1A1A]/80">
+                                "A couple of things really struck me early on," Matthew explains.
+                                "Firstly, there were tremendous amounts of infrastructure and services
+                                focused on education, but schools sat empty. Secondly, there was a
+                                great deficit of organisations focusing on sustainable livelihoods."
+                            </p>
+                            <p>
+                                With over 3300 employees to date, the Magic Bus family continues to
+                                grow in strength and number. With a presence spread across Nepal,
+                                Bangladesh, the organisation has grown tremendously. However, our essence
+                                remains the same as it did on that first Saturday in 1999.
+                            </p>
+                        </div>
+                    </FadeUp>
                 </div>
             </div>
         </section>
     );
 }
 
-/* ─────────────────────────────── ANNUAL REPORT CTA ─────────────────────────────── */
+/* ─────────────────────────────── MILESTONES ─────────────────────────────── */
+function MilestonesSection() {
+    return (
+        <section className="py-20 bg-[#F7F7F5]">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+                <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+                    <FadeUp>
+                        <SectionTag>Our Milestones</SectionTag>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A1A1A] leading-tight">
+                            Over Two Decades of Commitment
+                        </h2>
+                        <p className="mt-4 text-base text-[#1A1A1A]/70 leading-relaxed">
+                            Spanning more than two decades, our journey to shape the future of young India
+                            has been one defined by numerous milestones and achievements. What sets us apart
+                            is the spirit of hope, resilience, and determination that we have fostered. Magic
+                            Bus is built on the belief that every young person deserves a chance to live a
+                            fulfilling life, and we are proud of all that we have accomplished together. These
+                            are key moments that serve as a testament to our commitment to creating a brighter
+                            future for the next generation.
+                        </p>
+                    </FadeUp>
+
+                    <FadeUp delay={0.08}>
+                        <div className="rounded-3xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+                            <div className="aspect-video bg-black">
+                                <iframe
+                                    className="w-full h-full"
+                                    src="https://www.youtube.com/embed/NRLpqKHihFk"
+                                    title="Magic Bus Milestones"
+                                    loading="lazy"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen
+                                />
+                            </div>
+                            <div className="px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                <p className="text-sm text-[#1A1A1A]/70">
+                                    Watch key moments from the Magic Bus journey.
+                                </p>
+                                <a
+                                    href="https://www.magicbus.org/about-us.php"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 text-sm font-bold text-brand-red hover:text-[#a01018] transition-colors"
+                                >
+                                    <PlayCircle className="w-4 h-4" />
+                                    View on Official Page
+                                </a>
+                            </div>
+                        </div>
+                    </FadeUp>
+                </div>
+            </div>
+        </section>
+    );
+}
 function AnnualReportCTA() {
     return (
         <section className="py-20 bg-white">
@@ -347,7 +390,8 @@ export default function WhoWeAre() {
         <Layout>
             <HeroSection />
             <IntroSection />
-            <ValuesSection />
+            <HistorySection />
+            <MilestonesSection />
             <ImpactImages />
             <FAQSection
                 items={whoWeAreFAQ}
