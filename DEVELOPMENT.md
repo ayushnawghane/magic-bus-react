@@ -1,5 +1,48 @@
 # Development Log
 
+## Date: April 6, 2026
+
+### Changes Made Today
+
+#### New Pages Created
+
+1. `src/pages/YouthForChangeFellowshipProgramme.jsx`
+2. `src/pages/EmployeeVolunteeringProgramme.jsx`
+3. `src/pages/MagicMitra.jsx`
+4. `src/pages/LivelihoodProgramme.jsx`
+5. `src/pages/YouthSkillingProgramme.jsx`
+
+#### Routing and Navigation
+
+1. Added new routes in `src/App.jsx`:
+   - `/youth-for-change-fellowship-programme`
+   - `/employee-volunteering`
+   - `/magic-mitra`
+   - `/livelihood-programme`
+   - `/youth-skilling-programme`
+2. Updated `src/components/NavbarNew.jsx` with links for:
+   - Magic Mitra
+   - Livelihood Programme
+   - Standard Skilling
+3. Updated `src/components/Footer.jsx`:
+   - Linked Employee Volunteering Programme to `/employee-volunteering`
+
+#### Major Content/Design Iterations
+
+1. `src/pages/WhoWeAre.jsx`
+   - Replaced `Our Values` with `Our History`
+   - Added `Our Milestones` with embedded video
+   - Adjusted history section image/content ordering and layout spacing
+
+2. `src/pages/YouthForChangeFellowshipProgramme.jsx`
+   - Implemented full page content flow
+   - Redesigned `Building Leadership Capacities` section
+   - Refined `Success Stories` layout and CTA links
+
+3. `src/pages/YouthSkillingProgramme.jsx`
+   - Aligned page content to approved flow
+   - Updated Core Components to image-only block using `/youth-circle.jpg`
+
 ## Date: April 4, 2026
 
 ### Changes Made Today

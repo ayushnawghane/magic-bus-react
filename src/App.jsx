@@ -9,6 +9,11 @@ import BoardOfDirectors from './pages/BoardOfDirectors';
 import LearningDevelopment from './pages/LearningDevelopment';
 import AdolescentProgramme from './pages/AdolescentProgramme';
 import GovernmentPartnershipProgramme from './pages/GovernmentPartnershipProgramme';
+import YouthForChangeFellowshipProgramme from './pages/YouthForChangeFellowshipProgramme';
+import EmployeeVolunteeringProgramme from './pages/EmployeeVolunteeringProgramme';
+import MagicMitra from './pages/MagicMitra';
+import LivelihoodProgramme from './pages/LivelihoodProgramme';
+import YouthSkillingProgramme from './pages/YouthSkillingProgramme';
 import OurApproach from './pages/OurApproach'
 import DonateNow from './pages/DonateNow';
 import ContactUs from './pages/ContactUs';
@@ -36,6 +41,11 @@ function App() {
         <Route path="/learning-development" element={<LearningDevelopment />} />
         <Route path="/adolescent-programme" element={<AdolescentProgramme />} />
         <Route path="/government-partnership-programme" element={<GovernmentPartnershipProgramme />} />
+        <Route path="/youth-for-change-fellowship-programme" element={<YouthForChangeFellowshipProgramme />} />
+        <Route path="/employee-volunteering" element={<EmployeeVolunteeringProgramme />} />
+        <Route path="/magic-mitra" element={<MagicMitra />} />
+        <Route path="/livelihood-programme" element={<LivelihoodProgramme />} />
+        <Route path="/youth-skilling-programme" element={<YouthSkillingProgramme />} />
         {/* <Route path="/our-approach" element={<OurApproach />} />
         <Route path="/donate" element={<DonateNow />} />
         <Route path="/contact" element={<ContactUs />} />

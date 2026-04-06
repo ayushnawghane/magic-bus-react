@@ -33,16 +33,17 @@ const NAVIGATION_ITEMS = [
         items: [
           { label: "Government Partnership Programme", path: "/government-partnership-programme" },
           { label: "Learning & Development", path: "/learning-development" },
-          { label: "Youth for Change Fellowship Programme", path: "#" },
-          { label: "Magic Mitra", path: "#" },
+          { label: "Youth for Change Fellowship Programme", path: "/youth-for-change-fellowship-programme" },
+          { label: "Magic Mitra", path: "/magic-mitra" },
         ],
       },
       {
         title: "Livelihood Programme",
+        path: "/livelihood-programme",
         items: [
-          { label: "Standard Skilling", path: "#" },
-          { label: "Digital Skilling", path: "#" },
-          { label: "Rural Empowerment Programme", path: "#" },
+          { label: "Youth Skilling", path: "/youth-skilling-programme" },
+          { label: "Digital Skilling", path: "/livelihood-programme" },
+          { label: "Rural Empowerment Programme", path: "/livelihood-programme" },
           { label: "MB Dost", path: "#" },
           { label: "Future X", path: "#" },
         ],

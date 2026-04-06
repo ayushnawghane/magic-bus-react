@@ -1,7 +1,7 @@
 # Page Count for Client Billing
 
 ## Created: March 9, 2026
-## Last Updated: April 4, 2026
+## Last Updated: April 6, 2026
 
 | # | Page Name | File | Route | Status |
 |---|-----------|------|-------|--------|
@@ -13,15 +13,18 @@
 | 6 | Learning Development | src/pages/LearningDevelopment.jsx | /learning-development | Done |
 | 7 | Adolescent Programme | src/pages/AdolescentProgramme.jsx | /adolescent-programme | Done |
 | 8 | Government Partnership Programme | src/pages/GovernmentPartnershipProgramme.jsx | /government-partnership-programme | Done |
+| 9 | Youth for Change Fellowship Programme | src/pages/YouthForChangeFellowshipProgramme.jsx | /youth-for-change-fellowship-programme | Done |
+| 10 | Employee Volunteering Programme | src/pages/EmployeeVolunteeringProgramme.jsx | /employee-volunteering | Done |
+| 11 | Magic Mitra | src/pages/MagicMitra.jsx | /magic-mitra | Done |
+| 12 | Livelihood Programme | src/pages/LivelihoodProgramme.jsx | /livelihood-programme | Done |
+| 13 | Youth Skilling Programme | src/pages/YouthSkillingProgramme.jsx | /youth-skilling-programme | Done |
 
 ---
 
-**Total Pages Created: 8**
+**Total Pages Created: 13**
 
 ---
 
 **Note**
-- No new pages were created in the latest client update cycle.
-- Latest work was focused on enhancements to already created pages.
-- Major latest enhancement: `About Us` (`/about-us`) Our Story section redesign and interaction updates.
-- Current git workspace also includes additional pending updates in shared components/pages and 3 untracked `great-place-to-work` image files.
+- This count includes all newly added programme pages up to April 6, 2026.
+- Recent work includes route wiring and navigation updates for programme pages.

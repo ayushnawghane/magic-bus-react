@@ -1,5 +1,54 @@
 # Client Change Log
 
+## Date: April 6, 2026
+
+### New Programme Pages Added
+
+- `src/pages/YouthForChangeFellowshipProgramme.jsx`
+- `src/pages/EmployeeVolunteeringProgramme.jsx`
+- `src/pages/MagicMitra.jsx`
+- `src/pages/LivelihoodProgramme.jsx`
+- `src/pages/YouthSkillingProgramme.jsx`
+
+### Routing Updates
+
+- File: `src/App.jsx`
+- Added routes:
+  - `/youth-for-change-fellowship-programme`
+  - `/employee-volunteering`
+  - `/magic-mitra`
+  - `/livelihood-programme`
+  - `/youth-skilling-programme`
+
+### Navigation Updates
+
+- File: `src/components/NavbarNew.jsx`
+  - Linked `Magic Mitra` to `/magic-mitra`
+  - Linked livelihood group to `/livelihood-programme`
+  - Linked `Standard Skilling` to `/youth-skilling-programme`
+
+- File: `src/components/Footer.jsx`
+  - Linked `Employee Volunteering Programme` to `/employee-volunteering`
+
+### Youth For Change Fellowship Page Iterations
+
+- File: `src/pages/YouthForChangeFellowshipProgramme.jsx`
+- Replaced values/history flow with requested section content.
+- Added milestones section and embedded video.
+- Updated layouts based on feedback:
+  - milestones text-left/video-right
+  - history images-left/content-right
+  - reduced whitespace and balanced section heights
+  - testimonial-style success stories layout
+  - Linked success story CTAs to provided LinkedIn URLs.
+
+### Youth Skilling Programme Content Alignment
+
+- File: `src/pages/YouthSkillingProgramme.jsx`
+- Kept redesigned visual style while aligning content exactly to provided section flow.
+- Updated Core Components section to image-only as requested:
+  - `/youth-circle.jpg`
+
 ## Date: April 4, 2026
 
 ### Government Partnership Programme: Text Cleanup

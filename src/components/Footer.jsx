@@ -38,7 +38,7 @@ export default function Footer() {
             <p className="font-semibold text-white mt-2">Adolescent Programme</p>
             <ul className="space-y-1">
               <li><a href="#" className="hover:text-white transition-colors">Government Partnership Programme</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Youth for Change Fellowship Programme</a></li>
+              <li><Link to="/youth-for-change-fellowship-programme" className="hover:text-white transition-colors">Youth for Change Fellowship Programme</Link></li>
               <li><a href="#" className="hover:text-white transition-colors">MB Dost</a></li>
             </ul>
 
@@ -50,7 +50,7 @@ export default function Footer() {
               <li><a href="#" className="hover:text-white transition-colors">Future X</a></li>
             </ul>
 
-            <p className="font-semibold text-white mt-3"><a href="#" className="hover:text-white transition-colors">Employee Volunteering Programme</a></p>
+            <p className="font-semibold text-white mt-3"><Link to="/employee-volunteering" className="hover:text-white transition-colors">Employee Volunteering Programme</Link></p>
           </div>
 
           {/* PARTNERS */}
