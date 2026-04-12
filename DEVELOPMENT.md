@@ -1,5 +1,77 @@
 # Development Log
 
+## Date: April 12, 2026
+
+### Changes Made Today
+
+#### New Pages Created
+
+1. `src/pages/ConnectWithWork.jsx`
+2. `src/pages/DigitalSkilling.jsx`
+3. `src/pages/EntrepreneurshipDevelopmentProgramme.jsx`
+4. `src/pages/MBDost.jsx`
+5. `src/pages/FutureX.jsx`
+
+#### Routing and Navigation
+
+1. Added new routes in `src/App.jsx`:
+   - `/connect-with-work`
+   - `/digital-skilling`
+   - `/entrepreneurship-development-programme`
+   - `/mb-dost`
+   - `/futurex`
+2. Updated `src/components/NavbarNew.jsx` with links for:
+   - Connect With Work
+   - Digital Skilling
+   - Entrepreneurship Development Programme
+   - MB Dost
+   - Future X
+
+#### FAQ Data (`src/components/Home/faqItems.jsx`)
+
+- Added named exports:
+  - `cwwFAQ` — 5 FAQ items for Connect With Work
+  - `digitalSkillingFAQ` — 4 FAQ items for Digital Skilling
+  - `edpFAQ` — 5 FAQ items for EDP
+  - `mbDostFAQ` — 5 FAQ items for MB Dost
+  - `futureXFAQ` — 4 FAQ items for FutureX
+- Updated default export object to include all new datasets
+
+#### Major Content / Design Details
+
+1. **Connect With Work** (`src/pages/ConnectWithWork.jsx`)
+   - Sections: About, Features, Programme Structure, Components, Sectors & Roles, Eligibility, FAQs, Contact
+   - Eligibility redesigned as clean grid (removed repetitive layout)
+   - Uses shared `HeroBanner` and `FAQSection` components
+
+2. **Digital Skilling** (`src/pages/DigitalSkilling.jsx`)
+   - Sections: About, Features, Programme Details, Outreach & Impact, FAQs, Contact
+   - Programme Details in interactive card/tab layout
+
+3. **Entrepreneurship Development Programme** (`src/pages/EntrepreneurshipDevelopmentProgramme.jsx`)
+   - Sections: Demographic Need, About, Features, Structure, Components, Eligibility, Outreach, Success Stories, FAQs, Contact
+   - Success Stories: horizontal split-card layout — small portrait left, quote right
+   - Testimonial images: `/testimonials/vikas.png`, `/testimonials/deepika.png`, `/testimonials/monika.png`
+
+4. **MB Dost** (`src/pages/MBDost.jsx`)
+   - Sections: About (with WhatsApp chat mock), Benefits (bento grid), Demo Video, Testimonials, FAQs, Contact
+   - Design palette: dark forest `#0B1A13` + WhatsApp Green `#25D366`
+   - Animated chat UI simulation in About section
+   - 3×3 alternating dark/white bento benefits grid with ghost number watermarks (01–09)
+   - macOS-style video player chrome around demo video
+   - Youth testimonial cards: initial-letter avatars (green circle, no photos)
+   - Programme Head quotes strip on dark background
+
+5. **FutureX** (`src/pages/FutureX.jsx`)
+   - Sections: About (with orbit), Benefits (2×2 cards), In Action (image grid), Testimonial, FAQs, Contact
+   - Design palette: Magic Bus brand — Red `#E12228` primary, Yellow `#FFCC04` accent, Blue `#21BDEA` secondary, `#111111` dark
+   - Animated orbit visual showing 4 delivery channels (virtual, in-person, mobile, WhatsApp) with label spacing fix applied
+   - Cinematic image grid with floating stat chip overlay
+   - Pull-quote testimonial card with Instagram source link (Karthik's story)
+   - User-supplied images: `/futurex1.png`, `/futurex-testimonial.png`
+
+---
+
 ## Date: April 6, 2026
 
 ### Changes Made Today

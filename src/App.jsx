@@ -14,6 +14,11 @@ import EmployeeVolunteeringProgramme from './pages/EmployeeVolunteeringProgramme
 import MagicMitra from './pages/MagicMitra';
 import LivelihoodProgramme from './pages/LivelihoodProgramme';
 import YouthSkillingProgramme from './pages/YouthSkillingProgramme';
+import ConnectWithWork from './pages/ConnectWithWork';
+import DigitalSkilling from './pages/DigitalSkilling';
+import EntrepreneurshipDevelopmentProgramme from './pages/EntrepreneurshipDevelopmentProgramme';
+import MBDost from './pages/MBDost';
+import FutureX from './pages/FutureX';
 import OurApproach from './pages/OurApproach'
 import DonateNow from './pages/DonateNow';
 import ContactUs from './pages/ContactUs';
@@ -46,6 +51,11 @@ function App() {
         <Route path="/magic-mitra" element={<MagicMitra />} />
         <Route path="/livelihood-programme" element={<LivelihoodProgramme />} />
         <Route path="/youth-skilling-programme" element={<YouthSkillingProgramme />} />
+        <Route path="/connect-with-work" element={<ConnectWithWork />} />
+        <Route path="/digital-skilling" element={<DigitalSkilling />} />
+        <Route path="/entrepreneurship-development-programme" element={<EntrepreneurshipDevelopmentProgramme />} />
+        <Route path="/mb-dost" element={<MBDost />} />
+        <Route path="/futurex" element={<FutureX />} />
         {/* <Route path="/our-approach" element={<OurApproach />} />
         <Route path="/donate" element={<DonateNow />} />
         <Route path="/contact" element={<ContactUs />} />

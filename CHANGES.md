@@ -1,5 +1,96 @@
 # Client Change Log
 
+## Date: April 12, 2026
+
+### New Programme Pages Added
+
+- `src/pages/ConnectWithWork.jsx`
+- `src/pages/DigitalSkilling.jsx`
+- `src/pages/EntrepreneurshipDevelopmentProgramme.jsx`
+- `src/pages/MBDost.jsx`
+- `src/pages/FutureX.jsx`
+
+### Routing Updates
+
+- File: `src/App.jsx`
+- Added routes:
+  - `/connect-with-work`
+  - `/digital-skilling`
+  - `/entrepreneurship-development-programme`
+  - `/mb-dost`
+  - `/futurex`
+
+### Navigation Updates
+
+- File: `src/components/NavbarNew.jsx`
+  - Linked `Connect With Work` to `/connect-with-work`
+  - Linked `Digital Skilling` to `/digital-skilling`
+  - Linked `Entrepreneurship Development` to `/entrepreneurship-development-programme`
+  - Linked `MB Dost` to `/mb-dost`
+  - Linked `Future X` to `/futurex`
+
+### Connect With Work (CWW) Page
+
+- File: `src/pages/ConnectWithWork.jsx`
+- Full content flow: About, Programme Features, Structure, Components, Sectors & Roles, Eligibility, FAQs, Contact
+- Eligibility section redesigned to avoid repetition — now rendered as a clean responsive grid
+- Integrated shared `HeroBanner` and `FAQSection` components
+- Added `cwwFAQ` dataset to `src/components/Home/faqItems.jsx`
+
+### Digital Skilling Page
+
+- File: `src/pages/DigitalSkilling.jsx`
+- Full content flow: About, Programme Features, Programme Details, Outreach & Impact, FAQs, Contact
+- Programme Details rendered as an interactive tabbed/card layout
+- Added `digitalSkillingFAQ` dataset to `src/components/Home/faqItems.jsx`
+
+### Entrepreneurship Development Programme (EDP) Page
+
+- File: `src/pages/EntrepreneurshipDevelopmentProgramme.jsx`
+- Full content flow: Demographic Need, About EDP, Features, Structure, Components, Eligibility, Outreach, Success Stories, FAQs, Contact
+- Success Stories section redesigned to horizontal split-card layout (portrait left, quote right) after user-provided testimonial images added
+- Images referenced: `/testimonials/vikas.png`, `/testimonials/deepika.png`, `/testimonials/monika.png`
+- Added `edpFAQ` dataset to `src/components/Home/faqItems.jsx`
+
+### MB Dost Page
+
+- File: `src/pages/MBDost.jsx`
+- Full content flow: About, Benefits, Demo Video, Testimonials, FAQs, Contact
+- Design: Dark forest-dark theme (`#0B1A13`) with WhatsApp Green (`#25D366`) accents
+- Key design components:
+  - Animated WhatsApp Chat UI mock (chatbot simulation)
+  - 3×3 alternating dark/white bento benefits grid with ghost number watermarks
+  - Custom video player with macOS-style window chrome
+  - Youth testimonial cards using initial-letter avatars (no photos)
+  - Programme Head quote strip on dark background
+- Added `mbDostFAQ` dataset to `src/components/Home/faqItems.jsx`
+
+### FutureX Page
+
+- File: `src/pages/FutureX.jsx`
+- Full content flow: About (with orbit visual), Benefits, In Action (image grid), Testimonial, FAQs, Contact
+- Design: Magic Bus brand palette — Red (`#E12228`) primary, Yellow (`#FFCC04`) accent, Blue (`#21BDEA`) secondary, on `#111111` dark background
+- Key design components:
+  - Animated spinning orbit hub showing 4 delivery channels
+  - 2×2 gradient-border benefit cards
+  - Cinematic editorial image grid with floating stat chip and delivery mode card
+  - Giant pull-quote testimonial card with Instagram source link
+  - Orbit label spacing updated for visual clarity (spacing between labels and nodes)
+- Added `futureXFAQ` dataset to `src/components/Home/faqItems.jsx`
+
+### FAQ Data Updates
+
+- File: `src/components/Home/faqItems.jsx`
+- Added and exported:
+  - `cwwFAQ`
+  - `digitalSkillingFAQ`
+  - `edpFAQ`
+  - `mbDostFAQ`
+  - `futureXFAQ`
+- Updated default export to include all new datasets
+
+---
+
 ## Date: April 6, 2026
 
 ### New Programme Pages Added

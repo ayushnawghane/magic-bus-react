@@ -1,7 +1,7 @@
 # Page Count for Client Billing
 
 ## Created: March 9, 2026
-## Last Updated: April 6, 2026
+## Last Updated: April 12, 2026
 
 | # | Page Name | File | Route | Status |
 |---|-----------|------|-------|--------|
@@ -18,13 +18,20 @@
 | 11 | Magic Mitra | src/pages/MagicMitra.jsx | /magic-mitra | Done |
 | 12 | Livelihood Programme | src/pages/LivelihoodProgramme.jsx | /livelihood-programme | Done |
 | 13 | Youth Skilling Programme | src/pages/YouthSkillingProgramme.jsx | /youth-skilling-programme | Done |
+| 14 | Connect With Work | src/pages/ConnectWithWork.jsx | /connect-with-work | Done |
+| 15 | Digital Skilling | src/pages/DigitalSkilling.jsx | /digital-skilling | Done |
+| 16 | Entrepreneurship Development Programme | src/pages/EntrepreneurshipDevelopmentProgramme.jsx | /entrepreneurship-development-programme | Done |
+| 17 | MB Dost | src/pages/MBDost.jsx | /mb-dost | Done |
+| 18 | FutureX | src/pages/FutureX.jsx | /futurex | Done |
 
 ---
 
-**Total Pages Created: 13**
+**Total Pages Created: 18**
 
 ---
 
 **Note**
-- This count includes all newly added programme pages up to April 6, 2026.
-- Recent work includes route wiring and navigation updates for programme pages.
+- Pages 14–18 were added during the April 12, 2026 development cycle.
+- Pages 14–16 cover the Livelihood Programme sub-pages (Connect With Work, Digital Skilling, EDP).
+- Pages 17–18 are new tech-focused pages: MB Dost (WhatsApp chatbot companion) and FutureX (blended learning initiative).
+- All pages are routed in `src/App.jsx` and linked in `src/components/NavbarNew.jsx`.

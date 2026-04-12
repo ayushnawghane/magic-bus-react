@@ -1205,4 +1205,127 @@ export const whoWeAreFAQ = [
   },
 ];
 
-export default { homefaq, contactFAQ, annualReportsFAQ, newsFAQ, certificationsFAQ, flfprFAQ, genderJourneyFAQ, whoWeAreFAQ, cultureFAQ, adolescentFAQ, governmentPartnershipFAQ };
+/* -------------------------------------------------------------------------- */
+/*                          CONNECT WITH WORK PAGE FAQ                        */
+/* -------------------------------------------------------------------------- */
+export const cwwFAQ = [
+  {
+    question: "Does this programme cover AI skills?",
+    category: "Curriculum",
+    answer:
+      "Magic Bus has launched the AI-CWW Programme that embeds AI literacy, digital fluency, and future ready skills into employability training for underserved youth.",
+  },
+  {
+    question: "How does the programme support first-time job seekers?",
+    category: "Support",
+    answer:
+      "The CWW Programme equips graduates with skills for diverse job roles, addressing challenges faced by first-time job seekers and linking them with local job opportunities.",
+  },
+  {
+    question: "Does the programme give jobs to youth?",
+    category: "Placement",
+    answer:
+      "No, the programme does not give them jobs. The programme gives them job placement support through training in relevant employability skills for building sustainable livelihoods.",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                        DIGITAL SKILLING PAGE FAQ                           */
+/* -------------------------------------------------------------------------- */
+export const digitalSkillingFAQ = [
+  {
+    question: "Is this programme only for STEM graduates?",
+    category: "Eligibility",
+    answer:
+      "Both STEM and non-STEM are supported through the Foundational Technology Skilling Programme, equipping students with skills in cloud computing, AI, cyber security, and IT fundamentals, alongside 21st century life and employability skills.",
+  },
+  {
+    question: "What happens after students complete the programme?",
+    category: "Placement",
+    answer:
+      "After completing the programme, students are connected to a wide range of entry-level roles with leading employers.",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                              EDP PAGE FAQ                                  */
+/* -------------------------------------------------------------------------- */
+export const edpFAQ = [
+  {
+    question: "Does this programme support rural communities?",
+    category: "Reach",
+    answer:
+      "Under EDP, Magic Bus runs the Peri-Urban and Rural Livelihood Programme, equipping women with life skills, leadership training, and entrepreneurial skills to start and sustain enterprises for achieving financial independence.",
+  },
+  {
+    question: "In which parts of India is the EDP initiative active?",
+    category: "Reach",
+    answer:
+      "This programme is currently active in Maharashtra, Gujarat, Rajasthan, Madhya Pradesh, Karnataka, Odisha, and Tamil Nadu.",
+  },
+  {
+    question: "How does the programme promote social empowerment?",
+    category: "Impact",
+    answer:
+      "The programme combines training, financial support, and collective strength through Self Help Groups (SHGs), creating a ripple effect of social empowerment and economic growth.",
+  },
+  {
+    question: "How does the programme support women from underserved communities?",
+    category: "Women",
+    answer:
+      "Women from underserved communities are equipped with skills, resources, and opportunities to enhance their agency and drive positive change.",
+  },
+  {
+    question: "What kind of businesses are supported by EDP?",
+    category: "Businesses",
+    answer:
+      "This programme supports businesses like garment business, sewai business, medicine products, and dehydrated food through business collectives.",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                            MB DOST PAGE FAQ                                */
+/* -------------------------------------------------------------------------- */
+export const mbDostFAQ = [
+  {
+    question: "Who built MB Dost?",
+    category: "About",
+    answer:
+      "MB Dost was developed by a dedicated team of professionals working in Magic Bus India Foundation.",
+  },
+  {
+    question: "Is MB Dost different from FutureX?",
+    category: "About",
+    answer:
+      "Yes. However, both initiatives are related. As a digital support tool, MB Dost provides assistance to youth enrolled in the FutureX programme.",
+  },
+];
+
+export const futureXFAQ = [
+  {
+    question: "What is the focus of the FutureX programme?",
+    category: "About",
+    answer:
+      "FutureX aims to expand on the blended learning framework, keeping its focus on life and employability skills for underserved youth. It aims to enhance the efficiency of the skilling programmes of Magic Bus India Foundation.",
+  },
+  {
+    question: "How does FutureX work for youth development?",
+    category: "How It Works",
+    answer:
+      "Through FutureX, youth are introduced to one goal per week over the course of nine weeks, alongside exposure to English and digital skills.",
+  },
+  {
+    question: "What is the delivery mode of FutureX?",
+    category: "How It Works",
+    answer:
+      "This programme is delivered through diverse learning channels, including virtual sessions, in-person sessions, mobile learning apps, and a WhatsApp-based chatbot.",
+  },
+  {
+    question: "How does FutureX ensure enhanced outcomes and scalability?",
+    category: "Impact",
+    answer:
+      "FutureX leverages technology to streamline programme delivery end-to-end and establish support functions, such as mobilisation, learning management system, and continuous learning, in order to scale impact and sustain outcomes.",
+  },
+];
+
+export default { homefaq, contactFAQ, annualReportsFAQ, newsFAQ, certificationsFAQ, flfprFAQ, genderJourneyFAQ, whoWeAreFAQ, cultureFAQ, adolescentFAQ, governmentPartnershipFAQ, cwwFAQ, digitalSkillingFAQ, edpFAQ, mbDostFAQ, futureXFAQ };

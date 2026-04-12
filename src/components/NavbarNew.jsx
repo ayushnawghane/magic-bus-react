@@ -42,10 +42,12 @@ const NAVIGATION_ITEMS = [
         path: "/livelihood-programme",
         items: [
           { label: "Youth Skilling", path: "/youth-skilling-programme" },
-          { label: "Digital Skilling", path: "/livelihood-programme" },
+          { label: "Connect With Work", path: "/connect-with-work" },
+          { label: "Digital Skilling", path: "/digital-skilling" },
+          { label: "Entrepreneurship Development", path: "/entrepreneurship-development-programme" },
           { label: "Rural Empowerment Programme", path: "/livelihood-programme" },
-          { label: "MB Dost", path: "#" },
-          { label: "Future X", path: "#" },
+          { label: "MB Dost", path: "/mb-dost" },
+          { label: "Future X", path: "/futurex" },
         ],
       },
       {
