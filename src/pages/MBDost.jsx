@@ -558,7 +558,7 @@ export default function MBDost() {
         <Layout>
             <HeroBanner
                 badgeText="Magic Bus India Foundation"
-                image="/ngo-images/Ai.jpeg"
+                image="/futurex1.png"
                 title="MB Dost"
                 subtitle="In-House Companion of Magic Bus"
                 titleGradient={false}
