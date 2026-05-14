@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { fadeUp, fadeUpSm, staggerStd, VIEWPORT_ONCE } from "../../hooks/useScrollAnimations";
 
 /* === PROGRAM AREAS (images already in /ngo-images/) === */
 const PROGRAM_AREAS = [
@@ -122,16 +123,22 @@ function ProgramCard({ program, index }) {
 /* ProgramAreas grid */
 export default function ProgramAreas() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-20 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <span className="text-brand-red font-dosis font-bold text-sm uppercase tracking-wider">Success Stories</span>
-          <h2 className="mt-3 text-5xl font-dosis font-bold text-brand-black">Lives We've Transformed</h2>
-          <p className="text-gray-600 mt-4 max-w-2xl mx-auto font-lato text-lg">
+        {/* Header — staggered scroll reveal */}
+        <motion.div
+          className="text-center mb-16"
+          variants={staggerStd}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+        >
+          <motion.span variants={fadeUpSm} className="text-brand-red font-dosis font-bold text-sm uppercase tracking-wider">Success Stories</motion.span>
+          <motion.h2 variants={fadeUp} className="mt-3 text-5xl font-dosis font-bold text-brand-black">Lives We've Transformed</motion.h2>
+          <motion.p variants={fadeUpSm} className="text-gray-600 mt-4 max-w-2xl mx-auto font-lato text-lg">
             Real stories from youth who found their path through Magic Bus Programs
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

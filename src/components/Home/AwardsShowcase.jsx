@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, fadeUpSm, scaleReveal, staggerStd, VIEWPORT_ONCE, EASE_EXPO } from "../../hooks/useScrollAnimations";
 
 const AWARDS = [
   {
@@ -61,20 +62,30 @@ export default function AwardsShowcase() {
   const a = AWARDS[i];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex items-start md:items-center justify-between gap-6 mb-12">
+        {/* Header — staggered scroll reveal */}
+        <motion.div
+          className="flex items-start md:items-center justify-between gap-6 mb-12"
+          variants={staggerStd}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+        >
           <div>
-            <p className="text-sm font-semibold tracking-wider text-red-600 uppercase mb-2">
+            <motion.p variants={fadeUpSm} className="text-sm font-semibold tracking-wider text-red-600 uppercase mb-2">
               Recognition
-            </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Awards & Achievements
-            </h2>
+            </motion.p>
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-bold text-gray-900">
+              Awards &amp; Achievements
+            </motion.h2>
           </div>
 
-          <a
+          <motion.a
+            variants={fadeUpSm}
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 300, damping: 18 }}
             href="#"
             className="inline-flex items-center gap-2 rounded-full bg-red-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-red-700 transition-all hover:shadow-lg"
           >
@@ -82,11 +93,17 @@ export default function AwardsShowcase() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 6l6 6-6 6" />
             </svg>
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
 
-        {/* Main Grid */}
-        <div className="grid lg:grid-cols-16 gap-6 items-stretch">
+        {/* Main Grid — scale reveal on entry */}
+        <motion.div
+          className="grid lg:grid-cols-16 gap-6 items-stretch"
+          variants={staggerStd}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+        >
           {/* Left stats card */}
           <div className="lg:col-span-5">
             <div className="h-full min-h-[420px] rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 p-8 shadow-lg border border-orange-100 flex flex-col justify-between">
@@ -207,20 +224,29 @@ export default function AwardsShowcase() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* CTA */}
-        <div className="text-center mt-16">
-          <a
+        <motion.div
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          transition={{ duration: 0.6, ease: EASE_EXPO, delay: 0.2 }}
+        >
+          <motion.a
             href="#"
-            className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white px-8 py-3.5 font-semibold hover:bg-gray-800 transition-all hover:shadow-xl hover:scale-105"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 300, damping: 18 }}
+            className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white px-8 py-3.5 font-semibold hover:bg-gray-800 transition-all hover:shadow-xl"
           >
-            View All Awards & Certifications
+            View All Awards &amp; Certifications
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );

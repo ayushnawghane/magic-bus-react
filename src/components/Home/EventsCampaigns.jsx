@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { fadeUp, fadeUpSm, staggerStd, VIEWPORT_ONCE, EASE_EXPO } from "../../hooks/useScrollAnimations";
 
 /* Single sticky/stacked card */
 function UpdateCard({ index, total, scrollYProgress, item }) {
@@ -100,19 +101,22 @@ export default function LatestUpdates() {
       ref={containerRef}
       className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50"
     >
-      {/* Sticky header */}
+      {/* Sticky header with scroll-reveal */}
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={staggerStd}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-ink mb-4">
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-bold text-ink mb-4">
               Latest Updates
-            </h2>
-            <div className="mx-auto h-1 w-32 rounded-full bg-gradient-to-r from-brand-red via-brand-yellow to-brand-green" />
+            </motion.h2>
+            <motion.div
+              variants={fadeUpSm}
+              className="mx-auto h-1 w-32 rounded-full bg-gradient-to-r from-brand-red via-brand-yellow to-brand-green"
+            />
           </motion.div>
         </div>
       </div>

@@ -1,45 +1,35 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
+import {
+  fadeUp,
+  fadeUpSm,
+  staggerStd,
+  VIEWPORT_ONCE,
+  EASE_EXPO,
+} from "../../hooks/useScrollAnimations";
 
-/**
- * Trusted by 500+ Organizations
- * - 5 auto-scrolling columns (up/down alternating) with seamless loop
- * - Logo image cards (glass, subtle border/shadow)
- * - Brand-tinted light background + fade edges for the marquee
- * - Grayscale → color on hover, scale lift
- * - Respects prefers-reduced-motion
- */
-
-
-
-const col1  = [
-  { name: "OTIS", src: "/partners/1 (1).jpg" },
-  { name: "Dow", src: "/partners/1 (1).png" },
-  { name: "Interactive Brokers", src: "/partners/1 (3).jpg" },
-];
-
-const col2  = [
+const col2 = [
   { name: "Reliance", src: "/partners/1 (4).png" },
   { name: "SBI Card", src: "/partners/1 (3).png" },
   { name: "Deutsche Bank", src: "/partners/1 (2).jpg" },
   { name: "Deloitte", src: "/partners/1 (2).png" },
 ];
 
-const col3  = [
+const col3 = [
   { name: "KFC", src: "/partners/1 (4).jpg" },
   { name: "Airbus", src: "/partners/1 (5).jpg" },
   { name: "Cisco", src: "/partners/1 (14).jpg" },
 ];
 
-const col4  = [
+const col4 = [
   { name: "Puma", src: "/partners/1 (6).jpg" },
   { name: "Convergys", src: "/partners/1 (13).jpg" },
   { name: "IndiGo", src: "/partners/1 (7).jpg" },
   { name: "Oracle", src: "/partners/1 (12).jpg" },
 ];
 
-const col5  = [
+const col5 = [
   { name: "MEL", src: "/partners/1 (8).jpg" },
   { name: "Mitsubishi", src: "/partners/1 (11).jpg" },
   { name: "Hexaware", src: "/partners/1 (9).jpg" },
@@ -48,18 +38,22 @@ const col5  = [
 
 function LogoCard({ logo }) {
   const Img = (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-border/70 shadow-sm hover:shadow-md transition-shadow duration-300 p-6 grid place-items-center h-28">
+    <motion.div
+      whileHover={{ scale: 1.04, y: -2 }}
+      transition={{ type: "spring", stiffness: 300, damping: 18 }}
+      className="bg-white/80 backdrop-blur-sm rounded-2xl border border-border/70 shadow-sm hover:shadow-md transition-shadow duration-300 p-6 grid place-items-center h-28"
+    >
       <img
         src={logo.src}
         alt={logo.name}
-        className="max-h-18 max-w-[180px] object-contain hover:grayscale transition duration-300 ease-out will-change-transform"
+        className="max-h-18 max-w-[180px] object-contain grayscale hover:grayscale-0 transition duration-300 ease-out will-change-transform"
         loading="lazy"
         decoding="async"
       />
-    </div>
+    </motion.div>
   );
   return logo.href ? (
-    <a href={logo.href} aria-label={logo.name} className="block hover:scale-[1.01] transition-transform">
+    <a href={logo.href} aria-label={logo.name} className="block">
       {Img}
     </a>
   ) : (
@@ -67,18 +61,12 @@ function LogoCard({ logo }) {
   );
 }
 
-function AnimatedColumn({
-  logos,
-  direction = "up",
-  duration = 22,
-}) {
+function AnimatedColumn({ logos, direction = "up", duration = 22 }) {
   const shouldReduce = useReducedMotion();
-  // Duplicate to create a seamless loop
   const rows = [...logos, ...logos];
 
   return (
     <div className="relative h-[440px] overflow-hidden">
-      {/* top/bottom fades */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white to-transparent z-10" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
 
@@ -86,14 +74,10 @@ function AnimatedColumn({
         animate={
           shouldReduce
             ? undefined
-            : {
-                y: direction === "up" ? ["0%", "-50%"] : ["-50%", "0%"],
-              }
+            : { y: direction === "up" ? ["0%", "-50%"] : ["-50%", "0%"] }
         }
         transition={
-          shouldReduce
-            ? undefined
-            : { duration, repeat: Infinity, ease: "linear" }
+          shouldReduce ? undefined : { duration, repeat: Infinity, ease: "linear" }
         }
         className="will-change-transform"
       >
@@ -109,46 +93,87 @@ function AnimatedColumn({
 
 export default function TrustedOrganizations() {
   return (
-    <section className="py-20 md:py-24 bg-gradient-to-br from-brand-blue/10 via-brand-white to-brand-green/10">
+    <section className="py-20 md:py-24 bg-gradient-to-br from-brand-blue/10 via-brand-white to-brand-green/10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Heading */}
-        <div className="text-center mb-12">
-          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-brand-red/10 text-brand-red ring-1 ring-brand-red/20">
+
+        {/* Heading — staggered reveal */}
+        <motion.div
+          className="text-center mb-12"
+          variants={staggerStd}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+        >
+          <motion.p
+            variants={fadeUpSm}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-brand-red/10 text-brand-red ring-1 ring-brand-red/20"
+          >
             Trusted by 500+ Organizations
-          </p>
-          <h2 className="mt-4 text-3xl md:text-5xl font-extrabold text-ink">
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            className="mt-4 text-3xl md:text-5xl font-extrabold text-ink"
+          >
             Our Partners in <span className="text-brand-red">Change</span>
-          </h2>
-          <p className="mt-3 text-ink/70 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p
+            variants={fadeUpSm}
+            className="mt-3 text-ink/70 max-w-2xl mx-auto"
+          >
             Strategic employers, corporates and ecosystem allies who power scale with us.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* 4 Columns, 3 Rows Visible */}
-        <div className="grid grid-cols-4 gap-6">
-
-          <AnimatedColumn logos={col2} direction="down" duration={22} />
-          <AnimatedColumn logos={col3} direction="up" duration={22} />
-          <AnimatedColumn logos={col4} direction="down" duration={22} />
-          <AnimatedColumn logos={col5} direction="up" duration={22} />
-
-        </div>
+        {/* 4 Columns — staggered fade-in entry for each column */}
+        <motion.div
+          className="grid grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+            },
+          }}
+        >
+          {[
+            { logos: col2, dir: "down" },
+            { logos: col3, dir: "up" },
+            { logos: col4, dir: "down" },
+            { logos: col5, dir: "up" },
+          ].map(({ logos, dir }, idx) => (
+            <motion.div
+              key={idx}
+              variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_EXPO } } }}
+            >
+              <AnimatedColumn logos={logos} direction={dir} duration={22} />
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* CTA */}
-        <div className="text-center mt-12">
-          <Link
-            to="/partner"
-            className="inline-flex items-center gap-2 rounded-full bg-ink text-brand-white px-5 py-3 font-semibold shadow hover:opacity-90 transition"
-          >
-            Partner With Us
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          transition={{ duration: 0.6, ease: EASE_EXPO, delay: 0.3 }}
+        >
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 300, damping: 18 }}>
+            <Link
+              to="/partner"
+              className="inline-flex items-center gap-2 rounded-full bg-ink text-brand-white px-5 py-3 font-semibold shadow hover:opacity-90 transition"
+            >
+              Partner With Us
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </motion.div>
+        </motion.div>
 
       </div>
     </section>
   );
 }
-

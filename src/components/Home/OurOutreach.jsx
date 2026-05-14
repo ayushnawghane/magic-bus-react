@@ -1,6 +1,7 @@
 // OutreachWithDonut.jsx
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { fadeUp, fadeUpSm, staggerStd, VIEWPORT_ONCE } from "../../hooks/useScrollAnimations";
 /**
  * Four-Quadrant Impact Chart (Exact Image Match)
  */
@@ -361,11 +362,17 @@ export default function OutreachWithDonut() {
 
   return (
     <section className="py-16 md:py-20 relative">
-      <div className="text-center mb-8">
-        <h2 className="mt-4 text-3xl md:text-5xl font-extrabold text-ink">
+      <motion.div
+        className="text-center mb-8"
+        variants={staggerStd}
+        initial="hidden"
+        whileInView="visible"
+        viewport={VIEWPORT_ONCE}
+      >
+        <motion.h2 variants={fadeUp} className="mt-4 text-3xl md:text-5xl font-extrabold text-ink">
           Our <span className="text-brand-red">Outreach</span>
-        </h2>
-      </div>
+        </motion.h2>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Tabs */}
@@ -423,11 +430,17 @@ export default function OutreachWithDonut() {
           </button>
         </motion.div>
 
-        <div className="text-center my-8">
-          <h2 className="mt-4 text-3xl md:text-5xl font-extrabold text-ink">
+        <motion.div
+          className="text-center my-8"
+          variants={staggerStd}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+        >
+          <motion.h2 variants={fadeUp} className="mt-4 text-3xl md:text-5xl font-extrabold text-ink">
             Our <span className="text-brand-red">Impact</span>
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
         {/* Donut & labels aligned by side and vertical position */}
         <AnimatePresence mode="wait">

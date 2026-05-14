@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { fadeUp, fadeUpSm, staggerStd, VIEWPORT_ONCE, EASE_EXPO } from "../../hooks/useScrollAnimations";
 import {
   Users,
   BriefcaseBusiness,
@@ -206,20 +208,26 @@ export default function ProgrammesSlider() {
     baseSlides.length;
 
   return (
-    <section className="py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="py-24 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <p className="uppercase tracking-[0.22em] text-xs font-bold text-gray-500 mb-3">
+        <motion.div
+          className="text-center mb-12 md:mb-16"
+          variants={staggerStd}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+        >
+          <motion.p variants={fadeUpSm} className="uppercase tracking-[0.22em] text-xs font-bold text-gray-500 mb-3">
             Comprehensive Solutions
-          </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
+          </motion.p>
+          <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
             Our Core Programmes
-          </h2>
-          <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p variants={fadeUpSm} className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
             Transforming lives through structured pathways from adolescence to
             sustainable livelihoods.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="relative">
           <div className="overflow-hidden">

@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
 import { Layers, Users, Code2, Briefcase, Network } from "lucide-react";
+import {
+  fadeUp,
+  fadeUpSm,
+  scalePop,
+  staggerStd,
+  staggerFast,
+  slideLeft,
+  VIEWPORT_ONCE,
+  EASE_EXPO,
+} from "../../hooks/useScrollAnimations";
 
 const steps = [
   {
@@ -39,44 +49,49 @@ const steps = [
   },
 ];
 
-
-// Small helper to stagger card fades
-const fade = (i) => ({
-  initial: { opacity: 0, y: 10 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-10% 0px -10% 0px" },
-  transition: { delay: 0.05 * i, duration: 0.45, ease: "easeOut" },
-});
-
 export default function JourneyZigzagAnimated() {
   return (
-    <section className="py-16 md:py-20 bg-gray-50">
+    <section className="py-16 md:py-20 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-10 md:mb-12">
-          <p className="uppercase tracking-[0.22em] text-xs font-bold text-gray-500 mb-3">
+
+        {/* Section header — stagger with slow reveal */}
+        <motion.div
+          className="text-center mb-10 md:mb-12"
+          variants={staggerStd}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+        >
+          <motion.p
+            variants={fadeUpSm}
+            className="uppercase tracking-[0.22em] text-xs font-bold text-gray-500 mb-3"
+          >
             Our proven model
-          </p>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-ink mb-4">
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            className="text-3xl md:text-5xl font-extrabold text-ink mb-4"
+          >
             Childhood to Livelihood Journey
-          </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p
+            variants={fadeUpSm}
+            className="text-gray-600 text-lg max-w-3xl mx-auto"
+          >
             A clear, practical 5-step pathway that prepares young people for
             meaningful careers and lifelong success.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="relative">
-          {/* Dotted wave path – tuned to sit under 1, 4, 5 */}
+          {/* Dotted wave path — draws itself on scroll */}
           <svg
             className="pointer-events-none absolute inset-x-0 -top-6 hidden md:block"
             viewBox="0 0 1200 180"
             fill="none"
             aria-hidden="true"
           >
-            {/* main wave (starts slightly before step-1 and ends after step-5) */}
             <motion.path
-              // anchors ~ under each icon center: 1(160), 2(380), 3(600), 4(820), 5(1040)
-              // up (60) -> down (110) -> up (60) -> down (110) -> up (60)
               d="
                 M 70 90
                 C 120 40, 200 40, 260 90
@@ -88,36 +103,50 @@ export default function JourneyZigzagAnimated() {
               strokeWidth="5"
               strokeLinecap="round"
               strokeDasharray="6 12"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.4, ease: "easeOut", delay: 0.2 }}
-              opacity="0.75"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 0.75 }}
+              viewport={VIEWPORT_ONCE}
+              transition={{ duration: 1.8, ease: EASE_EXPO, delay: 0.2 }}
             />
           </svg>
 
-          {/* Steps grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 relative">
+          {/* Steps grid — staggered cascade */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 relative"
+            variants={staggerFast}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
+          >
             {steps.map((s, i) => {
-              const isDown = i % 2 === 1; // 2 & 4 lower
+              const isDown = i % 2 === 1;
               return (
-                <div
+                <motion.div
                   key={s.id}
+                  variants={fadeUp}
                   className={`relative flex flex-col items-center ${
                     isDown ? "mt-16" : "mt-0"
                   }`}
                 >
-                  {/* Floating Icon */}
+                  {/* Floating Icon — entry scale pop + perpetual float */}
                   <motion.div
+                    variants={scalePop}
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 3 + i * 0.15, repeat: Infinity, ease: "easeInOut" }}
-                    whileHover={{ scale: 1.06 }}
+                    whileHover={{ scale: 1.1, rotate: [0, -4, 4, 0] }}
                     className={`relative z-10 w-[96px] h-[96px] rounded-full grid place-items-center shadow-xl
                                 bg-gradient-to-br ${s.grad}`}
                   >
                     <s.icon className="w-10 h-10 text-white drop-shadow-md" />
-                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-white text-ink text-xs font-bold grid place-items-center shadow">
+                    <motion.span
+                      className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-white text-ink text-xs font-bold grid place-items-center shadow"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={VIEWPORT_ONCE}
+                      transition={{ type: "spring", stiffness: 400, damping: 16, delay: 0.3 + i * 0.07 }}
+                    >
                       {s.id}
-                    </span>
+                    </motion.span>
                     <span
                       aria-hidden
                       className="absolute inset-0 rounded-full blur-2xl opacity-30 bg-white"
@@ -126,28 +155,41 @@ export default function JourneyZigzagAnimated() {
                   </motion.div>
 
                   {/* Card */}
-                  <motion.div {...fade(i)} className="mt-6 w-full">
+                  <motion.div
+                    variants={fadeUpSm}
+                    whileHover={{ y: -4, boxShadow: "0 20px 40px rgba(16,24,40,0.14)" }}
+                    transition={{ type: "spring", stiffness: 250, damping: 18 }}
+                    className="mt-6 w-full"
+                  >
                     <div className="bg-white rounded-2xl shadow-[0_10px_30px_rgba(16,24,40,0.08)] p-6 text-center">
                       <h3 className="text-lg font-semibold text-ink mb-2">{s.title}</h3>
                       <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
                     </div>
                   </motion.div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* CTA */}
-          <div className="text-center mt-10">
-            <a
+          <motion.div
+            className="text-center mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_ONCE}
+            transition={{ duration: 0.6, ease: EASE_EXPO, delay: 0.4 }}
+          >
+            <motion.a
               href="#"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
               className="inline-flex items-center justify-center rounded-full px-8 py-4
-                         font-semibold bg-brand-red text-white shadow-lg hover:shadow-xl
-                         transition hover:-translate-y-0.5 active:translate-y-0"
+                         font-semibold bg-brand-red text-white shadow-lg"
             >
               Know Our Model
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
       </div>
     </section>
