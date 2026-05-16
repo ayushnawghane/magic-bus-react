@@ -1,6 +1,27 @@
 # Development Log
 
-## Date: April 12, 2026
+## Date: May 16, 2026
+
+### Changes Made Today
+
+#### Modernizing UI Components & Animations
+
+1. **Programmes Slider** (`src/components/Home/ProgrammesSlider.jsx`, `src/index.css`)
+   - Re-architected the generic slider cards to feature a 3D flip-on-hover effect.
+   - Refactored `ProgrammeCard` into a parent `flip-card` and two children (`flip-card-inner` face components) leveraging `transform-style: preserve-3d`.
+   - Adjusted layout sizes and vertical overflow to prevent clipping during 3D transforms.
+
+2. **Success Stories** (`src/components/Home/SuccessStories.jsx`)
+   - Addressed severe performance bottlenecks by refactoring Framer Motion's React-state-based hover animations (`useState` + `animate` props).
+   - Migrated entirely to GPU-accelerated CSS `group-hover` transitions using `scale` and `opacity`.
+   - Reduced layout thrashing and achieved a 60fps snappy interaction.
+
+3. **Our Outreach** (`src/components/Home/OurOutreach.jsx`)
+   - Completely discarded the basic metric cards.
+   - Designed and built an unorthodox interactive "Skyline Bar Chart" using standard `div` elements and `framer-motion`.
+   - Calculated bar heights using a `Math.log10` logarithmic scale algorithm to properly display heavily skewed data ranges (11 to 3.5 Million) in the same visual space.
+   - Added hover interactions via `onMouseEnter`/`onMouseLeave` state updates, driving an active-index based dimming effect.
+   - Integrated floating tooltips and animated count-up numbers.## Date: April 12, 2026
 
 ### Changes Made Today
 

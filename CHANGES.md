@@ -1,6 +1,30 @@
 # Client Change Log
 
-## Date: April 12, 2026
+## Date: May 16, 2026
+
+### Modernizing Home Page UI & Animations
+
+#### 1. Programmes Slider (3D Flip Effect)
+- **File**: `src/components/Home/ProgrammesSlider.jsx`, `src/index.css`
+- **Updates**:
+  - Replaced static card design with a modern 3D flip-on-hover effect.
+  - Front face retains the high-quality image, while the back face displays the programme title, summary, key tags, and a CTA.
+  - Added scoped CSS transforms to manage the 3D rotation smoothly without affecting other layouts.
+
+#### 2. Success Stories (Performance Optimization)
+- **File**: `src/components/Home/SuccessStories.jsx`
+- **Updates**:
+  - Addressed jittery/laggy animations by refactoring out expensive per-frame React state re-renders (Framer Motion hover state).
+  - Replaced with GPU-accelerated pure CSS `group-hover` transitions.
+  - Optimized scaling and opacity, creating a much snappier, premium feel for interactive hover states.
+
+#### 3. Our Outreach (Skyline Bar Chart Redesign)
+- **File**: `src/components/Home/OurOutreach.jsx`
+- **Updates**:
+  - Completely redesigned the traditional stat tiles into a custom interactive "Skyline Bar Chart".
+  - Data points are now represented as vertical gradient pillars rising from a baseline, sized dynamically using a logarithmic scale to handle vast number differences (11 vs 3.5M).
+  - Added rich interactions: hovering a bar scales it up, dims the surrounding bars (spotlight effect), and reveals a floating data tooltip.
+  - Numbers use an animated count-up effect synchronized with the bars rising into view on scroll.## Date: April 12, 2026
 
 ### New Programme Pages Added
 
