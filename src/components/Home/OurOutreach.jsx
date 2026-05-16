@@ -139,160 +139,175 @@ function computeLayout(segments) {
   return { left, right, enriched };
 }
 
-/* ---------- DonutChart (re-animates on each re-entry) ---------- */
-function DonutChart({
-  size = 420,
-  thickness = 42,
-  segments = [],
-  centerImage = "/ngo-images/girl.jpeg",
-  caption = "",
-  gap = 6,
-}) {
-  const r = (size - thickness) / 2;
-  const circumference = 2 * Math.PI * r;
-  const total = Math.max(1, segments.reduce((s, x) => s + x.value, 0));
-  const rot = START_ANGLE_DEG; // keep in sync with computeLayout
-
-  let accAngle = 0;
-  const arcs = segments.map((seg) => {
-    const frac = seg.value / total;
-    const angle = frac * TAU;
-    const arcLen = circumference * frac;
-    const gapLen = Math.min(arcLen * 0.06, gap);
-    const visibleLen = Math.max(0.0001, arcLen - gapLen);
-    const dashArray = `${visibleLen} ${Math.max(0.0001, circumference - visibleLen)}`;
-    const offsetPx = circumference * (accAngle / TAU);
-    const dashOffset = circumference - offsetPx;
-    accAngle += angle;
-    return { ...seg, dashArray, dashOffset };
-  });
-
-  const wrapRef = React.useRef(null);
-  const inView = useInView(wrapRef, { once: false, amount: 0.45 });
-
-  // bump "run" each time we re-enter viewport to remount the <g> and replay strokes
-  const [run, setRun] = React.useState(0);
-  React.useEffect(() => {
-    if (inView) setRun((n) => n + 1);
-  }, [inView]);
-
-  return (
-    <motion.div
-      ref={wrapRef}
-      className="relative z-20"
-      style={{ width: size, height: size }}
-      initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: inView ? 1 : 0.9, scale: inView ? 1 : 0.96 }}
-      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <svg className="bg-white rounded-full" width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <g key={run} transform={`translate(${size / 2}, ${size / 2}) rotate(${rot})`}>
-          <circle
-            r={r}
-            cx="0"
-            cy="0"
-            fill="transparent"
-            stroke="rgba(0,0,0,.06)"
-            strokeWidth={thickness}
-          />
-          {arcs.map(({ color, dashArray, dashOffset }, idx) => (
-            <motion.circle
-              key={idx}
-              r={r}
-              cx="0"
-              cy="0"
-              fill="transparent"
-              stroke={color}
-              strokeWidth={thickness}
-              strokeLinecap="round"
-              strokeDasharray={dashArray}
-              initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset: dashOffset }}
-              transition={{ duration: 2.2 + idx * 0.25, ease: [0.22, 1, 0.36, 1] }}
-            />
-          ))}
-        </g>
-      </svg>
-
-      {/* center image */}
-      <div
-        className="absolute rounded-full overflow-hidden ring-8 ring-white shadow-xl"
-        style={{
-          width: size * 0.46,
-          height: size * 0.46,
-          left: `calc(50% - ${size * 0.46 / 2}px)`,
-          top: `calc(50% - ${size * 0.46 / 2}px)`,
-        }}
-      >
-        <img src={centerImage} className="w-full h-full object-cover" />
-      </div>
-
-      {caption && (
-        <div className="absolute -bottom-8 w-full text-center text-xs text-ink/60">
-          {caption}
-        </div>
-      )}
-    </motion.div>
-  );
-}
-
-/* ---------- StatTile (re-animates on each re-entry) ---------- */
-function StatTile({ value, suffix = "", label, delay = 0, accent }) {
+/* ---------- useCountUp: animated number counting ---------- */
+function useCountUp(target, isInView, duration = 900) {
   const [val, setVal] = React.useState(0);
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.35 });
-
   React.useEffect(() => {
     let raf;
     if (isInView) {
-      const dur = 900;
       const start = performance.now();
       const tick = (t) => {
-        const p = Math.min(1, (t - start) / dur);
+        const p = Math.min(1, (t - start) / duration);
         const eased = 1 - Math.pow(1 - p, 3);
-        setVal(Math.floor(value * eased));
+        setVal(Math.floor(target * eased));
         if (p < 1) raf = requestAnimationFrame(tick);
       };
-      setVal(0); // restart
+      setVal(0);
       raf = requestAnimationFrame(tick);
     } else {
-      // reset when out of view so it can replay
       setVal(0);
     }
     return () => cancelAnimationFrame(raf);
-  }, [isInView, value]);
+  }, [isInView, target, duration]);
+  return val;
+}
+
+/* ---------- Bar accent colors ---------- */
+const BAR_ACCENTS = [
+  "#E12228", "#21BDEA", "#D4A600", "#7CB320",
+  "#7C3AED", "#E05A00", "#0891B2", "#BE185D",
+];
+
+/* ---------- SkylineChart ---------- */
+function SkylineChart({ stats }) {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const [activeIdx, setActiveIdx] = React.useState(-1);
+
+  const logValues = stats.map((s) => Math.log10(Math.max(1, s.value)));
+  const maxLog = Math.max(...logValues);
+
+  const chartHeight = 280;
+  const minBarHeight = 44;
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ y: 12, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: false, amount: 0.35 }}
-      transition={{ duration: 0.32, delay }}
-      className="rounded-2xl bg-white p-6 text-center border border-border shadow-[0_6px_24px_rgba(16,24,40,0.06)] hover:shadow-[0_10px_30px_rgba(16,24,40,0.1)] transition relative overflow-hidden"
-    >
+    <div ref={ref} className="px-6 md:px-10 pt-10 pb-8">
+      {/* Floating tooltip */}
+      <AnimatePresence>
+        {activeIdx >= 0 && (
+          <motion.div
+            key="tooltip"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.15 }}
+            className="flex justify-center mb-4"
+          >
+            <div
+              className="inline-flex items-center gap-3 px-5 py-2.5 rounded-xl shadow-lg"
+              style={{ backgroundColor: BAR_ACCENTS[activeIdx % BAR_ACCENTS.length] }}
+            >
+              <span className="text-white font-black text-xl md:text-2xl tabular-nums">
+                {stats[activeIdx].value.toLocaleString("en-IN")}
+                {stats[activeIdx].suffix && (
+                  <span className="text-white/60 text-sm ml-0.5">{stats[activeIdx].suffix}</span>
+                )}
+              </span>
+              <span className="text-white/80 text-xs font-semibold uppercase tracking-wider">
+                {stats[activeIdx].label}
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Bars row */}
       <div
-        aria-hidden
-        className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
-        style={{ background: accent }}
-      />
-      <div className="relative">
-        <div
-          className="text-2xl md:text-3xl font-extrabold mb-1"
-          style={{
-            background: "linear-gradient(90deg,#FF7A59,#FFB86B)",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-          }}
-        >
-          {val.toLocaleString("en-IN")}
-          {suffix}
-        </div>
-        <div className="mt-1 text-xs md:text-sm text-ink/70 font-medium">
-          {label}
-        </div>
+        className="flex items-end gap-2 sm:gap-3 md:gap-5 lg:gap-6"
+        style={{ height: chartHeight + 60 }}
+        onMouseLeave={() => setActiveIdx(-1)}
+      >
+        {stats.map((s, i) => {
+          const h = minBarHeight + ((logValues[i] / maxLog) * (chartHeight - minBarHeight));
+          return (
+            <SkylinePillar
+              key={s.label}
+              value={s.value}
+              suffix={s.suffix || ""}
+              label={s.label}
+              height={h}
+              color={BAR_ACCENTS[i % BAR_ACCENTS.length]}
+              index={i}
+              isInView={isInView}
+              isActive={activeIdx === i}
+              isDimmed={activeIdx >= 0 && activeIdx !== i}
+              onHover={() => setActiveIdx(i)}
+            />
+          );
+        })}
       </div>
-    </motion.div>
+
+      {/* Baseline */}
+      <div className="h-[1.5px] bg-ink/10" />
+    </div>
+  );
+}
+
+/* ---------- SkylinePillar ---------- */
+function SkylinePillar({ value, suffix, label, height, color, index, isInView, isActive, isDimmed, onHover }) {
+  const count = useCountUp(value, isInView, 1000);
+
+  return (
+    <div
+      className="flex-1 min-w-0 flex flex-col items-center cursor-pointer"
+      onMouseEnter={onHover}
+    >
+      {/* Number */}
+      <motion.div
+        className="mb-3 text-center"
+        initial={{ opacity: 0, y: 8 }}
+        animate={isInView ? { opacity: isDimmed ? 0.3 : 1, y: 0 } : { opacity: 0, y: 8 }}
+        transition={{ duration: 0.3, delay: isInView ? 0 : 0.5 + index * 0.07 }}
+      >
+        <span className="text-ink font-extrabold text-sm sm:text-base md:text-lg leading-none tracking-tight tabular-nums">
+          {count.toLocaleString("en-IN")}
+        </span>
+        {suffix && (
+          <span className="text-ink/35 text-[10px] md:text-xs ml-0.5 font-bold">{suffix}</span>
+        )}
+      </motion.div>
+
+      {/* Bar — rectangular with rounded top */}
+      <div className="w-full relative" style={{ height }}>
+        <motion.div
+          className="absolute bottom-0 left-[12%] right-[12%] rounded-t-lg transition-all duration-300"
+          style={{
+            backgroundColor: color,
+            opacity: isDimmed ? 0.25 : 1,
+            transform: isActive ? "scaleX(1.15)" : "scaleX(1)",
+            boxShadow: isActive ? `0 -4px 20px ${color}40` : "none",
+          }}
+          initial={{ height: 0 }}
+          animate={
+            isInView
+              ? { height: "100%" }
+              : { height: 0 }
+          }
+          transition={{
+            duration: 0.9,
+            delay: 0.1 + index * 0.09,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        />
+      </div>
+
+      {/* Tick mark */}
+      <div
+        className="w-[1.5px] h-2 mt-0 transition-colors duration-200"
+        style={{ backgroundColor: isActive ? color : "rgba(26,26,26,0.12)" }}
+      />
+
+      {/* Label */}
+      <motion.p
+        className="mt-1.5 text-center text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.1em] leading-tight transition-colors duration-200"
+        style={{ color: isActive ? color : isDimmed ? "rgba(26,26,26,0.25)" : "rgba(26,26,26,0.45)" }}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.4, delay: 0.7 + index * 0.07 }}
+      >
+        {label}
+      </motion.p>
+    </div>
   );
 }
 
@@ -318,10 +333,10 @@ export default function OutreachWithDonut() {
           img: "/ngo-images/girl.jpeg",
           caption: "Data as on April 2024 – March 2025",
           segments: [
-            { label: "School Regularity • 27%", value: 27, color: "#21BDEA" }, // blue
-            { label: "Higher Studies • 34%", value: 34, color: "#B3CC35" },   // green
-            { label: "Resilience • 45%", value: 45, color: "#FFCC04" },       // yellow
-            { label: "Self Efficacy • 20%", value: 20, color: "#E12228" },    // red
+            { label: "School Regularity • 27%", value: 27, color: "#21BDEA" },
+            { label: "Higher Studies • 34%", value: 34, color: "#B3CC35" },
+            { label: "Resilience • 45%", value: 45, color: "#FFCC04" },
+            { label: "Self Efficacy • 20%", value: 20, color: "#E12228" },
           ],
         },
       },
@@ -339,10 +354,10 @@ export default function OutreachWithDonut() {
           img: "/ngo-images/girl.jpeg",
           caption: "Data as on April 2024 – March 2025",
           segments: [
-            { label: "Placement • 74%", value: 74, color: "#21BDEA" },   // blue
-            { label: "Retention • 65%", value: 65, color: "#FF8A65" },   // orange
-            { label: "Graduates • 99%", value: 99, color: "#B3CC35" },   // green
-            { label: "Girls Participation • 60%", value: 60, color: "#FFCC04" }, // yellow
+            { label: "Placement • 74%", value: 74, color: "#21BDEA" },
+            { label: "Retention • 65%", value: 65, color: "#FF8A65" },
+            { label: "Graduates • 99%", value: 99, color: "#B3CC35" },
+            { label: "Girls Participation • 60%", value: 60, color: "#FFCC04" },
           ],
         },
       },
@@ -357,8 +372,6 @@ export default function OutreachWithDonut() {
     () => computeLayout(active.donut.segments),
     [active.donut.segments]
   );
-
-  const accents = ["#4F5BFE", "#FF7A59", "#21BDEA", "#B3CC35", "#FFCC04", "#E12228", "#8B5CF6", "#06B6D4"];
 
   return (
     <section className="py-16 md:py-20 relative">
@@ -376,7 +389,7 @@ export default function OutreachWithDonut() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Tabs */}
-        <div className="flex justify-center gap-3 mb-6">
+        <div className="flex justify-center gap-3 mb-10">
           {["adolescent", "livelihood"].map((t) => (
             <button
               key={t}
@@ -390,29 +403,18 @@ export default function OutreachWithDonut() {
           ))}
         </div>
 
-        {/* Stats grid */}
-        <div
-          className={`mt-4 grid gap-4
-            grid-cols-2
-            sm:grid-cols-3
-            ${
-              tab === "livelihood"
-                ? "lg:grid-cols-3"
-                : "lg:grid-cols-4"
-            }
-          `}
-        >
-          {active.stats.map((s, i) => (
-            <StatTile
-              key={s.label}
-              value={s.value}
-              suffix={s.suffix || ""}
-              label={s.label}
-              delay={i * 0.03}
-              accent={accents[i % accents.length]}
-            />
-          ))}
-        </div>
+        {/* ── Skyline Bar Chart ── */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`stats-${tab}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <SkylineChart stats={active.stats} />
+          </motion.div>
+        </AnimatePresence>
 
         {/* CTA */}
         <motion.div
