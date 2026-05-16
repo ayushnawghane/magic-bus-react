@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { fadeUp, fadeUpSm, staggerStd, VIEWPORT_ONCE } from "../../hooks/useScrollAnimations";
 
 /* === PROGRAM AREAS (images already in /ngo-images/) === */
@@ -15,105 +14,72 @@ const PROGRAM_AREAS = [
 ];
 
 function ProgramCard({ program, index }) {
-  const [hovered, setHovered] = useState(false);
-  const reduce = useReducedMotion();
-
-  // transition config
-  const duration = reduce ? 0.12 : 1.0;
-  const easing = [0.4, 0, 0.2, 1];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: index * 0.04 }}
       viewport={{ once: true, amount: 0.3 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       className="relative overflow-hidden rounded-lg aspect-[4/3] group cursor-pointer"
       aria-label={program.title}
     >
-      {/* Background image */}
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center"
+      {/* Background image — CSS transform for GPU compositing */}
+      <div
+        className="absolute inset-0 bg-cover bg-center will-change-transform transition-transform duration-400 ease-out group-hover:scale-[1.05]"
         style={{ backgroundImage: `url(${program.image})` }}
-        animate={{ scale: hovered ? 1.06 : 1 }}
-        transition={{ duration, ease: easing }}
         aria-hidden="true"
       />
 
-      {/* Dark gradient overlay */}
-      <motion.div
-        className="absolute inset-0"
+      {/* Dark gradient overlay — fades out on hover */}
+      <div
+        className="absolute inset-0 transition-opacity duration-400 ease-out group-hover:opacity-20"
         style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7), transparent)" }}
-        animate={{ opacity: hovered ? 0.18 : 1 }}
-        transition={{ duration, ease: easing }}
         aria-hidden="true"
       />
 
-      {/* Colored overlay expands on hover; hidden pre-hover */}
-      <motion.div
-        className={`${program.bgColor} absolute`}
-        initial={false}
-        animate={
-          hovered
-            ? { left: 0, bottom: 0, width: "100%", height: "100%", opacity: 0.92 }
-            : { left: 28, bottom: 28, width: 0, height: 0, opacity: 0 }
-        }
-        transition={{ duration, ease: easing }}
-        style={{ transformOrigin: "left bottom", zIndex: 5, borderRadius: 8 }}
+      {/* Colored overlay — uses scale instead of width/height for GPU performance */}
+      <div
+        className={`${program.bgColor} absolute inset-0 rounded-lg opacity-0 scale-0 origin-bottom-left will-change-[transform,opacity] transition-all duration-400 ease-out group-hover:opacity-90 group-hover:scale-100`}
+        style={{ zIndex: 5 }}
         aria-hidden="true"
       />
 
-      {/* PRE-HOVER: glued unit that sticks to left, right and bottom */}
-      <motion.div
-        className="absolute left-0 right-0 bottom-0 z-30"
-        initial={false}
-        animate={hovered ? { opacity: 0, y: 18 } : { opacity: 1, y: 0 }}
-        transition={{ duration, ease: easing }}
+      {/* PRE-HOVER: bottom bar with icon + title */}
+      <div
+        className="absolute left-0 right-0 bottom-0 z-30 transition-all duration-300 ease-out translate-y-0 opacity-100 group-hover:translate-y-4 group-hover:opacity-0"
       >
         <div className="flex items-center h-16 w-full">
-          {/* Icon circle glued to left edge; rounded-bl to match card corner */}
           <div
             className={`${program.bgColor} w-16 h-16 flex items-center justify-center rounded-bl-lg`}
             style={{ boxShadow: "0 6px 18px rgba(0,0,0,0.18)" }}
           >
             <div className="text-white">{program.icon}</div>
           </div>
-
-          {/* Title background fills entire remaining width and sticks to right edge */}
           <div className="flex-1 bg-black/60 h-16 flex items-center px-5 rounded-br-lg">
             <h3 className="text-white font-dosis font-semibold text-lg leading-none">
               {program.title}
             </h3>
           </div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* HOVER: centered icon + title (description removed) */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none z-40"
-        initial={{ opacity: 0, scale: 0.98, y: 8 }}
-        animate={ hovered ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.98, y: 8 } }
-        transition={{ duration, ease: easing }}
-        aria-hidden={!hovered}
+      {/* HOVER: centered icon + title */}
+      <div
+        className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none z-40 opacity-0 scale-95 translate-y-2 transition-all duration-400 ease-out group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0"
       >
         <div className="max-w-lg">
           <div className="mx-auto mb-4 w-16 h-16 flex items-center justify-center rounded-full bg-white/10">
             <div className="text-white">{program.icon}</div>
           </div>
-
           <h3 className="text-white text-2xl font-dosis font-bold">
             {program.title}
           </h3>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Accessibility: keyboard focus toggles hover visuals */}
+      {/* Accessibility: keyboard focus via :focus-within on parent group */}
       <button
-        className="absolute inset-0 z-50 bg-transparent"
-        onFocus={() => setHovered(true)}
-        onBlur={() => setHovered(false)}
+        className="absolute inset-0 z-50 bg-transparent focus:outline-none"
         aria-label={`View ${program.title}`}
       />
     </motion.div>
