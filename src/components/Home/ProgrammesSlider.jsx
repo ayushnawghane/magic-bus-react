@@ -230,7 +230,7 @@ export default function ProgrammesSlider() {
         </motion.div>
 
         <div className="relative">
-          <div className="overflow-hidden">
+          <div className="py-8" style={{ overflowX: "clip", overflowY: "visible" }}>
             <div
               ref={trackRef}
               className="flex will-change-transform"
@@ -311,52 +311,141 @@ export default function ProgrammesSlider() {
   );
 }
 
+/* ─── gradient color map for Tailwind dynamic class workaround ─── */
+const GRADIENT_MAP = {
+  "from-blue-400 via-purple-500 to-indigo-600":
+    "linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #4f46e5 100%)",
+  "from-green-400 via-emerald-500 to-teal-600":
+    "linear-gradient(135deg, #4ade80 0%, #10b981 50%, #0d9488 100%)",
+  "from-orange-400 via-red-500 to-pink-600":
+    "linear-gradient(135deg, #fb923c 0%, #ef4444 50%, #db2777 100%)",
+  "from-purple-400 via-violet-500 to-indigo-600":
+    "linear-gradient(135deg, #c084fc 0%, #8b5cf6 50%, #4f46e5 100%)",
+  "from-cyan-400 via-blue-500 to-indigo-600":
+    "linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #4f46e5 100%)",
+  "from-amber-400 via-orange-500 to-red-600":
+    "linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #dc2626 100%)",
+};
+
 function ProgrammeCard({ slide }) {
-  const { image, gradient, Icon, title, summary } = slide;
+  const { image, gradient, Icon, title, summary, tags } = slide;
+  const bgGradient = GRADIENT_MAP[gradient] || GRADIENT_MAP["from-blue-400 via-purple-500 to-indigo-600"];
 
   return (
-    <div className="group relative overflow-hidden rounded-[28px] h-[420px] md:h-[500px] cursor-pointer">
-      <img
-        src={image}
-        alt={title}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-      />
+    <div
+      className="flip-card h-[360px] md:h-[420px] cursor-pointer"
+      style={{ perspective: "1200px" }}
+    >
+      {/* Inner wrapper that flips */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-35 group-hover:opacity-80 mix-blend-multiply transition-opacity duration-300`}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
+        className="flip-card-inner relative w-full h-full"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* ══════ FRONT FACE ══════ */}
+        <div
+          className="absolute inset-0 rounded-[28px] overflow-hidden"
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <img
+            src={image}
+            alt={title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-30 mix-blend-multiply`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80" />
 
-      <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-        <div className="h-10 px-3 rounded-full bg-black/35 backdrop-blur-[3px] text-white flex items-center gap-2 group-hover:bg-black/50 transition-colors duration-300">
-          <Icon className="w-5 h-5" />
+          {/* Icon pill */}
+          <div className="absolute top-4 left-4">
+            <div className="h-10 px-3 rounded-full bg-black/35 backdrop-blur-[3px] text-white flex items-center gap-2">
+              <Icon className="w-5 h-5" />
+            </div>
+          </div>
+
+          {/* Bottom content */}
+          <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+            <h3 className="text-white text-[24px] font-extrabold leading-tight mb-3">
+              {title}
+            </h3>
+            <div className="flex gap-2 flex-wrap">
+              {tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[11px] font-semibold tracking-wide uppercase px-3 py-1 rounded-full bg-white/20 text-white/90 backdrop-blur-sm"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
         </div>
-      </div>
 
-      <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-        {/* Description — only visible on hover now */}
-        <p
-          className="
-            text-white/90 text-[13.5px] leading-relaxed max-w-[92%] mb-3
-            opacity-0 translate-y-4
-            group-hover:opacity-100 group-hover:translate-y-0
-            transition-all duration-300
-          "
+        {/* ══════ BACK FACE ══════ */}
+        <div
+          className="absolute inset-0 rounded-[28px] overflow-hidden"
+          style={{
+            backfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+            background: bgGradient,
+          }}
         >
-          {summary}
-        </p>
+          {/* Decorative shapes */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 blur-2xl" />
+            <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-white/[0.08] blur-2xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-white/5 blur-3xl" />
+          </div>
 
-        <h3
-          className="
-            text-white text-[24px] font-extrabold leading-tight mb-2
-            transition-all duration-300 group-hover:-translate-y-2
-          "
-        >
-          {title}
-        </h3>
+          {/* Subtle dot pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.04] pointer-events-none"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+              backgroundSize: "24px 24px",
+            }}
+          />
 
-        <button className="w-full bg-white/95 text-gray-900 font-semibold py-3 rounded-2xl hover:bg-white active:scale-[0.99] transition group-hover:bg-white group-hover:shadow-lg">
-          Learn More
-        </button>
+          {/* Content */}
+          <div className="relative z-10 flex flex-col items-center justify-center h-full p-6 md:p-8 text-center text-white">
+            {/* Icon */}
+            <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm grid place-items-center mb-6 shadow-lg shadow-black/10">
+              <Icon className="w-8 h-8 text-white" />
+            </div>
+
+            {/* Title */}
+            <h3 className="text-[22px] md:text-[26px] font-extrabold leading-tight mb-4">
+              {title}
+            </h3>
+
+            {/* Divider */}
+            <div className="w-12 h-[3px] rounded-full bg-white/40 mb-5" />
+
+            {/* Summary */}
+            <p className="text-white/85 text-[14px] md:text-[15px] leading-relaxed max-w-[90%] mb-6">
+              {summary}
+            </p>
+
+            {/* Tags */}
+            <div className="flex gap-2 flex-wrap justify-center mb-6">
+              {tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full bg-white/15 text-white/90 border border-white/20"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <button className="px-8 py-3 bg-white text-gray-900 font-bold rounded-2xl shadow-xl shadow-black/15 hover:shadow-2xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-200">
+              Learn More
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
