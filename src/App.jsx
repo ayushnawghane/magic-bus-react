@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import "./index.css";
 import Home from './pages/Home'
+import HomeOld from './pages/HomeOld'
 import AboutUs from './pages/AboutUs';
 import WhoWeAre from './pages/WhoWeAre';
 import OurTeam from './pages/OurTeam';
@@ -38,6 +39,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home-old" element={<HomeOld />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/who-we-are" element={<WhoWeAre />} />
         <Route path="/our-team" element={<OurTeam />} />
