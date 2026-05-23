@@ -180,20 +180,20 @@ export default function NavbarWireframe() {
         style={{ backdropFilter: scrolled ? "blur(12px)" : "none", borderBottom: scrolled ? "1px solid rgba(226,232,240,0.8)" : "1px solid rgba(226,232,240,0.4)" }}
         className="max-w-[1400px] mx-auto overflow-visible"
       >
-        <div className="flex items-center justify-between px-4 md:px-8 py-3 md:py-4">
-          
+        <div className="flex items-center justify-between px-4  py-2">
+
           {/* Left: Logo */}
           <Link to="/" className="flex-shrink-0 z-40">
             <img
               src="/Magic Bus Logo - Usage As Per Background-01.png"
               alt="Magic Bus Logo"
-              className="h-12 md:h-16 w-auto object-contain"
+              className="h-12 md:h-24 w-auto object-contain"
             />
           </Link>
 
           {/* Right: Content */}
           <div className="flex flex-col items-end justify-between gap-3 h-full">
-            
+
             {/* Top Row: Utilities & CTAs */}
             <div className="flex items-center gap-4 md:gap-6">
               {isSearchOpen ? (
@@ -214,7 +214,7 @@ export default function NavbarWireframe() {
                   <Search className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
               )}
-                            {/* Social Icons */}
+              {/* Social Icons */}
               <div className="hidden lg:flex items-center justify-center gap-2 mr-2">
                 <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="inline-flex items-center justify-center w-6 h-6 rounded-full shadow hover:scale-110 transition-transform" style={{ background: "linear-gradient(45deg, #f58529 0%, #dd2a7b 50%, #8134af 100%)" }}>
                   <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -264,16 +264,15 @@ export default function NavbarWireframe() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <button
-                    className={`flex items-center gap-1.5 text-[15px] font-medium pb-2 transition-colors ${
-                      activeDropdown === item.key
+                    className={`flex items-center gap-1.5 text-[15px] font-medium pb-2 transition-colors ${activeDropdown === item.key
                         ? "text-brand-red"
                         : "text-slate-700 hover:text-brand-red"
-                    }`}
+                      }`}
                   >
                     {item.label}
                     <Plus className={`w-4 h-4 text-brand-red transition-transform duration-300 ${activeDropdown === item.key ? "rotate-45" : ""}`} />
                   </button>
-                  
+
                   {/* Underline Animation */}
                   <_MOTION.div
                     className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red origin-left"
@@ -290,11 +289,10 @@ export default function NavbarWireframe() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.18 }}
-                        className={`absolute top-full mt-3 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-50 ${
-                          item.key === 'resources' || item.key === 'programmes'
+                        className={`absolute top-full mt-3 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-50 ${item.key === 'resources' || item.key === 'programmes'
                             ? 'left-1/2 -translate-x-1/2 w-[800px]'
                             : 'left-0 w-72'
-                        }`}
+                          }`}
                       >
                         {/* If groups exist (multi-column) */}
                         {item.groups ? (
