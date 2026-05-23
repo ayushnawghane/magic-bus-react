@@ -5,7 +5,7 @@ import FAQSection from '../components/Home/FAQSectiom';
 import GetInvolvedSection from '../components/Home/GetInvolvedSection';
 import HeroCarousel from '../components/Home/HeroCarousel';
 import JourneyStepper from '../components/Home/JourneyStepper';
-import OurOutreach from '../components/Home/OurOutreach';
+import OurOutreachOld from '../components/Home/OurOutreachOld';
 import OutreachImpactBento from '../components/Home/OutreachImpactBento';
 import PartnersShowcase from '../components/Home/PartnersShowcase';
 import ProgrammesSlider from '../components/Home/ProgrammesSlider';
@@ -20,7 +20,7 @@ export default function Home() {
         <JourneyStepper   />
         <ProgrammesSlider />
         <AIDigitalSection />
-        <OurOutreach />
+        <OurOutreachOld />
         <GetInvolvedSection />
         <PartnersShowcase />
         <OutreachImpactBento />
