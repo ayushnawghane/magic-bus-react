@@ -1,5 +1,22 @@
 # Development Log
 
+## Date: May 23, 2026
+
+### Changes Made Today
+
+#### Modernizing Hero & Navigation
+
+1. **Hero Carousel** (`src/components/Home/HeroCarousel.jsx`)
+   - Restructured the layout to feature a bottom-left anchored white card overlaying the full-bleed background media (BRAC style).
+   - Removed heavy dark gradients in favor of subtle edge gradients that preserve image visibility while ensuring text readability on the white card.
+
+2. **Navbar Morphing** (`src/components/NavbarNew.jsx`)
+   - Wrapped the outer nav and inner container with `framer-motion` (`_MOTION.nav` and `_MOTION.div`).
+   - Bound `padding`, `borderRadius`, `boxShadow`, and `backgroundColor` to the `scrolled` state to create a smooth, GPU-accelerated transition between floating and sticky states.
+   - Tweaked the scroll threshold from 20px to 60px for a more natural trigger point.
+
+---
+
 ## Date: May 16, 2026
 
 ### Changes Made Today

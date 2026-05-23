@@ -1,5 +1,26 @@
 # Client Change Log
 
+## Date: May 23, 2026
+
+### Home Page Hero & Navbar Navigation Improvements
+
+#### 1. Hero Carousel (BRAC-style Redesign)
+- **File**: `src/components/Home/HeroCarousel.jsx`
+- **Updates**:
+  - Redesigned the hero layout to match the reference BRAC-style aesthetic.
+  - Replaced the dominant dark full-screen overlay with a clean full-bleed image/video background.
+  - Positioned the content inside a white, semi-transparent text card anchored to the bottom-left.
+  - Updated typography to use uppercase titles with dark text on the white background for better readability.
+
+#### 2. Navbar Scroll Interaction (Sticky Morph)
+- **File**: `src/components/NavbarNew.jsx`
+- **Updates**:
+  - Implemented a scroll-driven morphing animation using Framer Motion.
+  - Navbar starts as a floating pill/card (with 24px padding and rounded corners) and morphs seamlessly into a full-width sticky navigation bar upon scrolling past 60px.
+  - Sticky state features a polished frosted glass effect (`backdrop-blur`), sharp corners, and an elevated drop shadow.
+
+---
+
 ## Date: May 16, 2026
 
 ### Modernizing Home Page UI & Animations
