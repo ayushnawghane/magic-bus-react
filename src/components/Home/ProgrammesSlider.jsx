@@ -314,37 +314,43 @@ export default function ProgrammesSlider() {
 /* ─── gradient color map for Tailwind dynamic class workaround ─── */
 const GRADIENT_MAP = {
   "from-blue-400 via-purple-500 to-indigo-600":
-    "linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #4f46e5 100%)",
+    "linear-gradient(135deg, #E12228 0%, #FF9E04 100%)",
   "from-green-400 via-emerald-500 to-teal-600":
-    "linear-gradient(135deg, #4ade80 0%, #10b981 50%, #0d9488 100%)",
+    "linear-gradient(135deg, #E12228 0%, #FFCC04 100%)",
   "from-orange-400 via-red-500 to-pink-600":
-    "linear-gradient(135deg, #fb923c 0%, #ef4444 50%, #db2777 100%)",
+    "linear-gradient(135deg, #FF9E04 0%, #FFCC04 100%)",
   "from-purple-400 via-violet-500 to-indigo-600":
-    "linear-gradient(135deg, #c084fc 0%, #8b5cf6 50%, #4f46e5 100%)",
+    "linear-gradient(135deg, #E12228 0%, #FF9E04 100%)",
   "from-cyan-400 via-blue-500 to-indigo-600":
-    "linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #4f46e5 100%)",
+    "linear-gradient(135deg, #E12228 0%, #FFCC04 100%)",
   "from-amber-400 via-orange-500 to-red-600":
-    "linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #dc2626 100%)",
+    "linear-gradient(135deg, #FF9E04 0%, #FFCC04 100%)",
 };
 
 function ProgrammeCard({ slide }) {
   const { image, gradient, Icon, title, summary, tags } = slide;
   const bgGradient = GRADIENT_MAP[gradient] || GRADIENT_MAP["from-blue-400 via-purple-500 to-indigo-600"];
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      className="flip-card h-[360px] md:h-[420px] cursor-pointer"
+      className="h-[360px] md:h-[420px] cursor-pointer"
       style={{ perspective: "1200px" }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Inner wrapper that flips */}
       <div
-        className="flip-card-inner relative w-full h-full"
-        style={{ transformStyle: "preserve-3d" }}
+        className="relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.4,0.2,0.2,1)]"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: isHovered ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
       >
         {/* ══════ FRONT FACE ══════ */}
         <div
           className="absolute inset-0 rounded-[28px] overflow-hidden"
-          style={{ backfaceVisibility: "hidden" }}
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
         >
           <img
             src={image}
@@ -352,7 +358,8 @@ function ProgrammeCard({ slide }) {
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div
-            className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-30 mix-blend-multiply`}
+            className="absolute inset-0 opacity-35 mix-blend-multiply"
+            style={{ background: bgGradient }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80" />
 
@@ -387,6 +394,7 @@ function ProgrammeCard({ slide }) {
           className="absolute inset-0 rounded-[28px] overflow-hidden"
           style={{
             backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
             background: bgGradient,
           }}
