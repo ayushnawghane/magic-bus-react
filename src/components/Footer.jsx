@@ -59,12 +59,12 @@ export default function Footer() {
               Partners
             </h4>
             <ul className="space-y-1">
-              <li><a href="#" className="hover:text-white transition-colors">Corporate Partners</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Foundations & Institutions</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Government Partners</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Knowledge Partners</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Employment Partners</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Partner Connect</a></li>
+              <li><Link to="/corporate-partners" className="hover:text-white transition-colors">Corporate Partners</Link></li>
+              <li><Link to="/foundation-partners" className="hover:text-white transition-colors">Foundations & Institutions</Link></li>
+              <li><Link to="/government-partners" className="hover:text-white transition-colors">Government Partners</Link></li>
+              <li><Link to="/knowledge-partners" className="hover:text-white transition-colors">Knowledge Partners</Link></li>
+              <li><Link to="/employment-partners" className="hover:text-white transition-colors">Employment Partners</Link></li>
+              <li><Link to="/partner" className="hover:text-white transition-colors">Partner Connect</Link></li>
             </ul>
           </div>
 
@@ -167,8 +167,8 @@ export default function Footer() {
           <div className="flex gap-4">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>
-            <a href="#" className="hover:text-white transition-colors">POSH Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Child Protection Policy</a>
+            <Link to="/posh-policy" className="hover:text-white transition-colors">POSH Policy</Link>
+            <Link to="/child-protection-policy" className="hover:text-white transition-colors">Child Protection Policy</Link>
           </div>
         </div>
       </div>

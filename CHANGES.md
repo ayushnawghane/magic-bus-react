@@ -1,5 +1,39 @@
 # Client Change Log
 
+## Date: June 20, 2026
+
+### Pages Developed From Design and Navigation Cleanup
+
+#### 1. Pages Developed From Design
+- **Files**: `src/App.jsx`, `src/components/NavbarNew.jsx`, `src/components/Footer.jsx`
+- **Updates**:
+  - Completed the page designs and connected the routed pages for:
+    - `/our-approach`
+    - `/donate`
+    - `/contact`
+    - `/partner`
+    - `/blogs`
+    - `/news`
+    - `/certifications`
+    - `/reports`
+    - `/impact-reports`
+    - `/annual-reports`
+    - `/gender-journey-report`
+    - `/flfpr-report`
+    - `/gallery`
+  - Added `Reports` to the navbar Resources menu.
+  - Replaced footer placeholders with live links across About Us, Programmes, Partner Connect, Resources, and the quick contact area.
+
+#### 2. Partner Directory Pages Developed From Design
+- **Files**: `src/App.jsx`, `src/components/NavbarNew.jsx`, `src/components/Footer.jsx`, `src/pages/CorporatePartners.jsx`, `src/pages/FoundationPartners.jsx`, `src/pages/GovernmentPartners.jsx`, `src/pages/KnowledgePartners.jsx`
+- **Updates**:
+  - Completed the partner directory pages and connected their routes:
+    - `/corporate-partners`
+    - `/foundation-partners`
+    - `/government-partners`
+    - `/knowledge-partners`
+  - Linked partner navigation items in the header and footer to the new directory pages.
+
 ## Date: May 23, 2026
 
 ### Home Page Hero & Navbar Navigation Improvements

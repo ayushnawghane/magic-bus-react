@@ -62,7 +62,7 @@ export default function GetInvolvedSection() {
         </svg>
       ),
       ctaText: "View Openings",
-      ctaHref: "/careers",
+      ctaHref: "/work-with-us",
     },
   ];
 

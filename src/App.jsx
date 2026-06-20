@@ -33,6 +33,15 @@ import AnnualReports from './pages/AnnualReports';
 import GenderJourneyReport from './pages/GenderJourneyReport';
 import FLFPRReport from './pages/FLFPRReport';
 import Gallery from './pages/Gallery';
+import CorporatePartners from './pages/CorporatePartners';
+import FoundationPartners from './pages/FoundationPartners';
+import GovernmentPartners from './pages/GovernmentPartners';
+import KnowledgePartners from './pages/KnowledgePartners';
+import EmploymentPartners from './pages/EmploymentPartners';
+import ChildProtectionPolicy from './pages/ChildProtectionPolicy';
+import PoshPolicy from './pages/PoshPolicy';
+import WorkWithUs from './pages/WorkWithUs';
+
 
 function App() {
   return (
@@ -58,7 +67,7 @@ function App() {
         <Route path="/entrepreneurship-development-programme" element={<EntrepreneurshipDevelopmentProgramme />} />
         <Route path="/mb-dost" element={<MBDost />} />
         <Route path="/futurex" element={<FutureX />} />
-        {/* <Route path="/our-approach" element={<OurApproach />} />
+        <Route path="/our-approach" element={<OurApproach />} />
         <Route path="/donate" element={<DonateNow />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/partner" element={<PartnerWithUs />} />
@@ -70,7 +79,15 @@ function App() {
         <Route path="/annual-reports" element={<AnnualReports />} />
         <Route path="/gender-journey-report" element={<GenderJourneyReport />} />
         <Route path="/flfpr-report" element={<FLFPRReport />} />
-        <Route path="/gallery" element={<Gallery />} /> */}
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/corporate-partners" element={<CorporatePartners />} />
+        <Route path="/foundation-partners" element={<FoundationPartners />} />
+        <Route path="/government-partners" element={<GovernmentPartners />} />
+        <Route path="/knowledge-partners" element={<KnowledgePartners />} />
+        <Route path="/employment-partners" element={<EmploymentPartners />} />
+        <Route path="/child-protection-policy" element={<ChildProtectionPolicy />} />
+        <Route path="/posh-policy" element={<PoshPolicy />} />
+        <Route path="/work-with-us" element={<WorkWithUs />} />
       </Routes>
     </Router>
   )

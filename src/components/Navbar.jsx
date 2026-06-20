@@ -91,8 +91,8 @@ const MEGA = {
         items: [
           { label: "Privacy", path: "#" },
           { label: "Terms & Conditions", path: "#" },
-          { label: "POSH Policy", path: "#" },
-          { label: "Child Protection Policy", path: "#" },
+          { label: "POSH Policy", path: "/posh-policy" },
+          { label: "Child Protection Policy", path: "/child-protection-policy" },
         ],
       },
     ],
@@ -101,7 +101,7 @@ const MEGA = {
   life: {
     title: "Life @ Magic Bus",
     items: [
-      { label: "Work With Us", path: "#" },
+      { label: "Work With Us", path: "/work-with-us" },
       { label: "Certifications", path: "/certifications" },
       { label: "Our Culture", path: "#" },
       { label: "Learning & Development", path: "/learning-development" },

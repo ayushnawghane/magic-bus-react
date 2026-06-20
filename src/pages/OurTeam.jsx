@@ -592,15 +592,13 @@ function JoinCTA() {
                             </p>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                <a
-                                    href="https://www.magicbus.org/work-with-us.php"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <Link
+                                    to="/work-with-us"
                                     className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-8 py-4 font-bold text-brand-black shadow-lg transition hover:shadow-xl hover:bg-brand-yellow/90 group"
                                 >
                                     View Open Positions
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </a>
+                                </Link>
                                 <Link
                                     to="/contact"
                                     className="inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-white/5 px-8 py-4 font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 hover:border-white/40"

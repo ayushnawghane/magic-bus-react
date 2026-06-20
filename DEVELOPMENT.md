@@ -1,5 +1,65 @@
 # Development Log
 
+## Date: June 20, 2026
+
+### Changes Made Today
+
+#### Compliance, Safeguarding & Career Expansion
+
+1. **Child Protection Policy Page** (`src/pages/ChildProtectionPolicy.jsx`)
+   - Implemented an editorial-grade safeguarding policy page with clean tabbed navigation.
+   - Added dual-focus content toggles (Ensuring Safety of Children vs. Safety of Women in the Workplace).
+   - Integrated copy-to-clipboard functionalities for safety reports and official complaint hotlines.
+
+2. **POSH Policy Page** (`src/pages/PoshPolicy.jsx`)
+   - Created a comprehensive Prevention of Sexual Harassment (POSH) compliance catalog.
+   - Built an interactive **Internal Regional Committee Explorer** supporting East, West, North, and South panels.
+   - Configured click-to-copy contacts for regional committee heads.
+
+3. **Employment Partners Directory** (`src/pages/EmploymentPartners.jsx`, `src/components/Corporate/BrandLogo.jsx`)
+   - Developed a high-fidelity, asymmetric partner brand logo showcase.
+   - Created 24 programmatic custom brand logo SVG modules inside `BrandLogo.jsx` to match corporate identities.
+
+4. **Work with Us Careers Portal** (`src/pages/WorkWithUs.jsx`)
+   - Built a career search directory featuring a functional filter query tool.
+   - Configured the job list to remain hidden by default until a user submits search criteria.
+   - Implemented an interactive slide-in CV submission application modal.
+   - Added 5 video testimonial player card dialogs with custom modal YouTube embedding.
+   - Incorporated recruitment scam/fraud alert warning banner blocks.
+
+5. **Routing and Global Navigation Updates**
+   - Registered `/child-protection-policy`, `/posh-policy`, `/employment-partners`, and `/work-with-us` routing points in `src/App.jsx`.
+   - Replaced dead anchors (`#`) with true navigation path states for POSH and Child Protection in footer and header dropdown links (`src/components/NavbarNew.jsx`, `src/components/Navbar.jsx`, `src/components/Footer.jsx`).
+   - Redirected careers CTA blocks from external URLs to the internal `/work-with-us` route (`src/pages/OurTeam.jsx`, `src/components/Home/GetInvolvedSection.jsx`).
+
+6. **Pages Developed From Design**
+   - Completed the existing page designs and exposed the routed pages in `src/App.jsx` for:
+     - `/our-approach`
+     - `/donate`
+     - `/contact`
+     - `/partner`
+     - `/blogs`
+     - `/news`
+     - `/certifications`
+     - `/reports`
+     - `/impact-reports`
+     - `/annual-reports`
+     - `/gender-journey-report`
+     - `/flfpr-report`
+     - `/gallery`
+   - Updated `src/components/NavbarNew.jsx` to surface `Reports` directly in the Resources menu.
+   - Replaced footer placeholders with real links for About Us, Programme, Partner Connect, Resources, and quick contact CTAs in `src/components/Footer.jsx`.
+
+7. **Partner Directory Pages Developed From Design**
+   - Completed and routed the partner directory pages that were added from the design work in git:
+     - `src/pages/CorporatePartners.jsx` → `/corporate-partners`
+     - `src/pages/FoundationPartners.jsx` → `/foundation-partners`
+     - `src/pages/GovernmentPartners.jsx` → `/government-partners`
+     - `src/pages/KnowledgePartners.jsx` → `/knowledge-partners`
+   - Wired the partner navigation entries in `src/components/NavbarNew.jsx` and `src/components/Footer.jsx` to the new directory pages.
+
+---
+
 ## Date: May 23, 2026
 
 ### Changes Made Today

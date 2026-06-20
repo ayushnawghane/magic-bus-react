@@ -1,7 +1,7 @@
 # Page Count for Client Billing
 
 ## Created: March 9, 2026
-## Last Updated: April 12, 2026
+## Last Updated: June 20, 2026
 
 | # | Page Name | File | Route | Status |
 |---|-----------|------|-------|--------|
@@ -23,15 +23,26 @@
 | 16 | Entrepreneurship Development Programme | src/pages/EntrepreneurshipDevelopmentProgramme.jsx | /entrepreneurship-development-programme | Done |
 | 17 | MB Dost | src/pages/MBDost.jsx | /mb-dost | Done |
 | 18 | FutureX | src/pages/FutureX.jsx | /futurex | Done |
+| 19 | Employment Partners | src/pages/EmploymentPartners.jsx | /employment-partners | Done |
+| 20 | Corporate Partners | src/pages/CorporatePartners.jsx | /corporate-partners | Done |
+| 21 | Foundation Partners | src/pages/FoundationPartners.jsx | /foundation-partners | Done |
+| 22 | Government Partners | src/pages/GovernmentPartners.jsx | /government-partners | Done |
+| 23 | Knowledge Partners | src/pages/KnowledgePartners.jsx | /knowledge-partners | Done |
+| 24 | Child Protection Policy | src/pages/ChildProtectionPolicy.jsx | /child-protection-policy | Done |
+| 25 | POSH Policy | src/pages/PoshPolicy.jsx | /posh-policy | Done |
+| 26 | Work with Us | src/pages/WorkWithUs.jsx | /work-with-us | Done |
 
 ---
 
-**Total Pages Created: 18**
+**Total Pages Created: 26**
 
 ---
 
 **Note**
 - Pages 14–18 were added during the April 12, 2026 development cycle.
-- Pages 14–16 cover the Livelihood Programme sub-pages (Connect With Work, Digital Skilling, EDP).
-- Pages 17–18 are new tech-focused pages: MB Dost (WhatsApp chatbot companion) and FutureX (blended learning initiative).
-- All pages are routed in `src/App.jsx` and linked in `src/components/NavbarNew.jsx`.
+- Pages 19–23 were developed during the June 20, 2026 cycle and added to the site experience:
+  - Page 19 (Employment Partners) displays brand tokens in an asymmetric grid.
+  - Pages 20–23 (Corporate, Foundation, Government, and Knowledge Partners) present the partner directory experiences.
+- Pages 24 & 25 (Child Protection & POSH Policies) implement interactive regional committee explorers and guidelines.
+- Page 26 (Work with Us) provides an interactive job filter engine, modal application form, and employee testimonial video player overlay.
+- The design-built pages are now exposed in `src/App.jsx` and connected through the navbar/footer.
