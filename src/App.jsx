@@ -41,6 +41,11 @@ import EmploymentPartners from './pages/EmploymentPartners';
 import ChildProtectionPolicy from './pages/ChildProtectionPolicy';
 import PoshPolicy from './pages/PoshPolicy';
 import WorkWithUs from './pages/WorkWithUs';
+import Events from './pages/Events';
+import Podcasts from './pages/Podcasts';
+import MBAcademy from './pages/MBAcademy';
+import Darwinbox from './pages/Darwinbox';
+import FAQ from './pages/FAQ';
 
 
 function App() {
@@ -88,6 +93,11 @@ function App() {
         <Route path="/child-protection-policy" element={<ChildProtectionPolicy />} />
         <Route path="/posh-policy" element={<PoshPolicy />} />
         <Route path="/work-with-us" element={<WorkWithUs />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/podcasts" element={<Podcasts />} />
+        <Route path="/mb-academy" element={<MBAcademy />} />
+        <Route path="/darwinbox" element={<Darwinbox />} />
+        <Route path="/faq" element={<FAQ />} />
       </Routes>
     </Router>
   )

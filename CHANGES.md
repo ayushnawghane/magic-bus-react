@@ -1,5 +1,26 @@
 # Client Change Log
 
+## Date: June 26, 2026
+
+### Portal Additions and Integrated Navigation
+
+#### 1. Page Releases
+- **Files**: `src/pages/Events.jsx`, `src/pages/Podcasts.jsx`, `src/pages/MBAcademy.jsx`, `src/pages/Darwinbox.jsx`, `src/pages/FAQ.jsx`
+- **Updates**:
+  - Released the interactive filterable **Events** page.
+  - Released the **Podcasts** page showcasing Magic Bus's audio series with active audio waves.
+  - Released the **Magic Bus Academy** page showing training and LMS module guides.
+  - Released the **Darwinbox** employee portal overview page detailing system modules.
+  - Released the consolidated **FAQ Center** displaying searchable queries with filterable categories.
+
+#### 2. Route & Navigation Integrations
+- **Files**: `src/App.jsx`, `src/components/NavbarNew.jsx`, `src/components/Footer.jsx`
+- **Updates**:
+  - Registered all five pages within the application routes.
+  - Added new grouping "Help & Support" to the Resources dropdown megamenu in the Navbar and footer column, and linked employee links directly.
+
+---
+
 ## Date: June 20, 2026
 
 ### Pages Developed From Design and Navigation Cleanup

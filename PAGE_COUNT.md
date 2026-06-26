@@ -31,18 +31,25 @@
 | 24 | Child Protection Policy | src/pages/ChildProtectionPolicy.jsx | /child-protection-policy | Done |
 | 25 | POSH Policy | src/pages/PoshPolicy.jsx | /posh-policy | Done |
 | 26 | Work with Us | src/pages/WorkWithUs.jsx | /work-with-us | Done |
+| 27 | Events | src/pages/Events.jsx | /events | Done |
+| 28 | Podcasts | src/pages/Podcasts.jsx | /podcasts | Done |
+| 29 | Magic Bus Academy | src/pages/MBAcademy.jsx | /mb-academy | Done |
+| 30 | Darwinbox | src/pages/Darwinbox.jsx | /darwinbox | Done |
+| 31 | FAQ Center | src/pages/FAQ.jsx | /faq | Done |
 
 ---
 
-**Total Pages Created: 26**
+**Total Pages Created: 31**
 
 ---
 
 **Note**
 - Pages 14–18 were added during the April 12, 2026 development cycle.
-- Pages 19–23 were developed during the June 20, 2026 cycle and added to the site experience:
-  - Page 19 (Employment Partners) displays brand tokens in an asymmetric grid.
-  - Pages 20–23 (Corporate, Foundation, Government, and Knowledge Partners) present the partner directory experiences.
-- Pages 24 & 25 (Child Protection & POSH Policies) implement interactive regional committee explorers and guidelines.
-- Page 26 (Work with Us) provides an interactive job filter engine, modal application form, and employee testimonial video player overlay.
+- Pages 19–23 were developed during the June 20, 2026 cycle and added to the site experience.
+- Pages 27–31 were developed during the June 26, 2026 cycle:
+  - Page 27 (Events) features filterable cards and interactive photo galleries.
+  - Page 28 (Podcasts) displays host highlights, host info, audio visualizations, and series lists.
+  - Page 29 (Magic Bus Academy) is a dedicated learning portal with Google Play/App Store badges and module features.
+  - Page 30 (Darwinbox) showcases information on employee attendance, recruitment, and management tools.
+  - Page 31 (FAQ Center) is a fully searchable, category-filtered, single-source FAQ repository.
 - The design-built pages are now exposed in `src/App.jsx` and connected through the navbar/footer.

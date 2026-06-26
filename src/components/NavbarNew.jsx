@@ -85,6 +85,8 @@ const NAVIGATION_ITEMS = [
       {
         title: "Media & Stories",
         items: [
+          { label: "Events", path: "/events" },
+          { label: "Podcasts", path: "/podcasts" },
           { label: "Gallery", path: "/gallery" },
           { label: "Blogs", path: "/blogs" },
           { label: "News", path: "/news" },
@@ -104,6 +106,12 @@ const NAVIGATION_ITEMS = [
           { label: "Child Protection Policy", path: "/child-protection-policy" },
         ],
       },
+      {
+        title: "Help & Support",
+        items: [
+          { label: "FAQs", path: "/faq" },
+        ],
+      },
     ],
   },
   {
@@ -114,8 +122,8 @@ const NAVIGATION_ITEMS = [
       { label: "Certifications", path: "/certifications" },
       { label: "Our Culture", path: "#" },
       { label: "Learning & Development", path: "/learning-development" },
-      { label: "MB Academy", path: "#" },
-      { label: "Darwin (Employee Login)", path: "#" },
+      { label: "MB Academy", path: "/mb-academy" },
+      { label: "Darwin (Employee Login)", path: "/darwinbox" },
     ],
   },
 ];

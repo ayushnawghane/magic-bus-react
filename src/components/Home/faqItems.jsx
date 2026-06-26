@@ -1328,4 +1328,37 @@ export const futureXFAQ = [
   },
 ];
 
-export default { homefaq, contactFAQ, annualReportsFAQ, newsFAQ, certificationsFAQ, flfprFAQ, genderJourneyFAQ, whoWeAreFAQ, cultureFAQ, adolescentFAQ, governmentPartnershipFAQ, cwwFAQ, digitalSkillingFAQ, edpFAQ, mbDostFAQ, futureXFAQ };
+export const podcastFAQ = [
+  {
+    question: "Where can I listen to Magic Bus podcasts?",
+    category: "Access",
+    answer:
+      "Our podcasts are available on YouTube and major platforms including Spotify and Apple Podcasts. You can find links to each series directly on this page.",
+  },
+  {
+    question: "What is YuWOW Ki Awaaz about?",
+    category: "Content",
+    answer:
+      "YuWOW Ki Awaaz focuses on employability skills for youth from underserved communities, featuring conversations with industry leaders and programme graduates.",
+  },
+  {
+    question: "What topics does 'The Giving Hour' cover?",
+    category: "Content",
+    answer:
+      "The Giving Hour covers philanthropy, CSR, and impact — conversations with NGO leaders and changemakers about effective giving and community development.",
+  },
+  {
+    question: "What is the 'Why Purpose?' podcast series?",
+    category: "Content",
+    answer:
+      "Why Purpose? explores purpose-driven leadership and social good, featuring guests who have aligned their career with creating positive change in society.",
+  },
+  {
+    question: "How can I be a guest on a Magic Bus podcast?",
+    category: "Participation",
+    answer:
+      "If you're passionate about youth development or social impact, reach out at info@magicbusindia.org with a brief introduction and your area of expertise.",
+  },
+];
+
+export default { homefaq, contactFAQ, annualReportsFAQ, newsFAQ, certificationsFAQ, flfprFAQ, genderJourneyFAQ, whoWeAreFAQ, cultureFAQ, adolescentFAQ, governmentPartnershipFAQ, cwwFAQ, digitalSkillingFAQ, edpFAQ, mbDostFAQ, futureXFAQ, podcastFAQ };

@@ -84,6 +84,8 @@ export default function Footer() {
 
             <p className="font-semibold text-white mt-3">Media & Stories</p>
             <ul className="space-y-1">
+              <li><Link to="/events" className="hover:text-white transition-colors">Events</Link></li>
+              <li><Link to="/podcasts" className="hover:text-white transition-colors">Podcasts</Link></li>
               <li><Link to="/news" className="hover:text-white transition-colors">News</Link></li>
               <li><Link to="/blogs" className="hover:text-white transition-colors">Blogs</Link></li>
               <li><a href="#" className="hover:text-white transition-colors">Podcast</a></li>
@@ -91,6 +93,11 @@ export default function Footer() {
               <li><a href="#" className="hover:text-white transition-colors">Success Stories</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Testimonials</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Awards</a></li>
+            </ul>
+
+            <p className="font-semibold text-white mt-3">Help & Support</p>
+            <ul className="space-y-1">
+              <li><Link to="/faq" className="hover:text-white transition-colors">FAQs</Link></li>
             </ul>
           </div>
 
@@ -102,6 +109,14 @@ export default function Footer() {
             <ul className="space-y-1 mb-3">
               <li><a href="#" className="hover:text-white transition-colors">Magic Bus USA</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Magic Bus UK</a></li>
+            </ul>
+
+            <p className="font-semibold text-white">Life @ Magic Bus</p>
+            <ul className="space-y-1 mb-3">
+              <li><Link to="/work-with-us" className="hover:text-white transition-colors">Work With Us</Link></li>
+              <li><Link to="/mb-academy" className="hover:text-white transition-colors">MB Academy</Link></li>
+              <li><Link to="/darwinbox" className="hover:text-white transition-colors">Darwin (Employee Login)</Link></li>
+              <li><Link to="/learning-development" className="hover:text-white transition-colors">Learning & Development</Link></li>
             </ul>
 
             <p className="font-semibold text-white">India Locations</p>

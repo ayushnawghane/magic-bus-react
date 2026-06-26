@@ -1,5 +1,41 @@
 # Development Log
 
+## Date: June 26, 2026
+
+### Changes Made Today
+
+#### Portal Expansion & Support Integration
+
+1. **Events Page** (`src/pages/Events.jsx`)
+   - Implemented an interactive photo gallery with responsive thumbnail indicators.
+   - Built a comprehensive tag filter component letting users filter events by category (Technology, Livelihood, Youth, NGO, AI).
+   - Designed dual horizontal card layout for featured events and a flexible grid for secondary events.
+
+2. **Podcasts Portal** (`src/pages/Podcasts.jsx`)
+   - Created a dynamic media landing page highlighting podcast series (YuWOW Ki Awaaz, The Giving Hour, Why Purpose?).
+   - Designed split intro block including custom live audio waves animation and streaming badges.
+   - Leveraged custom-colored gradient brand tokens matching individual card themes.
+
+3. **Magic Bus Academy** (`src/pages/MBAcademy.jsx`)
+   - Developed a training-focused dashboard for employee and volunteer learning modules.
+   - Built clean mobile app store mockups and custom badges.
+   - Structured 4-column module feature components with ghost count indicators.
+
+4. **Darwinbox Portal** (`src/pages/Darwinbox.jsx`)
+   - Implemented an informational page clarifying internal HR management services (attendance, records, appraisal, etc.).
+   - Integrated collapsible custom FAQ accordion cards and service overview summaries.
+
+5. **FAQ Center** (`src/pages/FAQ.jsx`)
+   - Created a unified directory consolidating all FAQ arrays from `src/components/Home/faqItems.jsx`.
+   - Built a two-column sidebar layout featuring category-based filters showing dynamic tab counters and search matches.
+   - Incorporated live keyword search input and smooth Framer Motion accordion wrappers.
+
+6. **Routing & Global Navigation**
+   - Registered `/events`, `/podcasts`, `/mb-academy`, `/darwinbox`, and `/faq` routes in `src/App.jsx`.
+   - Updated navbar megamenu (`src/components/NavbarNew.jsx`) and footer columns (`src/components/Footer.jsx`) with active routes.
+
+---
+
 ## Date: June 20, 2026
 
 ### Changes Made Today
