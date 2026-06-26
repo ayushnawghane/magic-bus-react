@@ -36,16 +36,29 @@
 | 29 | Magic Bus Academy | src/pages/MBAcademy.jsx | /mb-academy | Done |
 | 30 | Darwinbox | src/pages/Darwinbox.jsx | /darwinbox | Done |
 | 31 | FAQ Center | src/pages/FAQ.jsx | /faq | Done |
+| 32 | Our Approach | src/pages/OurApproach.jsx | /our-approach | Done |
+| 33 | Donate | src/pages/DonateNow.jsx | /donate | Done |
+| 34 | Contact | src/pages/ContactUs.jsx | /contact | Done |
+| 35 | Partner | src/pages/PartnerWithUs.jsx | /partner | Done |
+| 36 | Blogs | src/pages/Blogs.jsx | /blogs | Done |
+| 37 | News | src/pages/News.jsx | /news | Done |
+| 38 | Certifications | src/pages/Certifications.jsx | /certifications | Done |
+| 39 | Reports | src/pages/Reports.jsx | /reports | Done |
+| 40 | Impact Reports | src/pages/ImpactReports.jsx | /impact-reports | Done |
+| 41 | Annual Reports | src/pages/AnnualReports.jsx | /annual-reports | Done |
+| 42 | Gender Journey Report | src/pages/GenderJourneyReport.jsx | /gender-journey-report | Done |
+| 43 | FLFPR Report | src/pages/FLFPRReport.jsx | /flfpr-report | Done |
+| 44 | Gallery | src/pages/Gallery.jsx | /gallery | Done |
 
 ---
 
-**Total Pages Created: 31**
+**Total Pages Created: 44**
 
 ---
 
 **Note**
 - Pages 14–18 were added during the April 12, 2026 development cycle.
-- Pages 19–23 were developed during the June 20, 2026 cycle and added to the site experience.
+- Pages 19–26 and 32–44 were developed during the June 20, 2026 cycle and added to the site experience.
 - Pages 27–31 were developed during the June 26, 2026 cycle:
   - Page 27 (Events) features filterable cards and interactive photo galleries.
   - Page 28 (Podcasts) displays host highlights, host info, audio visualizations, and series lists.
