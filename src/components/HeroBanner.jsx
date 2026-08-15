@@ -43,7 +43,7 @@ function HeroBanner({
                 transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             />
 
-            <div className="relative z-10 w-full pb-16 pt-32 md:pb-24">
+            <div className="relative z-10 w-full pb-16 pt-32 md:pt-40 md:pb-24">
                 <div className="max-w-7xl mx-auto px-6 lg:px-12">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
